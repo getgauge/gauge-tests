@@ -1,0 +1,8 @@
+{
+    "variables": {
+    	"twist2_java_executable": "",
+        "twist2_java_classpath": "",
+        "twist2_java_additional_libs": "lib/*",
+        "twist2_java_jvm_args": ""
+    }
+}
