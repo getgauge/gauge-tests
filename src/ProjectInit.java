@@ -17,13 +17,13 @@ public class ProjectInit {
 
     private static final String[] PROJECT_SKELETAL_FILES = new String[]{
             "manifest.json",
-            "env/default/default.json",
+            "env/default/default.properties",
             "specs/hello_world.spec",
     };
 
     private static final String[] JAVA_PROJECT_SKELETAL_FILES = new String[]{
             "src/StepImplementation.java",
-            "env/default/default.json"
+            "env/default/java.properties"
     };
 
     Map<String, String[]> languageFilesMap = new HashMap<String, String[]>() {{

@@ -6,7 +6,7 @@
     <property name="version" value="0.0.0" />
     <property name="build.dir" value="build" />
     <property name="classes.dir" value="${build.dir}/classes" />
-    <property name="deps.dir" value="lib" />
+    <property name="deps.dir" value="libs" />
 
     <target name="clean">
         <delete dir="${build.dir}" />
