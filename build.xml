@@ -14,12 +14,12 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}" />
-        <javac srcdir="src" destdir="${classes.dir}" classpathref="classpath" debug="true" debuglevel="lines,vars,source" source="1.5" target="1.5"/>
+        <javac srcdir="src" destdir="${classes.dir}" classpathref="classpath" debug="true"
+               debuglevel="lines,vars,source" source="1.5" target="1.5"/>
     </target>
 
     <path id="classpath">
         <fileset dir="${deps.dir}" includes="**/*.jar" />
-        <fileset dir="/usr/local/lib/twist2/java/" includes="**/*.jar" />
     </path>
 
 </project>
