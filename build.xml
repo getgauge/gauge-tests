@@ -3,6 +3,7 @@
         <format property="current.date" pattern="yyyyMMdd" />
     </tstamp>
 
+    <property environment="env"/>
     <property name="version" value="0.0.0" />
     <property name="build.dir" value="build" />
     <property name="classes.dir" value="${build.dir}/classes" />
@@ -20,6 +21,8 @@
 
     <path id="classpath">
         <fileset dir="${deps.dir}" includes="**/*.jar" />
+        <fileset dir="${env.GAUGE_ROOT}/lib/twist2/java" includes="**/*.jar" erroronmissingdir="false" />
+        <fileset dir="/usr/local/lib/twist2/java}" includes="**/*.jar" erroronmissingdir="false" />
     </path>
 
 </project>
