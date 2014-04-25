@@ -34,7 +34,7 @@ public class ProjectInit {
         return projectDir;
     }
 
-    @Step("The following file structure should be created")
+    @Step("The following file structure should be created <table>")
     public void ensureInitCreatesSpecifiedStructure(Table table) throws Exception {
         ArrayList<String> failures = new ArrayList<String>();
         for (List<String> row : table.getRows()) {
