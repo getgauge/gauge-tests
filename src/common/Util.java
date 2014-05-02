@@ -1,6 +1,7 @@
 package common;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Util {
@@ -31,5 +32,17 @@ public class Util {
         File tempDir = tempFile.getParentFile();
         tempFile.delete();
         return tempDir;
+    }
+
+    public static void writeToFile(String absolutePath, String data) throws IOException {
+        FileOutputStream stream = new FileOutputStream(absolutePath, false);
+        stream.write(data.getBytes());
+        stream.close();
+    }
+
+    public static void appendToFile(String absolutePath, String data) throws IOException {
+        FileOutputStream stream = new FileOutputStream(absolutePath, true);
+        stream.write(data.getBytes());
+        stream.close();
     }
 }
