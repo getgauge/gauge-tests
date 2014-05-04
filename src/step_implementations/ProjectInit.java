@@ -11,6 +11,7 @@ import java.util.List;
 
 import static common.Util.getTempDir;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ProjectInit {
@@ -57,7 +58,6 @@ public class ProjectInit {
     @Step("Console should contain <message>")
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
-        String expectedErrorMessage = String.format("%s\n", message);
-        assertEquals(expectedErrorMessage, output);
+        assertTrue("Console don't contain '" + message + "'", output.contains(message));
     }
 }

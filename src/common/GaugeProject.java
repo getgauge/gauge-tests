@@ -21,6 +21,8 @@ public class GaugeProject {
     private Process lastProcess = null;
     private ArrayList<Specification> specifications = new ArrayList<Specification>();
     private static GaugeProject current;
+    private String lastProcessStderr;
+    private String lastProcessStdout;
 
     public static GaugeProject getCurrent() {
         if (current == null) {
@@ -35,25 +37,17 @@ public class GaugeProject {
         current = this;
     }
 
-    public void initialize() throws Exception {
-        ProcessBuilder processBuilder = new ProcessBuilder(executableName, "--init", language);
-        processBuilder.directory(projectDir);
-        lastProcess = processBuilder.start();
-        lastProcess.waitFor();
+    public boolean initialize() throws Exception {
+        executeGaugeCommand("--init", language);
+        return lastProcess.exitValue() == 0;
     }
 
     public String getStdOut() throws IOException {
-        if (lastProcess != null) {
-            return IOUtils.toString(lastProcess.getInputStream());
-        }
-        return "";
+        return lastProcessStdout;
     }
 
     public String getStdErr() throws IOException {
-        if (lastProcess != null) {
-            return IOUtils.toString(lastProcess.getErrorStream());
-        }
-        return "";
+        return lastProcessStderr;
     }
 
     public File getProjectDir() {
@@ -117,5 +111,7 @@ public class GaugeProject {
         processBuilder.directory(projectDir);
         lastProcess = processBuilder.start();
         lastProcess.waitFor();
+        lastProcessStdout = IOUtils.toString(lastProcess.getInputStream());
+        lastProcessStderr = IOUtils.toString(lastProcess.getErrorStream());
     }
 }
