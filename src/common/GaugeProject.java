@@ -109,6 +109,11 @@ public class GaugeProject {
         }
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
+        for (String env : processBuilder.environment().keySet()) {
+            if (env.toLowerCase().contains("gauge")) {
+                processBuilder.environment().put(env, "");
+            }
+        }
         lastProcess = processBuilder.start();
         lastProcess.waitFor();
         lastProcessStdout = IOUtils.toString(lastProcess.getInputStream());
