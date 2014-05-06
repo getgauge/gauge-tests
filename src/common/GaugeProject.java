@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class GaugeProject {
 
+    public static final String PRODUCT_ROOT = "GAUGE_ROOT";
+    public static final String PRODUCT_PREFIX = "GAUGE_";
     private static String executableName = "twist2";
     private static String specsDirName = "specs";
     private static String stepImplementationsDir = "src/test/java";
@@ -39,6 +41,8 @@ public class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
+        System.out.println(lastProcessStdout);
+        System.out.println(lastProcessStderr);
         return lastProcess.exitValue() == 0;
     }
 
@@ -109,14 +113,18 @@ public class GaugeProject {
         }
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
-        for (String env : processBuilder.environment().keySet()) {
-            if (env.toLowerCase().contains("gauge")) {
-                processBuilder.environment().put(env, "");
-            }
-        }
+        filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
         lastProcess.waitFor();
         lastProcessStdout = IOUtils.toString(lastProcess.getInputStream());
         lastProcessStderr = IOUtils.toString(lastProcess.getErrorStream());
+    }
+
+    private void filterConflictingEnv(ProcessBuilder processBuilder) {
+        for (String env : processBuilder.environment().keySet()) {
+            if (!env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX)) {
+                processBuilder.environment().put(env, "");
+            }
+        }
     }
 }
