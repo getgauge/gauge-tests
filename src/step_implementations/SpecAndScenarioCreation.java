@@ -17,7 +17,7 @@ public class SpecAndScenarioCreation {
     }
 
     @Step("Create <scenario name> in <spec name> with the following steps <steps table>")
-    public void createScenarioInSpecification(String scenarioName, String specName, Table steps) throws Exception {
+    public void addContextToSpecification(String scenarioName, String specName, Table steps) throws Exception {
         if (steps.getColumnNames().size() != 2) {
             throw new RuntimeException("Expected two columns for table");
         }
@@ -35,4 +35,5 @@ public class SpecAndScenarioCreation {
         spec.addScenarios(scenario);
         spec.save();
     }
+
 }
