@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static common.Util.getTempDir;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -59,5 +58,23 @@ public class ProjectInit {
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
         assertTrue("Console don't contain '" + message + "'", output.contains(message));
+    }
+
+    @Step("Console should contain following lines in order <console output table>")
+    public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
+        String output = currentProject.getStdOut();
+        String row1, row2;
+        for (int i = 0; i < table.getRows().size() - 1; i++) {
+            row1 = table.getRows().get(i).get(0);
+            row2 = table.getRows().get(i + 1).get(0);
+            if (!output.contains(row1))
+                fail("Console doesn't contain " + row1);
+            if (!output.contains(row2))
+                fail("Console doesn't contain " + row2);
+            if (output.indexOf(row1) < output.indexOf(row2))
+                output = output.replaceFirst(row1, "");
+            else
+                fail("Output was not in order");
+        }
     }
 }

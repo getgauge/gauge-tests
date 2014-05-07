@@ -105,7 +105,12 @@ public class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
-    private void executeGaugeCommand(String... args) throws IOException, InterruptedException {
+    public boolean executeSpec(String specName) throws Exception {
+        executeGaugeCommand("specs" + File.separator + specName + ".spec");
+        return lastProcess.exitValue() == 0;
+    }
+
+    public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<String>();
         command.add(executableName);
         for (String arg : args) {
@@ -118,6 +123,7 @@ public class GaugeProject {
         lastProcess.waitFor();
         lastProcessStdout = IOUtils.toString(lastProcess.getInputStream());
         lastProcessStderr = IOUtils.toString(lastProcess.getErrorStream());
+        return lastProcess.exitValue() == 0;
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
