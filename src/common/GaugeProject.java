@@ -1,6 +1,7 @@
 package common;
 
 
+import com.thoughtworks.twist2.Table;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -9,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GaugeProject {
 
@@ -16,27 +18,36 @@ public class GaugeProject {
     public static final String PRODUCT_PREFIX = "GAUGE_";
     private static String executableName = "twist2";
     private static String specsDirName = "specs";
+    private static String conceptsDirName = "concepts";
     private static String stepImplementationsDir = "src/test/java";
+    private ArrayList<Concept> concepts = new ArrayList<Concept>();
 
     private File projectDir;
     private String language;
     private Process lastProcess = null;
     private ArrayList<Specification> specifications = new ArrayList<Specification>();
-    private static GaugeProject current;
+    public static GaugeProject currentProject;
     private String lastProcessStderr;
     private String lastProcessStdout;
 
-    public static GaugeProject getCurrent() {
-        if (current == null) {
+    public static GaugeProject getCurrentProject() {
+        if (currentProject == null) {
             throw new RuntimeException("Gauge project is not initialized yet");
         }
-        return current;
+        return currentProject;
+    }
+
+
+    public void addConcepts(Concept... newConcepts){
+        for (Concept concept : newConcepts) {
+            concepts.add(concept);
+        }
     }
 
     public GaugeProject(File projectDir, String language) {
         this.projectDir = projectDir;
         this.language = language;
-        current = this;
+        currentProject = this;
     }
 
     public boolean initialize() throws Exception {
@@ -77,6 +88,29 @@ public class GaugeProject {
         }
 
         return null;
+    }
+
+
+    public Concept createConcept(String name, Table steps) throws IOException {
+
+        String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
+        File conceptsDir = new File(specDirPath, conceptsDirName);
+        if(!conceptsDir.exists()) {
+            conceptsDir.mkdir();
+        }
+        File conceptFile = new File(conceptsDir,  name + ".cpt");
+        if(conceptFile.exists()){
+            throw new RuntimeException("Failed to create concept: "+name+"."+conceptFile.getAbsolutePath()+" : File already exists");
+        }
+        Concept concept = new Concept(name);
+        for (List<String> row: steps.getRows()) {
+            System.out.println(row.get(0));
+            concept.addSteps(row.get(0));
+            implementStep(row.get(0), row.get(1));
+        }
+        concept.saveAs(conceptFile);
+        concepts.add(concept);
+        return concept;
     }
 
     public void implementStep(String stepText, String implementation) throws IOException {

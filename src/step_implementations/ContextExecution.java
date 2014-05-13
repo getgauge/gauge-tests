@@ -2,23 +2,17 @@ package step_implementations;
 
 import com.thoughtworks.twist2.Step;
 import com.thoughtworks.twist2.Table;
-import common.GaugeProject;
 import common.Scenario;
 import common.Specification;
 
 import java.util.List;
 
-/**
- * Created by gurushan on 5/6/14.
- */
+import static common.GaugeProject.currentProject;
+
 public class ContextExecution {
 
-    private final GaugeProject currentProject;
     private Specification spec;
 
-    public ContextExecution() {
-        this.currentProject = GaugeProject.getCurrent();
-    }
 
     @Step("Create a specification <spec name> with the following contexts <steps table>")
     public void createContextsInSpec(String specName , Table steps)throws Exception{
@@ -53,12 +47,13 @@ public class ContextExecution {
         spec.save();
     }
 
-    @Step("Execution should execute the spec <spec name> and ensure success")
+    @Step("Execute the spec <spec name> and ensure success")
     public void executeSpec(String specName) throws Exception{
         boolean passed;
+        System.out.println("current spec is " + currentProject);
         spec = currentProject.findSpecification(specName);
         if(spec == null){
-            throw new RuntimeException("Specified spec is not present");
+            throw new RuntimeException("Specified spec is not present : "+specName);
         }
         passed = currentProject.executeSpec(specName);
         if (!passed) {
