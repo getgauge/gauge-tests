@@ -38,7 +38,7 @@ public class GaugeProject {
     }
 
 
-    public void addConcepts(Concept... newConcepts){
+    public void addConcepts(Concept... newConcepts) {
         for (Concept concept : newConcepts) {
             concepts.add(concept);
         }
@@ -95,16 +95,15 @@ public class GaugeProject {
 
         String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
         File conceptsDir = new File(specDirPath, conceptsDirName);
-        if(!conceptsDir.exists()) {
+        if (!conceptsDir.exists()) {
             conceptsDir.mkdir();
         }
-        File conceptFile = new File(conceptsDir,  name + ".cpt");
-        if(conceptFile.exists()){
-            throw new RuntimeException("Failed to create concept: "+name+"."+conceptFile.getAbsolutePath()+" : File already exists");
+        File conceptFile = new File(conceptsDir, name + ".cpt");
+        if (conceptFile.exists()) {
+            throw new RuntimeException("Failed to create concept: " + name + "." + conceptFile.getAbsolutePath() + " : File already exists");
         }
         Concept concept = new Concept(name);
-        for (List<String> row: steps.getRows()) {
-            System.out.println(row.get(0));
+        for (List<String> row : steps.getRows()) {
             concept.addSteps(row.get(0));
             implementStep(row.get(0), row.get(1));
         }

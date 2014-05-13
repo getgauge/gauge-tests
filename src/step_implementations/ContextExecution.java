@@ -50,7 +50,6 @@ public class ContextExecution {
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpec(String specName) throws Exception{
         boolean passed;
-        System.out.println("current spec is " + currentProject);
         spec = currentProject.findSpecification(specName);
         if(spec == null){
             throw new RuntimeException("Specified spec is not present : "+specName);
