@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="twist2rt-0.0.0">
+  <library name="gaugert-0.0.0">
     <CLASSES>
-      <root url="jar:///usr/local/lib/twist2/java/twist2rt-0.0.0.jar!/" />
+      <root url="jar:///usr/local/lib/gauge/java/gaugert-0.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

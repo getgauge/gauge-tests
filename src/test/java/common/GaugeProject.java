@@ -1,7 +1,7 @@
 package common;
 
 
-import com.thoughtworks.twist2.Table;
+import com.thoughtworks.gauge.Table;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -16,7 +16,7 @@ public class GaugeProject {
 
     public static final String PRODUCT_ROOT = "GAUGE_ROOT";
     public static final String PRODUCT_PREFIX = "GAUGE_";
-    private static String executableName = "twist2";
+    private static String executableName = "gauge";
     private static String specsDirName = "specs";
     private static String conceptsDirName = "concepts";
     private static String stepImplementationsDir = "src/test/java";
@@ -117,7 +117,7 @@ public class GaugeProject {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String className = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
         StringBuilder classText = new StringBuilder();
-        classText.append("import com.thoughtworks.twist2.Step;\n");
+        classText.append("import com.thoughtworks.gauge.Step;\n");
         classText.append("public class ").append(className).append("{\n");
         classText.append("@Step(\"").append(stepValue.value).append("\")\n");
         classText.append("public void ").append("stepImplementation(");

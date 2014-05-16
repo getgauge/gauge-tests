@@ -1,7 +1,7 @@
 package step_implementations;
 
-import com.thoughtworks.twist2.Step;
-import com.thoughtworks.twist2.Table;
+import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.Table;
 import common.Concept;
 import common.GaugeProject;
 import common.Specification;
