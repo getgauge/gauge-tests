@@ -24,6 +24,7 @@ public class JavaProject extends GaugeProject {
     }
 
     public void implementStep(String stepText, String implementation) throws Exception {
+        implementation = String.format("System.out.println(\"%s\");\n", implementation);
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String className = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
