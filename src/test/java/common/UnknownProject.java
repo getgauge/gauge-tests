@@ -1,7 +1,5 @@
 package common;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.File;
 import java.util.Map;
 
@@ -12,11 +10,11 @@ public class UnknownProject extends GaugeProject {
 
     @Override
     public void implementStep(String stepText, String implementation) throws Exception {
-        throw new NotImplementedException();
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
-        throw new NotImplementedException();
+        throw new RuntimeException("Not implemented");
     }
 }
