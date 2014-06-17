@@ -13,17 +13,17 @@ Initializing a new project
 
 * In an empty directory initialize a project with the current language
 * The following file structure should be created 
-     |name                                 |type|
-     |-------------------------------------|----|
-     |manifest.json                        |file|
-     |specs                                |dir |
-     |specs/hello_world.spec               |file|
-     |env                                  |dir |
-     |env/default                          |dir |
-     |env/default/default.properties       |file|
+     |name                          |type|
+     |------------------------------|----|
+     |manifest.json                 |file|
+     |specs                         |dir |
+     |specs/hello_world.spec        |file|
+     |env                           |dir |
+     |env/default                   |dir |
+     |env/default/default.properties|file|
 
-* Verify language specific files are created     
-     
+* Verify language specific files are created
+
 
 Initializing unknown language project
 --------------------
