@@ -24,7 +24,7 @@ public class JavaProject extends GaugeProject {
     }
 
     public void implementStep(String stepText, String implementation) throws Exception {
-        implementation = String.format("System.out.println(\"%s\");\n", implementation);
+        implementation = String.format("System.out.println(%s);\n", implementation);
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String className = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
@@ -34,7 +34,12 @@ public class JavaProject extends GaugeProject {
         classText.append("@Step(\"").append(stepValue.value).append("\")\n");
         classText.append("public void ").append("stepImplementation(");
         for (int i = 0; i < stepValue.paramCount; i++) {
-            classText.append("String param").append(i).append(", ");
+            if (i + 1 == stepValue.paramCount) {
+                classText.append("String param").append(i);
+            } else {
+                classText.append("String param").append(i).append(", ");
+            }
+
         }
         classText.append(") {\n").append(implementation).append("\n}");
         classText.append("}");

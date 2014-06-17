@@ -16,13 +16,13 @@ public class StepValueExtractor {
                 if (!inQuotes) {
                     inQuotes = true;
                 } else {
-                    extractedValue.append("{}");
+                    extractedValue.append("<>");
                     inQuotes = false;
                 }
             } else if (aChar == '<' && !inBracket) {
                 inBracket = true;
             } else if (aChar == '>' && inBracket) {
-                extractedValue.append("{}");
+                extractedValue.append("<>");
                 inBracket = false;
             } else if (aChar == '\\') {
                 inEscape = true;
@@ -32,7 +32,7 @@ public class StepValueExtractor {
         }
         StepValue v = new StepValue();
         v.value = extractedValue.toString();
-        v.paramCount = extractedValue.toString().split("\\{").length - 1;
+        v.paramCount = extractedValue.toString().split("<").length - 1;
         return v;
     }
 
