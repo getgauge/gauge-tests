@@ -6,29 +6,29 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-public class GaugeProject {
+public abstract class GaugeProject {
 
     public static final String PRODUCT_ROOT = "GAUGE_ROOT";
     public static final String PRODUCT_PREFIX = "GAUGE_";
+    public static GaugeProject currentProject;
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
     private static String conceptsDirName = "concepts";
-    private static String stepImplementationsDir = "src/test/java";
     private ArrayList<Concept> concepts = new ArrayList<Concept>();
-
     private File projectDir;
     private String language;
     private Process lastProcess = null;
     private ArrayList<Specification> specifications = new ArrayList<Specification>();
-    public static GaugeProject currentProject;
     private String lastProcessStderr;
     private String lastProcessStdout;
+
+    protected GaugeProject(File projectDir, String language) {
+        this.projectDir = projectDir;
+        this.language = language;
+        currentProject = this;
+    }
 
     public static GaugeProject getCurrentProject() {
         if (currentProject == null) {
@@ -37,17 +37,20 @@ public class GaugeProject {
         return currentProject;
     }
 
+    public static GaugeProject createProject(File projectDir, String language) {
+        if (language.equalsIgnoreCase("java")) {
+            return new JavaProject(projectDir);
+        } else if (language.equalsIgnoreCase("ruby")) {
+            return new RubyProject(projectDir);
+        }
+
+        return new UnknownProject(projectDir, language);
+    }
 
     public void addConcepts(Concept... newConcepts) {
         for (Concept concept : newConcepts) {
             concepts.add(concept);
         }
-    }
-
-    public GaugeProject(File projectDir, String language) {
-        this.projectDir = projectDir;
-        this.language = language;
-        currentProject = this;
     }
 
     public boolean initialize() throws Exception {
@@ -91,8 +94,7 @@ public class GaugeProject {
     }
 
 
-    public Concept createConcept(String name, Table steps) throws IOException {
-
+    public Concept createConcept(String name, Table steps) throws Exception {
         String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
         File conceptsDir = new File(specDirPath, conceptsDirName);
         if (!conceptsDir.exists()) {
@@ -110,27 +112,6 @@ public class GaugeProject {
         concept.saveAs(conceptFile);
         concepts.add(concept);
         return concept;
-    }
-
-    public void implementStep(String stepText, String implementation) throws IOException {
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String className = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
-        StringBuilder classText = new StringBuilder();
-        classText.append("import com.thoughtworks.gauge.Step;\n");
-        classText.append("public class ").append(className).append("{\n");
-        classText.append("@Step(\"").append(stepValue.value).append("\")\n");
-        classText.append("public void ").append("stepImplementation(");
-        for (int i = 0; i < stepValue.paramCount; i++) {
-            classText.append("String param").append(i).append(", ");
-        }
-        classText.append(") {\n").append(implementation).append("\n}");
-        classText.append("}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
-    }
-
-    private String getStepImplementationsDir() {
-        return new File(getProjectDir(), "src/test/java").getAbsolutePath();
     }
 
     public boolean execute() throws Exception {
@@ -166,4 +147,7 @@ public class GaugeProject {
             }
         }
     }
+
+    public abstract void implementStep(String stepText, String implementation) throws Exception;
+    public abstract Map<String, String> getLanguageSpecificFiles();
 }

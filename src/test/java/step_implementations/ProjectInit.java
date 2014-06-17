@@ -8,6 +8,7 @@ import common.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static common.Util.getTempDir;
 import static org.junit.Assert.assertTrue;
@@ -17,9 +18,15 @@ public class ProjectInit {
     private GaugeProject currentProject = null;
 
     @Step("In an empty directory initialize a <language> project")
-    public void initializeProject(String language) throws Exception {
-        currentProject = new GaugeProject(getTempDir(), language);
+    public void initializeProjectWithLanguage(String language) throws Exception {
+        currentProject = GaugeProject.createProject(getTempDir(), language);
         currentProject.initialize();
+    }
+
+    @Step("In an empty directory initialize a project with the current language")
+    public void initializeProject() throws Exception {
+        String currentLanguage = Util.getCurrentLanguage();
+        initializeProjectWithLanguage(currentLanguage);
     }
 
     @Step("The following file structure should be created <table>")
@@ -41,6 +48,33 @@ public class ProjectInit {
             }
         }
 
+        if (failures.size() > 0) {
+            String consolidatedMessage = "";
+            for (String failure : failures) {
+                consolidatedMessage += failure + "\n";
+            }
+            fail("Project initialization failed to create required project structure.\n\n" + consolidatedMessage);
+        }
+    }
+
+    @Step("Verify language specific files are created")
+    public void verifyFilesForLanguageIsCreated() {
+        ArrayList<String> failures = new ArrayList<String>();
+        Map<String, String> files = currentProject.getLanguageSpecificFiles();
+        for (String filePath : files.keySet()) {
+            String fileType = files.get(filePath);
+            if (fileType.equalsIgnoreCase("dir")) {
+                if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(filePath))) {
+                    failures.add(filePath + " is not a valid directory");
+                }
+            } else if (fileType.equalsIgnoreCase("file")) {
+                if (!Util.isFileExists(getPathRelativeToCurrentProjectDir(filePath))) {
+                    failures.add(filePath + " is not a valid file");
+                }
+            } else {
+                fail(fileType + " is invalid");
+            }
+        }
         if (failures.size() > 0) {
             String consolidatedMessage = "";
             for (String failure : failures) {

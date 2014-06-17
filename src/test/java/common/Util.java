@@ -45,4 +45,13 @@ public class Util {
         stream.write(data.getBytes());
         stream.close();
     }
+
+    public static String getCurrentLanguage() {
+        String language = System.getenv("language");
+        if (language == null || language.equalsIgnoreCase("")) {
+            language = "java";
+        }
+
+        return language;
+    }
 }

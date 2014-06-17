@@ -2,3 +2,4 @@ out/**
 build/
 .idea/workspace.xml
 .idea/uiDesigner.xml
+gauge_bin/
