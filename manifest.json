@@ -1,1 +1,9 @@
-{"Language":"java"}
+{
+  "Language": "java",
+  "Plugins": [
+    {
+      "Id": "html-report",
+      "Version": "1.0.0"
+    }
+  ]
+}
