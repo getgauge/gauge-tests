@@ -103,13 +103,19 @@ public class ProjectInit {
         for (int i = 0; i < table.getRows().size() - 1; i++) {
             row1 = table.getRows().get(i).get(0);
             row2 = table.getRows().get(i + 1).get(0);
-            if (!output.contains(row1))
-                fail("Console doesn't contain " + row1);
-            if (!output.contains(row2))
-                fail("Console doesn't contain " + row2);
-            if (output.indexOf(row1) < output.indexOf(row2))
+            if (!output.contains(row1)) {
+                String message = "Console doesn't contain " + row1 + "\n" +
+                        "Actual output: " + outputCopy;
+                fail("Console doesn't contain " + message);
+            }
+            if (!output.contains(row2)) {
+                String message = "Console doesn't contain " + row2 + "\n" +
+                        "Actual output: " + outputCopy;
+                fail("Console doesn't contain " + message);
+            }
+            if (output.indexOf(row1) < output.indexOf(row2)) {
                 output = output.replaceFirst(row1, "");
-            else {
+            } else {
                 String message = "Output was not in order";
                 message += "Actual output: " + outputCopy;
                 fail(message);
