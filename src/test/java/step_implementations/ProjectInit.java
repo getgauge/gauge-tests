@@ -91,13 +91,15 @@ public class ProjectInit {
     @Step("Console should contain <message>")
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
-        assertTrue("Console don't contain '" + message + "'", output.contains(message));
+        assertTrue("Console doesn't contain '" + message + "'", output.contains(message));
     }
 
     @Step("Console should contain following lines in order <console output table>")
     public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
         String output = currentProject.getStdOut();
+        String outputCopy = output;
         String row1, row2;
+
         for (int i = 0; i < table.getRows().size() - 1; i++) {
             row1 = table.getRows().get(i).get(0);
             row2 = table.getRows().get(i + 1).get(0);
@@ -107,8 +109,11 @@ public class ProjectInit {
                 fail("Console doesn't contain " + row2);
             if (output.indexOf(row1) < output.indexOf(row2))
                 output = output.replaceFirst(row1, "");
-            else
-                fail("Output was not in order");
+            else {
+                String message = "Output was not in order";
+                message += "Actual output: " + outputCopy;
+                fail(message);
+            }
         }
     }
 }
