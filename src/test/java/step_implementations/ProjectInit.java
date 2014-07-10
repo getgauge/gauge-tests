@@ -105,19 +105,19 @@ public class ProjectInit {
             row2 = table.getRows().get(i + 1).get(0);
             if (!output.contains(row1)) {
                 String message = "Console doesn't contain " + row1 + "\n" +
-                        "Actual output: " + outputCopy;
-                fail("Console doesn't contain " + message);
+                        "Actual output: \n" + outputCopy;
+                fail(message);
             }
             if (!output.contains(row2)) {
                 String message = "Console doesn't contain " + row2 + "\n" +
-                        "Actual output: " + outputCopy;
-                fail("Console doesn't contain " + message);
+                        "Actual output: \n" + outputCopy;
+                fail(message);
             }
             if (output.indexOf(row1) < output.indexOf(row2)) {
                 output = output.replaceFirst(row1, "");
             } else {
                 String message = "Output was not in order";
-                message += "Actual output: " + outputCopy;
+                message += "Actual output: \n" + outputCopy;
                 fail(message);
             }
         }
