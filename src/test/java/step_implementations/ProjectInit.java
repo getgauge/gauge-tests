@@ -1,9 +1,11 @@
 package step_implementations;
 
+import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import common.GaugeProject;
 import common.Util;
+import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -120,6 +122,13 @@ public class ProjectInit {
                 message += "Actual output: \n" + outputCopy;
                 fail(message);
             }
+        }
+    }
+
+    @AfterScenario
+    public void clearProjectDir() throws IOException {
+        if (currentProject.getProjectDir().exists()) {
+            FileUtils.deleteDirectory(currentProject.getProjectDir());
         }
     }
 }
