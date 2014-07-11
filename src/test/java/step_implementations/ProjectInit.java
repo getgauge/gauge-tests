@@ -128,7 +128,7 @@ public class ProjectInit {
     @AfterScenario
     public void clearProjectDir() throws IOException {
         if (currentProject.getProjectDir().exists()) {
-            FileUtils.deleteDirectory(currentProject.getProjectDir());
+            FileUtils.deleteQuietly(currentProject.getProjectDir());
         }
     }
 }
