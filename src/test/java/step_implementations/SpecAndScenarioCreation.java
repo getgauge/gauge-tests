@@ -29,11 +29,18 @@ public class SpecAndScenarioCreation {
         Scenario scenario = new Scenario(scenarioName);
         for (List<String> rows : steps.getRows()) {
             scenario.addSteps(rows.get(0));
-            if(rows.get(1) != null && !rows.get(1).isEmpty())
+            if (rows.get(1) != null && !rows.get(1).isEmpty())
                 currentProject.implementStep(rows.get(0), rows.get(1));
         }
         spec.addScenarios(scenario);
         spec.save();
+    }
+
+    @Step("Create a specification <spec name> with the following datatable <table>")
+    public void createSpecWithDataTable(String specName, Table datatable) throws Exception {
+        Specification specification = currentProject.createSpecification(specName);
+        specification.addDataTable(datatable);
+        specification.save();
     }
 
 }

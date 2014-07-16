@@ -14,6 +14,7 @@ public abstract class GaugeProject {
 
     public static final String PRODUCT_ROOT = "GAUGE_ROOT";
     public static final String PRODUCT_PREFIX = "GAUGE_";
+    public static final String PRINT_PARAMS = "print params";
     public static GaugeProject currentProject;
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
@@ -151,5 +152,8 @@ public abstract class GaugeProject {
     }
 
     public abstract void implementStep(String stepText, String implementation) throws Exception;
+
     public abstract Map<String, String> getLanguageSpecificFiles();
+
+    public abstract String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
 }

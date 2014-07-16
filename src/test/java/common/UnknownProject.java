@@ -1,6 +1,7 @@
 package common;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 public class UnknownProject extends GaugeProject {
@@ -15,6 +16,11 @@ public class UnknownProject extends GaugeProject {
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
         throw new RuntimeException("Not implemented");
     }
 }
