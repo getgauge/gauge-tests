@@ -22,8 +22,8 @@
 
     <path id="classpath">
         <fileset dir="${deps.dir}" includes="**/*.jar" />
-        <fileset dir="${env.GAUGE_ROOT}/lib/${product}/java" includes="**/*.jar" erroronmissingdir="false" />
-        <fileset dir="/usr/local/lib/${product}/java" includes="**/*.jar" erroronmissingdir="false" />
+        <fileset dir="${env.APPDATA}/${product}/plugins/java/" includes="**/*.jar" erroronmissingdir="false" />
+        <fileset dir="${env.HOME}/.${product}/plugins/java/" includes="**/*.jar" erroronmissingdir="false" />
     </path>
 
 </project>
