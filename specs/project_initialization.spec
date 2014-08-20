@@ -29,4 +29,4 @@ Initializing unknown language project
 --------------------
 
 * In an empty directory initialize a "unknown" project
-* Console should contain "Failed to initialize. unknown is not a supported language"
+* Console should contain "unknown plugin is not installed"
