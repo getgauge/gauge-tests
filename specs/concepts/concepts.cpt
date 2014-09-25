@@ -1,0 +1,3 @@
+# Create <hook_level> level hooks with implementations <before_impl> for before and <after_impl> for after hook
+* Create <hook_level> level "before" hook with implementation <before_impl>
+* Create <hook_level> level "after" hook with implementation <after_impl>

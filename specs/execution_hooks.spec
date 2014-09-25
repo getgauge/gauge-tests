@@ -64,6 +64,24 @@ Scenario and step level hooks
        |inside after step hook       |
        |inside after scenario hook   |
 
+Test all level Execution hooks
+------------------------------
 
+* Create "spec" level hooks with implementations "inside before spec hook" for before and "inside after spec hook" for after hook
+* Create "suite" level hooks with implementations "inside before suite hook" for before and "inside after suite hook" for after hook
+* Create "scenario" level hooks with implementations "inside before scenario hook" for before and "inside after scenario hook" for after hook
+* Create "step" level hooks with implementations "inside before step hook" for before and "inside after step hook" for after hook
+* Execute the spec "02 Hooks Spec2" and ensure success
+* Console should contain following lines in order
+        |console output             |
+        |---------------------------|
+        |inside before suite hook   |
+        |inside before spec hook    |
+        |inside before scenario hook|
+        |inside before step hook    |
+        |inside after step hook     |
+        |inside after scenario hook |
+        |inside after spec hook     |
+        |inside after suite hook    |
 
 
