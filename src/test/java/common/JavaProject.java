@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static common.Util.capitalize;
+
 public class JavaProject extends GaugeProject {
     private static String stepImplementationsDir = "src/test/java";
 
@@ -24,8 +26,7 @@ public class JavaProject extends GaugeProject {
     public void implementStep(String stepText, String implementation) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String className = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
+        String className = getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append("import com.thoughtworks.gauge.Step;\n");
         classText.append("public class ").append(className).append("{\n");
@@ -45,6 +46,7 @@ public class JavaProject extends GaugeProject {
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
 
+
     @Override
     public String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
         StringBuilder builder = new StringBuilder();
@@ -63,6 +65,35 @@ public class JavaProject extends GaugeProject {
             builder.append("System.out.println(").append(implementation).append(");\n");
         }
         return builder.toString();
+    }
+
+    @Override
+    public void createHook(String hookLevel, String hookType, String implementation) throws Exception {
+        StringBuilder classText = new StringBuilder();
+        classText.append(String.format("import com.thoughtworks.gauge.%s;\n",hookName(hookLevel, hookType)));
+        String className = getUniqueName();
+        classText.append("public class ").append(className).append("{\n");
+        classText.append(createHookMethod(hookLevel, hookType, implementation));
+        classText.append("\n}");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+    }
+
+    private String createHookMethod(String hookLevel, String hookType, String implementation) {
+        StringBuilder methodText = new StringBuilder();
+        methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));
+        methodText.append(String.format("public void hook() {\n"));
+        methodText.append(String.format("System.out.println(\"%s\");\n", implementation));
+        methodText.append("\n}\n");
+        return methodText.toString();
+    }
+
+    private String hookName(String hookLevel, String hookType) {
+        return String.format("%s%s", capitalize(hookType), capitalize(hookLevel));
+    }
+
+    private String getUniqueName() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
     }
 
     private String getStepImplementationsDir() {

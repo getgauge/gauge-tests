@@ -59,6 +59,11 @@ public class RubyProject extends GaugeProject {
         return builder.toString();
     }
 
+    @Override
+    public void createHook(String hookLevel, String hookType, String implementation) {
+
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "step_implementations").getAbsolutePath();
     }

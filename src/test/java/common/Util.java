@@ -54,4 +54,8 @@ public class Util {
 
         return language;
     }
+
+    public static String capitalize(String word) {
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
 }

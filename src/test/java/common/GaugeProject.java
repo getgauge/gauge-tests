@@ -118,12 +118,12 @@ public abstract class GaugeProject {
     }
 
     public boolean execute() throws Exception {
-        executeGaugeCommand("specs/");
+        executeGaugeCommand("--simple-console", "specs/");
         return lastProcess.exitValue() == 0;
     }
 
     public boolean executeSpec(String specName) throws Exception {
-        executeGaugeCommand("specs" + File.separator + specName + ".spec");
+        executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
 
@@ -156,4 +156,6 @@ public abstract class GaugeProject {
     public abstract Map<String, String> getLanguageSpecificFiles();
 
     public abstract String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
+
+    public abstract void createHook(String hookLevel, String hookType, String implementation) throws Exception;
 }
