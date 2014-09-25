@@ -118,8 +118,10 @@ public class ProjectInit {
             if (output.indexOf(row1) < output.indexOf(row2)) {
                 output = output.replaceFirst(row1, "");
             } else {
-                String message = "Output was not in order";
-                message += "Actual output: \n" + outputCopy;
+                String message = "Output was not in order \n";
+                message += "******************Actual Console Output Start************\n";
+                message += outputCopy;
+                message += "******************Actual Console Output End************\n";
                 fail(message);
             }
         }

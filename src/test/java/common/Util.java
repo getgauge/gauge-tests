@@ -3,6 +3,9 @@ package common;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Util {
     public static String combinePath(String path1, String path2) {
@@ -57,5 +60,10 @@ public class Util {
 
     public static String capitalize(String word) {
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
+
+    public static String getUniqueName() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
     }
 }

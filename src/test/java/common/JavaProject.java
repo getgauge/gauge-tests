@@ -1,11 +1,13 @@
 package common;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static common.Util.capitalize;
+import static common.Util.getUniqueName;
 
 public class JavaProject extends GaugeProject {
     private static String stepImplementationsDir = "src/test/java";
@@ -89,11 +91,6 @@ public class JavaProject extends GaugeProject {
 
     private String hookName(String hookLevel, String hookType) {
         return String.format("%s%s", capitalize(hookType), capitalize(hookLevel));
-    }
-
-    private String getUniqueName() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
     }
 
     private String getStepImplementationsDir() {

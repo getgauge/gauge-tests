@@ -2,6 +2,7 @@ package common;
 
 
 import com.thoughtworks.gauge.Table;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -15,6 +16,7 @@ public abstract class GaugeProject {
     public static final String PRODUCT_ROOT = "GAUGE_ROOT";
     public static final String PRODUCT_PREFIX = "GAUGE_";
     public static final String PRINT_PARAMS = "print params";
+    private static final String EXAMPLE_SPEC = "hello_world.spec";
     public static GaugeProject currentProject;
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
@@ -58,9 +60,14 @@ public abstract class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
+        deleteExampleSpec();
         System.out.println(lastProcessStdout);
         System.out.println(lastProcessStderr);
         return lastProcess.exitValue() == 0;
+    }
+
+    private void deleteExampleSpec() {
+        FileUtils.deleteQuietly(getSpecFile(EXAMPLE_SPEC));
     }
 
     public String getStdOut() throws IOException {
@@ -76,7 +83,7 @@ public abstract class GaugeProject {
     }
 
     public Specification createSpecification(String name) throws IOException {
-        File specFile = new File(projectDir, Util.combinePath(specsDirName, name) + ".spec");
+        File specFile = getSpecFile(name);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
         }
@@ -84,6 +91,10 @@ public abstract class GaugeProject {
         specification.saveAs(specFile);
         specifications.add(specification);
         return specification;
+    }
+
+    private File getSpecFile(String name) {
+        return new File(projectDir, Util.combinePath(specsDirName, name) + ".spec");
     }
 
     public Specification findSpecification(String specName) {

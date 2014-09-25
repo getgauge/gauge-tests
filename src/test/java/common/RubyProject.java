@@ -1,9 +1,12 @@
 package common;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static common.Util.getUniqueName;
 
 public class RubyProject extends GaugeProject {
     public RubyProject(File projectDir) {
@@ -15,7 +18,7 @@ public class RubyProject extends GaugeProject {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = String.format("Steps%d%s", System.nanoTime(), dateFormat.format(new Date()));
+        String fileName = getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
         rubyCode.append("step '").append(stepValue.value).append("' do |");
         for (int i = 0; i < stepValue.paramCount; i++) {
@@ -60,8 +63,11 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public void createHook(String hookLevel, String hookType, String implementation) {
-
+    public void createHook(String hookLevel, String hookType, String implementation) throws IOException {
+        StringBuilder rubyFileText = new StringBuilder();
+        rubyFileText.append(String.format("%s_%s do \n puts \"%s\"\nend", hookType, hookLevel, implementation));
+        rubyFileText.append("\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), getUniqueName() + ".rb"), rubyFileText.toString());
     }
 
     private String getStepImplementationsDir() {
