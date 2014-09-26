@@ -60,14 +60,9 @@ public abstract class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
-        deleteExampleSpec();
         System.out.println(lastProcessStdout);
         System.out.println(lastProcessStderr);
         return lastProcess.exitValue() == 0;
-    }
-
-    private void deleteExampleSpec() {
-        FileUtils.deleteQuietly(getSpecFile(EXAMPLE_SPEC));
     }
 
     public String getStdOut() throws IOException {
@@ -168,5 +163,7 @@ public abstract class GaugeProject {
 
     public abstract String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
 
-    public abstract void createHook(String hookLevel, String hookType, String implementation) throws Exception;
+    public abstract void createHookWithPrint(String hookLevel, String hookType, String implementation) throws Exception;
+
+    public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
 }

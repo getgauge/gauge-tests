@@ -1,6 +1,7 @@
 package common;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,12 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void createHook(String hookLevel, String hookType, String implementation) {
+    public void createHookWithPrint(String hookLevel, String hookType, String implementation) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void createHookWithException(String hookLevel, String hookType) throws IOException {
         throw new RuntimeException("Not implemented");
     }
 }

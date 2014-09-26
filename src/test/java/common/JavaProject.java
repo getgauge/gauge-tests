@@ -1,6 +1,7 @@
 package common;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,12 +71,24 @@ public class JavaProject extends GaugeProject {
     }
 
     @Override
-    public void createHook(String hookLevel, String hookType, String implementation) throws Exception {
+    public void createHookWithPrint(String hookLevel, String hookType, String printStatement) throws Exception {
         StringBuilder classText = new StringBuilder();
-        classText.append(String.format("import com.thoughtworks.gauge.%s;\n",hookName(hookLevel, hookType)));
+        classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
+        String implementation = String.format("System.out.println(\"%s\");", printStatement);
         classText.append(createHookMethod(hookLevel, hookType, implementation));
+        classText.append("\n}");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+    }
+
+    @Override
+    public void createHookWithException(String hookLevel, String hookType) throws IOException {
+        StringBuilder classText = new StringBuilder();
+        classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
+        String className = getUniqueName();
+        classText.append("public class ").append(className).append("{\n");
+        classText.append(createHookMethod(hookLevel, hookType, "throw new RuntimeException();"));
         classText.append("\n}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
@@ -84,7 +97,7 @@ public class JavaProject extends GaugeProject {
         StringBuilder methodText = new StringBuilder();
         methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));
         methodText.append(String.format("public void hook() {\n"));
-        methodText.append(String.format("System.out.println(\"%s\");\n", implementation));
+        methodText.append(String.format("%s\n", implementation));
         methodText.append("\n}\n");
         return methodText.toString();
     }

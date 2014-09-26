@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static common.Util.getTempDir;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -132,5 +133,20 @@ public class ProjectInit {
         if (currentProject.getProjectDir().exists()) {
             FileUtils.deleteQuietly(currentProject.getProjectDir());
         }
+    }
+
+    @Step("Console should not contain following lines <table>")
+    public void ConsoleShouldNotContainFollowingLines(Table table) throws IOException {
+        String output = currentProject.getStdOut();
+        boolean contains = false;
+        String message = "\n";
+        for(List<String> row : table.getRows()){
+            if(output.contains(row.get(0))) {
+                contains = true;
+                message+="Output contains :"+row.get(0)+"\n";
+            }
+        }
+        if(contains == true)
+            fail(message);
     }
 }

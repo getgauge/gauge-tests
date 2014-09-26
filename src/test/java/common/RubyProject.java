@@ -63,9 +63,17 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public void createHook(String hookLevel, String hookType, String implementation) throws IOException {
+    public void createHookWithPrint(String hookLevel, String hookType, String printString) throws IOException {
         StringBuilder rubyFileText = new StringBuilder();
-        rubyFileText.append(String.format("%s_%s do \n puts \"%s\"\nend", hookType, hookLevel, implementation));
+        rubyFileText.append(String.format("%s_%s do \n puts \"%s\"\nend", hookType, hookLevel, printString));
+        rubyFileText.append("\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), getUniqueName() + ".rb"), rubyFileText.toString());
+    }
+
+    @Override
+    public void createHookWithException(String hookLevel, String hookType) throws IOException {
+        StringBuilder rubyFileText = new StringBuilder();
+        rubyFileText.append(String.format("%s_%s do \n raise \"exception was raised\"\nend", hookType, hookLevel));
         rubyFileText.append("\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), getUniqueName() + ".rb"), rubyFileText.toString());
     }
