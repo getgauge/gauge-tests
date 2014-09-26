@@ -31,4 +31,9 @@ public class Execution {
         }
         return passed;
     }
+
+    @Step("Execute the spec <spec name> and ensure failure")
+    public void executeSpecAndEnsureFailure(String specName) throws Exception {
+        assertTrue(!isExecutionPassed());
+    }
 }

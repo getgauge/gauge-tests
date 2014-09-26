@@ -15,7 +15,7 @@ Test a hook failure at suite level
 * Create "suite" level "before" hook with exception
 * Create "scenario" level "before" hook with implementation "inside before scenario"
 * Create "suite" level "after" hook with implementation "inside after suite"
-* Execute the current project and ensure failure
+* Execute the spec "01 Hooks Spec" and ensure failure
 * Console should not contain following lines
      |console output             |
      |---------------------------|
@@ -30,7 +30,7 @@ Test a hook failure at spec level
 * Create "spec" level "before" hook with exception
 * Create "spec" level "after" hook with implementation "inside after spec"
 * Create "suite" level "after" hook with implementation "inside after suite"
-* Execute the current project and ensure failure
+* Execute the spec "01 Hooks Spec" and ensure failure
 * Console should contain following lines in order
      |console output             |
      |---------------------------|
@@ -48,7 +48,7 @@ Test a hook failure at step level
 ----------------------------------
 * Create "step" level "before" hook with exception
 * Create "step" level "after" hook with implementation "inside after step"
-* Execute the current project and ensure failure
+* Execute the spec "01 Hooks Spec" and ensure failure
 * Console should contain following lines in order
      |console output             |
      |---------------------------|
