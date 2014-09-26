@@ -1,6 +1,7 @@
 package step_implementations;
 
 import com.thoughtworks.gauge.Step;
+import common.Specification;
 
 import java.io.IOException;
 
@@ -32,8 +33,21 @@ public class Execution {
         return passed;
     }
 
+    @Step("Execute the spec <spec name> and ensure success")
+    public void executeSpecAndEnsureSuccess(String specName) throws Exception{
+        assertTrue(executeSpec(specName));
+    }
+
     @Step("Execute the spec <spec name> and ensure failure")
     public void executeSpecAndEnsureFailure(String specName) throws Exception {
-        assertTrue(!isExecutionPassed());
+        assertTrue(!executeSpec(specName));
+    }
+
+    public boolean executeSpec(String specName) throws Exception {
+        Specification spec = currentProject.findSpecification(specName);
+        if(spec == null){
+            throw new RuntimeException("Specified spec is not present : "+specName);
+        }
+        return currentProject.executeSpec(specName);
     }
 }

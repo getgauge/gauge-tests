@@ -46,20 +46,6 @@ public class ContextExecution {
         spec.addScenarios(scenario);
         spec.save();
     }
-
-    @Step("Execute the spec <spec name> and ensure success")
-    public void executeSpec(String specName) throws Exception{
-        boolean passed;
-        spec = currentProject.findSpecification(specName);
-        if(spec == null){
-            throw new RuntimeException("Specified spec is not present : "+specName);
-        }
-        passed = currentProject.executeSpec(specName);
-        if (!passed) {
-            System.out.println(currentProject.getStdOut());
-            System.out.println(currentProject.getStdErr());
-        }
-    }
 }
 
 
