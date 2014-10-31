@@ -132,6 +132,10 @@ public abstract class GaugeProject {
         executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
+    public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
+        executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec:" + index);
+        return lastProcess.exitValue() == 0;
+    }
 
     public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<String>();

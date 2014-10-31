@@ -38,6 +38,16 @@ public class Execution {
         assertTrue(executeSpec(specName));
     }
 
+
+    @Step("Execute the spec <spec name> with scenario index <scenario index> and ensure success")
+    public void executeScenarioWithIndex(String specName, int scenarioIndex) throws Exception {
+        Specification spec = currentProject.findSpecification(specName);
+        if(spec == null){
+            throw new RuntimeException("Specified spec is not present : "+specName);
+        }
+        assertTrue(currentProject.executeSpecWithScenarioIndex(specName, scenarioIndex));
+    }
+
     @Step("Execute the spec <spec name> and ensure failure")
     public void executeSpecAndEnsureFailure(String specName) throws Exception {
         assertTrue(!executeSpec(specName));
@@ -50,4 +60,5 @@ public class Execution {
         }
         return currentProject.executeSpec(specName);
     }
+
 }
