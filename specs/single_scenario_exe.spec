@@ -6,22 +6,22 @@ Single Scenario Execution
 Passing execution of single scenario
 -------------------------------------
 
-* Create a specification "Specification 01" with the following contexts
+* Create a specification "newSpec" with the following contexts
      |step text     |implementation         |
      |--------------|-----------------------|
      |First context |"inside first context" |
 
-* Create a scenario "first scenario" in specification "Specification 01" with the following steps
+* Create a scenario "first scenario" in specification "newSpec" with the following steps
      |step text          |implementation              |
      |-------------------|----------------------------|
      |First Scenario step|"inside first scenario step"|
 
-* Create a scenario "second scenario" in specification "Specification 01" with the following steps
+* Create a scenario "second scenario" in specification "newSpec" with the following steps
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|
 
-* Execute the spec "Specification 01" with scenario index "0" and ensure success
+* Execute the spec "newSpec" with scenario index "0" and ensure success
 * Console should contain following lines in order
      |console output             |
      |---------------------------|
