@@ -2,7 +2,6 @@ package common;
 
 
 import com.thoughtworks.gauge.Table;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -134,6 +133,10 @@ public abstract class GaugeProject {
     }
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
         executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec:" + index);
+        System.out.println("===Stdout from process===");
+        System.out.println(lastProcessStdout);
+        System.out.println("===Stderr from process===");
+        System.out.println(lastProcessStderr);
         return lastProcess.exitValue() == 0;
     }
 
