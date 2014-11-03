@@ -108,7 +108,7 @@ public abstract class GaugeProject {
         if (!conceptsDir.exists()) {
             conceptsDir.mkdir();
         }
-        File conceptFile = new File(conceptsDir, name + ".cpt");
+        File conceptFile = new File(conceptsDir, "concept_" + System.nanoTime() + ".cpt");
         if (conceptFile.exists()) {
             throw new RuntimeException("Failed to create concept: " + name + "." + conceptFile.getAbsolutePath() + " : File already exists");
         }
