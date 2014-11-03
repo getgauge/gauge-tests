@@ -115,7 +115,9 @@ public abstract class GaugeProject {
         Concept concept = new Concept(name);
         for (List<String> row : steps.getRows()) {
             concept.addSteps(row.get(0));
-            implementStep(row.get(0), row.get(1));
+            if (steps.getColumnNames().size() == 2) {
+                implementStep(row.get(0), row.get(1));
+            }
         }
         concept.saveAs(conceptFile);
         concepts.add(concept);
@@ -173,4 +175,8 @@ public abstract class GaugeProject {
     public abstract void createHookWithPrint(String hookLevel, String hookType, String implementation) throws Exception;
 
     public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
+
+    public String getLastProcessStdout() {
+        return lastProcessStdout;
+    }
 }

@@ -35,6 +35,10 @@ public class Execution {
 
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception{
+        boolean passed = executeSpec(specName);
+        if (! passed) {
+            System.out.println("*************** Process output start************\n" + currentProject.getLastProcessStdout() +  "\n*************** Process output end************");
+        }
         assertTrue(executeSpec(specName));
     }
 

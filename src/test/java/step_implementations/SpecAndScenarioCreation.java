@@ -17,10 +17,6 @@ public class SpecAndScenarioCreation {
 
     @Step("Create <scenario name> in <spec name> with the following steps <steps table>")
     public void addContextToSpecification(String scenarioName, String specName, Table steps) throws Exception {
-        if (steps.getColumnNames().size() != 2) {
-            throw new RuntimeException("Expected two columns for table");
-        }
-
         Specification spec = currentProject.findSpecification(specName);
         if (spec == null) {
             spec = currentProject.createSpecification(specName);
@@ -29,11 +25,21 @@ public class SpecAndScenarioCreation {
         Scenario scenario = new Scenario(scenarioName);
         for (List<String> rows : steps.getRows()) {
             scenario.addSteps(rows.get(0));
-            if (rows.get(1) != null && !rows.get(1).isEmpty())
+            if (shouldCreateImplementation(rows)) {
                 currentProject.implementStep(rows.get(0), rows.get(1));
+            }
         }
         spec.addScenarios(scenario);
         spec.save();
+    }
+
+    private boolean shouldCreateImplementation(List<String> row) {
+        if (row.size() == 1) {
+            return false;
+        } else if (row.get(1) != null && !row.get(1).isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     @Step("Create a specification <spec name> with the following datatable <table>")
@@ -41,6 +47,17 @@ public class SpecAndScenarioCreation {
         Specification specification = currentProject.createSpecification(specName);
         specification.addDataTable(datatable);
         specification.save();
+    }
+
+    @Step("Create step implementations <table>")
+    public void createStepImplementations(Table steps) throws Exception {
+        if (steps.getColumnNames().size() != 2) {
+            throw new Exception("Expecting table with 2 columns: steps and implementations");
+        }
+        for (List<String> row : steps.getRows()) {
+            currentProject.implementStep(row.get(0), row.get(1));
+        }
+
     }
 
 }
