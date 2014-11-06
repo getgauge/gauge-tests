@@ -189,4 +189,7 @@ public abstract class GaugeProject {
     public String getLastProcessStdout() {
         return lastProcessStdout;
     }
+    public String getLastProcessStderr() {
+        return lastProcessStderr;
+    }
 }

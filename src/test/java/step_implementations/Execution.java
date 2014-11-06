@@ -26,22 +26,26 @@ public class Execution {
 
     private boolean isExecutionPassed() throws Exception {
         boolean passed = currentProject.execute();
-        if (!passed) {
-            System.out.println(currentProject.getStdOut());
-            System.out.println(currentProject.getStdErr());
-        }
+        printProcessOutput(passed);
         return passed;
     }
 
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception{
         boolean passed = executeSpec(specName);
-        if (! passed) {
-            System.out.println("*************** Process output start************\n" + currentProject.getLastProcessStdout() +  "\n*************** Process output end************");
-        }
-        assertTrue(executeSpec(specName));
+        printProcessOutput(passed);
+        assertTrue(passed);
     }
 
+
+    public void printProcessOutput(boolean passed) {
+        if (!passed) {
+            System.out.println("*************** Process output start************");
+            System.out.println(currentProject.getLastProcessStdout());
+            System.out.println(currentProject.getLastProcessStderr());
+            System.out.println("*************** Process output end************");
+        }
+    }
 
     @Step("Execute the spec <spec name> with scenario index <scenario index> and ensure success")
     public void executeScenarioWithIndex(String specName, int scenarioIndex) throws Exception {
@@ -49,7 +53,9 @@ public class Execution {
         if(spec == null){
             throw new RuntimeException("Specified spec is not present : "+specName);
         }
-        assertTrue(currentProject.executeSpecWithScenarioIndex(specName, scenarioIndex));
+        boolean passed = currentProject.executeSpecWithScenarioIndex(specName, scenarioIndex);
+        printProcessOutput(passed);
+        assertTrue(passed);
     }
 
     @Step("Execute the spec <spec name> and ensure failure")
@@ -62,7 +68,9 @@ public class Execution {
         if(spec == null){
             throw new RuntimeException("Specified spec is not present : "+specName);
         }
-        return currentProject.executeSpec(specName);
+        boolean passed = currentProject.executeSpec(specName);
+        printProcessOutput(passed);
+        return passed;
     }
 
     @Step("Execute the tags <tags> in spec <spec name> and ensure success")
@@ -71,7 +79,9 @@ public class Execution {
         if(spec == null){
             throw new RuntimeException("Specified spec is not present : "+specName);
         }
-        assertTrue(currentProject.executeTagsInSpec(tags, specName));
+        boolean passed = currentProject.executeTagsInSpec(tags, specName);
+        printProcessOutput(passed);
+        assertTrue(passed);
     }
 
 }
