@@ -65,4 +65,13 @@ public class Execution {
         return currentProject.executeSpec(specName);
     }
 
+    @Step("Execute the tags <tags> in spec <spec name> and ensure success")
+    public void executeTagsAndEnsureSuccess(String tags, String specName) throws IOException, InterruptedException {
+        Specification spec = currentProject.findSpecification(specName);
+        if(spec == null){
+            throw new RuntimeException("Specified spec is not present : "+specName);
+        }
+        assertTrue(currentProject.executeTagsInSpec(tags, specName));
+    }
+
 }

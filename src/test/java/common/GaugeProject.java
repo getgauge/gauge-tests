@@ -101,6 +101,15 @@ public abstract class GaugeProject {
         return null;
     }
 
+    public Scenario findScenario(String scenarioName, List<Scenario> scenarios) {
+        for (Scenario scenario : scenarios ){
+            if(scenario.getName().equalsIgnoreCase(scenarioName)){
+                return scenario;
+            }
+        }
+        return null;
+    }
+
 
     public Concept createConcept(String name, Table steps) throws Exception {
         String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
@@ -135,10 +144,11 @@ public abstract class GaugeProject {
     }
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
         executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec:" + index);
-        System.out.println("===Stdout from process===");
-        System.out.println(lastProcessStdout);
-        System.out.println("===Stderr from process===");
-        System.out.println(lastProcessStderr);
+        return lastProcess.exitValue() == 0;
+    }
+
+    public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
+        executeGaugeCommand("--tags" , "\"" + tags + "\" ", "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
 

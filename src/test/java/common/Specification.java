@@ -57,6 +57,9 @@ public class Specification {
 
         for (Scenario scenario : scenarios) {
             specText.append("## ").append(scenario.getName()).append("\n\n");
+            for (String tag : scenario.getTags()) {
+                specText.append("tags: ").append(tag).append("\n");
+            }
             for (String step : scenario.getSteps()) {
                 specText.append("* ").append(step).append("\n");
             }

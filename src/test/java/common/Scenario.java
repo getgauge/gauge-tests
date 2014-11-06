@@ -7,9 +7,14 @@ public class Scenario {
 
     private String name;
     ArrayList<String> steps = new ArrayList<String>();
+    ArrayList<String> tags = new ArrayList<String>();
 
     public Scenario(String name) {
         this.name = name;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
     }
 
     public String getName() {
@@ -26,4 +31,7 @@ public class Scenario {
         }
     }
 
+    public void addTags(String newTags) {
+        tags.add(newTags);
+    }
 }
