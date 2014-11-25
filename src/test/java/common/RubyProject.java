@@ -58,7 +58,7 @@ public class RubyProject extends GaugeProject {
             builder.append("\n");
         }
         else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
-            builder.append("def \n raise \" exception raised \" \nend \n");
+            builder.append("raise \" exception raised \" \n \n");
         }
         else {
             builder.append("puts ").append(implementation).append("\n");
