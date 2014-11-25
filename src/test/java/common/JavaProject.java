@@ -64,7 +64,11 @@ public class JavaProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else {
+        }else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
+            return "throw new RuntimeException();";
+        }
+        else {
+
             builder.append("System.out.println(").append(implementation).append(");\n");
         }
         return builder.toString();

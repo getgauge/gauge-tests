@@ -15,6 +15,7 @@ public abstract class GaugeProject {
     public static final String PRODUCT_ROOT = "GAUGE_ROOT";
     public static final String PRODUCT_PREFIX = "GAUGE_";
     public static final String PRINT_PARAMS = "print params";
+    public static final String THROW_EXCEPTION = "throw exception";
     private static final String EXAMPLE_SPEC = "hello_world";
     public static GaugeProject currentProject;
     private static String executableName = "gauge";
