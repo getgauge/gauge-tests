@@ -21,7 +21,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
         throw new RuntimeException("Not implemented");
     }
 

@@ -47,6 +47,8 @@ public abstract class GaugeProject {
             return new JavaProject(projectDir);
         } else if (language.equalsIgnoreCase("ruby")) {
             return new RubyProject(projectDir);
+        } else if (language.equalsIgnoreCase("csharp")) {
+            return new CSharpProject(projectDir);
         }
 
         return new UnknownProject(projectDir, language);
@@ -181,7 +183,7 @@ public abstract class GaugeProject {
 
     public abstract Map<String, String> getLanguageSpecificFiles();
 
-    public abstract String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
+    public abstract String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
 
     public abstract void createHookWithPrint(String hookLevel, String hookType, String implementation) throws Exception;
 

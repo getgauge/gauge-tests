@@ -29,7 +29,7 @@ public class RubyProject extends GaugeProject {
             }
             paramTypes.add("string");
         }
-        rubyCode.append("|\n").append(getStepImplemetation(stepValue, implementation, paramTypes)).append("\nend");
+        rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes)).append("\nend");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"), rubyCode.toString());
     }
 
@@ -43,7 +43,7 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public String getStepImplemetation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("puts ");

@@ -10,19 +10,14 @@ import java.util.Map;
 import static common.Util.capitalize;
 import static common.Util.getUniqueName;
 
-public class JavaProject extends GaugeProject {
-    private static String stepImplementationsDir = "src/test/java";
-
-    public JavaProject(File projectDir) {
-        super(projectDir, "java");
+public class CSharpProject extends GaugeProject {
+    public CSharpProject(File projectDir) {
+        super(projectDir, "csharp");
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("src", "dir");
-        map.put("libs", "dir");
-        map.put("src/test/java/StepImplementation.java", "file");
-        map.put("env/default/java.properties", "file");
+        map.put("StepImplementation.cs", "file");
         return map;
     }
 
@@ -31,30 +26,28 @@ public class JavaProject extends GaugeProject {
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String className = getUniqueName();
         StringBuilder classText = new StringBuilder();
-        classText.append("import com.thoughtworks.gauge.Step;\n");
-        classText.append("public class ").append(className).append("{\n");
-        classText.append("@Step(\"").append(stepValue.value).append("\")\n");
+        classText.append("public class ").append(className).append("\n{\n");
+        classText.append("[Step(\"").append(stepValue.value).append("\")]\n");
         classText.append("public void ").append("stepImplementation(");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
-                classText.append("String param").append(i);
+                classText.append("string param").append(i);
             } else {
-                classText.append("String param").append(i).append(", ");
+                classText.append("string param").append(i).append(", ");
             }
-            paramTypes.add("String");
+            paramTypes.add("string");
         }
         implementation = getStepImplementation(stepValue, implementation, paramTypes);
-        classText.append(") {\n").append(implementation).append("\n}");
-        classText.append("}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        classText.append(")\n{\n").append(implementation).append("\n}\n");
+        classText.append("}\n");
+        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
-
 
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
-            builder.append("System.out.println(");
+            builder.append("Console.WriteLine(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 if (paramTypes.get(i).toLowerCase().equals("string")) {
                     builder.append("\"param").append(i).append("=\"+").append("param").append(i);
@@ -65,11 +58,11 @@ public class JavaProject extends GaugeProject {
             }
             builder.append(");\n");
         }else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
-            return "throw new RuntimeException();";
+            return "throw new SystemException();";
         }
         else {
 
-            builder.append("System.out.println(").append(implementation).append(");\n");
+            builder.append("Console.WriteLine(").append(implementation).append(");\n");
         }
         return builder.toString();
     }
@@ -77,30 +70,29 @@ public class JavaProject extends GaugeProject {
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printStatement) throws Exception {
         StringBuilder classText = new StringBuilder();
-        classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
-        String implementation = String.format("System.out.println(\"%s\");", printStatement);
+        String implementation = String.format("Console.WriteLine(\"%s\");", printStatement);
         classText.append(createHookMethod(hookLevel, hookType, implementation));
-        classText.append("\n}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        classText.append("\n}\n");
+        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
     @Override
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
         StringBuilder classText = new StringBuilder();
-        classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
-        classText.append(createHookMethod(hookLevel, hookType, "throw new RuntimeException();"));
-        classText.append("\n}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();"));
+        classText.append("\n}\n");
+        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
         StringBuilder methodText = new StringBuilder();
-        methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));
-        methodText.append(String.format("public void hook() {\n"));
+        String hookName = hookName(hookLevel, hookType);
+        methodText.append(String.format("[%s]\n", hookName));
+        methodText.append(String.format("public void %s() {\n", hookName));
         methodText.append(String.format("%s\n", implementation));
         methodText.append("\n}\n");
         return methodText.toString();
@@ -111,6 +103,6 @@ public class JavaProject extends GaugeProject {
     }
 
     private String getStepImplementationsDir() {
-        return new File(getProjectDir(), "src/test/java").getAbsolutePath();
+        return getProjectDir().getAbsolutePath();
     }
 }
