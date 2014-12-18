@@ -165,9 +165,16 @@ public abstract class GaugeProject {
         processBuilder.directory(projectDir);
         filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
+
+        StreamGobbler inputStreamGobbler = new StreamGobbler(lastProcess.getInputStream());
+        StreamGobbler errorStreamGobbler = new StreamGobbler(lastProcess.getErrorStream());
+
+        inputStreamGobbler.start();
+        errorStreamGobbler.start();
         lastProcess.waitFor();
-        lastProcessStdout = IOUtils.toString(lastProcess.getInputStream());
-        lastProcessStderr = IOUtils.toString(lastProcess.getErrorStream());
+
+        lastProcessStdout = inputStreamGobbler.getOutput();
+        lastProcessStderr = errorStreamGobbler.getOutput();
         return lastProcess.exitValue() == 0;
     }
 
