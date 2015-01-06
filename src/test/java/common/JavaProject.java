@@ -49,6 +49,14 @@ public class JavaProject extends GaugeProject {
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
 
+    @Override
+    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+        boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
+        if (!exitStatus){
+            System.out.println(currentProject.getLastProcessStdout());
+            System.out.println(currentProject.getLastProcessStderr());
+        }
+    }
 
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
@@ -96,7 +104,6 @@ public class JavaProject extends GaugeProject {
         classText.append("\n}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
-
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
         StringBuilder methodText = new StringBuilder();
         methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));

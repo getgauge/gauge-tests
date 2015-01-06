@@ -155,6 +155,11 @@ public abstract class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
+    public boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
+        executeGaugeCommand("--refactor", oldStep, newStep);
+        return lastProcess.exitValue() == 0;
+    }
+
     public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<String>();
         command.add(executableName);
@@ -189,10 +194,14 @@ public abstract class GaugeProject {
 
     public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
 
+    public abstract void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException;
     public String getLastProcessStdout() {
         return lastProcessStdout;
     }
     public String getLastProcessStderr() {
         return lastProcessStderr;
+    }
+    public ArrayList<Specification> getAllSpecifications() {
+        return specifications;
     }
 }

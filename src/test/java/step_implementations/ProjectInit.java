@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import static common.Util.getTempDir;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -146,7 +145,7 @@ public class ProjectInit {
                 message+="Output contains :"+row.get(0)+"\n";
             }
         }
-        if(contains == true)
+        if(contains)
             fail(message);
     }
 }
