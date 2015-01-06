@@ -33,7 +33,7 @@ Rephrase step removing parameters
 ---------------------------------
 * Refactor step "Step with <a> <b>" to "Step having <b> and <c>"
 * Verify that project should not contain "Step with \"two\" \"params\""
-* Verify that project contains "Step having \" params \" and \"\""
+* Verify that project contains "Step having \"params\" and \"\""
 
 Rephrase step with all new parameters
 -------------------------------------
@@ -44,4 +44,4 @@ Rephrase step with all new parameters
 Refactor a non-Existing step
 ----------------------------
 * Refactor step "hello" to "world"
-* Console should contain "Failed to create refactoring request: Step implementation not found: hello"
+* Console should contain "Changes only in spec and concept files.Step implementation not found: hello"
