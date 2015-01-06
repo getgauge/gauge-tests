@@ -88,6 +88,15 @@ public class CSharpProject extends GaugeProject {
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
+    @Override
+    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+        boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
+        if (!exitStatus){
+            System.out.println(currentProject.getLastProcessStdout());
+            System.out.println(currentProject.getLastProcessStderr());
+        }
+    }
+
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
         StringBuilder methodText = new StringBuilder();
         String hookName = hookName(hookLevel, hookType);

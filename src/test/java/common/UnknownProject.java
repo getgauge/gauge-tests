@@ -34,4 +34,9 @@ public class UnknownProject extends GaugeProject {
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
         throw new RuntimeException("Not implemented");
     }
+
+    @Override
+    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+
+    }
 }

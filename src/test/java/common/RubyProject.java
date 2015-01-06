@@ -82,6 +82,15 @@ public class RubyProject extends GaugeProject {
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), getUniqueName() + ".rb"), rubyFileText.toString());
     }
 
+    @Override
+    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+        boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
+        if (!exitStatus){
+            System.out.println(currentProject.getLastProcessStdout());
+            System.out.println(currentProject.getLastProcessStderr());
+        }
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "step_implementations").getAbsolutePath();
     }
