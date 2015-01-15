@@ -93,7 +93,7 @@ public class ProjectInit {
     @Step("Console should contain <message>")
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
-        assertTrue("Console doesn't contain '" + message + "'", output.contains(message));
+        assertTrue("Console doesn't contain '" + message + "'. The output given is : " + output, output.contains(message));
     }
 
     @Step("Console should contain following lines in order <console output table>")
