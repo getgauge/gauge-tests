@@ -44,4 +44,4 @@ Rephrase step with all new parameters
 Refactor a non-Existing step
 ----------------------------
 * Refactor step "hello" to "world"
-* Console should contain "Changes only in spec and concept files.Step implementation not found: hello"
+* Console should contain <file:resources/refactor_console.txt>
