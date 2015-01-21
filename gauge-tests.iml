@@ -10,15 +10,13 @@
     <orderEntry type="module-library">
       <library name="gauge-lib">
         <CLASSES>
-          <root url="file://$USER_HOME$/.gauge/plugins/java/0.0.2/libs" />
+          <root url="file://$USER_HOME$/.gauge/plugins/java/0.0.3/libs" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/.gauge/plugins/java/0.0.2/libs" recursive="true" />
+        <jarDirectory url="file://$USER_HOME$/.gauge/plugins/java/0.0.3/libs" recursive="true" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gaugert-0.0.2" level="project" />
     <orderEntry type="library" name="libs" level="project" />
   </component>
 </module>
-

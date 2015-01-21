@@ -1,5 +1,6 @@
 out/**
 build/
+.idea
 .idea/workspace.xml
 .idea/uiDesigner.xml
 gauge_bin/
