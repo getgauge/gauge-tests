@@ -19,28 +19,28 @@ public class Refactor {
         currentProject.refactorStep(oldStep, newStep);
     }
 
-    @Step("Verify that project should not contain <First step>")
+    @Step("The step <First step> should no longer be used")
     public void verifyStepIsNotPresent(String oldStep) throws IOException {
         GaugeProject currentProject = GaugeProject.getCurrentProject();
         ArrayList<Specification> specFiles = currentProject.getAllSpecifications();
-        String message= "\n";
+        String message = "\n";
         for (Specification specification : specFiles) {
-            if (isStepPresent(oldStep, specification.getSpecFile())){
-                message+= "Step still exists: "+oldStep;
-                fail(message+"\n");
+            if (isStepPresent(oldStep, specification.getSpecFile())) {
+                message += "Step still exists: " + oldStep;
+                fail(message + "\n");
             }
         }
     }
 
-    @Step("Verify that project contains <First step>")
+    @Step("The step <First step> should be used in project")
     public void verifyStepIsPresent(String step) throws IOException {
         GaugeProject currentProject = GaugeProject.getCurrentProject();
         ArrayList<Specification> specFiles = currentProject.getAllSpecifications();
-        String message= "\n";
+        String message = "\n";
         for (Specification specification : specFiles) {
-            if (!isStepPresent(step, specification.getSpecFile())){
-                message+= "Step doesn't exist: "+step;
-                fail(message+"\n");
+            if (!isStepPresent(step, specification.getSpecFile())) {
+                message += "Step doesn't exist: " + step;
+                fail(message + "\n");
             }
         }
     }

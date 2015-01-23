@@ -90,7 +90,7 @@ public class ProjectInit {
         return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
     }
 
-    @Step("Console should contain <message>")
+    @Step({"Console should contain <message>", "The error message <message> should be displayed on console"})
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
         assertTrue("Console doesn't contain '" + message + "'. The output given is : " + output, output.contains(message));

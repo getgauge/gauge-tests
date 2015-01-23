@@ -1,5 +1,5 @@
 Project initialization
-====================
+======================
 
 A gauge project follows a simple structure. A Gauge project can be initialized by running
 
@@ -9,7 +9,7 @@ where the <language> can be any of the supported languages. Currently gauge supp
 
 
 Initializing a new project
---------------------
+--------------------------
 
 * In an empty directory initialize a project with the current language
 * The following file structure should be created 
@@ -26,7 +26,7 @@ Initializing a new project
 
 
 Initializing unknown language project
---------------------
+-------------------------------------
 
 * In an empty directory initialize a "unknown" project
 * Console should contain "unknown plugin is not installed"
