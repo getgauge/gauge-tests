@@ -4,3 +4,6 @@ build/
 .idea/workspace.xml
 .idea/uiDesigner.xml
 gauge_bin/
+logs
+reports*
+specs/hello_world.spec
