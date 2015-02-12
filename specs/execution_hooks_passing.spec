@@ -29,7 +29,7 @@ Suite and Spec Level Hooks
 * Create "spec" level "before" hook with implementation "inside before spec hook"
 * Create "spec" level "after" hook with implementation "inside after spec hook"
 * Execute the current project and ensure success
-* Console should contain following lines
+* Console should contain following lines in order
      |console output          |
      |------------------------|
      |inside before suite hook|

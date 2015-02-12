@@ -137,21 +137,21 @@ public abstract class GaugeProject {
     }
 
     public boolean execute() throws Exception {
-        executeGaugeCommand("--simple-console", "specs/");
+        executeGaugeCommand("--simple-console", "--doNotRandomize", "specs/");
         return lastProcess.exitValue() == 0;
     }
 
     public boolean executeSpec(String specName) throws Exception {
-        executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec");
+        executeGaugeCommand("--simple-console", "--doNotRandomize", "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
-        executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec:" + index);
+        executeGaugeCommand("--simple-console", "--doNotRandomize", "specs" + File.separator + specName + ".spec:" + index);
         return lastProcess.exitValue() == 0;
     }
 
     public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
-        executeGaugeCommand("--tags" , tags , "specs" + File.separator + specName + ".spec");
+        executeGaugeCommand("--tags" ,"--doNotRandomize", tags, "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
 
