@@ -127,6 +127,35 @@ public class ProjectInit {
         }
     }
 
+    @Step("Console should contain following lines <console output table>")
+    public void consoleShouldContainFollowingLines(Table table) throws IOException {
+        String output = currentProject.getStdOut();
+        String outputCopy = output;
+        String row1, row2;
+
+        for (int i = 0; i < table.getRows().size() - 1; i++) {
+            row1 = table.getRows().get(i).get(0);
+            row2 = table.getRows().get(i + 1).get(0);
+            if (!output.contains(row1)) {
+                String message = "Console doesn't contain " + row1 + "\n" +
+                        "Actual output: \n" + outputCopy;
+                fail(message);
+            }
+            if (!output.contains(row2)) {
+                String message = "Console doesn't contain " + row2 + "\n" +
+                        "Actual output: \n" + outputCopy;
+                fail(message);
+            }
+            if (!(output.indexOf(row1) < output.indexOf(row2))){
+                String message = "Output was not in order\n";
+                message += "******************Actual Console Output Start************\n";
+                message += outputCopy;
+                message += "******************Actual Console Output End************\n";
+                fail(message);
+            }
+        }
+    }
+
     @AfterScenario
     public void clearProjectDir() throws IOException {
         if (currentProject.getProjectDir().exists()) {
