@@ -32,18 +32,10 @@ public class Execution {
 
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception{
-        boolean passed = executeSpec(specName, false);
+        boolean passed = executeSpec(specName);
         printProcessOutput(passed);
         assertTrue(passed);
     }
-    
-    @Step("Execute the spec <spec name> in sorted order and ensure success")
-    public void executeSpecInSortedOrderAndEnsureSuccess(String specName) throws Exception{
-        boolean passed = executeSpec(specName, true);
-        printProcessOutput(passed);
-        assertTrue(passed);
-    }
-
 
     public void printProcessOutput(boolean passed) {
         if (!passed) {
@@ -67,20 +59,15 @@ public class Execution {
 
     @Step("Execute the spec <spec name> and ensure failure")
     public void executeSpecAndEnsureFailure(String specName) throws Exception {
-        assertTrue(!executeSpec(specName, false));
-    }
-    
-    @Step("Execute the spec <spec name> in sorted order and ensure failure")
-    public void executeSpecInSortedOrderAndEnsureFailure(String specName) throws Exception {
-        assertTrue(!executeSpec(specName, true));
+        assertTrue(!executeSpec(specName));
     }
 
-    public boolean executeSpec(String specName, boolean order) throws Exception {
+    public boolean executeSpec(String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
         if(spec == null){
             throw new RuntimeException("Specified spec is not present : "+specName);
         }
-        boolean passed = currentProject.executeSpec(specName, order);
+        boolean passed = currentProject.executeSpec(specName);
         printProcessOutput(passed);
         return passed;
     }
