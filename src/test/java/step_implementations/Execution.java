@@ -19,19 +19,30 @@ public class Execution {
         assertTrue(isExecutionPassed());
     }
 
+    @Step("Execute the specs in order and ensure success")
+    public void executeSpecsInOrderAndEnsureSuccess() throws Exception {
+        assertTrue(isExecutionPassed(true));
+    }
+
     @Step("Execute the current project and ensure failure")
     public void executeCurrentProjectAndEnsureFailure() throws Exception {
         assertTrue(!isExecutionPassed());
     }
 
     private boolean isExecutionPassed() throws Exception {
-        boolean passed = currentProject.execute();
+        boolean passed = currentProject.execute(false);
+        printProcessOutput(passed);
+        return passed;
+    }
+    
+    private boolean isExecutionPassed(boolean sorted) throws Exception {
+        boolean passed = currentProject.execute(sorted);
         printProcessOutput(passed);
         return passed;
     }
 
     @Step("Execute the spec <spec name> and ensure success")
-    public void executeSpecAndEnsureSuccess(String specName) throws Exception{
+    public void executeSpecAndEnsureSuccess(String specName) throws Exception {
         boolean passed = executeSpec(specName);
         printProcessOutput(passed);
         assertTrue(passed);
@@ -49,8 +60,8 @@ public class Execution {
     @Step("Execute the spec <spec name> with scenario index <scenario index> and ensure success")
     public void executeScenarioWithIndex(String specName, int scenarioIndex) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-        if(spec == null){
-            throw new RuntimeException("Specified spec is not present : "+specName);
+        if (spec == null) {
+            throw new RuntimeException("Specified spec is not present : " + specName);
         }
         boolean passed = currentProject.executeSpecWithScenarioIndex(specName, scenarioIndex);
         printProcessOutput(passed);
@@ -64,8 +75,8 @@ public class Execution {
 
     public boolean executeSpec(String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-        if(spec == null){
-            throw new RuntimeException("Specified spec is not present : "+specName);
+        if (spec == null) {
+            throw new RuntimeException("Specified spec is not present : " + specName);
         }
         boolean passed = currentProject.executeSpec(specName);
         printProcessOutput(passed);
@@ -75,8 +86,8 @@ public class Execution {
     @Step("Execute the tags <tags> in spec <spec name> and ensure success")
     public void executeTagsAndEnsureSuccess(String tags, String specName) throws IOException, InterruptedException {
         Specification spec = currentProject.findSpecification(specName);
-        if(spec == null){
-            throw new RuntimeException("Specified spec is not present : "+specName);
+        if (spec == null) {
+            throw new RuntimeException("Specified spec is not present : " + specName);
         }
         boolean passed = currentProject.executeTagsInSpec(tags, specName);
         printProcessOutput(passed);

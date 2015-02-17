@@ -1,5 +1,5 @@
-Execution Hooks
-===============
+Execution Hooks passing
+=======================
 
 Execution hooks can be used to run arbitrary test code as different levels during the test suite execution. They are available at suite,
 spec, scenario and step level.
@@ -28,7 +28,7 @@ Suite and Spec Level Hooks
 * Create "suite" level "after" hook with implementation "inside after suite hook"
 * Create "spec" level "before" hook with implementation "inside before spec hook"
 * Create "spec" level "after" hook with implementation "inside after spec hook"
-* Execute the current project and ensure success
+* Execute the specs in order and ensure success
 * Console should contain following lines in order
      |console output          |
      |------------------------|
