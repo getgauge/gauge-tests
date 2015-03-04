@@ -181,7 +181,7 @@ public abstract class GaugeProject {
         errorStreamGobbler.start();
         lastProcess.waitFor();
         // Thread.sleep to finish execution of process and then take the output stream
-        Thread.sleep(50);
+        Thread.sleep(150);
         
         lastProcessStdout = inputStreamGobbler.getOutput();
         lastProcessStderr = errorStreamGobbler.getOutput();
