@@ -8,14 +8,14 @@ Refactor Specification
      |First step              |"inside first step"                                     |
      |Second step             |"inside second step"                                    |
      |Repeated First step     |"inside second step"                                    |
-     |Step with "two" "params"|"inside step with parameters : " + param0 + " " + param1|
+     |Step with "two" "params"|
 
 * Create "Sample scenario2" in "Basic spec execution2" with the following steps 
      |step text                  |implementation                                                  |
      |---------------------------|----------------------------------------------------------------|
      |First step                 |"inside first step"                                             |
-     |Step with "two" "params"   |"inside step with parameters : " + param0 + " " + param1        |
-     |a step with "a" "b" and "c"|"step with parameters : " + param0 + " " + param1 + " " + param2|
+     |Step with "two" "params"   |
+     |a step with "a" "b" and "c"|
      |Second step                |"inside second step"                                            |
 
 
