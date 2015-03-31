@@ -58,6 +58,16 @@ public class ContextExecution {
         currentScenario.addTags(tags);
         spec.save();
     }
+
+    @Step("Add tags <tags> to specification <specification name>")
+    public void addTagsToSpec(String tags, String specName) throws IOException {
+        spec = currentProject.findSpecification(specName);
+        if (spec == null){
+            spec = currentProject.createSpecification(specName);
+        }
+        spec.addTags(tags);
+        spec.save();
+    }
 }
 
 

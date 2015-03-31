@@ -14,6 +14,7 @@ public class Specification {
     private ArrayList<String> contextSteps = new ArrayList<String>();
     private File specFile = null;
     private Table datatable = null;
+    String tags = "";
 
     public Specification(String name) {
         this.name = name;
@@ -47,6 +48,7 @@ public class Specification {
     public String toString() {
         StringBuilder specText = new StringBuilder();
         specText.append("# ").append(name).append("\n\n");
+        specText.append("tags: ").append(this.tags).append("\n");
         if (datatable != null) {
             specText.append(tableString(datatable));
         }
@@ -104,5 +106,9 @@ public class Specification {
 
     public File getSpecFile() {
         return specFile;
+    }
+
+    public void addTags(String tags) {
+        this.tags = tags;
     }
 }
