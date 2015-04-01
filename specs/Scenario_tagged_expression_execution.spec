@@ -98,7 +98,7 @@ tagged expression with (!&|) operator
      |inside second scenario step|
 
 * Console should not contain following lines 
-     |console output            |
-     |--------------------------|
-     |inside third scenario step|
-     |inside fouth scenario step|
+     |console output             |
+     |---------------------------|
+     |inside third scenario step |
+     |inside fourth scenario step|
