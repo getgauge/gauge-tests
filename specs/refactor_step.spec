@@ -5,21 +5,21 @@ tags: refactoring
 
 * In an empty directory initialize a project with the current language
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
-     |step text               |implementation                                          |
-     |------------------------|--------------------------------------------------------|
-     |First step              |"inside first step"                                     |
-     |Second step             |"inside second step"                                    |
-     |Repeated First step     |"inside second step"                                    |
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps
+     |step text               |
+     |------------------------|
+     |First step              |
+     |Second step             |
+     |Repeated First step     |
      |Step with "two" "params"|
 
-* Create "Sample scenario2" in "Basic spec execution2" with the following steps 
-     |step text                  |implementation                                                  |
-     |---------------------------|----------------------------------------------------------------|
-     |First step                 |"inside first step"                                             |
-     |Step with "two" "params"   |
-     |a step with "a" "b" and "c"|
-     |Second step                |"inside second step"                                            |
+* Create a scenario "Sample scenario2" in specification "Basic spec execution2" with the following steps
+     |step text                  |implementation      |
+     |---------------------------|--------------------|
+     |First step                 |"inside first step" |
+     |Step with "two" "params"   |"inside first step" |
+     |a step with "a" "b" and "c"|"inside first step" |
+     |Second step                |"inside second step"|
 
 
 Rename step

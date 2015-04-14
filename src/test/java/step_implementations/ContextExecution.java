@@ -32,20 +32,29 @@ public class ContextExecution {
     }
 
 
-    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>")
-    public void createScenario(String scenarioName , String specName , Table steps) throws Exception{
+    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps with implementation <steps table>")
+    public void createScenarioWithImpl(String scenarioName, String specName, Table steps) throws Exception {
+        createScenarioAndSteps(scenarioName, specName, steps, true);
+    }
+
+    private void createScenarioAndSteps(String scenarioName, String specName, Table steps, boolean implement) throws Exception {
         spec = currentProject.findSpecification(specName);
-        if (spec == null){
+        if (spec == null) {
             spec = currentProject.createSpecification(specName);
         }
-
         Scenario scenario = new Scenario(scenarioName);
         for (List<String> rows : steps.getRows()) {
             scenario.addSteps(rows.get(0));
-            currentProject.implementStep(rows.get(0), rows.get(1));
+            if (implement)
+                currentProject.implementStep(rows.get(0), rows.get(1));
         }
         spec.addScenarios(scenario);
         spec.save();
+    }
+
+    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>")
+    public void createScenario(String scenarioName, String specName, Table steps) throws Exception {
+        createScenarioAndSteps(scenarioName, specName, steps, false);
     }
 
     @Step("Add tags <tags> to scenario <scenario name> in specification <specification name>")

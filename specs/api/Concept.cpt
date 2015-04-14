@@ -1,0 +1,3 @@
+# Steps from api should have the following <table>
+* Fetch all steps from gauge
+* Verify all the steps are present <table> with default steps <file:resources/default_steps.txt>

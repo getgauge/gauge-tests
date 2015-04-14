@@ -1,6 +1,8 @@
 package common;
 
 
+import com.thoughtworks.gauge.GaugeConnection;
+import com.thoughtworks.gauge.GaugeConstant;
 import com.thoughtworks.gauge.Table;
 
 import java.io.File;
@@ -27,6 +29,7 @@ public abstract class GaugeProject {
     private ArrayList<Specification> specifications = new ArrayList<Specification>();
     private String lastProcessStderr;
     private String lastProcessStdout;
+    private GaugeService service;
 
     protected GaugeProject(File projectDir, String language) {
         this.projectDir = projectDir;
@@ -51,6 +54,21 @@ public abstract class GaugeProject {
         }
 
         return new UnknownProject(projectDir, language);
+    }
+
+    public void createGaugeService() throws IOException, InterruptedException {
+        int freePortForApi = SocketUtils.findFreePortForApi();
+        Process process = currentProject.executeGaugeDaemon(freePortForApi);
+        GaugeConnection gaugeConnection = initializeGaugeConnection(freePortForApi);
+        service = new GaugeService(process, gaugeConnection);
+    }
+
+    private static GaugeConnection initializeGaugeConnection(int apiPort) {
+        if (apiPort != -1) {
+            return new GaugeConnection(apiPort);
+        } else {
+            return null;
+        }
     }
 
     public void addConcepts(Concept... newConcepts) {
@@ -163,6 +181,18 @@ public abstract class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
+    public Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
+        ArrayList<String> command = new ArrayList<String>();
+        command.add(executableName);
+        command.add("--daemonize");
+        command.add("--api-port");
+        command.add(String.valueOf(apiPort));
+        ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
+        processBuilder.directory(this.projectDir);
+        filterConflictingEnv(processBuilder);
+        return processBuilder.start();
+    }
+
     public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<String>();
         command.add(executableName);
@@ -213,5 +243,9 @@ public abstract class GaugeProject {
     }
     public ArrayList<Specification> getAllSpecifications() {
         return specifications;
+    }
+
+    public GaugeService getService() {
+        return service;
     }
 }

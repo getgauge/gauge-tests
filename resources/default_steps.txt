@@ -1,0 +1,3 @@
+A context step which gets executed before every scenario
+Say {} to {}
+Step that takes a table {}
