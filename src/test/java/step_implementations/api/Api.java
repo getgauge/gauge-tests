@@ -28,12 +28,12 @@ public class Api {
 
     @Step("Verify all the steps are present <table> with default steps <steps>")
     public void verifySteps(Table table, String defaultSteps) {
-        String[] stepTexts = defaultSteps.split("\n");
+        String[] stepTexts = defaultSteps.split(System.getProperty("line.separator"));
         final List<String> steps = new ArrayList<String>();
         for (int i = 0; i < table.getRows().size(); i++) {
             List<String> row = table.getRows().get(i);
             StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.get(0), false);
-            steps.add(stepValue.getStepText());
+            steps.add(stepValue.getStepText().trim());
         }
         String[] dest = steps.toArray(new String[steps.size() + stepTexts.length]);
         System.arraycopy(stepTexts, 0, dest, steps.size(), stepTexts.length);

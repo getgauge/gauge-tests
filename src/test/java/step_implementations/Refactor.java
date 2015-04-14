@@ -53,7 +53,7 @@ public class Refactor {
             if (!(sCurrentLine.trim().startsWith("*")))
                 continue;
             String step = sCurrentLine.trim().substring(1, sCurrentLine.length()).trim();
-            if(step.equals(oldStep))
+            if (step.equals(oldStep))
                 return true;
         }
         return false;
