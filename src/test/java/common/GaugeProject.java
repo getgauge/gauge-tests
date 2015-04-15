@@ -2,7 +2,6 @@ package common;
 
 
 import com.thoughtworks.gauge.GaugeConnection;
-import com.thoughtworks.gauge.GaugeConstant;
 import com.thoughtworks.gauge.Table;
 
 import java.io.File;

@@ -15,6 +15,11 @@ public class Assert {
             Arrays.sort(actual);
             if (Arrays.equals(expected, actual))
                 return;
+            try {
+                Thread.sleep(info.getInterval());
+            } catch (InterruptedException e) {
+                //ignore
+            }
         }
         System.out.println();
         System.out.println();

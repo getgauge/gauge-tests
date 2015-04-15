@@ -18,7 +18,7 @@ public class Api {
 
     @Step("Fetch all steps from gauge")
     public void fetchAllSteps() throws IOException {
-        info = new StepsAssertInfo(15000);
+        info = new StepsAssertInfo(15000, 150);
     }
 
     @Step("Start Gauge daemon")
