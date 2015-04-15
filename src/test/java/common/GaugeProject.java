@@ -154,7 +154,7 @@ public abstract class GaugeProject {
 
     public boolean execute(boolean sorted) throws Exception {
         if (sorted) {
-            executeGaugeCommand("--simple-console", "--s", "specs/");
+            executeGaugeCommand("--simple-console", "--sort", "specs/");
         } else {
             executeGaugeCommand("--simple-console", "specs/");
         }
