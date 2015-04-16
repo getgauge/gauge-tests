@@ -42,10 +42,10 @@ Fetch all concept steps including newly created steps after starting the Api
 * Start Gauge daemon
 
 * Create concept "concept3 <c> and <d>" with following steps 
-     |step text|implementation      |
-     |---------|--------------------|
-     |step 5   |"inside first step" |
-     |step 6   |"inside second step"|
+     |step text |implementation      |
+     |----------|--------------------|
+     |step 5 "a"|"inside first step" |
+     |step 6    |"inside second step"|
 
 * Create concept "concept4" with following steps 
      |step text|
@@ -61,7 +61,7 @@ Fetch all concept steps including newly created steps after starting the Api
      |step 2    |
      |step 3    |
      |step 4    |
-     |step 5    |
+     |step 5 "a"|
      |step 6    |
      |step 7    |
      |step 8    |

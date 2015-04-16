@@ -8,10 +8,7 @@ import common.Assert;
 import common.AssertInfo;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static common.GaugeProject.currentProject;
 import static org.junit.Assert.fail;
@@ -79,8 +76,8 @@ public class Api {
             List<String> parameters = row.get(2).equals("") ? new ArrayList<String>() : Arrays.asList(row.get(2).trim().split(","));
             steps.add(new StepValue(row.get(0).trim(), row.get(1).trim(), parameters));
         }
-        steps.sort(comparator);
-        stepValues.sort(comparator);
+        Collections.sort(steps, comparator);
+        Collections.sort(stepValues, comparator);
         if (!steps.equals(stepValues)) {
             System.out.println(stepValues);
             System.out.println(steps);

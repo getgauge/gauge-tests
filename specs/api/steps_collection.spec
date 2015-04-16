@@ -80,10 +80,10 @@ Fetch all steps including newly created steps after starting the Api
 * Start Gauge daemon
 
 * Create a scenario "first scenario" in specification "Specification 4" with the following steps with implementation 
-     |step text       |implementation               |
-     |----------------|-----------------------------|
-     |Scenario step 14|"inside first scenario step" |
-     |Scenario step 15|"inside second scenario step"|
+     |step text           |implementation               |
+     |--------------------|-----------------------------|
+     |Scenario step 14 "a"|"inside first scenario step" |
+     |Scenario step 15    |"inside second scenario step"|
 
 * Create a scenario "first scenario" in specification "Specification 5" with the following steps 
      |step text       |
@@ -112,7 +112,7 @@ Fetch all steps including newly created steps after starting the Api
      |Scenario step 11           |
      |Scenario step 12           |
      |Scenario step 13           |
-     |Scenario step 14           |
+     |Scenario step 14 "a"       |
      |Scenario step 15           |
      |Scenario step 16           |
      |Scenario step 17           |
