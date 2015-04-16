@@ -43,10 +43,10 @@ Steps Collection
      |Scenario step 11|"inside second scenario step"|
 
 * Create step implementations 
-     |step            |implementation|
-     |----------------|--------------|
-     |Scenario step 12|print params  |
-     |Scenario step 13|print params  |
+     |step                |implementation|
+     |--------------------|--------------|
+     |Scenario step 12    |print params  |
+     |Scenario step 13 "a"|print params  |
 
 Fetch all steps present in project
 ----------------------------------
@@ -72,7 +72,7 @@ Fetch all steps present in project
      |Scenario step 10           |
      |Scenario step 11           |
      |Scenario step 12           |
-     |Scenario step 13           |
+     |Scenario step 13 "a"       |
 
 Fetch all steps including newly created steps after starting the Api
 --------------------------------------------------------------------
@@ -111,7 +111,7 @@ Fetch all steps including newly created steps after starting the Api
      |Scenario step 10           |
      |Scenario step 11           |
      |Scenario step 12           |
-     |Scenario step 13           |
+     |Scenario step 13 "a"       |
      |Scenario step 14 "a"       |
      |Scenario step 15           |
      |Scenario step 16           |
