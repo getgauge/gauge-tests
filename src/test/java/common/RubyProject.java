@@ -92,6 +92,11 @@ public class RubyProject extends GaugeProject {
         }
     }
 
+    @Override
+    public boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText) {
+        return true;
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "step_implementations").getAbsolutePath();
     }

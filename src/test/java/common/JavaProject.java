@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static common.Util.capitalize;
 import static common.Util.getUniqueName;
@@ -53,10 +55,31 @@ public class JavaProject extends GaugeProject {
     @Override
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
         boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
-        if (!exitStatus){
+        if (!exitStatus) {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
+    }
+
+    @Override
+    public boolean isStepPresentInImpl(String stepText, Integer paramCount, String implText) {
+        paramCount = paramCount == 0 ? 1 : paramCount;
+        String[] lines = implText.split(System.getProperty("line.separator"));
+        for (int i = 0; i < lines.length; i++) {
+            String stepName = lines[i].replace("@Step(\"", "").replace("\")", "");
+            if (replaceParams(stepName).equals(replaceParams(stepText))) {
+                Pattern p = Pattern.compile("\\(([^)]*)\\)");
+                Matcher m = p.matcher(lines[i + 1]);
+                while (m.find())
+                    if (m.group(1).split(",").length == paramCount)
+                        return true;
+            }
+        }
+        return false;
+    }
+
+    private String replaceParams(String stepName) {
+        return stepName.replaceAll("<[^>]*>", "").replaceAll("(\"[^\"]*?\")", "").trim();
     }
 
     @Override
@@ -73,10 +96,9 @@ public class JavaProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        }else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
+        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
-        }
-        else {
+        } else {
 
             builder.append("System.out.println(").append(implementation).append(");\n");
         }
@@ -105,6 +127,7 @@ public class JavaProject extends GaugeProject {
         classText.append("\n}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
+
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
         StringBuilder methodText = new StringBuilder();
         methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));

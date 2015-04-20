@@ -98,6 +98,11 @@ public class CSharpProject extends GaugeProject {
         }
     }
 
+    @Override
+    public boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText) {
+        return true;
+    }
+
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
         StringBuilder methodText = new StringBuilder();
         String hookName = hookName(hookLevel, hookType);

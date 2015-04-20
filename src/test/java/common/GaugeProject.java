@@ -262,4 +262,7 @@ public abstract class GaugeProject {
     public GaugeService getService() {
         return service;
     }
+
+
+    public abstract boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText);
 }
