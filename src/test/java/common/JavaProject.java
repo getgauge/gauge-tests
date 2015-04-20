@@ -46,6 +46,7 @@ public class JavaProject extends GaugeProject {
         implementation = getStepImplementation(stepValue, implementation, paramTypes);
         classText.append(") {\n").append(implementation).append("\n}");
         classText.append("}");
+        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), className + ".java"));
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
 

@@ -30,6 +30,7 @@ public class RubyProject extends GaugeProject {
             paramTypes.add("string");
         }
         rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes)).append("\nend");
+        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"));
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"), rubyCode.toString());
     }
 

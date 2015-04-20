@@ -40,6 +40,7 @@ public class CSharpProject extends GaugeProject {
         implementation = getStepImplementation(stepValue, implementation, paramTypes);
         classText.append(")\n{\n").append(implementation).append("\n}\n");
         classText.append("}\n");
+        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"));
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 

@@ -7,7 +7,9 @@ public class StepValueExtractor {
         Boolean inEscape = false;
         boolean inQuotes = false;
         boolean inBracket = false;
+        Integer count = 0;
         for (char aChar : chars) {
+            count++;
             if (inEscape) {
                 inEscape = false;
                 if (!inQuotes && !inBracket)
@@ -16,13 +18,13 @@ public class StepValueExtractor {
                 if (!inQuotes) {
                     inQuotes = true;
                 } else {
-                    extractedValue.append("<>");
+                    extractedValue.append("<param").append(count.toString()).append(">");
                     inQuotes = false;
                 }
             } else if (aChar == '<' && !inBracket) {
                 inBracket = true;
             } else if (aChar == '>' && inBracket) {
-                extractedValue.append("<>");
+                extractedValue.append("<param").append(count.toString()).append(">");
                 inBracket = false;
             } else if (aChar == '\\') {
                 inEscape = true;

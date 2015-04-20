@@ -30,10 +30,13 @@ public abstract class GaugeProject {
     private String lastProcessStdout;
     private GaugeService service;
 
+    private List<File> implementationFiles;
+
     protected GaugeProject(File projectDir, String language) {
         this.projectDir = projectDir;
         this.language = language;
         currentProject = this;
+        this.implementationFiles = new ArrayList<File>();
     }
 
     public static GaugeProject getCurrentProject() {
@@ -41,6 +44,14 @@ public abstract class GaugeProject {
             throw new RuntimeException("Gauge project is not initialized yet");
         }
         return currentProject;
+    }
+
+    public List<File> getImplementationFiles() {
+        return implementationFiles;
+    }
+
+    public void addImplementationFile(String file) {
+        implementationFiles.add(new File(file));
     }
 
     public static GaugeProject createProject(File projectDir, String language) {
@@ -121,8 +132,8 @@ public abstract class GaugeProject {
     }
 
     public Scenario findScenario(String scenarioName, List<Scenario> scenarios) {
-        for (Scenario scenario : scenarios ){
-            if(scenario.getName().equalsIgnoreCase(scenarioName)){
+        for (Scenario scenario : scenarios) {
+            if (scenario.getName().equalsIgnoreCase(scenarioName)) {
                 return scenario;
             }
         }
@@ -165,6 +176,7 @@ public abstract class GaugeProject {
         executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
+
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
         executeGaugeCommand("--simple-console", "specs" + File.separator + specName + ".spec:" + index);
         return lastProcess.exitValue() == 0;
@@ -234,12 +246,15 @@ public abstract class GaugeProject {
     public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
 
     public abstract void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException;
+
     public String getLastProcessStdout() {
         return lastProcessStdout;
     }
+
     public String getLastProcessStderr() {
         return lastProcessStderr;
     }
+
     public ArrayList<Specification> getAllSpecifications() {
         return specifications;
     }
