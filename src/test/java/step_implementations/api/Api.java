@@ -18,6 +18,7 @@ public class Api {
     private AssertInfo info;
     private List<StepValue> stepValues;
     private Comparator<StepValue> comparator;
+    private gauge.messages.Api.PerformRefactoringResponse refactorResponse;
 
     public Api() {
         comparator = new Comparator<StepValue>() {
@@ -83,6 +84,17 @@ public class Api {
             System.out.println(steps);
             fail();
         }
+    }
+
+    @Step("Refactor step <old step> to <new step> via api")
+    public void refactor(String oldStep, String newStep) throws Exception {
+        refactorResponse = currentProject.getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
+    }
+
+    @Step("verify refactoring didn't change files")
+    public void verifyRefactoring() {
+        if (refactorResponse.getFilesChangedList().size() != 0)
+            throw new RuntimeException("");
     }
 
     @AfterScenario
