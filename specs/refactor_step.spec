@@ -1,5 +1,5 @@
-Refactor Specification
-======================
+Concsole Refactor Specification
+===============================
 
 tags: refactoring
 
@@ -26,36 +26,41 @@ Rename step
 -----------
 
 * Refactor step "First step" to "New step"
-* The step "First step" with "0" params should no longer be used
-* The step "New step" should be used in project with "0" params
+* The step "First step" should no longer be used
+* The step "New step" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
 
 Rephrase simple step
 --------------------
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <a>"
-* The step "Step with \"two\" \"params\"" with "2" params should no longer be used
-* The step "Step having \"params\" and \"two\"" should be used in project with "2" params
+* The step "Step with \"two\" \"params\"" should no longer be used
+* The step "Step having \"params\" and \"two\"" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
 
 Rephrase step having new parameters
 -----------------------------------
 
 * Refactor step "Step with <a> <b>" to "Step having <b> <c> and <a>"
-* The step "Step with \"two\" \"params\"" with "2" params should no longer be used
-* The step "Step having \"params\" \"c\" and \"two\"" should be used in project with "3" params
+* The step "Step with \"two\" \"params\"" should no longer be used
+* The step "Step having \"params\" \"c\" and \"two\"" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
 
 Rephrase step removing parameters
 ---------------------------------
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <c>"
-* The step "Step with \"two\" \"params\"" with "2" params should no longer be used
-* The step "Step having \"params\" and \"c\"" should be used in project with "2" params
+* The step "Step with \"two\" \"params\"" should no longer be used
+* The step "Step having \"params\" and \"c\"" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
 
 Rephrase step with all new parameters
 -------------------------------------
 
 * Refactor step "Step with <a> <b>" to "Step having <d> and <c>"
-* The step "Step with \"two\" \"params\"" with "2" params should no longer be used
-* The step "Step having \"d\" and \"c\"" should be used in project with "2" params
+* The step "Step with \"two\" \"params\"" should no longer be used
+* The step "Step having \"d\" and \"c\"" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
 
 Refactor a non-Existing step
 ----------------------------
@@ -67,5 +72,5 @@ Rename an unimplemented step
 ----------------------------
 
 * Refactor step "Repeated First step" to "again Repeated First step"
-* The step "Repeated First step" should no longer be used in specs
-* The step "again Repeated First step" should be used in specs
+* The step "Repeated First step" should no longer be used
+* The step "again Repeated First step" should be used in project

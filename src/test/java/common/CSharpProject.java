@@ -40,7 +40,6 @@ public class CSharpProject extends GaugeProject {
         implementation = getStepImplementation(stepValue, implementation, paramTypes);
         classText.append(")\n{\n").append(implementation).append("\n}\n");
         classText.append("}\n");
-        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"));
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
@@ -96,11 +95,6 @@ public class CSharpProject extends GaugeProject {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
-    }
-
-    @Override
-    public boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText) {
-        return true;
     }
 
     private String createHookMethod(String hookLevel, String hookType, String implementation) {

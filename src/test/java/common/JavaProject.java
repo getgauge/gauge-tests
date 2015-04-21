@@ -46,9 +46,8 @@ public class JavaProject extends GaugeProject {
             paramTypes.add("String");
         }
         implementation = getStepImplementation(stepValue, implementation, paramTypes);
-        classText.append(") {\n").append(implementation).append("\n}");
+        classText.append(") {\n").append(implementation).append("\n}\n");
         classText.append("}");
-        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), className + ".java"));
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
 
@@ -59,27 +58,6 @@ public class JavaProject extends GaugeProject {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
-    }
-
-    @Override
-    public boolean isStepPresentInImpl(String stepText, Integer paramCount, String implText) {
-        paramCount = paramCount == 0 ? 1 : paramCount;
-        String[] lines = implText.split(System.getProperty("line.separator"));
-        for (int i = 0; i < lines.length; i++) {
-            String stepName = lines[i].replace("@Step(\"", "").replace("\")", "");
-            if (replaceParams(stepName).equals(replaceParams(stepText))) {
-                Pattern p = Pattern.compile("\\(([^)]*)\\)");
-                Matcher m = p.matcher(lines[i + 1]);
-                while (m.find())
-                    if (m.group(1).split(",").length == paramCount)
-                        return true;
-            }
-        }
-        return false;
-    }
-
-    private String replaceParams(String stepName) {
-        return stepName.replaceAll("<[^>]*>", "").replaceAll("(\"[^\"]*?\")", "").trim();
     }
 
     @Override

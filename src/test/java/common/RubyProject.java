@@ -30,7 +30,6 @@ public class RubyProject extends GaugeProject {
             paramTypes.add("string");
         }
         rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes)).append("\nend");
-        this.addImplementationFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"));
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"), rubyCode.toString());
     }
 
@@ -90,11 +89,6 @@ public class RubyProject extends GaugeProject {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
-    }
-
-    @Override
-    public boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText) {
-        return true;
     }
 
     private String getStepImplementationsDir() {

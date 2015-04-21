@@ -30,13 +30,10 @@ public abstract class GaugeProject {
     private String lastProcessStdout;
     private GaugeService service;
 
-    private List<File> implementationFiles;
-
     protected GaugeProject(File projectDir, String language) {
         this.projectDir = projectDir;
         this.language = language;
         currentProject = this;
-        this.implementationFiles = new ArrayList<File>();
     }
 
     public static GaugeProject getCurrentProject() {
@@ -44,14 +41,6 @@ public abstract class GaugeProject {
             throw new RuntimeException("Gauge project is not initialized yet");
         }
         return currentProject;
-    }
-
-    public List<File> getImplementationFiles() {
-        return implementationFiles;
-    }
-
-    public void addImplementationFile(String file) {
-        implementationFiles.add(new File(file));
     }
 
     public static GaugeProject createProject(File projectDir, String language) {
@@ -262,7 +251,4 @@ public abstract class GaugeProject {
     public GaugeService getService() {
         return service;
     }
-
-
-    public abstract boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText);
 }

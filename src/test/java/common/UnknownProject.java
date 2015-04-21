@@ -39,9 +39,4 @@ public class UnknownProject extends GaugeProject {
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
 
     }
-
-    @Override
-    public boolean isStepPresentInImpl(String oldStep, Integer paramCount, String implText) {
-        return false;
-    }
 }

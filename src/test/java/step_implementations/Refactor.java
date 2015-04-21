@@ -3,7 +3,6 @@ package step_implementations;
 import com.thoughtworks.gauge.Step;
 import common.GaugeProject;
 import common.Specification;
-import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,35 +19,23 @@ public class Refactor {
         currentProject.refactorStep(oldStep, newStep);
     }
 
-    @Step("The step <First step> with <param count> params should no longer be used")
-    public void verifyStepIsNotPresent(String oldStep, Integer paramCount) throws IOException {
-        verifyStepNotPresentInSpecs(oldStep);
-        for (File file : currentProject.getImplementationFiles())
-            if (currentProject.isStepPresentInImpl(oldStep, paramCount, FileUtils.readFileToString(file)))
-                fail("Step still exists in implementation: " + oldStep);
+    @Step("The step <First step> should no longer be used")
+    public void verifyStepIsNotPresent(String oldStep) throws IOException {
+        GaugeProject currentProject1 = GaugeProject.getCurrentProject();
+        List<Specification> specFiles = currentProject1.getAllSpecifications();
+        String message = "\n";
+        for (Specification specification : specFiles) {
+            if (isStepPresent(oldStep, specification.getSpecFile())) {
+                message += "Step still exists: " + oldStep;
+                fail(message + "\n");
+            }
+        }
     }
 
-    @Step("The step <First step> should be used in project with <param count> params")
-    public void verifyStepIsPresent(String step, Integer paramCount) throws IOException {
-        verifyStepPresentInSpecs(step);
-        for (File file : currentProject.getImplementationFiles())
-            if (currentProject.isStepPresentInImpl(step, paramCount, FileUtils.readFileToString(file))) return;
-        fail("Step does not exist in implementation: " + step);
-    }
-
-    @Step("The step <First step> should be used in specs")
-    public void verifyStepIsPresentInSpecs(String step) throws IOException {
-        verifyStepPresentInSpecs(step);
-    }
-
-    @Step("The step <First step> should no longer be used in specs")
-    public void verifyStepIsNotPresentInSoecs(String oldStep) throws IOException {
-        verifyStepNotPresentInSpecs(oldStep);
-    }
-
-    private void verifyStepPresentInSpecs(String step) throws IOException {
-        GaugeProject currentProject = GaugeProject.getCurrentProject();
-        List<Specification> specFiles = currentProject.getAllSpecifications();
+    @Step("The step <First step> should be used in project")
+    public void verifyStepIsPresent(String step) throws IOException {
+        GaugeProject currentProject1 = GaugeProject.getCurrentProject();
+        List<Specification> specFiles = currentProject1.getAllSpecifications();
         String message = "\n";
         for (Specification specification : specFiles)
             if (isStepPresent(step, specification.getSpecFile())) return;
@@ -69,16 +56,4 @@ public class Refactor {
         return false;
     }
 
-    private void verifyStepNotPresentInSpecs(String oldStep) throws IOException {
-        GaugeProject currentProject = GaugeProject.getCurrentProject();
-        List<Specification> specFiles = currentProject.getAllSpecifications();
-        String message = "\n";
-        for (Specification specification : specFiles) {
-            if (isStepPresent(oldStep, specification.getSpecFile())) {
-                message += "Step still exists: " + oldStep;
-                fail(message + "\n");
-            }
-        }
-
-    }
 }
