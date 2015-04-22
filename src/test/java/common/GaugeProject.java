@@ -76,6 +76,10 @@ public abstract class GaugeProject {
         }
     }
 
+    public List<Concept> getConcepts() {
+        return concepts;
+    }
+
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
         System.out.println(lastProcessStdout);

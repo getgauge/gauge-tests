@@ -45,4 +45,8 @@ public class Concept {
         Util.writeToFile(file.getAbsolutePath(), this.toString());
         this.conceptFile = file;
     }
+
+    public File getConceptFile() {
+        return conceptFile;
+    }
 }

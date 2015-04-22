@@ -1,6 +1,7 @@
 package step_implementations;
 
 import com.thoughtworks.gauge.Step;
+import common.Concept;
 import common.GaugeProject;
 import common.Specification;
 
@@ -23,12 +24,17 @@ public class Refactor {
     public void verifyStepIsNotPresent(String oldStep) throws IOException {
         GaugeProject currentProject1 = GaugeProject.getCurrentProject();
         List<Specification> specFiles = currentProject1.getAllSpecifications();
+        for (Specification specification : specFiles)
+            checkInFile(oldStep, specification.getSpecFile());
+        for (Concept concept : currentProject1.getConcepts())
+            checkInFile(oldStep, concept.getConceptFile());
+    }
+
+    private void checkInFile(String oldStep, File specFile) throws IOException {
         String message = "\n";
-        for (Specification specification : specFiles) {
-            if (isStepPresent(oldStep, specification.getSpecFile())) {
-                message += "Step still exists: " + oldStep;
-                fail(message + "\n");
-            }
+        if (isStepPresent(oldStep, specFile)) {
+            message += "Step still exists: " + oldStep;
+            fail(message + "\n");
         }
     }
 
@@ -39,19 +45,22 @@ public class Refactor {
         String message = "\n";
         for (Specification specification : specFiles)
             if (isStepPresent(step, specification.getSpecFile())) return;
+        for (Concept concept : currentProject1.getConcepts())
+            if (isStepPresent(step, concept.getConceptFile())) return;
         message += "Step doesn't exist: " + step;
         fail(message + "\n");
+
     }
 
     private boolean isStepPresent(String oldStep, File specFile) throws IOException {
         String sCurrentLine;
         BufferedReader br = new BufferedReader(new FileReader(specFile));
         while ((sCurrentLine = br.readLine()) != null) {
-            if (!(sCurrentLine.trim().startsWith("*")))
-                continue;
-            String step = sCurrentLine.trim().substring(1, sCurrentLine.length()).trim();
-            if (step.equals(oldStep))
-                return true;
+            if (sCurrentLine.trim().startsWith("*") || sCurrentLine.trim().startsWith("#")) {
+                String step = sCurrentLine.trim().substring(1, sCurrentLine.length()).trim();
+                if (step.equals(oldStep))
+                    return true;
+            }
         }
         return false;
     }

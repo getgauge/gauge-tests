@@ -1,5 +1,8 @@
 package common;
 
+import com.thoughtworks.gauge.AfterClassSteps;
+import com.thoughtworks.gauge.BeforeClassSteps;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
