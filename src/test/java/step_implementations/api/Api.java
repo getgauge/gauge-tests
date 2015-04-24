@@ -51,11 +51,14 @@ public class Api {
     }
 
     @Step("Verify all the steps are present <table> with default steps <steps>")
-    public void verifySteps(Table table, String defaultSteps) {
-        String[] stepTexts = defaultSteps.split(System.getProperty("line.separator"));
+    public void verifySteps(Table table, Table defaultSteps) {
+        List<String> stepTexts = new ArrayList<String>();
+        for (List<String> strings : defaultSteps.getRows()) {
+            stepTexts.add(strings.get(0));
+        }
         final List<String> steps = getSteps(table);
-        String[] dest = steps.toArray(new String[steps.size() + stepTexts.length]);
-        System.arraycopy(stepTexts, 0, dest, steps.size(), stepTexts.length);
+        String[] dest = steps.toArray(new String[steps.size() + stepTexts.size()]);
+        System.arraycopy(stepTexts.toArray(), 0, dest, steps.size(), stepTexts.size());
         info.setExpected(dest);
         Assert.till(info);
     }
