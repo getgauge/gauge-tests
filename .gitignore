@@ -6,4 +6,5 @@ build/
 gauge_bin/
 logs
 reports*
+target
 specs/hello_world.spec
