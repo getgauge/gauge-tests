@@ -18,7 +18,7 @@ Tests for Gauge Command-Line Utility using Gauge
   gauge --install ruby
   gauge --install csharp
   ```
-- Install [Apache Ant](https://ant.apache.org/bindownload.cgi)
+- Install [Maven](https://maven.apache.org/)
 
 - Clone this repo.
 
