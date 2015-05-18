@@ -194,7 +194,9 @@ public abstract class GaugeProject {
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
         filterConflictingEnv(processBuilder);
-        return processBuilder.start();
+        Process process = processBuilder.start();
+        Thread.sleep(3000);
+        return process;
     }
 
     public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
