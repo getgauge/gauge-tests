@@ -1,4 +1,4 @@
-Concsole Refactor Specification
+Console Refactor Specification
 ===============================
 
 tags: refactoring
