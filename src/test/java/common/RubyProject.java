@@ -14,7 +14,7 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation) throws Exception {
+    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -29,7 +29,7 @@ public class RubyProject extends GaugeProject {
             }
             paramTypes.add("string");
         }
-        rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes)).append("\nend");
+        rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes, appendCode)).append("\nend");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"), rubyCode.toString());
     }
 
@@ -43,7 +43,7 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("puts ");
@@ -61,7 +61,11 @@ public class RubyProject extends GaugeProject {
             builder.append("raise \" exception raised \" \n \n");
         }
         else {
-            builder.append("puts ").append(implementation).append("\n");
+            if (appendCode){
+                builder.append(implementation);
+            } else {
+                builder.append("puts ").append(implementation).append("\n");
+            }
         }
         return builder.toString();
     }
@@ -89,6 +93,21 @@ public class RubyProject extends GaugeProject {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
+    }
+
+    @Override
+    public String getDataStoreWriteStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        String value = row.get(2);
+        return "Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.put(\"" + key + "\", \"" + value + "\")";
+    }
+
+    @Override
+    public String getDataStorePrintValueStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        return "puts Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.get(\"" + key + "\")";
     }
 
     private String getStepImplementationsDir() {

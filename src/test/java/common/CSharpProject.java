@@ -21,7 +21,8 @@ public class CSharpProject extends GaugeProject {
         return map;
     }
 
-    public void implementStep(String stepText, String implementation) throws Exception {
+    @Override
+    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String className = getUniqueName();
@@ -37,14 +38,14 @@ public class CSharpProject extends GaugeProject {
             }
             paramTypes.add("string");
         }
-        implementation = getStepImplementation(stepValue, implementation, paramTypes);
+        implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
         classText.append(")\n{\n").append(implementation).append("\n}\n");
         classText.append("}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
     @Override
-    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("Console.WriteLine(");
@@ -59,10 +60,12 @@ public class CSharpProject extends GaugeProject {
             builder.append(");\n");
         }else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
             return "throw new SystemException();";
-        }
-        else {
-
-            builder.append("Console.WriteLine(").append(implementation).append(");\n");
+        }else {
+            if (appendCode){
+                builder.append(implementation);
+            } else {
+                builder.append("Console.WriteLine(").append(implementation).append(");\n");
+            }
         }
         return builder.toString();
     }
@@ -95,6 +98,21 @@ public class CSharpProject extends GaugeProject {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
+    }
+
+    @Override
+    public String getDataStoreWriteStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        String value = row.get(2);
+        return "DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Add(\""+ key + "\",\"" + value +"\");";
+    }
+
+    @Override
+    public String getDataStorePrintValueStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key +"\"));";
     }
 
     private String createHookMethod(String hookLevel, String hookType, String implementation) {

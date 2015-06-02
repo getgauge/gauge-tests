@@ -11,7 +11,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation) throws Exception {
+    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
         throw new RuntimeException("Not implemented");
     }
 
@@ -21,7 +21,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         throw new RuntimeException("Not implemented");
     }
 
@@ -38,5 +38,15 @@ public class UnknownProject extends GaugeProject {
     @Override
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
 
+    }
+
+    @Override
+    public String getDataStoreWriteStatement(List<String> row) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public String getDataStorePrintValueStatement(List<String> row) {
+        throw new RuntimeException("Not implemented");
     }
 }

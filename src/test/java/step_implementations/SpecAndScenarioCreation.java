@@ -26,7 +26,7 @@ public class SpecAndScenarioCreation {
         for (List<String> rows : steps.getRows()) {
             scenario.addSteps(rows.get(0));
             if (shouldCreateImplementation(rows)) {
-                currentProject.implementStep(rows.get(0), rows.get(1));
+                currentProject.implementStep(rows.get(0), rows.get(1), false);
             }
         }
         spec.addScenarios(scenario);
@@ -55,7 +55,7 @@ public class SpecAndScenarioCreation {
             throw new Exception("Expecting table with 2 columns: steps and implementations");
         }
         for (List<String> row : steps.getRows()) {
-            currentProject.implementStep(row.get(0), row.get(1));
+            currentProject.implementStep(row.get(0), row.get(1), false);
         }
 
     }

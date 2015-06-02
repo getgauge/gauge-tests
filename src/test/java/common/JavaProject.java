@@ -1,16 +1,11 @@
 package common;
 
-import com.thoughtworks.gauge.AfterClassSteps;
-import com.thoughtworks.gauge.BeforeClassSteps;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static common.Util.capitalize;
 import static common.Util.getUniqueName;
@@ -31,7 +26,7 @@ public class JavaProject extends GaugeProject {
         return map;
     }
 
-    public void implementStep(String stepText, String implementation) throws Exception {
+    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String className = getUniqueName();
@@ -48,7 +43,7 @@ public class JavaProject extends GaugeProject {
             }
             paramTypes.add("String");
         }
-        implementation = getStepImplementation(stepValue, implementation, paramTypes);
+        implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
         classText.append(") {\n").append(implementation).append("\n}\n");
         classText.append("}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
@@ -64,7 +59,22 @@ public class JavaProject extends GaugeProject {
     }
 
     @Override
-    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes) {
+    public String getDataStoreWriteStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        String value = row.get(2);
+        return "com.thoughtworks.gauge.DataStoreFactory.get" + dataStoreType + "DataStore().put(\""+ key + "\",\"" + value +"\");";
+    }
+
+    @Override
+    public String getDataStorePrintValueStatement(List<String> row) {
+        String dataStoreType = row.get(3);
+        String key = row.get(1);
+        return "System.out.println(com.thoughtworks.gauge.DataStoreFactory.get" + dataStoreType + "DataStore().get(\""+ key + "\"));";
+    }
+
+    @Override
+    public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("System.out.println(");
@@ -80,8 +90,11 @@ public class JavaProject extends GaugeProject {
         } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
         } else {
-
-            builder.append("System.out.println(").append(implementation).append(");\n");
+            if (appendCode){
+                builder.append(implementation);
+            } else {
+                builder.append("System.out.println(").append(implementation).append(");\n");
+            }
         }
         return builder.toString();
     }

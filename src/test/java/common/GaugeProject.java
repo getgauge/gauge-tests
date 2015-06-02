@@ -148,7 +148,7 @@ public abstract class GaugeProject {
         for (List<String> row : steps.getRows()) {
             concept.addSteps(row.get(0));
             if (steps.getColumnNames().size() == 2) {
-                implementStep(row.get(0), row.get(1));
+                implementStep(row.get(0), row.get(1), false);
             }
         }
         concept.saveAs(conceptFile);
@@ -230,11 +230,11 @@ public abstract class GaugeProject {
         }
     }
 
-    public abstract void implementStep(String stepText, String implementation) throws Exception;
+    public abstract void implementStep(String stepText, String implementation, boolean appendCode) throws Exception;
 
     public abstract Map<String, String> getLanguageSpecificFiles();
 
-    public abstract String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes);
+    public abstract String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode);
 
     public abstract void createHookWithPrint(String hookLevel, String hookType, String implementation) throws Exception;
 
@@ -257,4 +257,8 @@ public abstract class GaugeProject {
     public GaugeService getService() {
         return service;
     }
+
+    public abstract String getDataStoreWriteStatement(List<String> row);
+
+    public abstract String getDataStorePrintValueStatement(List<String> row);
 }
