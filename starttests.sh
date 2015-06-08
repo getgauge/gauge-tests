@@ -1,4 +1,4 @@
 #!/bin/sh
 export PATH=$GAUGE_ROOT/bin:$PATH
-mvn test -X -Denv=ci-$1
+gauge -p --env=ci-$1 specs/
 
