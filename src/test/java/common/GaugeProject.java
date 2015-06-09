@@ -1,7 +1,7 @@
 package common;
 
 
-import com.thoughtworks.gauge.GaugeConnection;
+import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.Table;
 
 import java.io.File;
