@@ -63,14 +63,14 @@ public class JavaProject extends GaugeProject {
         String dataStoreType = row.get(3);
         String key = row.get(1);
         String value = row.get(2);
-        return "com.thoughtworks.gauge.DataStoreFactory.get" + dataStoreType + "DataStore().put(\""+ key + "\",\"" + value +"\");";
+        return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\""+ key + "\",\"" + value +"\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(List<String> row) {
         String dataStoreType = row.get(3);
         String key = row.get(1);
-        return "System.out.println(com.thoughtworks.gauge.DataStoreFactory.get" + dataStoreType + "DataStore().get(\""+ key + "\"));";
+        return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\""+ key + "\"));";
     }
 
     @Override
