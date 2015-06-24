@@ -3,6 +3,7 @@ package common;
 
 import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.Table;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -222,6 +223,10 @@ public abstract class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
+    public void deleteSpec(String specName) throws IOException {
+        FileUtils.forceDelete(getSpecFile(specName));
+    }
+
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
         for (String env : processBuilder.environment().keySet()) {
             if (!env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX)) {
@@ -239,6 +244,8 @@ public abstract class GaugeProject {
     public abstract void createHookWithPrint(String hookLevel, String hookType, String implementation) throws Exception;
 
     public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
+
+    public abstract void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException;
 
     public abstract void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException;
 

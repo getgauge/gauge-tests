@@ -1,5 +1,7 @@
 package common;
 
+import com.thoughtworks.gauge.Table;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,6 +91,11 @@ public class CSharpProject extends GaugeProject {
         classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();"));
         classText.append("\n}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
+    }
+
+    @Override
+    public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package common;
 
+import com.thoughtworks.gauge.Table;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +34,11 @@ public class UnknownProject extends GaugeProject {
 
     @Override
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
         throw new RuntimeException("Not implemented");
     }
 

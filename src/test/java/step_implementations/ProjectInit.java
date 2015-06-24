@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import static common.Util.getTempDir;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ProjectInit {
@@ -25,10 +24,16 @@ public class ProjectInit {
         currentProject.initialize();
     }
 
-    @Step("In an empty directory initialize a project with the current language")
+    @Step({"In an empty directory initialize a project with the current language"})
     public void initializeProject() throws Exception {
         String currentLanguage = Util.getCurrentLanguage();
         initializeProjectWithLanguage(currentLanguage);
+    }
+
+    @Step("Project is initialized without example spec")
+    public void projectInitWithoutHelloWorldSpec() throws Exception {
+        initializeProject();
+        currentProject.deleteSpec("hello_world");
     }
 
     @Step("The following file structure should be created <table>")
@@ -90,43 +95,6 @@ public class ProjectInit {
         return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
     }
 
-    @Step({"Console should contain <message>", "The error message <message> should be displayed on console"})
-    public void consoleShouldContain(String message) throws IOException {
-        String output = currentProject.getStdOut();
-        assertTrue("Console doesn't contain '" + message + "'. The output given is : " + output, output.contains(message));
-    }
-
-    @Step("Console should contain following lines in order <console output table>")
-    public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
-        String output = currentProject.getStdOut();
-        String outputCopy = output;
-        String row1, row2;
-
-        for (int i = 0; i < table.getRows().size() - 1; i++) {
-            row1 = table.getRows().get(i).get(0);
-            row2 = table.getRows().get(i + 1).get(0);
-            if (!output.contains(row1)) {
-                String message = "Console doesn't contain " + row1 + "\n" +
-                        "Actual output: \n" + outputCopy;
-                fail(message);
-            }
-            if (!output.contains(row2)) {
-                String message = "Console doesn't contain " + row2 + "\n" +
-                        "Actual output: \n" + outputCopy;
-                fail(message);
-            }
-            if (output.indexOf(row1) < output.indexOf(row2)) {
-                output = output.replaceFirst(row1, "");
-            } else {
-                String message = "Output was not in order \n";
-                message += "******************Actual Console Output Start************\n";
-                message += outputCopy;
-                message += "******************Actual Console Output End************\n";
-                fail(message);
-            }
-        }
-    }
-
     @AfterScenario
     public void clearProjectDir() throws IOException {
         if (currentProject.getProjectDir().exists()) {
@@ -134,18 +102,4 @@ public class ProjectInit {
         }
     }
 
-    @Step("Console should not contain following lines <table>")
-    public void ConsoleShouldNotContainFollowingLines(Table table) throws IOException {
-        String output = currentProject.getStdOut();
-        boolean contains = false;
-        String message = "\n";
-        for(List<String> row : table.getRows()){
-            if(output.contains(row.get(0))) {
-                contains = true;
-                message+="Output contains :"+row.get(0)+"\n";
-            }
-        }
-        if(contains)
-            fail(message);
-    }
 }

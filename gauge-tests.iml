@@ -12,16 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="gauge-lib">
-        <CLASSES>
-          <root url="file://$USER_HOME$/.gauge/plugins/java/0.0.9/libs" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/.gauge/plugins/java/0.0.9/libs" recursive="true" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="project-lib">
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
@@ -29,6 +19,16 @@
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/libs" recursive="true" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="gauge-lib">
+        <CLASSES>
+          <root url="file://$USER_HOME$/.gauge/plugins/java/0.2.1/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/.gauge/plugins/java/0.2.1/libs" recursive="true" />
       </library>
     </orderEntry>
   </component>

@@ -1,11 +1,16 @@
 package common;
 
+import com.thoughtworks.gauge.Table;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Util {
     public static String combinePath(String path1, String path2) {
@@ -65,5 +70,26 @@ public class Util {
     public static String getUniqueName() {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
+    }
+
+    public static List<String> toList(Table table, int column) {
+        ArrayList<String> values = new ArrayList<String>();
+        for (List<String> row : table.getRows()) {
+            values.add(row.get(column));
+        }
+        return values;
+    }
+
+    public static ArrayList<String> quotifyValues(List<String> values) {
+        ArrayList<String> quotedValues = new ArrayList<String>();
+        for (String val : values) {
+            quotedValues.add(String.format("\"%s\"", val));
+        }
+        return quotedValues;
+    }
+
+
+    public static String commaSeparatedValues(ArrayList<String> strings) {
+        return StringUtils.join(strings, ",");
     }
 }

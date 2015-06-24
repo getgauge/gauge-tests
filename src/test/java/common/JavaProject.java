@@ -1,5 +1,7 @@
 package common;
 
+import com.thoughtworks.gauge.Table;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import static common.Util.capitalize;
 import static common.Util.getUniqueName;
 
 public class JavaProject extends GaugeProject {
+    public static final String DEFAULT_AGGREGATION = "AND";
     private static String stepImplementationsDir = "src/test/java";
 
     public JavaProject(File projectDir) {
@@ -63,14 +66,14 @@ public class JavaProject extends GaugeProject {
         String dataStoreType = row.get(3);
         String key = row.get(1);
         String value = row.get(2);
-        return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\""+ key + "\",\"" + value +"\");";
+        return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(List<String> row) {
         String dataStoreType = row.get(3);
         String key = row.get(1);
-        return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\""+ key + "\"));";
+        return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\"" + key + "\"));";
     }
 
     @Override
@@ -90,7 +93,7 @@ public class JavaProject extends GaugeProject {
         } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
         } else {
-            if (appendCode){
+            if (appendCode) {
                 builder.append(implementation);
             } else {
                 builder.append("System.out.println(").append(implementation).append(");\n");
@@ -101,38 +104,54 @@ public class JavaProject extends GaugeProject {
 
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printStatement) throws Exception {
-        StringBuilder classText = new StringBuilder();
-        classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
-        String className = getUniqueName();
-        classText.append("public class ").append(className).append("{\n");
         String implementation = String.format("System.out.println(\"%s\");", printStatement);
-        classText.append(createHookMethod(hookLevel, hookType, implementation));
-        classText.append("\n}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        String method = createHookMethod(hookLevel, hookType, implementation, DEFAULT_AGGREGATION, new ArrayList<String>());
+        createHook(hookLevel, hookType, method);
     }
 
     @Override
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
+        createHook(hookLevel, hookType, createHookMethod(hookLevel, hookType, "throw new RuntimeException();", DEFAULT_AGGREGATION, new ArrayList<String>()));
+    }
+
+    @Override
+    public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tagsTable) throws IOException {
+        String implementation = String.format("System.out.println(\"%s\");", printString);
+        String method = createHookMethod(hookLevel, hookType, implementation, aggregation, Util.toList(tagsTable, 0));
+        createHook(hookLevel, hookType, method);
+    }
+
+    private void createHook(String hookLevel, String hookType, String method) throws IOException {
         StringBuilder classText = new StringBuilder();
         classText.append(String.format("import com.thoughtworks.gauge.%s;\n", hookName(hookLevel, hookType)));
+        classText.append("import com.thoughtworks.gauge.Operator;");
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
-        classText.append(createHookMethod(hookLevel, hookType, "throw new RuntimeException();"));
+        classText.append(method);
         classText.append("\n}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
     }
 
-    private String createHookMethod(String hookLevel, String hookType, String implementation) {
+    private String createHookMethod(String hookLevel, String hookType, String implementation, String aggregation, List<String> tags) {
         StringBuilder methodText = new StringBuilder();
-        methodText.append(String.format("@%s\n", hookName(hookLevel, hookType)));
+        String hookAttributes = isSuiteHook(hookLevel) ? "" : hookAttributesString(tags, aggregation);
+        methodText.append(String.format("@%s(%s)\n", hookName(hookLevel, hookType), hookAttributes));
         methodText.append(String.format("public void hook() {\n"));
         methodText.append(String.format("%s\n", implementation));
         methodText.append("\n}\n");
         return methodText.toString();
     }
 
+    private boolean isSuiteHook(String hookLevel) {
+        return hookLevel.trim().equals("suite");
+    }
+
     private String hookName(String hookLevel, String hookType) {
         return String.format("%s%s", capitalize(hookType), capitalize(hookLevel));
+    }
+
+    private String hookAttributesString(List<String> tags, String aggregation) {
+        return String.format("tags = {%s}, tagAggregation = Operator.%s ", Util.commaSeparatedValues(Util.quotifyValues(tags)), aggregation);
     }
 
     private String getStepImplementationsDir() {

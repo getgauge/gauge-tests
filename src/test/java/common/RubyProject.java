@@ -1,5 +1,7 @@
 package common;
 
+import com.thoughtworks.gauge.Table;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -84,6 +86,11 @@ public class RubyProject extends GaugeProject {
         rubyFileText.append(String.format("%s_%s do \n raise \"exception was raised\"\nend", hookType, hookLevel));
         rubyFileText.append("\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), getUniqueName() + ".rb"), rubyFileText.toString());
+    }
+
+    @Override
+    public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
+
     }
 
     @Override
