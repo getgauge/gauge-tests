@@ -13,6 +13,8 @@ import static common.Util.capitalize;
 import static common.Util.getUniqueName;
 
 public class CSharpProject extends GaugeProject {
+    private static final String DEFAULT_AGGREGATION = "And";
+
     public CSharpProject(File projectDir) {
         super(projectDir, "csharp");
     }
@@ -74,28 +76,54 @@ public class CSharpProject extends GaugeProject {
 
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printStatement) throws Exception {
-        StringBuilder classText = new StringBuilder();
-        String className = getUniqueName();
-        classText.append("public class ").append(className).append("{\n");
         String implementation = String.format("Console.WriteLine(\"%s\");", printStatement);
-        classText.append(createHookMethod(hookLevel, hookType, implementation));
-        classText.append("\n}\n");
-        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
+        String method = createHookMethod(hookLevel, hookType, implementation);
+        createHook(method);
     }
 
     @Override
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
-        StringBuilder classText = new StringBuilder();
-        String className = getUniqueName();
-        classText.append("public class ").append(className).append("{\n");
-        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();"));
-        classText.append("\n}\n");
-        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
+        String method = createHookMethod(hookLevel, hookType, "throw new SystemException();");
+        createHook(method);
     }
 
     @Override
     public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
+        String implementation = String.format("Console.WriteLine(\"%s\");", printString);
+        String method = createHookMethod(hookLevel, hookType, implementation, Util.toList(tags, 0), aggregation);
+        createHook(method);
+    }
 
+
+    private String createHookMethod(String hookLevel, String hookType, String implementation) {
+        return createHookMethod(hookLevel, hookType, implementation, new ArrayList<String>(), DEFAULT_AGGREGATION);
+    }
+
+    private String createHookMethod(String hookLevel, String hookType, String implementation, List<String> tags, String aggregation) {
+        StringBuilder methodText = new StringBuilder();
+        String hookString = hookString(hookLevel, hookType, tags);
+        methodText.append(hookString).append("\n");
+        methodText.append(aggregationAttribute(aggregation));
+        methodText.append(String.format("public void %s() {\n", getUniqueName()));
+        methodText.append(String.format("%s\n", implementation));
+        methodText.append("\n}\n");
+        return methodText.toString();
+    }
+
+    private String aggregationAttribute(String aggregation) {
+        if (aggregation.equals("AND") || aggregation.equals(DEFAULT_AGGREGATION)) {
+            return "";
+        }
+        return String.format("[TagAggregationBehaviour(TagAggregation.%s)]\n", "Or");
+    }
+
+    private void createHook(String method) throws IOException {
+        StringBuilder classText = new StringBuilder();
+        String className = getUniqueName();
+        classText.append("public class ").append(className).append("{\n");
+        classText.append(method);
+        classText.append("\n}\n");
+        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
     @Override
@@ -122,18 +150,17 @@ public class CSharpProject extends GaugeProject {
         return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key +"\"));";
     }
 
-    private String createHookMethod(String hookLevel, String hookType, String implementation) {
-        StringBuilder methodText = new StringBuilder();
-        String hookName = hookName(hookLevel, hookType);
-        methodText.append(String.format("[%s]\n", hookName));
-        methodText.append(String.format("public void %s() {\n", hookName));
-        methodText.append(String.format("%s\n", implementation));
-        methodText.append("\n}\n");
-        return methodText.toString();
+    private String hookString(String hookLevel, String hookType, List<String> tags) {
+        String tagsText = isSuiteLevel(hookLevel)? "" : Util.commaSeparatedValues(Util.quotifyValues(tags));
+        return String.format("[%s(%s)]", hookName(hookLevel, hookType), tagsText);
     }
 
     private String hookName(String hookLevel, String hookType) {
         return String.format("%s%s", capitalize(hookType), capitalize(hookLevel));
+    }
+
+    private boolean isSuiteLevel(String hookLevel) {
+        return hookLevel.trim().equals(hookLevel);
     }
 
     private String getStepImplementationsDir() {
