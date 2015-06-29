@@ -99,7 +99,7 @@ public class CSharpProject extends GaugeProject {
         classText.append("public class ").append(className).append("{\n");
         classText.append(hookMethodText);
         classText.append("\n}\n");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".cs"), classText.toString());
     }
 
     @Override
