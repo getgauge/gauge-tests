@@ -78,7 +78,7 @@ public class CSharpProject extends GaugeProject {
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
         String implementation = String.format("Console.WriteLine(\"%s\");", printStatement);
-        classText.append(createHookMethod(hookLevel, hookType, implementation, new ArrayList<String>()));
+        classText.append(createHookMethod(hookLevel, hookType, implementation, new ArrayList<String>(), ""));
         classText.append("\n}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
@@ -88,7 +88,7 @@ public class CSharpProject extends GaugeProject {
         StringBuilder classText = new StringBuilder();
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
-        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();", new ArrayList<String>()));
+        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();", new ArrayList<String>(), ""));
         classText.append("\n}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
@@ -105,7 +105,7 @@ public class CSharpProject extends GaugeProject {
     @Override
     public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
         String implementation = String.format("Console.WriteLine(\"%s\");", printString);
-        String hookMethodText = createHookMethod(hookLevel, hookType, implementation, Util.toList(tags, 0));
+        String hookMethodText = createHookMethod(hookLevel, hookType, implementation, Util.toList(tags, 0), aggregation);
         createHook(hookMethodText);
     }
 
@@ -133,10 +133,13 @@ public class CSharpProject extends GaugeProject {
         return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key +"\"));";
     }
 
-    private String createHookMethod(String hookLevel, String hookType, String implementation, List<String> tags) {
+    private String createHookMethod(String hookLevel, String hookType, String implementation, List<String> tags, String aggregation) {
         StringBuilder methodText = new StringBuilder();
         String hookName = hookName(hookLevel, hookType);
         methodText.append(String.format("[%s%s]\n", hookName, getHookAttributesString(tags)));
+        if (!aggregation.isEmpty()){
+            methodText.append(String.format("[TagAggregationBehaviour(TagAggregation.%s)]\n", aggregation));
+        }
         methodText.append(String.format("public void %s() {\n", hookName));
         methodText.append(String.format("%s\n", implementation));
         methodText.append("\n}\n");
