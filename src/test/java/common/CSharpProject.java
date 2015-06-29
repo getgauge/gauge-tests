@@ -78,7 +78,7 @@ public class CSharpProject extends GaugeProject {
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
         String implementation = String.format("Console.WriteLine(\"%s\");", printStatement);
-        classText.append(createHookMethod(hookLevel, hookType, implementation));
+        classText.append(createHookMethod(hookLevel, hookType, implementation, new ArrayList<String>()));
         classText.append("\n}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
@@ -88,14 +88,25 @@ public class CSharpProject extends GaugeProject {
         StringBuilder classText = new StringBuilder();
         String className = getUniqueName();
         classText.append("public class ").append(className).append("{\n");
-        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();"));
+        classText.append(createHookMethod(hookLevel, hookType, "throw new SystemException();", new ArrayList<String>()));
         classText.append("\n}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());
     }
 
+    private void createHook(String hookMethodText) throws IOException {
+        StringBuilder classText = new StringBuilder();
+        String className = getUniqueName();
+        classText.append("public class ").append(className).append("{\n");
+        classText.append(hookMethodText);
+        classText.append("\n}\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+    }
+
     @Override
     public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
-
+        String implementation = String.format("Console.WriteLine(\"%s\");", printString);
+        String hookMethodText = createHookMethod(hookLevel, hookType, implementation, Util.toList(tags, 0));
+        createHook(hookMethodText);
     }
 
     @Override
@@ -122,14 +133,21 @@ public class CSharpProject extends GaugeProject {
         return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key +"\"));";
     }
 
-    private String createHookMethod(String hookLevel, String hookType, String implementation) {
+    private String createHookMethod(String hookLevel, String hookType, String implementation, List<String> tags) {
         StringBuilder methodText = new StringBuilder();
         String hookName = hookName(hookLevel, hookType);
-        methodText.append(String.format("[%s]\n", hookName));
+        methodText.append(String.format("[%s%s]\n", hookName, getHookAttributesString(tags)));
         methodText.append(String.format("public void %s() {\n", hookName));
         methodText.append(String.format("%s\n", implementation));
         methodText.append("\n}\n");
         return methodText.toString();
+    }
+
+    private String getHookAttributesString(List<String> tags) {
+        if (tags.isEmpty()){
+            return "";
+        }
+        return String.format("(%s)", Util.commaSeparatedValues(Util.quotifyValues(tags)));
     }
 
     private String hookName(String hookLevel, String hookType) {
