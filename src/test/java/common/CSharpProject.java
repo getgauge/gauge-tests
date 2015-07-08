@@ -112,7 +112,7 @@ public class CSharpProject extends GaugeProject {
 
     private String aggregationAttribute(String aggregation) {
         if (aggregation.equals("AND") || aggregation.equals(DEFAULT_AGGREGATION)) {
-            return "";
+            return String.format("[TagAggregationBehaviour(TagAggregation.%s)]\n", DEFAULT_AGGREGATION);
         }
         return String.format("[TagAggregationBehaviour(TagAggregation.%s)]\n", "Or");
     }
@@ -160,7 +160,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     private boolean isSuiteLevel(String hookLevel) {
-        return hookLevel.trim().equals(hookLevel);
+        return hookLevel.trim().equals("suite");
     }
 
     private String getStepImplementationsDir() {
