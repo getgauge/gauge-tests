@@ -1,6 +1,7 @@
 Steps Collection
 ================
 
+tags: api
 
 * In an empty directory initialize a project with the current language
 * Create a specification "Specification 1" with the following contexts 

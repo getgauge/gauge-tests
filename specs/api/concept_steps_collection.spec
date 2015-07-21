@@ -1,6 +1,8 @@
 Concept Steps Collection
 ========================
 
+tags: api
+
 
 * In an empty directory initialize a project with the current language
 * Create concept "concept1 <b>" with following steps 

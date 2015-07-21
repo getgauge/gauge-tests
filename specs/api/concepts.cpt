@@ -1,8 +1,0 @@
-# Steps from api should have the following <table>
-* Fetch all steps from gauge
-* Verify all the steps are present <table> with default steps <table:resources/default_steps.csv>
-
-# Concepts from api should have the following <table>
-* Fetch all concepts from gauge
-* Verify all the steps are present <table>
-

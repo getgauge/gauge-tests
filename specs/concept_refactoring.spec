@@ -1,5 +1,5 @@
-API Concept Refactoring
-=======================
+Concept Refactoring
+===================
 
 tags: refactoring
 

@@ -1,6 +1,7 @@
 Step Value
 ==========
 
+tags: api
 
 * In an empty directory initialize a project with the current language
 
