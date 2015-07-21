@@ -68,6 +68,17 @@ public class Execution {
         assertTrue(passed);
     }
 
+    @Step("Execute the spec <spec name> with row range <row range> and ensure success")
+    public void executeScenarioWithRowRange(String specName, String rowRange) throws Exception {
+        Specification spec = currentProject.findSpecification(specName);
+        if (spec == null) {
+            throw new RuntimeException("Specified spec is not present : " + specName);
+        }
+        boolean passed = currentProject.executeSpecWithRowRange(specName, rowRange);
+        printProcessOutput(passed);
+        assertTrue(passed);
+    }
+
     @Step("Execute the spec <spec name> and ensure failure")
     public void executeSpecAndEnsureFailure(String specName) throws Exception {
         assertTrue(!executeSpec(specName));

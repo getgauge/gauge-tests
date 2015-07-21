@@ -176,6 +176,11 @@ public abstract class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
+    public boolean executeSpecWithRowRange(String specName, String rowRange) throws Exception {
+        executeGaugeCommand("--simple-console", "--table-rows", rowRange, "specs" + File.separator + specName + ".spec");
+        return lastProcess.exitValue() == 0;
+    }
+
     public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
         executeGaugeCommand("--tags", tags, "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
