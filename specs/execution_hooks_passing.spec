@@ -17,7 +17,7 @@ spec, scenario and step level.
      |--------------------|--------------------|
      |Second scenario step|"inside second step"|
 
-* Create "Testing Hooks scenario new" in "02 Hooks Spec" with the following steps
+* Create "Testing Hooks scenario new" in "02 Hooks Spec" with the following steps 
      |step text              |implementation         |
      |-----------------------|-----------------------|
      |First scenario new step|"inside new first step"|
@@ -29,7 +29,7 @@ Suite and Spec Level Hooks
 * Create "spec" level "before" hook with implementation "inside before spec hook"
 * Create "spec" level "after" hook with implementation "inside after spec hook"
 * Execute the specs in order and ensure success
-* Console should contain following lines in order
+* Console should contain following lines in order 
      |console output          |
      |------------------------|
      |inside before suite hook|
@@ -50,7 +50,7 @@ Scenario and step level hooks
 * Create "step" level "before" hook with implementation "inside before step hook"
 * Create "step" level "after" hook with implementation "inside after step hook"
 * Execute the spec "01 Hooks Spec" and ensure success
-* Console should contain following lines in order
+* Console should contain following lines in order 
      |console output             |
      |---------------------------|
      |inside before scenario hook|
@@ -72,7 +72,7 @@ Test all level Execution hooks
 * Create "scenario" level hooks with implementations "inside before scenario hook" for before and "inside after scenario hook" for after hook
 * Create "step" level hooks with implementations "inside before step hook" for before and "inside after step hook" for after hook
 * Execute the spec "02 Hooks Spec" and ensure success
-* Console should contain following lines in order
+* Console should contain following lines in order 
      |console output             |
      |---------------------------|
      |inside before suite hook   |

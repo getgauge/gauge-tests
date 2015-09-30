@@ -11,12 +11,12 @@ Passing execution of single scenario
      |-------------|----------------------|
      |First context|"inside first context"|
 
-* Create a scenario "first scenario" in specification "newSpec" with the following steps with implementation
+* Create a scenario "first scenario" in specification "newSpec" with the following steps with implementation 
      |step text          |implementation              |
      |-------------------|----------------------------|
      |First Scenario step|"inside first scenario step"|
 
-* Create a scenario "second scenario" in specification "newSpec" with the following steps with implementation
+* Create a scenario "second scenario" in specification "newSpec" with the following steps with implementation 
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|

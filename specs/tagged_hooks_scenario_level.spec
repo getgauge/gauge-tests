@@ -9,9 +9,9 @@ tags: tagged_hooks, execution_hooks
      |-------------------------------------|---------------------------------------|
      |first spec first scenario first step |"first spec first scenario first step" |
      |first spec first scenario second step|"first spec first scenario second step"|
-* Create a scenario "Second scenario" in specification "First Spec" with the following steps with implementation
-     |step text                            |step implementation                    |
-     |-------------------------------------|---------------------------------------|
+* Create a scenario "Second scenario" in specification "First Spec" with the following steps with implementation 
+     |step text                             |step implementation                     |
+     |--------------------------------------|----------------------------------------|
      |first spec second scenario first step |"first spec second scenario first step" |
      |first spec second scenario second step|"first spec second scenario second step"|
 
@@ -79,25 +79,25 @@ AND aggregation of hooks
 
 OR aggregation of hooks
 -----------------------
-* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "OR" aggregated tags
+* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "OR" aggregated tags 
      |tags|
      |----|
      |tag6|
      |tag4|
-* Create "scenario" level "after" hook with implementation "inside after scenario hook" with "OR" aggregated tags
+* Create "scenario" level "after" hook with implementation "inside after scenario hook" with "OR" aggregated tags 
      |tags|
      |----|
      |tag6|
 
 * Execute the current project and ensure success
-* Console should contain following lines in order
+* Console should contain following lines in order 
      |Console output                        |
      |--------------------------------------|
      |inside before scenario hook           |
      |first spec first scenario first step  |
      |first spec first scenario second step |
      |first spec second scenario first step |
-     |first spec second scenario second step |
+     |first spec second scenario second step|
      |inside before scenario hook           |
      |second spec first scenario first step |
      |second spec first scenario second step|

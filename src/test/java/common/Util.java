@@ -1,6 +1,7 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
@@ -72,10 +73,10 @@ public class Util {
         return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
     }
 
-    public static List<String> toList(Table table, int column) {
+    public static List<String> toList(Table table, String columnName) {
         ArrayList<String> values = new ArrayList<String>();
-        for (List<String> row : table.getRows()) {
-            values.add(row.get(column));
+        for (TableRow row : table.getTableRows()) {
+            values.add(row.getCell(columnName));
         }
         return values;
     }

@@ -1,6 +1,7 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 
 import java.util.List;
 
@@ -14,10 +15,11 @@ public class GaugeProjectBuilder {
             spec = currentProject.createSpecification(specName);
         }
         Scenario scenario = new Scenario(scenarioName);
-        for (List<String> rows : steps.getRows()) {
-            scenario.addSteps(rows.get(0));
+        List<String> columnNames = steps.getColumnNames();
+        for (TableRow rows : steps.getTableRows()) {
+            scenario.addSteps(rows.getCell(columnNames.get(0)));
             if (implement)
-                currentProject.implementStep(rows.get(0), rows.get(1), appendCode);
+                currentProject.implementStep(rows.getCell(columnNames.get(0)), rows.getCell(columnNames.get(1)), appendCode);
         }
         spec.addScenarios(scenario);
         spec.save();

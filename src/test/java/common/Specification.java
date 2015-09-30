@@ -1,10 +1,12 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Specification {
@@ -76,7 +78,11 @@ public class Specification {
         StringBuilder builder = new StringBuilder();
         List<String> columnNames = datatable.getColumnNames();
         appendRow(builder, columnNames);
-        for (List<String> row : datatable.getRows()) {
+        for (TableRow tableRow : datatable.getTableRows()) {
+            ArrayList<String> row = new ArrayList<>();
+            for (String column : columnNames){
+                row.add(tableRow.getCell(column));
+            }
             appendRow(builder, row);
         }
         return builder.toString();

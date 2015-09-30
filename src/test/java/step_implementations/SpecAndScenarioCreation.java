@@ -2,6 +2,7 @@ package step_implementations;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import common.Scenario;
 import common.Specification;
 
@@ -21,22 +22,27 @@ public class SpecAndScenarioCreation {
         if (spec == null) {
             spec = currentProject.createSpecification(specName);
         }
-
+        List<String> columnNames = steps.getColumnNames();
         Scenario scenario = new Scenario(scenarioName);
-        for (List<String> rows : steps.getRows()) {
-            scenario.addSteps(rows.get(0));
-            if (shouldCreateImplementation(rows)) {
-                currentProject.implementStep(rows.get(0), rows.get(1), false);
+        for (TableRow row : steps.getTableRows()) {
+            scenario.addSteps(row.getCell(columnNames.get(0)));
+            boolean b = shouldCreateImplementation(row, columnNames);
+            if (b) {
+                currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
             }
         }
         spec.addScenarios(scenario);
         spec.save();
     }
 
-    private boolean shouldCreateImplementation(List<String> row) {
-        if (row.size() == 1) {
+    private boolean shouldCreateImplementation(TableRow row, List<String> columnNames) {
+        if (columnNames.size() != 2){
             return false;
-        } else if (row.get(1) != null && !row.get(1).isEmpty()) {
+        }
+        String implementation = row.getCell(columnNames.get(1));
+        if (implementation == null) {
+            return false;
+        } else if (!implementation.isEmpty()) {
             return true;
         }
         return false;
@@ -51,11 +57,12 @@ public class SpecAndScenarioCreation {
 
     @Step("Create step implementations <table>")
     public void createStepImplementations(Table steps) throws Exception {
-        if (steps.getColumnNames().size() != 2) {
+        List<String> columnNames = steps.getColumnNames();
+        if (columnNames.size() != 2) {
             throw new Exception("Expecting table with 2 columns: steps and implementations");
         }
-        for (List<String> row : steps.getRows()) {
-            currentProject.implementStep(row.get(0), row.get(1), false);
+        for (TableRow row : steps.getTableRows()) {
+            currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
         }
 
     }

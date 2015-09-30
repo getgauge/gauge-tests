@@ -1,6 +1,7 @@
 package common;
 
 
+import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.Table;
 import org.apache.commons.io.FileUtils;
@@ -146,10 +147,11 @@ public abstract class GaugeProject {
             throw new RuntimeException("Failed to create concept: " + name + "." + conceptFile.getAbsolutePath() + " : File already exists");
         }
         Concept concept = new Concept(name);
-        for (List<String> row : steps.getRows()) {
-            concept.addSteps(row.get(0));
-            if (steps.getColumnNames().size() == 2) {
-                implementStep(row.get(0), row.get(1), false);
+        List<String> columnNames = steps.getColumnNames();
+        for (TableRow row : steps.getTableRows()) {
+            concept.addSteps(row.getCell(columnNames.get(0)));
+            if (columnNames.size() == 2) {
+                implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
             }
         }
         concept.saveAs(conceptFile);
@@ -270,7 +272,7 @@ public abstract class GaugeProject {
         return service;
     }
 
-    public abstract String getDataStoreWriteStatement(List<String> row);
+    public abstract String getDataStoreWriteStatement(TableRow row, List<String> columnNames);
 
-    public abstract String getDataStorePrintValueStatement(List<String> row);
+    public abstract String getDataStorePrintValueStatement(TableRow row, List<String> columnNames);
 }

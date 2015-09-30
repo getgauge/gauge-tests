@@ -1,5 +1,5 @@
 Console Refactor Specification
-===============================
+==============================
 
 tags: refactoring
 

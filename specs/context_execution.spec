@@ -12,12 +12,12 @@ Passing context execution
      |First context |"inside first context" |
      |Second context|"inside second context"|
 
-* Create a scenario "first scenario" in specification "basic context execution" with the following steps with implementation
+* Create a scenario "first scenario" in specification "basic context execution" with the following steps with implementation 
      |step text          |implementation              |
      |-------------------|----------------------------|
      |First Scenario step|"inside first scenario step"|
 
-* Create a scenario "second scenario" in specification "basic context execution" with the following steps with implementation
+* Create a scenario "second scenario" in specification "basic context execution" with the following steps with implementation 
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|

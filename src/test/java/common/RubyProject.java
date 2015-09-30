@@ -1,6 +1,7 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,6 @@ public class RubyProject extends GaugeProject {
     public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String fileName = getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
         rubyCode.append("step '").append(stepValue.value).append("' do |");
@@ -103,17 +103,17 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public String getDataStoreWriteStatement(List<String> row) {
-        String dataStoreType = row.get(3);
-        String key = row.get(1);
-        String value = row.get(2);
+    public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
+        String dataStoreType = row.getCell(columnNames.get(3));
+        String key = row.getCell(columnNames.get(1));
+        String value = row.getCell(columnNames.get(2));
         return "Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.put(\"" + key + "\", \"" + value + "\")";
     }
 
     @Override
-    public String getDataStorePrintValueStatement(List<String> row) {
-        String dataStoreType = row.get(3);
-        String key = row.get(1);
+    public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
+        String dataStoreType = row.getCell(columnNames.get(3));
+        String key = row.getCell(columnNames.get(1));
         return "puts Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.get(\"" + key + "\")";
     }
 

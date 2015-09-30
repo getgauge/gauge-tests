@@ -1,6 +1,7 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,12 +49,12 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public String getDataStoreWriteStatement(List<String> row) {
+    public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
         throw new RuntimeException("Not implemented");
     }
 
     @Override
-    public String getDataStorePrintValueStatement(List<String> row) {
+    public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         throw new RuntimeException("Not implemented");
     }
 }

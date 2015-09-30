@@ -2,6 +2,7 @@ package step_implementations;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import common.GaugeProjectBuilder;
 import common.Scenario;
 import common.Specification;
@@ -22,9 +23,9 @@ public class ContextExecution {
 
         Specification spec = currentProject.createSpecification(specName);
 
-        for (List<String> rows : steps.getRows()) {
-            spec.addContextSteps(rows.get(0));
-            currentProject.implementStep(rows.get(0),rows.get(1), false);
+        for (TableRow rows : steps.getTableRows()) {
+            spec.addContextSteps(rows.getCell("step text"));
+            currentProject.implementStep(rows.getCell("step text"),rows.getCell("implementation"), false);
             spec.save();
         }
     }

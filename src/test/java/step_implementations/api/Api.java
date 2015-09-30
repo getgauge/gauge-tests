@@ -1,9 +1,6 @@
 package step_implementations.api;
 
-import com.thoughtworks.gauge.AfterScenario;
-import com.thoughtworks.gauge.Step;
-import com.thoughtworks.gauge.StepValue;
-import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.*;
 import common.Assert;
 import common.AssertInfo;
 
@@ -53,8 +50,9 @@ public class Api {
     @Step("Verify all the steps are present <table> with default steps <steps>")
     public void verifySteps(Table table, Table defaultSteps) {
         List<String> stepTexts = new ArrayList<String>();
-        for (List<String> strings : defaultSteps.getRows()) {
-            stepTexts.add(strings.get(0));
+        List<String> columnNames = defaultSteps.getColumnNames();
+        for (TableRow strings : defaultSteps.getTableRows()) {
+            stepTexts.add(strings.getCell(columnNames.get(0)));
         }
         final List<String> steps = getSteps(table);
         String[] dest = steps.toArray(new String[steps.size() + stepTexts.size()]);
@@ -66,9 +64,9 @@ public class Api {
     @Step("fetch step values for the following <table>")
     public void fetchStepValues(Table table) {
         stepValues = new ArrayList<StepValue>();
-        for (int i = 0; i < table.getRows().size(); i++) {
-            List<String> row = table.getRows().get(i);
-            StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.get(0));
+        List<String> columnNames = table.getColumnNames();
+        for (TableRow row : table.getTableRows()){
+            StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
             stepValues.add(stepValue);
         }
     }
@@ -76,9 +74,10 @@ public class Api {
     @Step("Verify all the step values are present <table>")
     public void verifyStepValues(Table table) {
         List<StepValue> steps = new ArrayList<StepValue>();
-        for (List<String> row : table.getRows()) {
-            List<String> parameters = row.get(2).equals("") ? new ArrayList<String>() : Arrays.asList(row.get(2).trim().split(","));
-            steps.add(new StepValue(row.get(0).trim(), row.get(1).trim(), parameters));
+        List<String> columnNames = table.getColumnNames();
+        for (TableRow row : table.getTableRows()) {
+            List<String> parameters = row.getCell(columnNames.get(2)).equals("") ? new ArrayList<String>() : Arrays.asList(row.getCell(columnNames.get(2)).trim().split(","));
+            steps.add(new StepValue(row.getCell(columnNames.get(0)).trim(), row.getCell(columnNames.get(1)).trim(), parameters));
         }
         Collections.sort(steps, comparator);
         Collections.sort(stepValues, comparator);
@@ -108,10 +107,10 @@ public class Api {
     }
 
     private List<String> getSteps(Table table) {
+        List<String> columnNames = table.getColumnNames();
         final List<String> steps = new ArrayList<String>();
-        for (int i = 0; i < table.getRows().size(); i++) {
-            List<String> row = table.getRows().get(i);
-            StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.get(0));
+        for(TableRow row : table.getTableRows()){
+            StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
             steps.add(stepValue.getStepText().trim());
         }
         return steps;

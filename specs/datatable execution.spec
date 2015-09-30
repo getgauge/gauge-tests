@@ -15,7 +15,7 @@ Simple Datatable Execution
      |2 |prateek|007  |
      |3 |nava   |100  |
 
-* Create a scenario "datatable scenario" in specification "basic data table execution" with the following steps with implementation
+* Create a scenario "datatable scenario" in specification "basic data table execution" with the following steps with implementation 
      |step text                |implementation|
      |-------------------------|--------------|
      |print <id> <name> <phone>|print params  |

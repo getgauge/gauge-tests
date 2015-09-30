@@ -3,6 +3,7 @@ package step_implementations;
 import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import common.GaugeProject;
 import common.Util;
 import org.apache.commons.io.FileUtils;
@@ -39,9 +40,9 @@ public class ProjectInit {
     @Step("The following file structure should be created <table>")
     public void ensureInitCreatesSpecifiedStructure(Table table) throws Exception {
         ArrayList<String> failures = new ArrayList<String>();
-        for (List<String> row : table.getRows()) {
-            String fileName = row.get(0);
-            String fileType = row.get(1);
+        for (TableRow row : table.getTableRows()) {
+            String fileName = row.getCell("name");
+            String fileType = row.getCell("type");
             if (fileType.equalsIgnoreCase("dir")) {
                 if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(fileName))) {
                     failures.add(fileName + " is not a valid directory");

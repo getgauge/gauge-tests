@@ -71,7 +71,7 @@ OR aggregation of hooks
      |inside before spec hook               |
      |first spec first scenario first step  |
      |first spec first scenario second step |
-     |inside after spec hook               |
+     |inside after spec hook                |
      |second spec first scenario first step |
      |second spec first scenario second step|
      |inside before spec hook               |

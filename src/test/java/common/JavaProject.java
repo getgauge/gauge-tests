@@ -1,6 +1,7 @@
 package common;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,17 +63,17 @@ public class JavaProject extends GaugeProject {
     }
 
     @Override
-    public String getDataStoreWriteStatement(List<String> row) {
-        String dataStoreType = row.get(3);
-        String key = row.get(1);
-        String value = row.get(2);
+    public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
+        String dataStoreType = row.getCell(columnNames.get(3));
+        String key = row.getCell(columnNames.get(1));
+        String value = row.getCell(columnNames.get(2));
         return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
-    public String getDataStorePrintValueStatement(List<String> row) {
-        String dataStoreType = row.get(3);
-        String key = row.get(1);
+    public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
+        String dataStoreType = row.getCell(columnNames.get(3));
+        String key = row.getCell(columnNames.get(1));
         return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\"" + key + "\"));";
     }
 
@@ -117,7 +118,7 @@ public class JavaProject extends GaugeProject {
     @Override
     public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tagsTable) throws IOException {
         String implementation = String.format("System.out.println(\"%s\");", printString);
-        String method = createHookMethod(hookLevel, hookType, implementation, aggregation, Util.toList(tagsTable, 0));
+        String method = createHookMethod(hookLevel, hookType, implementation, aggregation, tagsTable.getColumnValues("tags"));
         createHook(hookLevel, hookType, method);
     }
 

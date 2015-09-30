@@ -2,6 +2,7 @@ package step_implementations;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
@@ -19,10 +20,11 @@ public class Console {
         String output = currentProject.getStdOut();
         boolean contains = false;
         String message = "\n";
-        for (List<String> row : table.getRows()) {
-            if (output.contains(row.get(0))) {
+        String console_output = table.getColumnNames().get(0);
+        for (TableRow row : table.getTableRows()) {
+            if (output.contains(row.getCell(console_output))) {
                 contains = true;
-                message += "Output contains :" + row.get(0) + "\n";
+                message += "Output contains :" + row.getCell(console_output) + "\n";
             }
         }
         if (contains)
@@ -47,9 +49,9 @@ public class Console {
         String outputCopy = output;
         String row1, row2;
 
-        for (int i = 0; i < table.getRows().size() - 1; i++) {
-            row1 = table.getRows().get(i).get(0);
-            row2 = table.getRows().get(i + 1).get(0);
+        for (int i = 0; i < table.getTableRows().size() - 1; i++) {
+            row1 = table.getTableRows().get(i).getCell(table.getColumnNames().get(0));
+            row2 = table.getTableRows().get(i + 1).getCell(table.getColumnNames().get(0));
             if (!output.contains(row1)) {
                 String message = "Console doesn't contain " + row1 + "\n" +
                         "Actual output: \n" + outputCopy;

@@ -6,19 +6,19 @@ Tagged Execution
 Passing tagged execution
 ------------------------
 
-* Create a scenario "first scenario" in specification "tags_execution" with the following steps with implementation
+* Create a scenario "first scenario" in specification "tags_execution" with the following steps with implementation 
      |step text          |implementation              |
      |-------------------|----------------------------|
      |First Scenario step|"inside first scenario step"|
 * Add tags "tag1" to scenario "first scenario" in specification "tags_execution"
 
-* Create a scenario "second scenario" in specification "tags_execution" with the following steps with implementation
+* Create a scenario "second scenario" in specification "tags_execution" with the following steps with implementation 
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|
 * Add tags "tag1, tag2" to scenario "second scenario" in specification "tags_execution"
 
-* Create a scenario "third scenario" in specification "tags_execution" with the following steps with implementation
+* Create a scenario "third scenario" in specification "tags_execution" with the following steps with implementation 
      |step text          |implementation              |
      |-------------------|----------------------------|
      |Third Scenario step|"inside third scenario step"|

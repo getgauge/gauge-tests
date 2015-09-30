@@ -5,19 +5,19 @@ Spec Tagged Expression Execution
 
 * Add tags "tag1" to specification "tags_expression_execution"
 
-* Create a scenario "second scenario" in specification "tags_expression_execution" with the following steps with implementation
+* Create a scenario "second scenario" in specification "tags_expression_execution" with the following steps with implementation 
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|
 * Add tags "tag1, tag2" to scenario "second scenario" in specification "tags_expression_execution"
 
-* Create a scenario "third scenario" in specification "tags_expression_execution" with the following steps with implementation
+* Create a scenario "third scenario" in specification "tags_expression_execution" with the following steps with implementation 
      |step text          |implementation              |
      |-------------------|----------------------------|
      |Third Scenario step|"inside third scenario step"|
 * Add tags "tag3, tag4" to scenario "third scenario" in specification "tags_expression_execution"
 
-* Create a scenario "fourth scenario" in specification "tags_expression_execution" with the following steps with implementation
+* Create a scenario "fourth scenario" in specification "tags_expression_execution" with the following steps with implementation 
      |step text           |implementation               |
      |--------------------|-----------------------------|
      |fourth Scenario step|"inside fourth scenario step"|
