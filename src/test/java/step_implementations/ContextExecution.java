@@ -8,24 +8,30 @@ import common.Scenario;
 import common.Specification;
 
 import java.io.IOException;
-import java.util.List;
 
 import static common.GaugeProject.currentProject;
 
 public class ContextExecution {
 
     @Step("Create a specification <spec name> with the following contexts <steps table>")
-    public void createContextsInSpec(String specName , Table steps)throws Exception{
+    public void createContextsInSpec(String specName, Table steps) throws Exception {
+        createContexts(specName, steps, true);
+    }
 
-        if (steps.getColumnNames().size() != 2) {
-            throw new RuntimeException("Expected two columns for table");
-        }
+    @Step("Create a specification <spec name> with the following unimplemented contexts <steps table>")
+    public void createUnimplementedContextsInSpec(String specName, Table steps) throws Exception {
+        createContexts(specName, steps, false);
+    }
 
+    private void createContexts(String specName, Table steps, boolean implement) throws Exception {
         Specification spec = currentProject.createSpecification(specName);
-
         for (TableRow rows : steps.getTableRows()) {
             spec.addContextSteps(rows.getCell("step text"));
-            currentProject.implementStep(rows.getCell("step text"),rows.getCell("implementation"), false);
+            if (implement) {
+                if (steps.getColumnNames().size() != 2)
+                    throw new RuntimeException("Expected two columns for table");
+                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false);
+            }
             spec.save();
         }
     }
@@ -43,7 +49,7 @@ public class ContextExecution {
     @Step("Add tags <tags> to scenario <scenario name> in specification <specification name>")
     public void addTagsToScenario(String tags, String scenarioName, String specName) throws IOException {
         Specification spec = currentProject.findSpecification(specName);
-        if (spec == null){
+        if (spec == null) {
             spec = currentProject.createSpecification(specName);
         }
         Scenario currentScenario = currentProject.findScenario(scenarioName, spec.getScenarios());
@@ -54,7 +60,7 @@ public class ContextExecution {
     @Step("Add tags <tags> to specification <specification name>")
     public void addTagsToSpec(String tags, String specName) throws IOException {
         Specification spec = currentProject.findSpecification(specName);
-        if (spec == null){
+        if (spec == null) {
             spec = currentProject.createSpecification(specName);
         }
         spec.addTags(tags);
