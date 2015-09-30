@@ -79,7 +79,7 @@ public class Specification {
         List<String> columnNames = datatable.getColumnNames();
         appendRow(builder, columnNames);
         for (TableRow tableRow : datatable.getTableRows()) {
-            ArrayList<String> row = new ArrayList<>();
+            ArrayList<String> row = new ArrayList<String>();
             for (String column : columnNames){
                 row.add(tableRow.getCell(column));
             }
