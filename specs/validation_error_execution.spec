@@ -34,7 +34,7 @@ Spec execution with unimplemented step in scenarios
 
 Spec execution with unimplemented step in context step
 ------------------------------------------------------
-* Create a specification "basic spec execution" with the following unimplemented contexts 
+* Create a specification "Basic spec execution" with the following unimplemented contexts
      |step text    |
      |-------------|
      |First context|
@@ -59,7 +59,7 @@ Spec execution with unimplemented step in context step
 
 Spec execution with unimplemented step in context step and scenario
 -------------------------------------------------------------------
-* Create a specification "basic spec execution" with the following unimplemented contexts 
+* Create a specification "Basic spec execution" with the following unimplemented contexts
      |step text    |
      |-------------|
      |First context|
