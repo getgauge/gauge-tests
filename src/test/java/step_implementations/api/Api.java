@@ -33,12 +33,12 @@ public class Api {
 
     @Step("Fetch all steps from gauge")
     public void fetchAllSteps() throws IOException {
-        info = new StepsAssertInfo(30000, 150);
+        info = new StepsAssertInfo(50000, 150);
     }
 
     @Step("Fetch all concepts from gauge")
     public void fetchAllConcepts() {
-        info = new ConceptsAssertInfo(30000, 150);
+        info = new ConceptsAssertInfo(50000, 150);
     }
 
     @Step("Verify all the steps are present <table>")
@@ -65,7 +65,7 @@ public class Api {
     public void fetchStepValues(Table table) {
         stepValues = new ArrayList<StepValue>();
         List<String> columnNames = table.getColumnNames();
-        for (TableRow row : table.getTableRows()){
+        for (TableRow row : table.getTableRows()) {
             StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
             stepValues.add(stepValue);
         }
@@ -109,9 +109,10 @@ public class Api {
     private List<String> getSteps(Table table) {
         List<String> columnNames = table.getColumnNames();
         final List<String> steps = new ArrayList<String>();
-        for(TableRow row : table.getTableRows()){
+        for (TableRow row : table.getTableRows()) {
             StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
-            steps.add(stepValue.getStepText().trim());
+            if (stepValue != null && stepValue.getStepText() != null)
+                steps.add(stepValue.getStepText().trim());
         }
         return steps;
     }

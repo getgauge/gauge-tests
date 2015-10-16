@@ -1,7 +1,6 @@
 package step_implementations.api;
 
 import com.thoughtworks.gauge.ConceptInfo;
-import com.thoughtworks.gauge.StepValue;
 import common.AssertInfo;
 
 import java.io.IOException;
@@ -19,7 +18,6 @@ public class ConceptsAssertInfo implements AssertInfo<String> {
         this.waitTime = waitTime;
         this.interval = interval;
     }
-
 
 
     public void setExpected(String[] expected) {

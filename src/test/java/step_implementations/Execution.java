@@ -34,7 +34,7 @@ public class Execution {
         printProcessOutput(passed);
         return passed;
     }
-    
+
     private boolean isExecutionPassed(boolean sorted) throws Exception {
         boolean passed = currentProject.execute(sorted);
         printProcessOutput(passed);

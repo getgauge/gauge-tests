@@ -36,7 +36,7 @@ public class SpecAndScenarioCreation {
     }
 
     private boolean shouldCreateImplementation(TableRow row, List<String> columnNames) {
-        if (columnNames.size() != 2){
+        if (columnNames.size() != 2) {
             return false;
         }
         String implementation = row.getCell(columnNames.get(1));

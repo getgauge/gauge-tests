@@ -63,10 +63,10 @@ public class CSharpProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        }else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
+        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             return "throw new SystemException();";
-        }else {
-            if (appendCode){
+        } else {
+            if (appendCode) {
                 builder.append(implementation);
             } else {
                 builder.append("Console.WriteLine(").append(implementation).append(");\n");
@@ -130,7 +130,7 @@ public class CSharpProject extends GaugeProject {
     @Override
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
         boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
-        if (!exitStatus){
+        if (!exitStatus) {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }
@@ -141,18 +141,18 @@ public class CSharpProject extends GaugeProject {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
         String value = row.getCell(columnNames.get(2));
-        return "DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Add(\""+ key + "\",\"" + value +"\");";
+        return "DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Add(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
-        return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key +"\"));";
+        return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key + "\"));";
     }
 
     private String hookString(String hookLevel, String hookType, List<String> tags) {
-        String tagsText = isSuiteLevel(hookLevel)? "" : Util.commaSeparatedValues(Util.quotifyValues(tags));
+        String tagsText = isSuiteLevel(hookLevel) ? "" : Util.commaSeparatedValues(Util.quotifyValues(tags));
         return String.format("[%s(%s)]", hookName(hookLevel, hookType), tagsText);
     }
 

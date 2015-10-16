@@ -20,7 +20,6 @@ public class StepsAssertInfo implements AssertInfo<String> {
     }
 
 
-
     public void setExpected(String[] expected) {
         this.expected = expected;
     }

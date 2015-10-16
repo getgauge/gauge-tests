@@ -1,9 +1,9 @@
 package common;
 
 
+import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
-import com.thoughtworks.gauge.Table;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

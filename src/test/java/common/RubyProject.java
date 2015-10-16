@@ -5,9 +5,10 @@ import com.thoughtworks.gauge.TableRow;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static common.Util.getUniqueName;
 
@@ -58,12 +59,10 @@ public class RubyProject extends GaugeProject {
                 }
             }
             builder.append("\n");
-        }
-        else if(implementation.toLowerCase().equals(THROW_EXCEPTION)){
+        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             builder.append("raise \" exception raised \" \n \n");
-        }
-        else {
-            if (appendCode){
+        } else {
+            if (appendCode) {
                 builder.append(implementation);
             } else {
                 builder.append("puts ").append(implementation).append("\n");
@@ -96,7 +95,7 @@ public class RubyProject extends GaugeProject {
     @Override
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
         boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
-        if (!exitStatus){
+        if (!exitStatus) {
             System.out.println(currentProject.getLastProcessStdout());
             System.out.println(currentProject.getLastProcessStderr());
         }

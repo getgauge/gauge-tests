@@ -6,7 +6,6 @@ import com.thoughtworks.gauge.TableRow;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Specification {
@@ -80,7 +79,7 @@ public class Specification {
         appendRow(builder, columnNames);
         for (TableRow tableRow : datatable.getTableRows()) {
             ArrayList<String> row = new ArrayList<String>();
-            for (String column : columnNames){
+            for (String column : columnNames) {
                 row.add(tableRow.getCell(column));
             }
             appendRow(builder, row);

@@ -6,9 +6,9 @@ import static org.junit.Assert.fail;
 
 public class Assert {
     public static void till(AssertInfo info) {
-        long t= System.currentTimeMillis();
-        long end = t+info.getWaitTime();
-        while(System.currentTimeMillis() < end) {
+        long t = System.currentTimeMillis();
+        long end = t + info.getWaitTime();
+        while (System.currentTimeMillis() < end) {
             Object[] expected = info.getExpected();
             Object[] actual = info.getActual();
             Arrays.sort(expected);
