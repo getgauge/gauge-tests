@@ -1,5 +1,5 @@
 # GAUGE testing GAUGE!
-[![Gauge Badge](https://cdn.rawgit.com/getgauge/getgauge.github.io/master/Gauge_Badge.svg)](http://getgauge.io)
+[![Gauge Badge](getgauge.io/Gauge_Badge.svg)](http://getgauge.io)
 
 Tests for Gauge Command-Line Utility using Gauge
 
