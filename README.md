@@ -1,5 +1,5 @@
 # GAUGE testing GAUGE!
-[![Gauge Badge](getgauge.io/Gauge_Badge.svg)](http://getgauge.io)
+[![Gauge Badge](http://getgauge.io/Gauge_Badge.svg)](http://getgauge.io)
 
 Tests for Gauge Command-Line Utility using Gauge
 
