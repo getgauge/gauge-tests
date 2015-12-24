@@ -1,5 +1,5 @@
-Data Store Tests
-================
+Data Store
+==========
 
 * In an empty directory initialize a project with the current language
 

@@ -1,5 +1,5 @@
-Nested Concept Failure case
-===========================
+Concept Failing
+===============
 * In an empty directory initialize a project with the current language
 * Create concept "concept with <param0> and <param1>" with following steps 
      |concept steps                |

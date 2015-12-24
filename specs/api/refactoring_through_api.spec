@@ -1,5 +1,5 @@
-API Refactor Specification
-==========================
+Refactoring through API
+=======================
 
 tags: refactoring, api
 

@@ -1,5 +1,5 @@
-Console Refactor Specification
-==============================
+Step Refactoring through command
+================================
 
 tags: refactoring
 

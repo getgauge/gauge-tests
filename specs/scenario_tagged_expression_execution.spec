@@ -1,5 +1,5 @@
-Tagged Expression Execution
-===========================
+Scenario Tagged Expression Execution
+====================================
 
 * In an empty directory initialize a project with the current language
 * Create a scenario "first scenario" in specification "tags_expression_execution" with the following steps with implementation 

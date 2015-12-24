@@ -1,5 +1,5 @@
-Execution Hooks Failure Case
-============================
+Execution Hooks Failing
+=======================
 
 When a before execution hook fails the after hook will still execute skipping all other executions at that level.
 
