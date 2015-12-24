@@ -37,10 +37,7 @@ public class Util {
     }
 
     private static File getSystemTempDir() throws IOException {
-        File tempFile = File.createTempFile("gauge", "");
-        File tempDir = tempFile.getParentFile();
-        tempFile.delete();
-        return tempDir;
+        return new File(System.getProperty("java.io.tmpdir"));
     }
 
     public static void writeToFile(String absolutePath, String data) throws IOException {
