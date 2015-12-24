@@ -43,31 +43,19 @@ public class Console {
     @Step("Console should contain following lines in order <console output table>")
     public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
         String output = currentProject.getStdOut();
-        String outputCopy = output;
-        String row1, row2;
+        int currentIndex = 0;
 
-        for (int i = 0; i < table.getTableRows().size() - 1; i++) {
-            row1 = table.getTableRows().get(i).getCell(table.getColumnNames().get(0));
-            row2 = table.getTableRows().get(i + 1).getCell(table.getColumnNames().get(0));
-            if (!output.contains(row1)) {
-                String message = "Console doesn't contain " + row1 + "\n" +
-                        "Actual output: \n" + outputCopy;
+        for (int i = 0; i < table.getTableRows().size(); i++) {
+            String currentRow = table.getTableRows().get(i).getCell("Console output");
+            int rowIndex = output.indexOf(currentRow, currentIndex);
+
+            if (rowIndex < 0) {
+                String message = "Console doesn't contain " + currentRow + " in order\n" +
+                        "Actual output: \n" + output;
                 fail(message);
             }
-            if (!output.contains(row2)) {
-                String message = "Console doesn't contain " + row2 + "\n" +
-                        "Actual output: \n" + outputCopy;
-                fail(message);
-            }
-            if (output.indexOf(row1) < output.indexOf(row2)) {
-                output = output.replaceFirst(row1, "");
-            } else {
-                String message = "Output was not in order \n";
-                message += "******************Actual Console Output Start************\n";
-                message += outputCopy;
-                message += "******************Actual Console Output End************\n";
-                fail(message);
-            }
+
+            currentIndex = rowIndex + currentRow.length();
         }
     }
 

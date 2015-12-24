@@ -28,9 +28,9 @@ Spec execution with unimplemented step in scenarios
      |inside first step                                       |
      |inside second step                                      |
 
-* Console should contain "Specifications: \t1 executed, 1 passed, 0 failed, 0 skipped"
+* Console should contain "Specifications:\t1 executed\t1 passed\t0 failed\t0 skipped"
 
-* Console should contain "Scenarios: \t1 executed, 1 passed, 0 failed, 1 skipped"
+* Console should contain "Scenarios:\t1 executed\t1 passed\t0 failed\t1 skipped"
 
 Spec execution with unimplemented step in context step
 ------------------------------------------------------
@@ -52,9 +52,9 @@ Spec execution with unimplemented step in context step
      |--------------------------------------------------------|
      |Step implementation not found. First context            |
 
-* Console should contain "Specifications: \t0 executed, 0 passed, 0 failed, 1 skipped"
+* Console should contain "Specifications:\t0 executed\t0 passed\t0 failed\t1 skipped"
 
-* Console should contain "Scenarios: \t0 executed, 0 passed, 0 failed, 1 skipped"
+* Console should contain "Scenarios:\t0 executed\t0 passed\t0 failed\t1 skipped"
 
 
 Spec execution with unimplemented step in context step and scenario
@@ -83,6 +83,6 @@ Spec execution with unimplemented step in context step and scenario
      |Step implementation not found. First context            |
      |Step implementation not found. Second unimplemented step|
 
-* Console should contain "Specifications: \t0 executed, 0 passed, 0 failed, 1 skipped"
+* Console should contain "Specifications:\t0 executed\t0 passed\t0 failed\t1 skipped"
 
-* Console should contain "Scenarios: \t0 executed, 0 passed, 0 failed, 2 skipped"
+* Console should contain "Scenarios:\t0 executed\t0 passed\t0 failed\t2 skipped"
