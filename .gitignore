@@ -7,5 +7,4 @@ gauge_bin/
 logs
 reports*
 target
-specs/hello_world.spec
 gauge-tests.iml
