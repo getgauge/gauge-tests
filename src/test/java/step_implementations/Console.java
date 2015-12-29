@@ -46,7 +46,8 @@ public class Console {
         int currentIndex = 0;
 
         for (int i = 0; i < table.getTableRows().size(); i++) {
-            String currentRow = table.getTableRows().get(i).getCell("Console output");
+            String colName = table.getColumnNames().get(0);
+            String currentRow = table.getTableRows().get(i).getCell(colName);
             int rowIndex = output.indexOf(currentRow, currentIndex);
 
             if (rowIndex < 0) {

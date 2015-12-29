@@ -23,10 +23,33 @@ public class ContextExecution {
         createContexts(specName, steps, false);
     }
 
+    @Step("Add the following teardown steps in specification <spec name> <steps table>")
+    public void createTeardownInSpec(String specName, Table steps) throws Exception {
+        createTeardownSteps(specName, steps, true);
+    }
+
+    @Step("Add the following unimplemented teardown steps in specification <spec name> <steps table>")
+    public void createUnimplementedTeardownInSpec(String specName, Table steps) throws Exception {
+        createTeardownSteps(specName, steps, false);
+    }
+
     private void createContexts(String specName, Table steps, boolean implement) throws Exception {
         Specification spec = currentProject.createSpecification(specName);
         for (TableRow rows : steps.getTableRows()) {
             spec.addContextSteps(rows.getCell("step text"));
+            if (implement) {
+                if (steps.getColumnNames().size() != 2)
+                    throw new RuntimeException("Expected two columns for table");
+                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false);
+            }
+            spec.save();
+        }
+    }
+
+    private void createTeardownSteps(String specName, Table steps, boolean implement) throws Exception {
+        Specification spec = currentProject.findSpecification(specName);
+        for (TableRow rows : steps.getTableRows()) {
+            spec.addTeardownSteps(rows.getCell("step text"));
             if (implement) {
                 if (steps.getColumnNames().size() != 2)
                     throw new RuntimeException("Expected two columns for table");
@@ -67,5 +90,3 @@ public class ContextExecution {
         spec.save();
     }
 }
-
-

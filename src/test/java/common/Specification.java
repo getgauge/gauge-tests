@@ -13,6 +13,7 @@ public class Specification {
     private String name;
     private ArrayList<Scenario> scenarios = new ArrayList<Scenario>();
     private ArrayList<String> contextSteps = new ArrayList<String>();
+    private ArrayList<String> teardownSteps = new ArrayList<String>();
     private File specFile = null;
     private Table datatable = null;
     String tags = "";
@@ -38,6 +39,12 @@ public class Specification {
     public void addContextSteps(String... newContextSteps) {
         for (String contextStep : newContextSteps) {
             contextSteps.add(contextStep);
+        }
+    }
+
+    public void addTeardownSteps(String... newTeardownSteps) {
+        for (String step : newTeardownSteps) {
+            teardownSteps.add(step);
         }
     }
 
@@ -70,6 +77,10 @@ public class Specification {
         }
 
         specText.append("\n");
+        specText.append("_____\n\n");
+        for (String step : teardownSteps) {
+            specText.append("* ").append(step).append("\n");
+        }
         return specText.toString();
     }
 
