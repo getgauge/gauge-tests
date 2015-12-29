@@ -22,7 +22,7 @@ Passing tagged execution
      |step text          |implementation              |
      |-------------------|----------------------------|
      |Third Scenario step|"inside third scenario step"|
-* Add tags "tag3, tag4" to scenario "second scenario" in specification "tags_execution"
+* Add tags "tag3, tag4" to scenario "third scenario" in specification "tags_execution"
 
 * Execute the tags "tag1, tag2" in spec "tags_execution" and ensure success
 * Console should contain following lines in order 

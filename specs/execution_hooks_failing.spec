@@ -49,12 +49,7 @@ Test a hook failure at step level
 * Create "step" level "before" hook with exception
 * Create "step" level "after" hook with implementation "inside after step"
 * Execute the spec "01 Hooks Spec" and ensure failure
-* Console should contain following lines in order 
-     |console output    |
-     |------------------|
-     |inside before step|
-
-* Console should contain following lines in order 
+* Console should contain following lines in order
      |console output   |
      |-----------------|
      |inside after step|
