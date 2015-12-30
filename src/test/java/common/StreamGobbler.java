@@ -19,8 +19,9 @@ class StreamGobbler extends Thread {
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
             String line;
+            String lineSeparator = System.getProperty("line.separator");
             while ((line = br.readLine()) != null)
-                output.append(line + System.getProperty("line.separator"));
+                output.append(line).append(lineSeparator);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
