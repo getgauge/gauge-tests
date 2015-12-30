@@ -184,7 +184,7 @@ public abstract class GaugeProject {
     }
 
     public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
-        executeGaugeCommand("--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
+        executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
         return lastProcess.exitValue() == 0;
     }
 
