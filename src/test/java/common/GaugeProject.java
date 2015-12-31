@@ -215,6 +215,7 @@ public abstract class GaugeProject {
         }
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
+
         filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
 
@@ -223,7 +224,10 @@ public abstract class GaugeProject {
 
         inputStreamGobbler.start();
         errorStreamGobbler.start();
+
         lastProcess.waitFor();
+        inputStreamGobbler.join();
+        errorStreamGobbler.join();
 
         lastProcessStdout = inputStreamGobbler.getOutput();
         lastProcessStderr = errorStreamGobbler.getOutput();
