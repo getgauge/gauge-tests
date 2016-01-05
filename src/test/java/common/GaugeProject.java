@@ -161,36 +161,29 @@ public abstract class GaugeProject {
 
     public boolean execute(boolean sorted) throws Exception {
         if (sorted) {
-            executeGaugeCommand("--simple-console", "--verbose", "--sort", "specs/");
-        } else {
-            executeGaugeCommand("--simple-console", "--verbose", "specs/");
+            return executeGaugeCommand("--simple-console", "--verbose", "--sort", "specs/");
         }
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--simple-console", "--verbose", "specs/");
     }
 
     public boolean executeSpec(String specName) throws Exception {
-        executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec");
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec");
     }
 
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
-        executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec:" + index);
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec:" + index);
     }
 
     public boolean executeSpecWithRowRange(String specName, String rowRange) throws Exception {
-        executeGaugeCommand("--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + specName + ".spec");
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + specName + ".spec");
     }
 
     public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
-        executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
     }
 
     public boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
-        executeGaugeCommand("--refactor", oldStep, newStep);
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--refactor", oldStep, newStep);
     }
 
     public Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
