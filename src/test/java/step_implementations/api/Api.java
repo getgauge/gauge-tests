@@ -33,12 +33,12 @@ public class Api {
 
     @Step("Fetch all steps from gauge")
     public void fetchAllSteps() throws IOException {
-        info = new StepsAssertInfo(100000, 150);
+        info = new StepsAssertInfo(100000, 500);
     }
 
     @Step("Fetch all concepts from gauge")
     public void fetchAllConcepts() {
-        info = new ConceptsAssertInfo(50000, 150);
+        info = new ConceptsAssertInfo(100000, 500);
     }
 
     @Step("Verify all the steps are present <table>")
