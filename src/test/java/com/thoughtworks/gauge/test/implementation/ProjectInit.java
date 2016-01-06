@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.thoughtworks.gauge.test.common.Util.getTempDir;
@@ -38,23 +39,17 @@ public class ProjectInit {
 
     @Step("The following file structure should be created <table>")
     public void ensureInitCreatesSpecifiedStructure(Table table) throws Exception {
-        ArrayList<String> failures = new ArrayList<String>();
+        List<String> failures = null;
         for (TableRow row : table.getTableRows()) {
             String fileName = row.getCell("name");
             String fileType = row.getCell("type");
-            if (fileType.equalsIgnoreCase("dir")) {
-                if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(fileName))) {
-                    failures.add(fileName + " is not a valid directory");
-                }
-            } else if (fileType.equalsIgnoreCase("file")) {
-                if (!Util.isFileExists(getPathRelativeToCurrentProjectDir(fileName))) {
-                    failures.add(fileName + " is not a valid file");
-                }
-            } else {
-                fail(fileType + " is invalid");
-            }
+            failures = verifyFileType(fileName, fileType);
         }
 
+        doFail(failures);
+    }
+
+    private void doFail(List<String> failures) {
         if (failures.size() > 0) {
             String consolidatedMessage = "";
             for (String failure : failures) {
@@ -66,33 +61,13 @@ public class ProjectInit {
 
     @Step("Verify language specific files are created")
     public void verifyFilesForLanguageIsCreated() {
-        ArrayList<String> failures = new ArrayList<String>();
+        List<String> failures = null;
         Map<String, String> files = currentProject.getLanguageSpecificFiles();
         for (String filePath : files.keySet()) {
             String fileType = files.get(filePath);
-            if (fileType.equalsIgnoreCase("dir")) {
-                if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(filePath))) {
-                    failures.add(filePath + " is not a valid directory");
-                }
-            } else if (fileType.equalsIgnoreCase("file")) {
-                if (!Util.isFileExists(getPathRelativeToCurrentProjectDir(filePath))) {
-                    failures.add(filePath + " is not a valid file");
-                }
-            } else {
-                fail(fileType + " is invalid");
-            }
+            failures = verifyFileType(filePath, fileType);
         }
-        if (failures.size() > 0) {
-            String consolidatedMessage = "";
-            for (String failure : failures) {
-                consolidatedMessage += failure + "\n";
-            }
-            fail("Project initialization failed to create required project structure.\n\n" + consolidatedMessage);
-        }
-    }
-
-    private String getPathRelativeToCurrentProjectDir(String path) {
-        return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
+        doFail(failures);
     }
 
     @AfterScenario
@@ -102,4 +77,23 @@ public class ProjectInit {
         }
     }
 
+    private List<String> verifyFileType(String filePath, String fileType) {
+        List<String> failures = new ArrayList<>();
+        if (fileType.equalsIgnoreCase("dir")) {
+            if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(filePath))) {
+                failures.add(filePath + " is not a valid directory");
+            }
+        } else if (fileType.equalsIgnoreCase("file")) {
+            if (!Util.isFileExists(getPathRelativeToCurrentProjectDir(filePath))) {
+                failures.add(filePath + " is not a valid file");
+            }
+        } else {
+            fail(fileType + " is invalid");
+        }
+        return failures;
+    }
+
+    private String getPathRelativeToCurrentProjectDir(String path) {
+        return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
+    }
 }
