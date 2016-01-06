@@ -10,10 +10,6 @@ import static org.junit.Assert.assertTrue;
 
 public class Execution {
 
-
-    public Execution() {
-    }
-
     @Step("Execute the current project and ensure success")
     public void executeCurrentProjectAndEnsureSuccess() throws Exception {
         assertTrue(isExecutionPassed());
