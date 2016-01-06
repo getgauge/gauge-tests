@@ -58,7 +58,6 @@ public class JavaProject extends GaugeProject {
         boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
         if (!exitStatus) {
             System.out.println(currentProject.getLastProcessStdout());
-            System.out.println(currentProject.getLastProcessStderr());
         }
     }
 

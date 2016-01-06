@@ -55,9 +55,9 @@ public class Api {
             stepTexts.add(strings.getCell(columnNames.get(0)));
         }
         final List<String> steps = getSteps(table);
-        String[] dest = steps.toArray(new String[steps.size() + stepTexts.size()]);
-        System.arraycopy(stepTexts.toArray(), 0, dest, steps.size(), stepTexts.size());
-        info.setExpected(dest);
+        String[] expected = steps.toArray(new String[steps.size() + stepTexts.size()]);
+        System.arraycopy(stepTexts.toArray(), 0, expected, steps.size(), stepTexts.size());
+        info.setExpected(expected);
         Assert.till(info);
     }
 

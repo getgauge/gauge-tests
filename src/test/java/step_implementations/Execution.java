@@ -52,7 +52,6 @@ public class Execution {
         if (!passed) {
             System.out.println("*************** Process output start************");
             System.out.println(currentProject.getLastProcessStdout());
-            System.out.println(currentProject.getLastProcessStderr());
             System.out.println("*************** Process output end************");
         }
     }

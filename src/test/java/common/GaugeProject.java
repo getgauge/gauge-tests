@@ -6,8 +6,10 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
 import org.apache.commons.io.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,6 @@ public abstract class GaugeProject {
     private String language;
     private Process lastProcess = null;
     private ArrayList<Specification> specifications = new ArrayList<Specification>();
-    private String lastProcessStderr;
     private String lastProcessStdout;
     private GaugeService service;
 
@@ -85,16 +86,11 @@ public abstract class GaugeProject {
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
         System.out.println(lastProcessStdout);
-        System.out.println(lastProcessStderr);
         return lastProcess.exitValue() == 0;
     }
 
     public String getStdOut() throws IOException {
         return lastProcessStdout;
-    }
-
-    public String getStdErr() throws IOException {
-        return lastProcessStderr;
     }
 
     public File getProjectDir() {
@@ -212,18 +208,15 @@ public abstract class GaugeProject {
         filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
 
-        StreamGobbler inputStreamGobbler = new StreamGobbler(lastProcess.getInputStream());
-        StreamGobbler errorStreamGobbler = new StreamGobbler(lastProcess.getErrorStream());
-
-        inputStreamGobbler.start();
-        errorStreamGobbler.start();
+        BufferedReader br = new BufferedReader(new InputStreamReader(lastProcess.getInputStream()));
+        String line = "";
+        String newLine = System.getProperty("line.separator");
+        lastProcessStdout = "";
+        while((line = br.readLine()) != null) {
+            lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
+        }
 
         lastProcess.waitFor();
-        inputStreamGobbler.join();
-        errorStreamGobbler.join();
-
-        lastProcessStdout = inputStreamGobbler.getOutput();
-        lastProcessStderr = errorStreamGobbler.getOutput();
         return lastProcess.exitValue() == 0;
     }
 
@@ -255,10 +248,6 @@ public abstract class GaugeProject {
 
     public String getLastProcessStdout() {
         return lastProcessStdout;
-    }
-
-    public String getLastProcessStderr() {
-        return lastProcessStderr;
     }
 
     public ArrayList<Specification> getAllSpecifications() {
