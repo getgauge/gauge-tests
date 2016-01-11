@@ -34,7 +34,7 @@ public class ProjectInit {
     @Step("Project is initialized without example spec")
     public void projectInitWithoutHelloWorldSpec() throws Exception {
         initializeProject();
-        currentProject.deleteSpec("hello_world");
+        currentProject.deleteSpec("example");
     }
 
     @Step("The following file structure should be created <table>")
