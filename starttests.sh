@@ -1,4 +1,4 @@
 #!/bin/sh
 export PATH=$GAUGE_ROOT/bin:$PATH
-gauge -p --env=ci-$1 specs/
+gauge --env=ci-$1 specs/
 
