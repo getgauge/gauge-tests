@@ -92,6 +92,6 @@ Failed teardown execution
      |console output             |
      |---------------------------|
      |inside first scenario step |
-     |Failed step: First teardown|
+     |Failed Step: First teardown|
      |inside second scenario step|
-     |Failed step: First teardown|
+     |Failed Step: First teardown|
