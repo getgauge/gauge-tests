@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -204,6 +206,9 @@ public abstract class GaugeProject {
         }
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
+        String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+        String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
+        processBuilder.environment().putIfAbsent("NUGET_ENDPOINT", localNugetPath);
 
         filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
