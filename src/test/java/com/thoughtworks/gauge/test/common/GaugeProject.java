@@ -208,7 +208,7 @@ public abstract class GaugeProject {
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
-        processBuilder.environment().putIfAbsent("NUGET_ENDPOINT", localNugetPath);
+        processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
 
         filterConflictingEnv(processBuilder);
         lastProcess = processBuilder.start();
