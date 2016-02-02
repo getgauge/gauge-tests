@@ -29,7 +29,7 @@ Spec data store persists data between scenario runs
      |step text    |implementation        |
      |-------------|----------------------|
      |First context|"inside first context"|
-* Add tags "hadjka" to specification "spec"
+* Add tags "hadjka" to specification "newspec"
 * Create a scenario "writeScenario" in specification "newSpec" with step to write to datastore 
      |step text              |key       |value                         |datastore type|
      |-----------------------|----------|------------------------------|--------------|
