@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class RubyProject extends GaugeProject {
+    private static final String DEFAULT_AGGREGATION = "AND";
+
     public RubyProject(File projectDir) {
         super(projectDir, "ruby");
     }
@@ -71,10 +73,7 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printString) throws IOException {
-        StringBuilder rubyFileText = new StringBuilder();
-        rubyFileText.append(String.format("%s_%s do \n puts \"%s\"\nend", hookType, hookLevel, printString));
-        rubyFileText.append("\n");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".rb"), rubyFileText.toString());
+        createHook(hookLevel, hookType, printString, DEFAULT_AGGREGATION, new ArrayList<String>());
     }
 
     @Override
@@ -87,7 +86,14 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException {
+        createHook(hookLevel, hookType, printString, aggregation, tags.getColumnValues("tags"));
+    }
 
+    public void createHook(String hookLevel, String hookType, String printString, String aggregation, List<String> tags) throws IOException {
+        StringBuilder rubyFileText = new StringBuilder();
+        rubyFileText.append(String.format("%s_%s(%s) do \n puts \"%s\"\nend", hookType, hookLevel, getOptions(aggregation, tags), printString));
+        rubyFileText.append("\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".rb"), rubyFileText.toString());
     }
 
     @Override
@@ -104,6 +110,11 @@ public class RubyProject extends GaugeProject {
         String key = row.getCell(columnNames.get(1));
         String value = row.getCell(columnNames.get(2));
         return "Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.put(\"" + key + "\", \"" + value + "\")";
+    }
+
+    private String getOptions(String aggregation, List<String> tags) {
+        String tagsText = Util.commaSeparatedValues(Util.quotifyValues(tags));
+        return String.format("{tags: [%s], operator: '%s'}", tagsText, aggregation);
     }
 
     @Override
