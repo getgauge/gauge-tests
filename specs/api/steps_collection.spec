@@ -49,33 +49,7 @@ tags: api
      |Scenario step 12    |print params  |
      |Scenario step 13 "a"|print params  |
 
-Fetch all steps present in project
-----------------------------------
-
-* Start Gauge daemon
-
-* Steps from api should have the following 
-     |step text                  |
-     |---------------------------|
-     |context 1                  |
-     |context 2                  |
-     |context 3                  |
-     |context 4                  |
-     |Scenario step 1 "a"        |
-     |Scenario step 2 "a" and "b"|
-     |Scenario step 3            |
-     |Scenario step 4            |
-     |Scenario step 5            |
-     |Scenario step 6            |
-     |Scenario step 7            |
-     |Scenario step 8            |
-     |Scenario step 9            |
-     |Scenario step 10           |
-     |Scenario step 11           |
-     |Scenario step 12           |
-     |Scenario step 13 "a"       |
-
-Fetch all steps including newly created steps after starting the Api
+Fetch all steps including newly created steps after starting the API
 --------------------------------------------------------------------
 
 * Start Gauge daemon
@@ -111,8 +85,6 @@ Fetch all steps including newly created steps after starting the Api
      |Scenario step 9            |
      |Scenario step 10           |
      |Scenario step 11           |
-     |Scenario step 12           |
-     |Scenario step 13 "a"       |
      |Scenario step 14 "a"       |
      |Scenario step 15           |
      |Scenario step 16           |
