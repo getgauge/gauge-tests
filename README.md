@@ -14,11 +14,12 @@ Tests for Gauge Command-Line Utility using Gauge
   ```
   gauge --install {language}
   ```
-  
+
   ```
   gauge --install java
   gauge --install ruby
   gauge --install csharp
+  gauge --install js
   ```
 - Install [Maven](https://maven.apache.org/)
 
@@ -33,6 +34,7 @@ Tests for Gauge Command-Line Utility using Gauge
   sh starttests.sh java
   sh starttests.sh ruby
   sh starttests.sh csharp
+  sh starttests.sh js
   ```
 
 This will also compile all the supporting code implementations and run your specs in parallel.
