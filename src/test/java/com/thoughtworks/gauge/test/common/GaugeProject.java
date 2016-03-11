@@ -55,6 +55,8 @@ public abstract class GaugeProject {
             return new RubyProject(projectDir);
         } else if (language.equalsIgnoreCase("csharp")) {
             return new CSharpProject(projectDir);
+        } else if (language.equalsIgnoreCase("js")) {
+            return new JSProject(projectDir);
         }
 
         return new UnknownProject(projectDir, language);
