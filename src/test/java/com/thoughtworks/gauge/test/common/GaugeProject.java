@@ -57,6 +57,8 @@ public abstract class GaugeProject {
             return new CSharpProject(projectDir);
         } else if (language.equalsIgnoreCase("js")) {
             return new JSProject(projectDir);
+        } else if (language.equalsIgnoreCase("python")) {
+            return new PythonProject(projectDir);
         }
 
         return new UnknownProject(projectDir, language);
