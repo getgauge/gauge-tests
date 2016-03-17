@@ -53,7 +53,7 @@ public class PythonProject extends GaugeProject {
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
-            builder.append("    print ");
+            builder.append("    print(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 if (paramTypes.get(i).toLowerCase().equals("string")) {
                     builder.append("\"param").append(i).append("=\"+").append("param").append(i);
@@ -62,14 +62,14 @@ public class PythonProject extends GaugeProject {
                     }
                 }
             }
-            builder.append("\n");
+            builder.append(")\n");
         } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             builder.append("    raise Exception('I do not know Python!')\n");
         } else {
             if (appendCode) {
                 builder.append(implementation);
             } else {
-                builder.append("    print ").append(implementation).append("\n");
+                builder.append("    print(").append(implementation).append(")\n");
             }
         }
         return builder.toString();
@@ -96,9 +96,9 @@ public class PythonProject extends GaugeProject {
     public void createHook(String hookLevel, String hookType, String printString, String aggregation, List<String> tags) throws IOException {
         StringBuilder fileText = new StringBuilder();
         if (!isSuiteHook(hookLevel))
-            fileText.append(String.format(IMPORT + "@%s_%s%s\ndef %s():\n    print \"%s\"\n", hookType, hookLevel, getOptions(aggregation, tags), Util.getUniqueName(), printString));
+            fileText.append(String.format(IMPORT + "@%s_%s%s\ndef %s():\n    print(\"%s\")\n", hookType, hookLevel, getOptions(aggregation, tags), Util.getUniqueName(), printString));
         else
-            fileText.append(String.format(IMPORT + "@%s_%s\ndef %s():\n    print \"%s\"\n", hookType, hookLevel, Util.getUniqueName(), printString));
+            fileText.append(String.format(IMPORT + "@%s_%s\ndef %s():\n    print(\"%s\")\n", hookType, hookLevel, Util.getUniqueName(), printString));
         fileText.append("\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".py"), fileText.toString());
     }
@@ -116,7 +116,7 @@ public class PythonProject extends GaugeProject {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
         String value = row.getCell(columnNames.get(2));
-        return "    print DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().put(\"" + key + "\", \"" + value + "\")";
+        return "    print(DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().put(\"" + key + "\", \"" + value + "\"))";
     }
 
     private String getOptions(String aggregation, List<String> tags) {
@@ -127,7 +127,7 @@ public class PythonProject extends GaugeProject {
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
-        return "    print DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().get(\"" + key + "\")";
+        return "    print(DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().get(\"" + key + "\"))";
     }
 
     private String getStepImplementationsDir() {
