@@ -6,6 +6,7 @@ import com.thoughtworks.gauge.test.common.Specification;
 import java.io.IOException;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Execution {
@@ -100,4 +101,17 @@ public class Execution {
         assertTrue(passed);
     }
 
+    @Step("Check for validation errors in the project and ensure failure")
+    public void validateAndEnsureFailure() throws IOException, InterruptedException {
+        boolean passed = currentProject.validate();
+        printProcessOutput(passed);
+        assertFalse(passed);
+    }
+
+    @Step("Check for validation errors in the project and ensure success")
+    public void validateAndEnsureSuccess() throws IOException, InterruptedException {
+        boolean passed = currentProject.validate();
+        printProcessOutput(passed);
+        assertTrue(passed);
+    }
 }
