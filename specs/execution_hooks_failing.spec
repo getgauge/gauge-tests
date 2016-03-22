@@ -43,13 +43,29 @@ Test a hook failure at spec level
      |inside step 1 |
      |inside step 2 |
 
+Test a hook failure at scenario level
+-------------------------------------
+* Create "scenario" level "before" hook with exception
+* Create "scenario" level "after" hook with implementation "inside after scenario"
+* Execute the spec "01 Hooks Spec" and ensure failure
+* Console should contain following lines in order 
+     |console output       |
+     |---------------------|
+     |inside after scenario|
+* Console should not contain following lines 
+     |console output|
+     |--------------|
+     |inside step 1 |
+     |inside step 2 |
+
+
 
 Test a hook failure at step level
 ---------------------------------
 * Create "step" level "before" hook with exception
 * Create "step" level "after" hook with implementation "inside after step"
 * Execute the spec "01 Hooks Spec" and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
      |console output   |
      |-----------------|
      |inside after step|
