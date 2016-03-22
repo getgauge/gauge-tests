@@ -16,6 +16,20 @@ public class Execution {
         assertTrue(isExecutionPassed());
     }
 
+    @Step("Execute the current project in parallel and ensure success")
+    public void executeCurrentProjectInParallelAndEnsureSuccess() throws IOException, InterruptedException {
+        boolean passed = currentProject.executeInParallel();
+        printProcessOutput(passed);
+        assertTrue(passed);
+    }
+
+    @Step("Execute the current project in parallel in <n> streams and ensure success")
+    public void executeCurrentProjectInParallelStreamsAndEnsureSuccess(int n) throws IOException, InterruptedException {
+        boolean passed = currentProject.executeInParallel(n);
+        printProcessOutput(passed);
+        assertTrue(passed);
+    }
+
     @Step("Execute the specs in order and ensure success")
     public void executeSpecsInOrderAndEnsureSuccess() throws Exception {
         assertTrue(isExecutionPassed(true));

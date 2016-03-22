@@ -166,6 +166,14 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--simple-console", "--verbose", "specs/");
     }
 
+    public boolean executeInParallel() throws IOException, InterruptedException {
+        return executeGaugeCommand("--parallel", "--verbose", "specs/");
+    }
+
+    public boolean executeInParallel(int nStreams) throws IOException, InterruptedException {
+        return executeGaugeCommand("--parallel", "-n=" + nStreams, "--verbose", "specs/");
+    }
+
     public boolean validate() throws IOException, InterruptedException {
         return executeGaugeCommand("--validate", "specs/");
     }
