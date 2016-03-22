@@ -90,7 +90,6 @@ public abstract class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("--init", language);
-        System.out.println(lastProcessStdout);
         return lastProcess.exitValue() == 0;
     }
 
