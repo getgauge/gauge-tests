@@ -8,16 +8,6 @@ Validation
      |First Step |
      |Second Step|
 
-Execution failure in case of validation errors
-----------------------------------------------
-
-* Execute the spec "Validation Spec" and ensure failure
-* Console should contain following lines in order 
-     |Console output                            |
-     |------------------------------------------|
-     |Step implementation not found. First Step |
-     |Step implementation not found. Second Step|
-
 Validation Failure
 ------------------
 
