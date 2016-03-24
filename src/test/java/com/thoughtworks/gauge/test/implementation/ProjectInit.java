@@ -7,14 +7,13 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.SoftAssertions;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static com.thoughtworks.gauge.test.common.Util.getTempDir;
-import static org.junit.Assert.fail;
 
 public class ProjectInit {
     private GaugeProject currentProject = null;
@@ -39,35 +38,38 @@ public class ProjectInit {
 
     @Step("The following file structure should be created <table>")
     public void ensureInitCreatesSpecifiedStructure(Table table) throws Exception {
-        List<String> failures = null;
+        SoftAssertions softly = new SoftAssertions();
         for (TableRow row : table.getTableRows()) {
-            String fileName = row.getCell("name");
-            String fileType = row.getCell("type");
-            failures = verifyFileType(fileName, fileType);
-        }
+            File fileName = new File(getPathRelativeToCurrentProjectDir(row.getCell("name")));
+            String fileType = row.getCell("type").toLowerCase();
 
-        doFail(failures);
-    }
-
-    private void doFail(List<String> failures) {
-        if (failures.size() > 0) {
-            String consolidatedMessage = "";
-            for (String failure : failures) {
-                consolidatedMessage += failure + "\n";
+            softly.assertThat(fileType).isIn("dir", "file");
+            if (fileType.equals("dir")) {
+                softly.assertThat(fileName).exists().isDirectory();
+            } else if (fileType.equals("file")) {
+                softly.assertThat(fileName).exists().isFile();
             }
-            fail("Project initialization failed to create required project structure.\n\n" + consolidatedMessage);
         }
+        softly.assertAll();
     }
 
     @Step("Verify language specific files are created")
     public void verifyFilesForLanguageIsCreated() {
-        List<String> failures = null;
+        SoftAssertions softly = new SoftAssertions();
+
         Map<String, String> files = currentProject.getLanguageSpecificFiles();
-        for (String filePath : files.keySet()) {
-            String fileType = files.get(filePath);
-            failures = verifyFileType(filePath, fileType);
-        }
-        doFail(failures);
+        files.forEach((k,v ) -> {
+            File fileName = new File(getPathRelativeToCurrentProjectDir(k));
+            String fileType = v.toLowerCase();
+
+            softly.assertThat(fileType).isIn("dir", "file");
+            if (fileType.equals("dir")) {
+                softly.assertThat(fileName).exists().isDirectory();
+            } else if (fileType.equals("file")) {
+                softly.assertThat(fileName).exists().isFile();
+            }
+        });
+        softly.assertAll();
     }
 
     @AfterScenario
@@ -75,22 +77,6 @@ public class ProjectInit {
         if (currentProject.getProjectDir().exists()) {
             FileUtils.deleteQuietly(currentProject.getProjectDir());
         }
-    }
-
-    private List<String> verifyFileType(String filePath, String fileType) {
-        List<String> failures = new ArrayList<>();
-        if (fileType.equalsIgnoreCase("dir")) {
-            if (!Util.isDirectoryExists(getPathRelativeToCurrentProjectDir(filePath))) {
-                failures.add(filePath + " is not a valid directory");
-            }
-        } else if (fileType.equalsIgnoreCase("file")) {
-            if (!Util.isFileExists(getPathRelativeToCurrentProjectDir(filePath))) {
-                failures.add(filePath + " is not a valid file");
-            }
-        } else {
-            fail(fileType + " is invalid");
-        }
-        return failures;
     }
 
     private String getPathRelativeToCurrentProjectDir(String path) {
