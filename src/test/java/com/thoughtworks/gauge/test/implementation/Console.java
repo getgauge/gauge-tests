@@ -44,5 +44,4 @@ public class Console {
             assertThat(output).contains(s);
         }
     }
-
 }
