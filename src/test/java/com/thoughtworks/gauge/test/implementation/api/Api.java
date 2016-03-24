@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Api {
 
@@ -63,26 +63,26 @@ public class Api {
 
     @Step("Verify all the step values are present <table>")
     public void verifyStepValues(Table table) {
-        HashSet<Object> steps = new HashSet<>();
+        ArrayList<String> steps = new ArrayList<>();
         List<String> columnNames = table.getColumnNames();
-        for (TableRow row : table.getTableRows()) {
-            List<String> parameters = row.getCell(columnNames.get(2)).equals("") ? new ArrayList<String>() : Arrays.asList(row.getCell(columnNames.get(2)).trim().split(","));
-
+        table.getTableRows().forEach(row -> {
+            List<String> parameters = Arrays.asList(row.getCell(columnNames.get(2)).trim().split(","));
             StepValue e = new StepValue(row.getCell(columnNames.get(0)).trim(), row.getCell(columnNames.get(1)).trim(), parameters);
             steps.add(e.getStepText());
-        }
-        assertEquals(steps, stepValues);
+        });
+
+        assertThat(stepValues).containsAll(steps);
     }
 
     @Step("Refactor step <old step> to <new step> via api")
     public void refactor(String oldStep, String newStep) throws Exception {
         refactorResponse = currentProject.getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
-        assertTrue("Refactoring resulted in error", refactorResponse.getSuccess());
+        assertThat(refactorResponse.getSuccess()).isTrue().withFailMessage("Refactoring resulted in error");
     }
 
     @Step("verify refactoring didn't change files")
     public void verifyRefactoring() {
-        assertEquals(0, refactorResponse.getFilesChangedList().size());
+        assertThat(refactorResponse.getFilesChangedList()).isEmpty();
     }
 
     @AfterScenario
@@ -93,7 +93,7 @@ public class Api {
 
     private List<String> getSteps(Table table) {
         List<String> columnNames = table.getColumnNames();
-        final List<String> steps = new ArrayList<String>();
+        final List<String> steps = new ArrayList<>();
         for (TableRow row : table.getTableRows()) {
             StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
             if (stepValue != null && stepValue.getStepText() != null)
