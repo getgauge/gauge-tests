@@ -2,61 +2,46 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Console {
 
     @Step("Console should not contain following lines <table>")
     public void consoleShouldNotContainFollowingLines(Table table) throws IOException {
         String output = currentProject.getStdOut();
-        boolean contains = false;
-        String message = "\n";
-        String console_output = table.getColumnNames().get(0);
-        for (TableRow row : table.getTableRows()) {
-            if (output.contains(row.getCell(console_output))) {
-                contains = true;
-                message += "Output contains :" + row.getCell(console_output) + "\n";
-            }
+        for (String s : table.getColumnValues(0)) {
+            assertThat(output).doesNotContain(s);
         }
-        if (contains)
-            fail(message);
     }
 
     @Step("Console should contain <text> <number of times> times")
     public void consoleShouldContain(String text, int numberOfTimes) throws IOException {
         String output = currentProject.getStdOut();
-        assertEquals(numberOfTimes, StringUtils.countMatches(output, text));
+        int matchCount = StringUtils.countMatches(output, text);
+        String errorMessage = "Expected '" + output + "' to have '" + text + "' " + numberOfTimes + " times. Found " + matchCount + " times.";
+
+        assertThat(matchCount)
+                .isEqualTo(numberOfTimes)
+                .withFailMessage(errorMessage);
     }
 
     @Step({"Console should contain <message>", "The error message <message> should be displayed on console"})
     public void consoleShouldContain(String message) throws IOException {
         String output = currentProject.getStdOut();
-        assertTrue("Console doesn't contain '" + message + "'. The output given is : " + output, output.contains(message));
+        assertThat(output).contains(message);
     }
 
     @Step("Console should contain following lines in order <console output table>")
     public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
         String output = currentProject.getStdOut();
-        int currentIndex = 0;
 
-        for (int i = 0; i < table.getTableRows().size(); i++) {
-            String colName = table.getColumnNames().get(0);
-            String currentRow = table.getTableRows().get(i).getCell(colName);
-            int rowIndex = output.indexOf(currentRow, currentIndex);
-
-            if (rowIndex < 0) {
-                String message = "Console doesn't contain " + currentRow + " in order\n" +
-                        "Actual output: \n" + output;
-                fail(message);
-            }
-
-            currentIndex = rowIndex + currentRow.length();
+        for (String s : table.getColumnValues(0)){
+            assertThat(output).contains(s);
         }
     }
 
