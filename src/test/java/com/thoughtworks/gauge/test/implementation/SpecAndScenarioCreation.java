@@ -11,11 +11,6 @@ import java.util.List;
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 public class SpecAndScenarioCreation {
-
-
-    public SpecAndScenarioCreation() {
-    }
-
     @Step("Create <scenario name> in <spec name> with the following steps <steps table>")
     public void addContextToSpecification(String scenarioName, String specName, Table steps) throws Exception {
         Specification spec = currentProject.findSpecification(specName);

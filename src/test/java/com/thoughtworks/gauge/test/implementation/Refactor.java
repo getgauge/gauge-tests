@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 
 public class Refactor {
     @Step("Refactor step <First step> to <New step>")
@@ -24,32 +26,29 @@ public class Refactor {
     public void verifyStepIsNotPresent(String oldStep) throws IOException {
         GaugeProject currentProject1 = GaugeProject.getCurrentProject();
         List<Specification> specFiles = currentProject1.getAllSpecifications();
-        for (Specification specification : specFiles)
-            checkInFile(oldStep, specification.getSpecFile());
-        for (Concept concept : currentProject1.getConcepts())
-            checkInFile(oldStep, concept.getConceptFile());
-    }
 
-    private void checkInFile(String oldStep, File specFile) throws IOException {
-        String message = "\n";
-        if (isStepPresent(oldStep, specFile)) {
-            message += "Step still exists: " + oldStep;
-            fail(message + "\n");
-        }
+        for (Specification specification : specFiles)
+            assertThat(isStepPresent(oldStep, specification.getSpecFile()))
+                    .isFalse()
+                    .withFailMessage("Found Steo :'" + oldStep + "' in Spec: " + specification.getSpecFile().getAbsolutePath());
+
+        for (Concept concept : currentProject1.getConcepts())
+            assertThat(isStepPresent(oldStep, concept.getConceptFile()))
+                    .isFalse()
+                    .withFailMessage("Found Steo :'" + oldStep + "' in Concept: " + concept.getConceptFile().getAbsolutePath());
     }
 
     @Step("The step <First step> should be used in project")
     public void verifyStepIsPresent(String step) throws IOException {
         GaugeProject currentProject1 = GaugeProject.getCurrentProject();
         List<Specification> specFiles = currentProject1.getAllSpecifications();
-        String message = "\n";
+
         for (Specification specification : specFiles)
             if (isStepPresent(step, specification.getSpecFile())) return;
         for (Concept concept : currentProject1.getConcepts())
             if (isStepPresent(step, concept.getConceptFile())) return;
-        message += "Step doesn't exist: " + step;
-        fail(message + "\n");
 
+        fail("\nCould not find step in any spec/concept files: " + step + "\n");
     }
 
     private boolean isStepPresent(String oldStep, File specFile) throws IOException {
@@ -64,5 +63,4 @@ public class Refactor {
         }
         return false;
     }
-
 }
