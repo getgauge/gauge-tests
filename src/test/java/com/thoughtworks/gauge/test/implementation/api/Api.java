@@ -8,23 +8,13 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class Api {
 
     private AssertInfo info;
-    private List<StepValue> stepValues;
-    private Comparator<StepValue> comparator;
+    private HashSet<String> stepValues;
     private gauge.messages.Api.PerformRefactoringResponse refactorResponse;
-
-    public Api() {
-        comparator = new Comparator<StepValue>() {
-            @Override
-            public int compare(StepValue o1, StepValue o2) {
-                return o1.getStepText().compareTo(o2.getStepText());
-            }
-        };
-    }
 
     @Step("Start Gauge daemon")
     public void startGauge() throws IOException, InterruptedException {
@@ -63,41 +53,36 @@ public class Api {
 
     @Step("fetch step values for the following <table>")
     public void fetchStepValues(Table table) {
-        stepValues = new ArrayList<StepValue>();
+        stepValues = new HashSet<>();
         List<String> columnNames = table.getColumnNames();
         for (TableRow row : table.getTableRows()) {
             StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
-            stepValues.add(stepValue);
+            stepValues.add(stepValue.getStepText());
         }
     }
 
     @Step("Verify all the step values are present <table>")
     public void verifyStepValues(Table table) {
-        List<StepValue> steps = new ArrayList<StepValue>();
+        HashSet<Object> steps = new HashSet<>();
         List<String> columnNames = table.getColumnNames();
         for (TableRow row : table.getTableRows()) {
             List<String> parameters = row.getCell(columnNames.get(2)).equals("") ? new ArrayList<String>() : Arrays.asList(row.getCell(columnNames.get(2)).trim().split(","));
-            steps.add(new StepValue(row.getCell(columnNames.get(0)).trim(), row.getCell(columnNames.get(1)).trim(), parameters));
+
+            StepValue e = new StepValue(row.getCell(columnNames.get(0)).trim(), row.getCell(columnNames.get(1)).trim(), parameters);
+            steps.add(e.getStepText());
         }
-        Collections.sort(steps, comparator);
-        Collections.sort(stepValues, comparator);
-        if (!steps.equals(stepValues)) {
-            System.out.println(stepValues);
-            System.out.println(steps);
-            fail();
-        }
+        assertEquals(steps, stepValues);
     }
 
     @Step("Refactor step <old step> to <new step> via api")
     public void refactor(String oldStep, String newStep) throws Exception {
         refactorResponse = currentProject.getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
-        if (!refactorResponse.getSuccess()) fail("Refactoring resulted in error");
+        assertTrue("Refactoring resulted in error", refactorResponse.getSuccess());
     }
 
     @Step("verify refactoring didn't change files")
     public void verifyRefactoring() {
-        if (refactorResponse.getFilesChangedList().size() != 0)
-            throw new RuntimeException("");
+        assertEquals(0, refactorResponse.getFilesChangedList().size());
     }
 
     @AfterScenario
