@@ -13,15 +13,7 @@ public class Concept {
 
     public Concept(String name) {
         this.name = name;
-        steps = new ArrayList<String>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<String> getSteps() {
-        return steps;
+        steps = new ArrayList<>();
     }
 
     public void addSteps(String... newSteps) {
