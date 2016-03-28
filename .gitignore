@@ -8,3 +8,4 @@ logs
 reports*
 target
 gauge-tests.iml
+.vagrant

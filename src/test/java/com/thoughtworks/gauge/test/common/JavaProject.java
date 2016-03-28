@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class JavaProject extends GaugeProject {
     public static final String DEFAULT_AGGREGATION = "AND";
-    private static String stepImplementationsDir = "src/test/java";
 
     public JavaProject(File projectDir) {
         super(projectDir, "java");

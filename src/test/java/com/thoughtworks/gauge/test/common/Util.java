@@ -19,16 +19,6 @@ public class Util {
         return combined_path;
     }
 
-    public static boolean isFileExists(String fileName) {
-        File file = new File(fileName);
-        return file.exists() && !file.isDirectory();
-    }
-
-    public static boolean isDirectoryExists(String directoryName) {
-        File file = new File(directoryName);
-        return file.exists() && file.isDirectory();
-    }
-
     public static File getTempDir() throws IOException {
         String projectDirName = "gauge_project_" + System.nanoTime();
         File projectDir = new File(getSystemTempDir(), projectDirName);
