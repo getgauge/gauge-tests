@@ -1,4 +1,4 @@
 #!/bin/sh
 export PATH=$GAUGE_ROOT/bin:$PATH
-gauge -p --env=ci-$1 specs/
+mvn clean install -Denv=ci-$1
 
