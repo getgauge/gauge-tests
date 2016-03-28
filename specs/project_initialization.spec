@@ -17,7 +17,7 @@ Initializing a new project
      |------------------------------|----|
      |manifest.json                 |file|
      |specs                         |dir |
-     |specs/hello_world.spec        |file|
+     |specs/example.spec            |file|
      |env                           |dir |
      |env/default                   |dir |
      |env/default/default.properties|file|
