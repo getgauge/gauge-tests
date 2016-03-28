@@ -12,25 +12,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public abstract class GaugeProject {
 
-    public static final String PRODUCT_ROOT = "GAUGE_ROOT";
-    public static final String PRODUCT_PREFIX = "GAUGE_";
-    public static final String PRINT_PARAMS = "print params";
-    public static final String THROW_EXCEPTION = "throw exception";
-    private static final String EXAMPLE_SPEC = "hello_world";
+    private static final String PRODUCT_ROOT = "GAUGE_ROOT";
+    private static final String PRODUCT_PREFIX = "GAUGE_";
+    static final String PRINT_PARAMS = "print params";
+    static final String THROW_EXCEPTION = "throw exception";
     public static GaugeProject currentProject;
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
-    private static String conceptsDirName = "concepts";
-    private ArrayList<Concept> concepts = new ArrayList<Concept>();
+    private ArrayList<Concept> concepts = new ArrayList<>();
     private File projectDir;
     private String language;
-    private Process lastProcess = null;
-    private ArrayList<Specification> specifications = new ArrayList<Specification>();
+    private ArrayList<Specification> specifications = new ArrayList<>();
     private String lastProcessStdout;
     private GaugeService service;
 
@@ -48,19 +46,20 @@ public abstract class GaugeProject {
     }
 
     public static GaugeProject createProject(File projectDir, String language) {
-        if (language.equalsIgnoreCase("java")) {
-            return new JavaProject(projectDir);
-        } else if (language.equalsIgnoreCase("ruby")) {
-            return new RubyProject(projectDir);
-        } else if (language.equalsIgnoreCase("csharp")) {
-            return new CSharpProject(projectDir);
-        } else if (language.equalsIgnoreCase("js")) {
-            return new JSProject(projectDir);
-        } else if (language.equalsIgnoreCase("python")) {
-            return new PythonProject(projectDir);
+        switch (language.toLowerCase()){
+            case "java":
+                return new JavaProject(projectDir);
+            case "ruby":
+                return new RubyProject(projectDir);
+            case "csharp":
+                return new CSharpProject(projectDir);
+            case "js":
+                return new JavascriptProject(projectDir);
+            case "python":
+                return new PythonProject(projectDir);
+            default:
+                return new UnknownProject(projectDir, language);
         }
-
-        return new UnknownProject(projectDir, language);
     }
 
     public void createGaugeService() throws IOException, InterruptedException {
@@ -71,17 +70,13 @@ public abstract class GaugeProject {
     }
 
     private static GaugeConnection initializeGaugeConnection(int apiPort) {
-        if (apiPort != -1) {
+        if (apiPort != -1)
             return new GaugeConnection(apiPort);
-        } else {
-            return null;
-        }
+        return null;
     }
 
     public void addConcepts(Concept... newConcepts) {
-        for (Concept concept : newConcepts) {
-            concepts.add(concept);
-        }
+        Collections.addAll(concepts, newConcepts);
     }
 
     public List<Concept> getConcepts() {
@@ -89,8 +84,7 @@ public abstract class GaugeProject {
     }
 
     public boolean initialize() throws Exception {
-        executeGaugeCommand("--init", language);
-        return lastProcess.exitValue() == 0;
+        return executeGaugeCommand("--init", language);
     }
 
     public String getStdOut() throws IOException {
@@ -138,6 +132,7 @@ public abstract class GaugeProject {
 
     public Concept createConcept(String name, Table steps) throws Exception {
         String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
+        String conceptsDirName = "concepts";
         File conceptsDir = new File(specDirPath, conceptsDirName);
         if (!conceptsDir.exists()) {
             conceptsDir.mkdir();
@@ -194,12 +189,12 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
     }
 
-    public boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
+    boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
         return executeGaugeCommand("--refactor", oldStep, newStep);
     }
 
-    public Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
-        ArrayList<String> command = new ArrayList<String>();
+    private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
+        ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
         command.add("--daemonize");
         command.add("--api-port");
@@ -212,12 +207,10 @@ public abstract class GaugeProject {
         return process;
     }
 
-    public boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
-        ArrayList<String> command = new ArrayList<String>();
+    private boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
+        ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
-        for (String arg : args) {
-            command.add(arg);
-        }
+        Collections.addAll(command, args);
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
@@ -225,10 +218,10 @@ public abstract class GaugeProject {
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
 
         filterConflictingEnv(processBuilder);
-        lastProcess = processBuilder.start();
+        Process lastProcess = processBuilder.start();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(lastProcess.getInputStream()));
-        String line = "";
+        String line;
         String newLine = System.getProperty("line.separator");
         lastProcessStdout = "";
         while((line = br.readLine()) != null) {
@@ -244,11 +237,9 @@ public abstract class GaugeProject {
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
-        for (String env : processBuilder.environment().keySet()) {
-            if (!env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX)) {
-                processBuilder.environment().put(env, "");
-            }
-        }
+        processBuilder.environment().keySet().stream()
+                .filter(env -> !env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX))
+                .forEach(env -> processBuilder.environment().put(env, ""));
     }
 
     public abstract void implementStep(String stepText, String implementation, boolean appendCode) throws Exception;

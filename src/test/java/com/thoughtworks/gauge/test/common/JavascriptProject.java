@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JSProject extends GaugeProject {
+public class JavascriptProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
 
-    public JSProject(File projectDir) {
+    public JavascriptProject(File projectDir) {
         super(projectDir, "js");
     }
 
