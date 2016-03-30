@@ -1,26 +1,21 @@
 package com.thoughtworks.gauge.test.implementation;
 
-import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
-import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.SoftAssertions;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
-
-import static com.thoughtworks.gauge.test.common.Util.getTempDir;
 
 public class ProjectInit {
     private GaugeProject currentProject = null;
 
     @Step("In an empty directory initialize a <language> project")
     public void initializeProjectWithLanguage(String language) throws Exception {
-        currentProject = GaugeProject.createProject(getTempDir(), language);
+        currentProject = GaugeProject.createProject(language);
         currentProject.initialize();
     }
 
@@ -70,13 +65,6 @@ public class ProjectInit {
             }
         });
         softly.assertAll();
-    }
-
-    @AfterScenario
-    public void clearProjectDir() throws IOException {
-        if (currentProject.getProjectDir().exists()) {
-            FileUtils.deleteQuietly(currentProject.getProjectDir());
-        }
     }
 
     private String getPathRelativeToCurrentProjectDir(String path) {

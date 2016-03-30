@@ -13,8 +13,8 @@ import java.util.Map;
 public class JavaProject extends GaugeProject {
     public static final String DEFAULT_AGGREGATION = "AND";
 
-    public JavaProject(File projectDir) {
-        super(projectDir, "java");
+    public JavaProject() throws IOException {
+        super("java");
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
@@ -147,7 +147,7 @@ public class JavaProject extends GaugeProject {
     }
 
     private String hookAttributesString(List<String> tags, String aggregation) {
-        return String.format("tags = {%s}, tagAggregation = Operator.%s ", Util.commaSeparatedValues(Util.quotifyValues(tags)), aggregation);
+        return String.format("tags = {%s}, tagAggregation = Operator.%s ", Util.joinList(Util.quotifyValues(tags)), aggregation);
     }
 
     private String getStepImplementationsDir() {

@@ -13,8 +13,8 @@ import java.util.Map;
 public class JavascriptProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
 
-    public JavascriptProject(File projectDir) {
-        super(projectDir, "js");
+    public JavascriptProject() throws IOException {
+        super("js");
     }
 
     public static String toTitleCase(String input) {
@@ -122,7 +122,7 @@ public class JavascriptProject extends GaugeProject {
     }
 
     private String getOptions(String aggregation, List<String> tags) {
-        String tagsText = Util.commaSeparatedValues(Util.quotifyValues(tags));
+        String tagsText = Util.joinList(Util.quotifyValues(tags));
         return String.format("{tags: [%s], operator: \"%s\"}", tagsText, aggregation);
     }
 

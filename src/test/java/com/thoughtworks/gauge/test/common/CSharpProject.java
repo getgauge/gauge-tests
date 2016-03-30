@@ -3,7 +3,6 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +12,8 @@ import java.util.Map;
 public class CSharpProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "And";
 
-    public CSharpProject(File projectDir) {
-        super(projectDir, "csharp");
+    public CSharpProject() throws IOException {
+        super("csharp");
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
@@ -148,7 +147,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     private String hookString(String hookLevel, String hookType, List<String> tags) {
-        String tagsText = isSuiteLevel(hookLevel) ? "" : Util.commaSeparatedValues(Util.quotifyValues(tags));
+        String tagsText = isSuiteLevel(hookLevel) ? "" : Util.joinList(Util.quotifyValues(tags));
         return String.format("[%s(%s)]", hookName(hookLevel, hookType), tagsText);
     }
 

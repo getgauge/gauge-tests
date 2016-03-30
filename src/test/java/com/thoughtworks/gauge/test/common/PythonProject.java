@@ -15,8 +15,8 @@ public class PythonProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
     public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory\n";
 
-    public PythonProject(File projectDir) {
-        super(projectDir, "python");
+    public PythonProject() throws IOException {
+        super("python");
     }
 
     @Override
@@ -120,7 +120,9 @@ public class PythonProject extends GaugeProject {
     }
 
     private String getOptions(String aggregation, List<String> tags) {
-        return tags.size() < 1 ? "" : "('<" + StringUtils.join(tags, "> " + aggregation.toLowerCase() + " <") + ">')";
+        return tags.size() < 1
+                ? ""
+                : "('<" + StringUtils.join(tags, "> " + aggregation.toLowerCase() + " <") + ">')";
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
-import org.apache.commons.lang.StringUtils;
+import com.thoughtworks.gauge.test.common.Util;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class Console {
     @Step("Console should contain <text> <number of times> times")
     public void consoleShouldContain(String text, int numberOfTimes) throws IOException {
         String output = currentProject.getStdOut();
-        int matchCount = StringUtils.countMatches(output, text);
+        int matchCount = Util.countOccurrences(output, text);
         String errorMessage = "Expected '" + output + "' to have '" + text + "' " + numberOfTimes + " times. Found " + matchCount + " times.";
 
         assertThat(matchCount)

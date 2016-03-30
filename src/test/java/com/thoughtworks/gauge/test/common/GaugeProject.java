@@ -4,12 +4,12 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
-import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,10 +32,12 @@ public abstract class GaugeProject {
     private String lastProcessStdout;
     private GaugeService service;
 
-    protected GaugeProject(File projectDir, String language) {
-        this.projectDir = projectDir;
+    protected GaugeProject(String language) throws IOException {
         this.language = language;
         currentProject = this;
+
+        this.projectDir = Files.createTempDirectory("gauge_temp_").toFile();
+        this.projectDir.deleteOnExit();
     }
 
     public static GaugeProject getCurrentProject() {
@@ -45,20 +47,20 @@ public abstract class GaugeProject {
         return currentProject;
     }
 
-    public static GaugeProject createProject(File projectDir, String language) {
-        switch (language.toLowerCase()){
+    public static GaugeProject createProject(String language) throws IOException {
+        switch (language.toLowerCase()) {
             case "java":
-                return new JavaProject(projectDir);
+                return new JavaProject();
             case "ruby":
-                return new RubyProject(projectDir);
+                return new RubyProject();
             case "csharp":
-                return new CSharpProject(projectDir);
+                return new CSharpProject();
             case "js":
-                return new JavascriptProject(projectDir);
+                return new JavascriptProject();
             case "python":
-                return new PythonProject(projectDir);
+                return new PythonProject();
             default:
-                return new UnknownProject(projectDir, language);
+                return new UnknownProject(language);
         }
     }
 
@@ -224,7 +226,7 @@ public abstract class GaugeProject {
         String line;
         String newLine = System.getProperty("line.separator");
         lastProcessStdout = "";
-        while((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
             lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
         }
 
@@ -232,8 +234,8 @@ public abstract class GaugeProject {
         return lastProcess.exitValue() == 0;
     }
 
-    public void deleteSpec(String specName) throws IOException {
-        FileUtils.forceDelete(getSpecFile(specName));
+    public void deleteSpec(String specName) {
+        getSpecFile(specName).delete();
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {

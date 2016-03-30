@@ -2,7 +2,6 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,17 +16,6 @@ public class Util {
     public static String combinePath(String path1, String path2) {
         String combined_path = new File(path1, path2).getPath();
         return combined_path;
-    }
-
-    public static File getTempDir() throws IOException {
-        String projectDirName = "gauge_project_" + System.nanoTime();
-        File projectDir = new File(getSystemTempDir(), projectDirName);
-        projectDir.mkdir();
-        return projectDir;
-    }
-
-    private static File getSystemTempDir() throws IOException {
-        return new File(System.getProperty("java.io.tmpdir"));
     }
 
     public static void writeToFile(String absolutePath, String data) throws IOException {
@@ -77,7 +65,20 @@ public class Util {
     }
 
 
-    public static String commaSeparatedValues(ArrayList<String> strings) {
-        return StringUtils.join(strings, ",");
+    public static String joinList(List<String> list) {
+        if (list.isEmpty()) return "";
+        return list.stream().
+                reduce((t, u) -> t + "," + u).
+                get();
+    }
+
+    public static int countOccurrences(String in, String of) {
+        int ctr = 0;
+        int indx = in.indexOf(of);
+        while (indx > -1) {
+            ctr++;
+            indx = in.indexOf(of, indx + of.length());
+        }
+        return ctr;
     }
 }

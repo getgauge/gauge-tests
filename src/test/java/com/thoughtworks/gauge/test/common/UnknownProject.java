@@ -3,14 +3,13 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class UnknownProject extends GaugeProject {
-    public UnknownProject(File projectDir, String language) {
-        super(projectDir, language);
+    public UnknownProject(String language) throws IOException {
+        super(language);
     }
 
     @Override
