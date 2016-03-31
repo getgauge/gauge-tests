@@ -13,8 +13,8 @@ import java.util.Map;
 public class JavaProject extends GaugeProject {
     public static final String DEFAULT_AGGREGATION = "AND";
 
-    public JavaProject() throws IOException {
-        super("java");
+    public JavaProject(String projName) throws IOException {
+        super("java", projName);
     }
 
     public Map<String, String> getLanguageSpecificFiles() {

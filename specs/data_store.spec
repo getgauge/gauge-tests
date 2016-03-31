@@ -1,7 +1,7 @@
 Data Store
 ==========
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "data_store" with the current language
 
 Scenario data store refreshes after every scenario run.
 -------------------------------------------------------

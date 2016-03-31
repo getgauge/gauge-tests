@@ -4,7 +4,7 @@ Execution Hooks passing
 Execution hooks can be used to run arbitrary test code as different levels during the test suite execution. They are available at suite,
 spec, scenario and step level.
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "exec_hooks_pass" with the current language
 
 * Create "Testing Hooks scenario 1" in "01 Hooks Spec" with the following steps 
      |step text          |implementation     |

@@ -3,7 +3,7 @@ Datatable row range execution
 
 tags: Data-table, execution
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "datatable_row_exec" with the current language
 * Create a specification "row range data table execution" with the following datatable 
      |id|name   |phone|
      |--|-------|-----|

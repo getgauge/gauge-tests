@@ -3,7 +3,7 @@ Datatable Execution
 
 tags: Data-table, execution
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "datatable_exec" with the current language
 
 Simple Datatable Execution
 --------------------------

@@ -13,8 +13,8 @@ import java.util.Map;
 public class RubyProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
 
-    public RubyProject() throws IOException {
-        super("ruby");
+    public RubyProject(String projName) throws IOException {
+        super("ruby", projName);
     }
 
     @Override

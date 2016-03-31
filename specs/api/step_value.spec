@@ -3,7 +3,7 @@ Step Value
 
 tags: api
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "step_value" with the current language
 
 * Create a scenario "first scenario" in specification "Specification 1" with the following steps with implementation 
      |step text          |implementation              |

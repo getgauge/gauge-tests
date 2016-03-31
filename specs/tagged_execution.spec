@@ -1,7 +1,7 @@
 Tagged Execution
 ================
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "tagged_exec" with the current language
 
 Passing tagged execution
 ------------------------

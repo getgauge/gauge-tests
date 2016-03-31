@@ -1,7 +1,7 @@
 Single Scenario Execution
 =========================
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "single_scen_exec" with the current language
 
 Passing execution of single scenario
 ------------------------------------

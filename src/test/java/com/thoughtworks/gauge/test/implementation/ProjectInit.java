@@ -14,21 +14,21 @@ public class ProjectInit {
 
     private GaugeProject currentProject = null;
 
-    @Step("In an empty directory initialize a <language> project")
-    public void initializeProjectWithLanguage(String language) throws Exception {
-        currentProject = GaugeProject.createProject(language);
+    @Step("In an empty directory initialize a <language> project named <projName>")
+    public void initializeProjectWithLanguage(String language, String projName) throws Exception {
+        currentProject = GaugeProject.createProject(language, projName);
         currentProject.initialize();
     }
 
-    @Step({"In an empty directory initialize a project with the current language"})
-    public void initializeProject() throws Exception {
+    @Step({"In an empty directory initialize a project named <projName> with the current language"})
+    public void initializeProject(String projName) throws Exception {
         String currentLanguage = Util.getCurrentLanguage();
-        initializeProjectWithLanguage(currentLanguage);
+        initializeProjectWithLanguage(currentLanguage, projName);
     }
 
-    @Step("In an empty directory initialize a project without example spec")
-    public void projectInitWithoutHelloWorldSpec() throws Exception {
-        initializeProject();
+    @Step("In an empty directory initialize a project named <projName> without example spec")
+    public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
+        initializeProject(projName);
         currentProject.deleteSpec("example");
     }
 

@@ -1,7 +1,7 @@
 Spec Tagged Expression Execution
 ================================
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "spec_tagged_expression_exec" with the current language
 
 * Add tags "tag1" to specification "tags_expression_execution"
 

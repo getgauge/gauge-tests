@@ -12,8 +12,8 @@ import java.util.Map;
 public class CSharpProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "And";
 
-    public CSharpProject() throws IOException {
-        super("csharp");
+    public CSharpProject(String projName) throws IOException {
+        super("csharp", projName);
     }
 
     public Map<String, String> getLanguageSpecificFiles() {

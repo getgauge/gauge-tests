@@ -1,7 +1,7 @@
 Validation
 ==========
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "validation" with the current language
 * Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps 
      |step text  |
      |-----------|

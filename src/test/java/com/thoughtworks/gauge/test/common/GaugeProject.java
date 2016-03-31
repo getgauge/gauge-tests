@@ -32,11 +32,11 @@ public abstract class GaugeProject {
     private String lastProcessStdout;
     private GaugeService service;
 
-    protected GaugeProject(String language) throws IOException {
+    protected GaugeProject(String language, String projName) throws IOException {
         this.language = language;
         currentProject = this;
 
-        this.projectDir = Files.createTempDirectory("gauge_temp_").toFile();
+        this.projectDir = Files.createTempDirectory(projName + "_").toFile();
         this.projectDir.deleteOnExit();
     }
 
@@ -47,20 +47,20 @@ public abstract class GaugeProject {
         return currentProject;
     }
 
-    public static GaugeProject createProject(String language) throws IOException {
+    public static GaugeProject createProject(String language, String projName) throws IOException {
         switch (language.toLowerCase()) {
             case "java":
-                return new JavaProject();
+                return new JavaProject(projName);
             case "ruby":
-                return new RubyProject();
+                return new RubyProject(projName);
             case "csharp":
-                return new CSharpProject();
+                return new CSharpProject(projName);
             case "js":
-                return new JavascriptProject();
+                return new JavascriptProject(projName);
             case "python":
-                return new PythonProject();
+                return new PythonProject(projName);
             default:
-                return new UnknownProject(language);
+                return new UnknownProject(language, projName);
         }
     }
 

@@ -3,7 +3,7 @@ Refactoring through API
 
 tags: refactoring, api
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "refactor_thru_api" with the current language
 
 * Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
      |step text               |

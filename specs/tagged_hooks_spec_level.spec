@@ -3,7 +3,7 @@ Tagged hooks spec level - Both AND and OR aggregation
 
 tags: tagged_hooks, execution_hooks
 
-* In an empty directory initialize a project without example spec
+* In an empty directory initialize a project named "tagged_hook_spec" without example spec
 * Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation 
      |step text                            |step implementation                    |
      |-------------------------------------|---------------------------------------|

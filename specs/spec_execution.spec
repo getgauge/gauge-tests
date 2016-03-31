@@ -1,7 +1,7 @@
 Spec execution
 ==============
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "spec_exec" with the current language
 
 Basic spec execution
 --------------------

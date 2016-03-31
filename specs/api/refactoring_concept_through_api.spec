@@ -3,7 +3,7 @@ Refactoring Concept through API
 
 tags: refactoring, api
 
-* In an empty directory initialize a project with the current language
+* In an empty directory initialize a project named "refactor_concept_thru_api" with the current language
 
 * Create concept "concept with <param0> and <param1>" with following steps 
      |concept steps                            |

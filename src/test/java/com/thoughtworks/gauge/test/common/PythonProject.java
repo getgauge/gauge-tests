@@ -15,8 +15,8 @@ public class PythonProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
     public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory\n";
 
-    public PythonProject() throws IOException {
-        super("python");
+    public PythonProject(String projName) throws IOException {
+        super("python", projName);
     }
 
     @Override

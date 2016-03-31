@@ -13,8 +13,8 @@ import java.util.Map;
 public class JavascriptProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
 
-    public JavascriptProject() throws IOException {
-        super("js");
+    public JavascriptProject(String projName) throws IOException {
+        super("js", projName);
     }
 
     public static String toTitleCase(String input) {

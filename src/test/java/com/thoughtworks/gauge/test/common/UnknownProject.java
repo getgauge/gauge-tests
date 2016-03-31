@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class UnknownProject extends GaugeProject {
-    public UnknownProject(String language) throws IOException {
-        super(language);
+    public UnknownProject(String language, String projName) throws IOException {
+        super(language, projName);
     }
 
     @Override
