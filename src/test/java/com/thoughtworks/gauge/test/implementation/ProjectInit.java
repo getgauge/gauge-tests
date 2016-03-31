@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Map;
 
 public class ProjectInit {
+
     private GaugeProject currentProject = null;
 
     @Step("In an empty directory initialize a <language> project")
@@ -25,7 +26,7 @@ public class ProjectInit {
         initializeProjectWithLanguage(currentLanguage);
     }
 
-    @Step("Project is initialized without example spec")
+    @Step("In an empty directory initialize a project without example spec")
     public void projectInitWithoutHelloWorldSpec() throws Exception {
         initializeProject();
         currentProject.deleteSpec("example");
@@ -37,7 +38,6 @@ public class ProjectInit {
         for (TableRow row : table.getTableRows()) {
             File fileName = new File(getPathRelativeToCurrentProjectDir(row.getCell("name")));
             String fileType = row.getCell("type").toLowerCase();
-
             softly.assertThat(fileType).isIn("dir", "file");
             if (fileType.equals("dir")) {
                 softly.assertThat(fileName).exists().isDirectory();
@@ -51,12 +51,10 @@ public class ProjectInit {
     @Step("Verify language specific files are created")
     public void verifyFilesForLanguageIsCreated() {
         SoftAssertions softly = new SoftAssertions();
-
         Map<String, String> files = currentProject.getLanguageSpecificFiles();
-        files.forEach((k,v ) -> {
+        files.forEach((k, v) -> {
             File fileName = new File(getPathRelativeToCurrentProjectDir(k));
             String fileType = v.toLowerCase();
-
             softly.assertThat(fileType).isIn("dir", "file");
             if (fileType.equals("dir")) {
                 softly.assertThat(fileName).exists().isDirectory();
