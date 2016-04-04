@@ -63,4 +63,9 @@ public class Refactor {
         }
         return false;
     }
+
+    @Step("A step with special character in the implementation")
+    public void AStepWithSpecialCharacterInTheImplemntation() {
+
+    }
 }
