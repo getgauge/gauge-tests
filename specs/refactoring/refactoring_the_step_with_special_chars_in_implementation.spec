@@ -1,7 +1,7 @@
 Refactoring the step with special chars in implementation
 =========================================================
 Refactoring code with escape character is formatting the code and causing the following issue
----------------------------------------------------------------------------------------------
+
 tags: unimplemented
 
 * In an empty directory initialize a project named "refactor_step_with_special_chars" with the current language
@@ -17,7 +17,7 @@ tags: refactoring
 
 * Refactor step "A step" to "New step"
 * Execute the spec "Basic spec execution2" and ensure success
-* Console should not contain following lines 
+* Console should not contain following lines
      |output                                             |
      |---------------------------------------------------|
      |"//*[@id="content"]/section[1]/section/div[2]/a[1]"|
