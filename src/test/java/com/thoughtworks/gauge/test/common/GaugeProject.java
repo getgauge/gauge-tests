@@ -98,7 +98,11 @@ public abstract class GaugeProject {
     }
 
     public Specification createSpecification(String name) throws IOException {
-        File specFile = getSpecFile(name);
+        return createSpecification("",name);
+    }
+
+    public Specification createSpecification(String subDirPath,String name) throws IOException {
+        File specFile = getSpecFile(name, subDirPath);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
         }
@@ -108,8 +112,12 @@ public abstract class GaugeProject {
         return specification;
     }
 
-    private File getSpecFile(String name) {
-        return new File(projectDir, Util.combinePath(specsDirName, name) + ".spec");
+    private File getSpecFile(String name, String subDirPath) {
+        String dirPath = Util.combinePath(specsDirName, subDirPath);
+        if(!new File(projectDir,dirPath).exists()){
+            new File(projectDir,dirPath).mkdir();
+        }
+        return new File(projectDir, Util.combinePath(dirPath, name) + ".spec");
     }
 
     public Specification findSpecification(String specName) {
@@ -154,6 +162,10 @@ public abstract class GaugeProject {
         concept.saveAs(conceptFile);
         concepts.add(concept);
         return concept;
+    }
+
+    public boolean executeSpecFolder(String specFolder) throws Exception {
+        return executeGaugeCommand("--simple-console", "--verbose", specFolder);
     }
 
     public boolean execute(boolean sorted) throws Exception {
@@ -235,7 +247,7 @@ public abstract class GaugeProject {
     }
 
     public void deleteSpec(String specName) {
-        getSpecFile(specName).delete();
+        getSpecFile(specName, "").delete();
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {

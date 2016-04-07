@@ -10,6 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
 
+    @Step("Execute the spec folder \"specs/subfolder\" and ensure success")
+    public void executeTheSpecFolderAndEnsureSuccess(String subFolder) throws Exception {
+        assertThat(currentProject.executeSpecFolder(subFolder))
+                .isTrue()
+                .withFailMessage(getFormattedProcessOutput());
+    }
+
     @Step("Execute the current project and ensure success")
     public void executeCurrentProjectAndEnsureSuccess() throws Exception {
         assertThat(currentProject.execute(false))

@@ -14,6 +14,10 @@ import java.util.List;
 
 public class Util {
     public static String combinePath(String path1, String path2) {
+        if(path1==null)
+            return path2;
+        if(path2==null)
+            return path1;
         String combined_path = new File(path1, path2).getPath();
         return combined_path;
     }

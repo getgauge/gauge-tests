@@ -30,6 +30,25 @@ public class SpecAndScenarioCreation {
         spec.save();
     }
 
+    @Step("Create <scenario name> in <spec name> within sub folder <subFolder> the following steps <steps table>")
+    public void addContextToSpecification(String scenarioName, String specName,String subFolder, Table steps) throws Exception {
+        Specification spec = currentProject.findSpecification(specName);
+        if (spec == null) {
+            spec = currentProject.createSpecification(subFolder,specName);
+        }
+        List<String> columnNames = steps.getColumnNames();
+        Scenario scenario = new Scenario(scenarioName);
+        for (TableRow row : steps.getTableRows()) {
+            scenario.addSteps(row.getCell(columnNames.get(0)));
+            boolean b = shouldCreateImplementation(row, columnNames);
+            if (b) {
+                currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
+            }
+        }
+        spec.addScenarios(scenario);
+        spec.save();
+    }
+
     private boolean shouldCreateImplementation(TableRow row, List<String> columnNames) {
         if (columnNames.size() != 2) {
             return false;

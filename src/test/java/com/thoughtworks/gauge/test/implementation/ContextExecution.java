@@ -61,12 +61,19 @@ public class ContextExecution {
 
     @Step("Create a scenario <scenario name> in specification <spec name> with the following steps with implementation <steps table>")
     public void createScenarioWithImpl(String scenarioName, String specName, Table steps) throws Exception {
-        GaugeProjectBuilder.createScenarioAndSteps(scenarioName, specName, steps, true, false);
+        new GaugeProjectBuilder().withScenarioName(scenarioName)
+                .withSpecName(specName)
+                .withSteps(steps)
+                .withImplement(true)
+                .createScenarioAndSteps();
     }
 
     @Step("Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>")
     public void createScenario(String scenarioName, String specName, Table steps) throws Exception {
-        GaugeProjectBuilder.createScenarioAndSteps(scenarioName, specName, steps, false, false);
+        new GaugeProjectBuilder().withScenarioName(scenarioName)
+                .withSpecName(specName)
+                .withSteps(steps)
+                .createScenarioAndSteps();
     }
 
     @Step("Add tags <tags> to scenario <scenario name> in specification <specification name>")
@@ -89,4 +96,15 @@ public class ContextExecution {
         spec.addTags(tags);
         spec.save();
     }
+
+//    @Step("Create <Concept Testing> in <Spec 1> with the following steps1 <table>")
+//    public void createScenarioWithImpl(String scenarioName, String specName, String subDir, Table steps) throws Exception {
+//        new GaugeProjectBuilder().withScenarioName(scenarioName)
+//                .withSubDirPath(subDir)
+//                .withSpecName(specName)
+//                .withSteps(steps)
+//                .withImplement(true)
+//                .createScenarioAndSteps();
+//    }
+
 }

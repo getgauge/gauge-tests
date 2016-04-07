@@ -23,7 +23,12 @@ public class DataStore {
         row = rows.get(1);
         table.addRow(Arrays.asList(row.getCell(columnNames.get(0)), currentProject.getDataStorePrintValueStatement(row, columnNames)));
 
-        GaugeProjectBuilder.createScenarioAndSteps(scenario, spec, table, true, true);
+        new GaugeProjectBuilder().withScenarioName(scenario)
+                .withSpecName(spec)
+                .withSteps(table)
+                .withImplement(true)
+                .withAppendCode(true)
+                .createScenarioAndSteps();
     }
 
     @Step("Create a scenario <readScenario> in specification <newSpec> with step to read from datastore <table>")
@@ -36,7 +41,12 @@ public class DataStore {
         TableRow row = rows.get(0);
         table.addRow(Arrays.asList(row.getCell(columnNames.get(0)), currentProject.getDataStorePrintValueStatement(row, columnNames)));
 
-        GaugeProjectBuilder.createScenarioAndSteps(scenario, spec, table, true, true);
+        new GaugeProjectBuilder().withScenarioName(scenario)
+                .withSpecName(spec)
+                .withSteps(table)
+                .withImplement(true)
+                .withAppendCode(true)
+                .createScenarioAndSteps();
     }
 
     @Step("Create a scenario <writeScenario> in specification <newSpec> with step to write to datastore <table>")
@@ -47,6 +57,12 @@ public class DataStore {
 
         TableRow row = rows.get(0);
         table.addRow(Arrays.asList(row.getCell(columnNames.get(0)), currentProject.getDataStoreWriteStatement(row, columnNames)));
-        GaugeProjectBuilder.createScenarioAndSteps(scenario, spec, table, true, true);
+
+        new GaugeProjectBuilder().withScenarioName(scenario)
+                .withSpecName(spec)
+                .withSteps(table)
+                .withImplement(true)
+                .withAppendCode(true)
+                .createScenarioAndSteps();
     }
 }
