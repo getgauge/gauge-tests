@@ -5,7 +5,7 @@ build/
 .idea/uiDesigner.xml
 gauge_bin/
 logs
-reports*
+reports*/
 target
 gauge-tests.iml
 .vagrant
