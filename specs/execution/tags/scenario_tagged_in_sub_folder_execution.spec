@@ -11,11 +11,10 @@ Scenario Tagged Expression In Subfolder Execution
      |Concept step one|"inside first concept step" |
      |Concept step two|"inside second concept step"|
 
-* Create "Concept Testing" in "Spec 1" within sub folder "subFolder" the following steps 
+* Create "Concept Testing" in "Spec 1" within sub folder "subFolder" with the following steps 
      |scenario steps      |
      |--------------------|
      |Sample concept      |
      |Tell "HI" to "Gauge"|
 
 * Execute the spec folder "specs/subfolder/" and ensure success
-

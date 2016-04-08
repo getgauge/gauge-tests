@@ -98,10 +98,10 @@ public abstract class GaugeProject {
     }
 
     public Specification createSpecification(String name) throws IOException {
-        return createSpecification("",name);
+        return createSpecification("", name);
     }
 
-    public Specification createSpecification(String subDirPath,String name) throws IOException {
+    public Specification createSpecification(String subDirPath, String name) throws IOException {
         File specFile = getSpecFile(name, subDirPath);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
@@ -114,8 +114,8 @@ public abstract class GaugeProject {
 
     private File getSpecFile(String name, String subDirPath) {
         String dirPath = Util.combinePath(specsDirName, subDirPath);
-        if(!new File(projectDir,dirPath).exists()){
-            new File(projectDir,dirPath).mkdir();
+        if (!new File(projectDir, dirPath).exists()) {
+            new File(projectDir, dirPath).mkdir();
         }
         return new File(projectDir, Util.combinePath(dirPath, name) + ".spec");
     }

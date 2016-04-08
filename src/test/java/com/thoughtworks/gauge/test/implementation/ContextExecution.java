@@ -97,14 +97,4 @@ public class ContextExecution {
         spec.save();
     }
 
-//    @Step("Create <Concept Testing> in <Spec 1> with the following steps1 <table>")
-//    public void createScenarioWithImpl(String scenarioName, String specName, String subDir, Table steps) throws Exception {
-//        new GaugeProjectBuilder().withScenarioName(scenarioName)
-//                .withSubDirPath(subDir)
-//                .withSpecName(specName)
-//                .withSteps(steps)
-//                .withImplement(true)
-//                .createScenarioAndSteps();
-//    }
-
 }
