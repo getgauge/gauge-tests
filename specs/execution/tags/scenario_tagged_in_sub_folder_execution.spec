@@ -15,6 +15,5 @@ Scenario Tagged Expression In Subfolder Execution
      |scenario steps      |
      |--------------------|
      |Sample concept      |
-     |Tell "HI" to "Gauge"|
 
 * Execute the spec folder "specs/subfolder/" and ensure success
