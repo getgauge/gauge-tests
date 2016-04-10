@@ -86,3 +86,25 @@ Spec execution with unimplemented step in context step and scenario
 * Console should contain "Specifications:\t0 executed\t0 passed\t0 failed\t1 skipped"
 
 * Console should contain "Scenarios:\t0 executed\t0 passed\t0 failed\t2 skipped"
+
+Spec with no heading
+--------------------
+
+* Create a scenario "Sample scenario" in specification "" with the following steps
+     |step text                |
+     |-------------------------|
+     |First unimplemented step |
+     |Second unimplemented step|
+
+* Execute the spec "" and ensure failure
+
+Scenario with no heading
+--------------------
+
+* Create a scenario "" in specification "Scenario with no heading" with the following steps
+     |step text                |
+     |-------------------------|
+     |First unimplemented step |
+     |Second unimplemented step|
+
+* Execute the spec "Scenario with no heading" and ensure failure
