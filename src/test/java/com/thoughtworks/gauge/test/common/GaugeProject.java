@@ -239,7 +239,6 @@ public abstract class GaugeProject {
         while ((line = br.readLine()) != null) {
             lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
         }
-
         lastProcess.waitFor();
         return lastProcess.exitValue() == 0;
     }
