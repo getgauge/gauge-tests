@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Util {
+
+    public static final String DEFAULT_SPEC_FILENAME = "default";
+
     public static String combinePath(String path1, String path2) {
         if(path1==null)
             return path2;
@@ -85,4 +88,9 @@ public class Util {
         }
         return ctr;
     }
+
+    public static String getSpecName(String name) {
+        return "".equals(name) ? DEFAULT_SPEC_FILENAME : name;
+    }
+
 }

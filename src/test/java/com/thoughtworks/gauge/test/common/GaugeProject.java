@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class GaugeProject {
 
@@ -113,6 +110,7 @@ public abstract class GaugeProject {
     }
 
     private File getSpecFile(String name, String subDirPath) {
+        name = Util.getSpecName(name);
         String dirPath = Util.combinePath(specsDirName, subDirPath);
         if (!new File(projectDir, dirPath).exists()) {
             new File(projectDir, dirPath).mkdir();
@@ -188,19 +186,19 @@ public abstract class GaugeProject {
     }
 
     public boolean executeSpec(String specName) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec");
+        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec");
     }
 
     public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + specName + ".spec:" + index);
+        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + index);
     }
 
     public boolean executeSpecWithRowRange(String specName, String rowRange) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + specName + ".spec");
+        return executeGaugeCommand("--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec");
     }
 
     public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
-        return executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + specName + ".spec");
+        return executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec");
     }
 
     boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
