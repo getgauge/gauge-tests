@@ -35,9 +35,9 @@ Rephrase concept with removal of params
 Rephrase concept with addition of params
 ----------------------------------------
 
-* Refactor step "concept with <param0>" to "concept with <param0> and <param1>" via api
-* The step "concept with <param0> and <param1>" should be used in project
-* The step "concept with <param0>" should no longer be used
+* Refactor step "concept with <param0> and <param1>" to "concept with <param0> and <param1> and <param2>" via api
+* The step "concept with <param0> and <param1> and <param2>" should be used in project
+* The step "concept with <param0> and <param1>" should no longer be used
 
 Rephrase concept
 ----------------

@@ -1,7 +1,7 @@
 Step should not be empty
 ========================
 
-tags: refactoring
+tags: refactoring, unimplemented
 
 * In an empty directory initialize a project named "step_should_not_be_empty" with the current language
 

@@ -1,6 +1,8 @@
 Undefined parameter name used in a step
 =======================================
 
+tags: unimplemented
+
 When a parameter not defined is used in a step it should give a parse
 ---------------------------------------------------------------------
 * In an empty directory initialize a project named "undefined_parameter_name_used_in_a_step" with the current language

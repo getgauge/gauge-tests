@@ -202,7 +202,7 @@ public abstract class GaugeProject {
     }
 
     boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
-        return executeGaugeCommand("--refactor", oldStep, newStep);
+        return executeGaugeCommand("--refactor", oldStep, newStep, "specs");
     }
 
     private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
@@ -211,6 +211,7 @@ public abstract class GaugeProject {
         command.add("--daemonize");
         command.add("--api-port");
         command.add(String.valueOf(apiPort));
+        command.add("specs");
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
         filterConflictingEnv(processBuilder);

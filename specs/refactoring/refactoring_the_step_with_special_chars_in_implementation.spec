@@ -1,6 +1,8 @@
 Refactoring the step with special chars in implementation
 =========================================================
 
+tags: unimplemented
+
 Refactoring code with escape character is formatting the code and causing the following issue
 
 * In an empty directory initialize a project named "refactor_step_with_special_chars" with the current language
