@@ -23,6 +23,7 @@ public class SpecAndScenarioCreation {
     @Step("Create a specification <spec name> with the following datatable <table>")
     public void createSpecWithDataTable(String specName, Table datatable) throws Exception {
         Specification specification = currentProject.createSpecification(specName);
+        specification.addContextSteps();
         specification.addDataTable(datatable);
         specification.save();
     }
