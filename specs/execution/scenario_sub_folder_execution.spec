@@ -2,7 +2,7 @@ Scenario In Subfolder Execution
 ===============================
 
 Scenario In Subfolder Execution
----------
+-------------------------------
 * In an empty directory initialize a project named "scen_sub_folder_expression_exec" with the current language
 
 * Create concept "Sample concept" with following steps 
@@ -12,8 +12,8 @@ Scenario In Subfolder Execution
      |Concept step two|"inside second concept step"|
 
 * Create "Concept Testing" in "Spec 1" within sub folder "subFolder" with the following steps 
-     |scenario steps      |
-     |--------------------|
-     |Sample concept      |
+     |scenario steps|
+     |--------------|
+     |Sample concept|
 
 * Execute the spec folder "specs/subfolder/" and ensure success

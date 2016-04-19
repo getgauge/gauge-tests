@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 
 public class Refactor {
-    @Step("Refactor step <First step> to <New step>")
+    @Step("Refactor step <Old step> to <New step>")
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
         currentProject.refactorStep(oldStep, newStep);
     }
@@ -30,12 +30,12 @@ public class Refactor {
         for (Specification specification : specFiles)
             assertThat(isStepPresent(oldStep, specification.getSpecFile()))
                     .isFalse()
-                    .withFailMessage("Found Steo :'" + oldStep + "' in Spec: " + specification.getSpecFile().getAbsolutePath());
+                    .withFailMessage("Found Step :'" + oldStep + "' in Spec: " + specification.getSpecFile().getAbsolutePath());
 
         for (Concept concept : currentProject1.getConcepts())
             assertThat(isStepPresent(oldStep, concept.getConceptFile()))
                     .isFalse()
-                    .withFailMessage("Found Steo :'" + oldStep + "' in Concept: " + concept.getConceptFile().getAbsolutePath());
+                    .withFailMessage("Found Step :'" + oldStep + "' in Concept: " + concept.getConceptFile().getAbsolutePath());
     }
 
     @Step("The step <First step> should be used in project")

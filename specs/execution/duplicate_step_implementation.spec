@@ -4,7 +4,7 @@ Duplicate step implementation
 tags: unimplemented
 
 Duplicate step implementation should atleast give a warning
------------------------------------
+-----------------------------------------------------------
 * In an empty directory initialize a project named "duplicate_step_implementation" with the current language
 
 * Create a specification "duplicate step implementation" with the following contexts 
