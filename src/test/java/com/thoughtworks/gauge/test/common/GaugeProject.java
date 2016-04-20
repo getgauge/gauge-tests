@@ -9,9 +9,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public abstract class GaugeProject {
 
@@ -34,7 +37,7 @@ public abstract class GaugeProject {
         currentProject = this;
 
         this.projectDir = Files.createTempDirectory(projName + "_").toFile();
-        this.projectDir.deleteOnExit();
+        registerShutDownHook();
     }
 
     public static GaugeProject getCurrentProject() {
@@ -251,6 +254,32 @@ public abstract class GaugeProject {
         processBuilder.environment().keySet().stream()
                 .filter(env -> !env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX))
                 .forEach(env -> processBuilder.environment().put(env, ""));
+    }
+
+    private void registerShutDownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                Path directory = Paths.get(projectDir.getAbsolutePath());
+                try {
+                    Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+                        @Override
+                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                            Files.delete(file);
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                        @Override
+                        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                            Files.delete(dir);
+                            return FileVisitResult.CONTINUE;
+                        }
+                    });
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+        });
     }
 
     public abstract void implementStep(String stepText, String implementation, boolean appendCode) throws Exception;
