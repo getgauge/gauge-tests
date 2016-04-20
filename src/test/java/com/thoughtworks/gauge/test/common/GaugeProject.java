@@ -211,7 +211,6 @@ public abstract class GaugeProject {
         command.add("--daemonize");
         command.add("--api-port");
         command.add(String.valueOf(apiPort));
-        command.add("specs");
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
         filterConflictingEnv(processBuilder);
