@@ -20,6 +20,7 @@ tags: refactoring
      |Step with "two" "params"   |"inside first step" |
      |a step with "a" "b" and "c"|"inside first step" |
      |Second step                |"inside second step"|
+     |step1                      |"inside step1"      |
 
 
 Rename step
@@ -74,3 +75,11 @@ Rename an unimplemented step
 * Refactor step "Repeated First step" to "again Repeated First step"
 * The step "Repeated First step" should no longer be used
 * The step "again Repeated First step" should be used in project
+
+Rename step to step with \
+--------------------------
+
+* Refactor step "step1" to "step with \\ slash"
+* The step "step1" should no longer be used
+* The step "step with \\ slash" should be used in project
+* Execute the spec "Basic spec execution2" and ensure success
