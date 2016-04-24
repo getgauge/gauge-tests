@@ -1,11 +1,17 @@
 package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.common.Concept;
 import com.thoughtworks.gauge.test.common.Specification;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
@@ -62,6 +68,25 @@ public class Execution {
                 .withFailMessage(getFormattedProcessOutput());
     }
 
+    @Step("Execute the specs and ensure success <table>")
+    public void executeSpecAndEnsureSuccess(Table givenSpecNames) throws Exception {
+        List<String> columnNames = givenSpecNames.getColumnNames();
+        List<String> specNames = new ArrayList<>();
+        for (TableRow row : givenSpecNames.getTableRows()) {
+            String specName = row.getCell(columnNames.get(0));
+            Specification specification = currentProject.findSpecification(specName);
+            assertThat(specification).isNotNull();
+
+            specNames.add(specName);
+        }
+
+        assertThat(currentProject.executeSpec(specNames))
+                .isTrue()
+                .withFailMessage(getFormattedProcessOutput());
+
+    }
+
+
     @Step("Execute the spec <spec name> with scenario index <scenario index> and ensure success")
     public void executeScenarioWithIndex(String specName, int scenarioIndex) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
@@ -116,8 +141,7 @@ public class Execution {
                 .withFailMessage(getFormattedProcessOutput());
     }
 
-    private String getFormattedProcessOutput()
-    {
+    private String getFormattedProcessOutput() {
         return "*************** Process output start************\n" +
                 currentProject.getLastProcessStdout() +
                 "\n*************** Process output end************\n";

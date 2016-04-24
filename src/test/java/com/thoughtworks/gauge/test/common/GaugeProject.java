@@ -188,6 +188,14 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--validate", "specs/");
     }
 
+    public boolean executeSpec(List<String> specNames) throws Exception {
+        StringBuilder strBuilder = new StringBuilder("");
+        for (String specName:specNames) {
+            strBuilder.append("specs"+File.separator+  Util.getSpecName(specName) + ".spec"+" ");
+        }
+        return executeGaugeCommand("--simple-console", "--verbose", strBuilder.toString());
+    }
+
     public boolean executeSpec(String specName) throws Exception {
         return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec");
     }

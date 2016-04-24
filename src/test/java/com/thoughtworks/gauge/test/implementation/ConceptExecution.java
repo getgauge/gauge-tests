@@ -14,5 +14,4 @@ public class ConceptExecution {
         Concept concept = getCurrentProject().createConcept(conceptName, steps);
         getCurrentProject().addConcepts(concept);
     }
-
 }

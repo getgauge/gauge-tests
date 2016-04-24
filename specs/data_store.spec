@@ -21,7 +21,6 @@ Scenario data store refreshes after every scenario run.
 
 * Console should contain "Some temporary datastore value"
 
-
 Spec data store persists data between scenario runs
 ---------------------------------------------------
 
