@@ -18,7 +18,7 @@ tags: refactoring, unimplemented
 
 Spec should allow to refactor parameter in tear down
 ----------------------------------------------------
-* Refactor step "First teardown" to "First <b>teardown"
-* The step "First <b>teardown" should be used in project
+* Refactor step "First teardown" to "First \"b\" teardown"
+* The step "First \"b\" teardown" should be used in project
 * The step "First teardown" should no longer be used
-
+* Execute the spec "spec_should_allow_to_refactor_parameter_in_tear_down" and ensure success

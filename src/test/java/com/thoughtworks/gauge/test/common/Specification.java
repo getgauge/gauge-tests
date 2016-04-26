@@ -16,7 +16,7 @@ public class Specification {
     private ArrayList<String> teardownSteps = new ArrayList<String>();
     private File specFile = null;
     private Table datatable = null;
-    String tags = "";
+    private String tags = "";
 
     public Specification(String name) {
         this.name = name;
