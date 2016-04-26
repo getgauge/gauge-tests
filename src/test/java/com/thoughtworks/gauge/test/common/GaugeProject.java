@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class GaugeProject {
 
@@ -189,11 +186,13 @@ public abstract class GaugeProject {
     }
 
     public boolean executeSpec(List<String> specNames) throws Exception {
-        StringBuilder strBuilder = new StringBuilder("");
-        for (String specName:specNames) {
-            strBuilder.append("specs"+File.separator+  Util.getSpecName(specName) + ".spec"+" ");
+        List<String> args = new ArrayList<>();
+        args.add("--simple-console");
+        args.add("--verbose");
+        for (String specName : specNames) {
+            args.add("specs" + File.separator + Util.getSpecName(specName) + ".spec");
         }
-        return executeGaugeCommand("--simple-console", "--verbose", strBuilder.toString());
+        return executeGaugeCommand(args.toArray(new String[0]));
     }
 
     public boolean executeSpec(String specName) throws Exception {
