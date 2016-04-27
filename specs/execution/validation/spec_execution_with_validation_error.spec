@@ -111,3 +111,32 @@ Scenario with no heading
 * Execute the spec "Scenario with no heading" and ensure failure
 
 * Console should contain "Scenario heading should have at least one character"
+
+Skip spec if all scenarios are skipped
+--------------------------------------
+
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+     |step text                |
+     |-------------------------|
+     |First unimplemented step |
+     |Second unimplemented step|
+
+* Create a scenario "Sample scenario2" in specification "Basic spec execution" with the following steps 
+     |step text                |
+     |-------------------------|
+     |Third unimplemented step |
+     |Fourth unimplemented step|
+
+* Execute the spec "Basic spec execution" and ensure failure
+
+* Console should contain following lines in order 
+     |console output                                          |
+     |--------------------------------------------------------|
+     |Step implementation not found. First unimplemented step |
+     |Step implementation not found. Second unimplemented step|
+     |Step implementation not found. Third unimplemented step |
+     |Step implementation not found. Fourth unimplemented step|
+
+* Console should contain "Specifications:\t0 executed\t0 passed\t0 failed\t1 skipped"
+
+* Console should contain "Scenarios:\t0 executed\t0 passed\t0 failed\t2 skipped"
