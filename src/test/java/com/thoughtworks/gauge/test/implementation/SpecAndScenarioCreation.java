@@ -60,7 +60,7 @@ public class SpecAndScenarioCreation {
         List<String> columnNames = steps.getColumnNames();
         Scenario scenario = new Scenario(scenarioName);
         for (TableRow row : steps.getTableRows()) {
-            scenario.addSteps(row.getCell(columnNames.get(0)));
+            scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             boolean b = shouldCreateImplementation(row, columnNames);
             if (b) {
                 currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);

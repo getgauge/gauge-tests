@@ -152,7 +152,7 @@ public abstract class GaugeProject {
         Concept concept = new Concept(name);
         List<String> columnNames = steps.getColumnNames();
         for (TableRow row : steps.getTableRows()) {
-            concept.addSteps(row.getCell(columnNames.get(0)));
+            concept.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (columnNames.size() == 2) {
                 implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
             }

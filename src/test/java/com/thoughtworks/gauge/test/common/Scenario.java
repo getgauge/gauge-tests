@@ -6,14 +6,14 @@ import java.util.List;
 public class Scenario {
 
     private String name;
-    ArrayList<String> steps = new ArrayList<String>();
-    ArrayList<String> tags = new ArrayList<String>();
+    List<Item> items = new ArrayList<>();
+    List<String> tags = new ArrayList<String>();
 
     public Scenario(String name) {
         this.name = name;
     }
 
-    public ArrayList<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -21,14 +21,16 @@ public class Scenario {
         return name;
     }
 
-    public List<String> getSteps() {
-        return steps;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void addSteps(String... newSteps) {
-        for (String step : newSteps) {
-            steps.add(step);
+    public void addItem(String item, String type) {
+        if (type.equalsIgnoreCase(Comment.TYPE)){
+            this.items.add(new Comment(item));
+            return;
         }
+        this.items.add(new Step(item));
     }
 
     public void addTags(String newTags) {

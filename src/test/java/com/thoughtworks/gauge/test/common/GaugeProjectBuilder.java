@@ -2,7 +2,6 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import javafx.scene.control.Tab;
 
 import java.util.List;
 
@@ -54,10 +53,10 @@ public class GaugeProjectBuilder {
         }
         Scenario scenario = new Scenario(scenarioName);
         List<String> columnNames = steps.getColumnNames();
-        for (TableRow rows : steps.getTableRows()) {
-            scenario.addSteps(rows.getCell(columnNames.get(0)));
+        for (TableRow row : steps.getTableRows()) {
+            scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (implement)
-                GaugeProject.currentProject.implementStep(rows.getCell(columnNames.get(0)), rows.getCell(columnNames.get(1)), appendCode);
+                GaugeProject.currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), appendCode);
         }
         spec.addScenarios(scenario);
         spec.save();

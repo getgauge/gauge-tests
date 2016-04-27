@@ -9,25 +9,27 @@ public class Concept {
 
     private String name;
     private File conceptFile = null;
-    private List<String> steps;
+    private List<Item> items;
 
     public Concept(String name) {
         this.name = name;
-        steps = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
-    public void addSteps(String... newSteps) {
-        for (String step : newSteps) {
-            steps.add(step);
+    public void addItem(String item, String type) {
+        if (type.equalsIgnoreCase(Comment.TYPE)){
+            this.items.add(new Comment(item));
+            return;
         }
+        this.items.add(new Step(item));
     }
 
     @Override
     public String toString() {
         StringBuilder conceptText = new StringBuilder();
         conceptText.append("# ").append(name).append("\n");
-        for (String contextStep : steps) {
-            conceptText.append("* ").append(contextStep).append("\n");
+        for (Item item : items) {
+            conceptText.append(item.toString()).append("\n");
         }
         conceptText.append("\n");
         return conceptText.toString();

@@ -6,14 +6,15 @@ import com.thoughtworks.gauge.TableRow;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Specification {
 
     private String name;
-    private ArrayList<Scenario> scenarios = new ArrayList<Scenario>();
-    private ArrayList<String> contextSteps = new ArrayList<String>();
-    private ArrayList<String> teardownSteps = new ArrayList<String>();
+    private List<Scenario> scenarios = new ArrayList<Scenario>();
+    private List<String> contextSteps = new ArrayList<String>();
+    private List<String> teardownSteps = new ArrayList<String>();
     private File specFile = null;
     private Table datatable = null;
     private String tags = "";
@@ -31,21 +32,15 @@ public class Specification {
     }
 
     public void addScenarios(Scenario... newScenarios) {
-        for (Scenario scenario : newScenarios) {
-            scenarios.add(scenario);
-        }
+        Collections.addAll(scenarios, newScenarios);
     }
 
     public void addContextSteps(String... newContextSteps) {
-        for (String contextStep : newContextSteps) {
-            contextSteps.add(contextStep);
-        }
+        Collections.addAll(contextSteps, newContextSteps);
     }
 
     public void addTeardownSteps(String... newTeardownSteps) {
-        for (String step : newTeardownSteps) {
-            teardownSteps.add(step);
-        }
+        Collections.addAll(teardownSteps, newTeardownSteps);
     }
 
     public void addDataTable(Table datatable) {
@@ -70,8 +65,8 @@ public class Specification {
             for (String tag : scenario.getTags()) {
                 specText.append("tags: ").append(tag).append("\n");
             }
-            for (String step : scenario.getSteps()) {
-                specText.append("* ").append(step).append("\n");
+            for (Item item : scenario.getItems()) {
+                specText.append(item.toString()).append("\n");
             }
             specText.append("\n");
         }
