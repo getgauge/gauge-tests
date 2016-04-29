@@ -1,63 +1,60 @@
 Nested Concept Execution
 ========================
-
 * In an empty directory initialize a project named "nested_concept_exec" with the current language
 * Create concept "concept with <param0> and <param1>" with following steps 
+
      |concept steps                            |
      |-----------------------------------------|
      |nested concept with <param0> and <param1>|
      |simple step with "static"                |
-
 * Create concept "nested concept with <p0> and <p1>" with following steps 
+
      |concept steps                                 |
      |----------------------------------------------|
      |second level nested concept with <p0> and <p1>|
-
 * Create concept "second level nested concept with <p-0> and <p-1>" with following steps 
+
      |concept steps                   |
      |--------------------------------|
      |nested step with <p-0> and <p-1>|
 * Create step implementations 
+
      |step text                       |implementation|
      |--------------------------------|--------------|
      |simple step with <parameter0>   |print params  |
      |nested step with <p-0> and <p-1>|print params  |
-
-
-
 Nested Concept execution
 ------------------------
-
 * Create "Scenario for concept execution" in "2 level nested Concept execution" with the following steps 
+
      |step text                        |
      |---------------------------------|
      |concept with "first" and "second"|
-
 * Execute the spec "2 level nested Concept execution" and ensure success
 * Console should contain following lines in order 
+
      |console output            |
      |--------------------------|
      |param0=first,param1=second|
      |param0=static             |
-
-
 Nested Concept execution with data table
 ----------------------------------------
 * Create a specification "nested concept execution with data table" with the following datatable 
+
      |id|name    |phone|
      |--|--------|-----|
      |1 |apoorva |999  |
      |2 |prateek |007  |
      |3 |srikanth|100  |
-
 * Create "Table scenario" in "nested concept execution with data table" with the following steps 
+
      |step text                      |
      |-------------------------------|
      |concept with <name> and <phone>|
      |concept with <id> and <name>   |
-
 * Execute the spec "nested concept execution with data table" and ensure success
 * Console should contain following lines in order 
+
      |console output            |
      |--------------------------|
      |param0=apoorva,param1=999 |
@@ -72,4 +69,3 @@ Nested Concept execution with data table
      |param0=static             |
      |param0=3,param1=srikanth  |
      |param0=static             |
-
