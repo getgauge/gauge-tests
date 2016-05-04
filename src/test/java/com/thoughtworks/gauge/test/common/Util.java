@@ -2,10 +2,9 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -34,10 +33,7 @@ public class Util {
     }
 
     public static String read(String absolutePath) throws IOException {
-        FileInputStream stream = new FileInputStream(absolutePath);
-        String content = String.join("\n", IOUtils.readLines(stream));
-        stream.close();
-        return content;
+        return FileUtils.readFileToString(new File(absolutePath));
     }
 
     public static void appendToFile(String absolutePath, String data) throws IOException {
