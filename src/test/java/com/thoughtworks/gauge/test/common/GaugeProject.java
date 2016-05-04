@@ -166,6 +166,10 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--simple-console", "--verbose", specFolder);
     }
 
+    public boolean formatSpecFolder(String specFolder) throws Exception {
+        return executeGaugeCommand("--format", specFolder);
+    }
+
     public boolean execute(boolean sorted) throws Exception {
         if (sorted) {
             return executeGaugeCommand("--simple-console", "--verbose", "--sort", "specs/");
