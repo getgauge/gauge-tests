@@ -119,3 +119,69 @@ Skip spec if all scenarios are skipped
      |Step implementation not found => 'Fourth unimplemented step'|
 * Console should contain "Specifications:\t0 executed\t0 passed\t0 failed\t1 skipped"
 * Console should contain "Scenarios:\t0 executed\t0 passed\t0 failed\t2 skipped"
+Duplicate Concept Defination
+----------------------------
+* Create concept "Concept Heading" with following steps 
+
+     |step text  |implementation      |
+     |-----------|--------------------|
+     |First step |"inside first step" |
+     |Second step|"inside second step"|
+* Create concept "Concept Heading" with following steps 
+
+     |step text  |implementation      |
+     |-----------|--------------------|
+     |First step]|"inside first step" |
+     |Second step|"inside second step"|
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation 
+
+     |step text |implementation     |
+     |----------|-------------------|
+     |Third step|"inside third step"|
+* Execute the spec "Basic spec execution" and ensure failure
+* Console should contain following lines in order 
+
+     |console output                                         |
+     |-------------------------------------------------------|
+     |Duplicate concept definition found => 'Concept Heading'|
+Concept Calling itself
+----------------------
+* Create concept "Concept Heading" with following steps 
+
+     |step text      |
+     |---------------|
+     |Concept Heading|
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation 
+
+     |step text  |implementation      |
+     |-----------|--------------------|
+     |Second step|"inside second step"|
+* Execute the spec "Basic spec execution" and ensure failure
+* Console should contain following lines in order 
+
+     |console output                                                              |
+     |----------------------------------------------------------------------------|
+     |Cyclic dependancy found. Step is calling concept again. => 'Concept Heading'|
+Cyclic Concept Dependency
+-------------------------
+* Create concept "Concept Heading" with following steps 
+
+     |step text        |
+     |-----------------|
+     |Concept Heading 1|
+* Create concept "Concept Heading 1" with following steps 
+
+     |step text      |
+     |---------------|
+     |Concept Heading|
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+
+     |step text      |
+     |---------------|
+     |Concept Heading|
+* Execute the spec "Basic spec execution" and ensure failure
+* Console should contain following lines in order 
+
+     |console output                                                              |
+     |----------------------------------------------------------------------------|
+     |Cyclic dependancy found. Step is calling concept again. => 'Concept Heading'|
