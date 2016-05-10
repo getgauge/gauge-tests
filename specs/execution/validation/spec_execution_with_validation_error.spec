@@ -182,6 +182,6 @@ Cyclic Concept Dependency
 * Execute the spec "Basic spec execution" and ensure failure
 * Console should contain following lines in order 
 
-     |console output                                                              |
-     |----------------------------------------------------------------------------|
-     |Cyclic dependancy found. Step is calling concept again. => 'Concept Heading'|
+     |console output                                        |
+     |------------------------------------------------------|
+     |Circular reference found in concept: "Concept Heading"|
