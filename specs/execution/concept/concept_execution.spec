@@ -1,7 +1,7 @@
 concept execution
 =================
 
-* In an empty directory initialize a project named "concept execution" with the current language
+* In an empty directory initialize a project named "concept_execution" with the current language
 
 * Create concept "sample_concept" with following steps
 
@@ -12,7 +12,7 @@ concept execution
 Resolve concepts when executing from nested directories in specs
 ----------------------------------------------------------------
 
-* Create "resolve concept" in "concept" within sub folder "subFolder" with the following steps
+* Create "resolve concept" in "concept" within sub folder "subfolder" with the following steps
 
      |scenario steps|
      |--------------|
