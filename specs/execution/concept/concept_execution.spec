@@ -18,5 +18,4 @@ Resolve concepts when executing from nested directories in specs
      |--------------|
      |sample_concept|
 
-* Execute         System.out.println(projectDir);
-the spec "concept" from folder "specs/subfolder/" and ensure success
+* Execute the spec "concept" from folder "specs/subfolder/" and ensure success
