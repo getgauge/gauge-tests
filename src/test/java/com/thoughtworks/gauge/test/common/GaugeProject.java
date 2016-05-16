@@ -166,6 +166,14 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--simple-console", "--verbose", specFolder);
     }
 
+    public boolean executeSpecFromFolder(String spec, String specFolder) throws Exception {
+        File oldProjectDir = this.projectDir;
+        this.projectDir = new File(oldProjectDir, specFolder);
+        boolean exitCode = executeGaugeCommand("--simple-console", "--verbose", spec);
+        this.projectDir = oldProjectDir;
+        return exitCode;
+    }
+
     public boolean formatSpecFolder(String specFolder) throws Exception {
         return executeGaugeCommand("--format", specFolder);
     }

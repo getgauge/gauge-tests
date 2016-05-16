@@ -6,6 +6,7 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.Concept;
 import com.thoughtworks.gauge.test.common.Specification;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
 
-    @Step("Execute the spec folder \"specs/subfolder\" and ensure success")
+
+    @Step("Execute the spec <spec> from folder <specs/subfolder> and ensure success")
+    public void executeFromSpecFolderAndEnsureSuccess(String spec, String subFolder) throws Exception {
+        assertThat(currentProject.executeSpecFromFolder(spec + ".spec",subFolder))
+                .isTrue()
+                .withFailMessage(getFormattedProcessOutput());
+    }
+
+    @Step("Execute the spec folder <specs/subfolder> and ensure success")
     public void executeTheSpecFolderAndEnsureSuccess(String subFolder) throws Exception {
         assertThat(currentProject.executeSpecFolder(subFolder))
                 .isTrue()
