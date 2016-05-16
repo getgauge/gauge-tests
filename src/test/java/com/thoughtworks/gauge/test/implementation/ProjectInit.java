@@ -6,6 +6,7 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 
 import java.io.File;
 import java.util.Map;
@@ -67,5 +68,12 @@ public class ProjectInit {
 
     private String getPathRelativeToCurrentProjectDir(String path) {
         return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
+    }
+
+    @Step("Directory <init_proj_unknown> should be empty")
+    public void verifyEmptyDir(String dirName) {
+        File[] files = currentProject.getProjectDir().listFiles();
+        Assert.assertNotNull(files);
+        Assert.assertEquals(files.length, 0);
     }
 }

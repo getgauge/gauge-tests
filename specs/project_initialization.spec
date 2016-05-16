@@ -21,3 +21,4 @@ Initializing unknown language project
 -------------------------------------
 * In an empty directory initialize a "unknown" project named "init_proj_unknown"
 * Console should contain "Failed to initialize project. Plugin 'unknown' not installed"
+* Directory "init_proj_unknown" should be empty
