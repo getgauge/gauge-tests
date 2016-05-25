@@ -211,8 +211,8 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec");
     }
 
-    public boolean executeSpecWithScenarioIndex(String specName, int index) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + index);
+    public boolean executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
+        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber);
     }
 
     public boolean executeSpecWithRowRange(String specName, String rowRange) throws Exception {

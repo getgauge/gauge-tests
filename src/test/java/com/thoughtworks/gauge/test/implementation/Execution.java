@@ -3,16 +3,13 @@ package com.thoughtworks.gauge.test.implementation;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import com.thoughtworks.gauge.test.common.Concept;
 import com.thoughtworks.gauge.test.common.Specification;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
@@ -95,13 +92,12 @@ public class Execution {
 
     }
 
-
-    @Step("Execute the spec <spec name> with scenario index <scenario index> and ensure success")
-    public void executeScenarioWithIndex(String specName, int scenarioIndex) throws Exception {
+    @Step("Execute the spec <spec name> with scenario at <line number> and ensure success")
+    public void executeScenarioWithLineNumber(String specName, int lineNumber) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
 
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeSpecWithScenarioIndex(specName, scenarioIndex))
+        assertThat(currentProject.executeSpecWithScenarioLineNumber(specName, lineNumber))
                 .isTrue()
                 .withFailMessage(getFormattedProcessOutput());
     }
