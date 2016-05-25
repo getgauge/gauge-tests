@@ -64,6 +64,13 @@ public class Execution {
                 .withFailMessage(getFormattedProcessOutput());
     }
 
+    @Step("Rerun failed scenarios and ensure failure")
+    public void rerunCurrentProjectAndEnsureFailure() throws Exception {
+        assertThat(currentProject.rerun())
+                .isFalse()
+                .withFailMessage(getFormattedProcessOutput());
+    }
+
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
