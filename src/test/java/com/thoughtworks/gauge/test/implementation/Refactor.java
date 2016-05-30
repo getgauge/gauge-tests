@@ -4,6 +4,7 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.test.common.Concept;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
+import com.thoughtworks.gauge.test.common.Util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +20,10 @@ import static org.assertj.core.api.Assertions.fail;
 public class Refactor {
     @Step("Refactor step <Old step> to <New step>")
     public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+        if (Util.isWindows()) {
+            oldStep = oldStep.replaceAll("\\\"", "\\\\\"");
+            newStep = newStep.replaceAll("\\\"", "\\\\\"");
+        }
         currentProject.refactorStep(oldStep, newStep);
     }
 

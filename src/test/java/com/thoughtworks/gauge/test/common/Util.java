@@ -98,4 +98,9 @@ public class Util {
         return "".equals(name) ? DEFAULT_SPEC_FILENAME : name;
     }
 
+    public static boolean isWindows() {
+        String OS = System.getProperty("os.name").toLowerCase();
+        return (OS.contains("win"));
+    }
+
 }
