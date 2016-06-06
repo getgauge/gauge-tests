@@ -1,8 +1,8 @@
-spec Formatting
+Spec Formatting
 ===============
 * In an empty directory initialize a project named "formatting" with the current language
 
-formatting should not remove steps, scenarios from spec
+Formatting should not remove steps, scenarios from spec
 -------------------------------------------------------
 * Create a scenario "formatting should not remove steps scenarios from spec" in specification "spec formatting" with the following steps 
 
@@ -29,7 +29,7 @@ formatting should not remove steps, scenarios from spec
 
 * Spec "spec formatting" should not be formatted
 
-formatting merges scenario with same heading
+Formatting merges scenario with same heading
 --------------------------------------------
 * Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps
      |step text  |implementation   |
