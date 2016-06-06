@@ -48,6 +48,6 @@ Formatting merges scenario with same heading
 
 * Format specs and ensure failure
 
-* Console should contain "Parse error: Duplicate scenario definition"
+* Console should contain "Duplicate scenario definition"
 
 * Spec "spec formatting" should not be formatted
