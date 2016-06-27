@@ -1,6 +1,8 @@
 Duplicate step implementation
 =============================
-tags: unimplemented
+
+tags: duplicate_step_impl
+
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------
 * In an empty directory initialize a project named "duplicate_step_implementation" with the current language
@@ -10,4 +12,5 @@ Duplicate step implementation should atleast give a warning
      |----------------|----------------------------|
      |Concept step one|"inside first concept step" |
      |Concept step one|"inside second concept step"|
+
 * Execute the spec "duplicate step implementation" and ensure failure
