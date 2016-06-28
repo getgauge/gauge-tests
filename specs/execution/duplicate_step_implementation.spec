@@ -5,8 +5,10 @@ tags: duplicate_step_impl
 
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------
+
 * In an empty directory initialize a project named "duplicate_step_implementation" with the current language
-* Create a specification "duplicate step implementation" with the following contexts 
+
+* Create a scenario "scenaro1" in specification "duplicate step implementation" with the following steps with implementation
 
      |step text       |implementation              |
      |----------------|----------------------------|
@@ -14,3 +16,5 @@ Duplicate step implementation should atleast give a warning
      |Concept step one|"inside second concept step"|
 
 * Execute the spec "duplicate step implementation" and ensure failure
+
+* Console should contain "Duplicate step implementation"
