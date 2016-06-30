@@ -28,6 +28,7 @@ public abstract class GaugeProject {
     private ArrayList<Specification> specifications = new ArrayList<>();
     private String lastProcessStdout;
     private GaugeService service;
+    private String lastProcessStderr;
 
     protected GaugeProject(String language, String projName) throws IOException {
         this.language = language;
@@ -178,11 +179,10 @@ public abstract class GaugeProject {
         return executeGaugeCommand("--format", specFolder);
     }
 
-    public boolean execute(boolean sorted) throws Exception {
-        if (sorted) {
-            return executeGaugeCommand("--simple-console", "--verbose", "--sort", "specs/");
-        }
-        return executeGaugeCommand("--simple-console", "--verbose", "specs/");
+    public ExecutionSummary execute(boolean sorted) throws Exception {
+        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
+        boolean success = executeGaugeCommand(args);
+        return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
     }
 
     public boolean executeInParallel() throws IOException, InterruptedException {
@@ -265,6 +265,11 @@ public abstract class GaugeProject {
         while ((line = br.readLine()) != null) {
             lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
         }
+        lastProcessStderr = "";
+        br = new BufferedReader(new InputStreamReader(lastProcess.getErrorStream()));
+        while ((line = br.readLine()) != null) {
+            lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
+        }
         lastProcess.waitFor();
         return lastProcess.exitValue() == 0;
     }
@@ -323,6 +328,9 @@ public abstract class GaugeProject {
         return lastProcessStdout;
     }
 
+    public String getLastProcessStderr() {
+        return lastProcessStderr;
+    }
     public ArrayList<Specification> getAllSpecifications() {
         return specifications;
     }

@@ -3,6 +3,8 @@ package com.thoughtworks.gauge.test.implementation;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.common.ExecutionSummary;
+import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
 
 import java.io.IOException;
@@ -31,9 +33,9 @@ public class Execution {
 
     @Step("Execute the current project and ensure success")
     public void executeCurrentProjectAndEnsureSuccess() throws Exception {
-        assertThat(currentProject.execute(false))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        ExecutionSummary result = currentProject.execute(false);
+        ExecutionSummaryAssert.assertThat(result)
+                .hasSuccess(true);
     }
 
     @Step("Execute the current project in parallel and ensure success")
@@ -52,16 +54,18 @@ public class Execution {
 
     @Step("Execute the specs in order and ensure success")
     public void executeSpecsInOrderAndEnsureSuccess() throws Exception {
-        assertThat(currentProject.execute(true))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        ExecutionSummary result = currentProject.execute(true);
+        ExecutionSummaryAssert.assertThat(result)
+                .withFailMessage(result.getStdout())
+                .hasSuccess(true);
     }
 
     @Step("Execute the current project and ensure failure")
     public void executeCurrentProjectAndEnsureFailure() throws Exception {
-        assertThat(currentProject.execute(false))
-                .isFalse()
-                .withFailMessage(getFormattedProcessOutput());
+        ExecutionSummary result = currentProject.execute(false);
+        ExecutionSummaryAssert.assertThat(result)
+                .withFailMessage(result.getStdout())
+                .hasSuccess(false);
     }
 
     @Step("Rerun failed scenarios and ensure failure")
@@ -154,7 +158,7 @@ public class Execution {
     }
 
     private String getFormattedProcessOutput() {
-        return "*************** Process output start************\n" +
+        return "\n*************** Process output start************\n" +
                 currentProject.getLastProcessStdout() +
                 "\n*************** Process output end************\n";
     }
