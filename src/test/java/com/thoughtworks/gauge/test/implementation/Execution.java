@@ -33,56 +33,41 @@ public class Execution {
 
     @Step("Execute the current project and ensure success")
     public void executeCurrentProjectAndEnsureSuccess() throws Exception {
-        ExecutionSummary result = currentProject.execute(false);
-        ExecutionSummaryAssert.assertThat(result)
-                .hasSuccess(true);
+        assertOn(currentProject.execute(false),true);
     }
 
     @Step("Execute the current project in parallel and ensure success")
-    public void executeCurrentProjectInParallelAndEnsureSuccess() throws IOException, InterruptedException {
-        assertThat(currentProject.executeInParallel())
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+    public void executeCurrentProjectInParallelAndEnsureSuccess() throws Exception {
+        assertOn(currentProject.executeInParallel(),true);
     }
 
     @Step("Execute the current project in parallel in <n> streams and ensure success")
-    public void executeCurrentProjectInParallelStreamsAndEnsureSuccess(int n) throws IOException, InterruptedException {
-        assertThat(currentProject.executeInParallel(n))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+    public void executeCurrentProjectInParallelStreamsAndEnsureSuccess(int n) throws Exception {
+        assertOn(currentProject.executeInParallel(n),true);
+
     }
 
     @Step("Execute the specs in order and ensure success")
     public void executeSpecsInOrderAndEnsureSuccess() throws Exception {
-        ExecutionSummary result = currentProject.execute(true);
-        ExecutionSummaryAssert.assertThat(result)
-                .withFailMessage(result.getStdout())
-                .hasSuccess(true);
+        assertOn(currentProject.execute(true),true);
     }
 
     @Step("Execute the current project and ensure failure")
     public void executeCurrentProjectAndEnsureFailure() throws Exception {
-        ExecutionSummary result = currentProject.execute(false);
-        ExecutionSummaryAssert.assertThat(result)
-                .withFailMessage(result.getStdout())
-                .hasSuccess(false);
+        assertOn(currentProject.execute(false),false);
     }
 
     @Step("Rerun failed scenarios and ensure failure")
     public void rerunCurrentProjectAndEnsureFailure() throws Exception {
-        assertThat(currentProject.rerun())
-                .isFalse()
-                .withFailMessage(getFormattedProcessOutput());
+        assertOn(currentProject.rerun(),false);
     }
 
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeSpec(specName))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+
+        assertOn(currentProject.executeSpec(specName),true);
     }
 
     @Step("Execute the specs and ensure success <table>")
@@ -97,69 +82,58 @@ public class Execution {
             specNames.add(specName);
         }
 
-        assertThat(currentProject.executeSpec(specNames))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
-
+        assertOn(currentProject.executeSpec(specNames),true);
     }
 
     @Step("Execute the spec <spec name> with scenario at <line number> and ensure success")
     public void executeScenarioWithLineNumber(String specName, int lineNumber) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeSpecWithScenarioLineNumber(specName, lineNumber))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        assertOn(currentProject.executeSpecWithScenarioLineNumber(specName, lineNumber),true);
     }
 
     @Step("Execute the spec <spec name> with row range <row range> and ensure success")
     public void executeScenarioWithRowRange(String specName, String rowRange) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeSpecWithRowRange(specName, rowRange))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        assertOn(currentProject.executeSpecWithRowRange(specName, rowRange),true);
     }
 
     @Step("Execute the spec <spec name> and ensure failure")
     public void executeSpecAndEnsureFailure(String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
-
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeSpec(specName))
-                .isFalse()
-                .withFailMessage(getFormattedProcessOutput());
+        assertOn(currentProject.executeSpec(specName),false);
+
     }
 
     @Step("Execute the tags <tags> in spec <spec name> and ensure success")
-    public void executeTagsAndEnsureSuccess(String tags, String specName) throws IOException, InterruptedException {
+    public void executeTagsAndEnsureSuccess(String tags, String specName) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
 
         assertThat(spec).isNotNull();
-        assertThat(currentProject.executeTagsInSpec(tags, specName))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        assertOn(currentProject.executeTagsInSpec(tags, specName),true);
     }
 
     @Step("Check for validation errors in the project and ensure failure")
-    public void validateAndEnsureFailure() throws IOException, InterruptedException {
-        assertThat(currentProject.validate())
-                .isFalse()
-                .withFailMessage(getFormattedProcessOutput());
+    public void validateAndEnsureFailure() throws Exception {
+        assertOn(currentProject.validate(),false);
     }
 
     @Step("Check for validation errors in the project and ensure success")
-    public void validateAndEnsureSuccess() throws IOException, InterruptedException {
-        assertThat(currentProject.validate())
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+    public void validateAndEnsureSuccess() throws Exception {
+        assertOn(currentProject.validate(),true);
     }
 
     private String getFormattedProcessOutput() {
         return "\n*************** Process output start************\n" +
                 currentProject.getLastProcessStdout() +
                 "\n*************** Process output end************\n";
+    }
+
+    private ExecutionSummaryAssert assertOn(ExecutionSummary summary,boolean result){
+        return ExecutionSummaryAssert.assertThat(summary)
+                .hasSuccess(result)
+                .withFailMessage(getFormattedProcessOutput());
     }
 }

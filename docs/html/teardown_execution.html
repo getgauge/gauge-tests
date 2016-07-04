@@ -1,0 +1,273 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Teardown Execution</h1>
+<ul>
+<li>In an empty directory initialize a project named &quot;teardown_exec&quot; with the current language
+Passing teardown execution</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Create a scenario &quot;first scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Scenario step</td>
+<td>&quot;inside first scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;second scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Second Scenario step</td>
+<td>&quot;inside second scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Add the following teardown steps in specification &quot;basic teardown execution&quot;</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First teardown</td>
+<td>&quot;inside first teardown&quot;</td>
+</tr>
+<tr>
+<td>Second teardown</td>
+<td>&quot;inside second teardown&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;basic teardown execution&quot; and ensure success</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside first scenario step</td>
+</tr>
+<tr>
+<td>inside first teardown</td>
+</tr>
+<tr>
+<td>inside second teardown</td>
+</tr>
+<tr>
+<td>inside second scenario step</td>
+</tr>
+<tr>
+<td>inside first teardown</td>
+</tr>
+<tr>
+<td>inside second teardown</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Unimplemented teardown execution</h2>
+<ul>
+<li>
+<p>Create a scenario &quot;first scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Scenario step</td>
+<td>&quot;inside first scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;second scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Second Scenario step</td>
+<td>&quot;inside second scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Add the following unimplemented teardown steps in specification &quot;basic teardown execution&quot;</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First teardown</td>
+</tr>
+<tr>
+<td>Second teardown</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;basic teardown execution&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step implementation not found =&gt; 'First teardown'</td>
+</tr>
+<tr>
+<td>Step implementation not found =&gt; 'Second teardown'</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Failed teardown execution</h2>
+<ul>
+<li>
+<p>Create a scenario &quot;first scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Scenario step</td>
+<td>&quot;inside first scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;second scenario&quot; in specification &quot;basic teardown execution&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Second Scenario step</td>
+<td>&quot;inside second scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Add the following teardown steps in specification &quot;basic teardown execution&quot;</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First teardown</td>
+<td>throw exception</td>
+</tr>
+<tr>
+<td>Second teardown</td>
+<td>&quot;inside second teardown&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;basic teardown execution&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside second teardown</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside first scenario step</td>
+</tr>
+<tr>
+<td>Failed Step: First teardown</td>
+</tr>
+<tr>
+<td>inside second scenario step</td>
+</tr>
+<tr>
+<td>Failed Step: First teardown</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="tagged_hooks_step_level.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="concept_should_not_contain_scenario_heading.html">></a></li></center>

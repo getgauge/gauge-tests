@@ -124,14 +124,6 @@ public class CSharpProject extends GaugeProject {
     }
 
     @Override
-    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
-        boolean exitStatus = currentProject.executeRefactor(oldStep, newStep);
-        if (!exitStatus) {
-            System.out.println(currentProject.getLastProcessStdout());
-        }
-    }
-
-    @Override
     public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));

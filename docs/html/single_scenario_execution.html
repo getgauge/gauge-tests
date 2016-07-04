@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Single Scenario Execution</h1>
+<ul>
+<li>In an empty directory initialize a project named &quot;single_scen_exec&quot; with the current language
+Passing execution of single scenario</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Create a specification &quot;newSpec&quot; with the following contexts</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First context</td>
+<td>&quot;inside first context&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;first scenario&quot; in specification &quot;newSpec&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First Scenario step</td>
+<td>&quot;inside first scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;second scenario&quot; in specification &quot;newSpec&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Second Scenario step</td>
+<td>&quot;inside second scenario step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;newSpec&quot; with scenario index &quot;0&quot; and ensure success</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside first context</td>
+</tr>
+<tr>
+<td>inside first scenario step</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside second scenario step</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="scenario_sub_folder_execution.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="spec_execution.html">></a></li></center>

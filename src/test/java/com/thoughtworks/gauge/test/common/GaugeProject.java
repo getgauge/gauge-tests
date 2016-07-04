@@ -181,54 +181,58 @@ public abstract class GaugeProject {
 
     public ExecutionSummary execute(boolean sorted) throws Exception {
         String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
+        return execute(args);
+    }
+
+    private ExecutionSummary execute(String[] args) throws Exception {
         boolean success = executeGaugeCommand(args);
         return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
     }
 
-    public boolean executeInParallel() throws IOException, InterruptedException {
-        return executeGaugeCommand("--parallel", "--verbose", "specs/");
+    public ExecutionSummary executeInParallel() throws Exception {
+        return execute(new String[]{"--parallel", "--verbose", "specs/"});
     }
 
-    public boolean executeInParallel(int nStreams) throws IOException, InterruptedException {
-        return executeGaugeCommand("--parallel", "-n=" + nStreams, "--verbose", "specs/");
+    public ExecutionSummary executeInParallel(int nStreams) throws Exception {
+        return execute(new String[]{"--parallel", "-n=" + nStreams, "--verbose", "specs/"});
     }
 
-    public boolean validate() throws IOException, InterruptedException {
-        return executeGaugeCommand("--validate", "specs/");
+    public ExecutionSummary validate() throws Exception {
+        return execute(new String[]{"--validate", "specs/"});
     }
 
-    public boolean executeSpec(List<String> specNames) throws Exception {
+    public ExecutionSummary executeSpec(List<String> specNames) throws Exception {
         List<String> args = new ArrayList<>();
         args.add("--simple-console");
         args.add("--verbose");
         for (String specName : specNames) {
             args.add("specs" + File.separator + Util.getSpecName(specName) + ".spec");
         }
-        return executeGaugeCommand(args.toArray(new String[0]));
+        return execute(args.toArray(new String[0]));
     }
 
-    public boolean executeSpec(String specName) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec");
+    public ExecutionSummary executeSpec(String specName) throws Exception {
+        return execute(new String[]{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
-    public boolean rerun() throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "--failed");
+    public ExecutionSummary rerun() throws Exception {
+        return execute(new String[]{"--simple-console", "--verbose", "--failed"});
     }
 
-    public boolean executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber);
+    public ExecutionSummary executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
+        return execute(new String []{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
     }
 
-    public boolean executeSpecWithRowRange(String specName, String rowRange) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec");
+    public ExecutionSummary executeSpecWithRowRange(String specName, String rowRange) throws Exception {
+        return execute(new String[]{"--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
-    public boolean executeTagsInSpec(String tags, String specName) throws IOException, InterruptedException {
-        return executeGaugeCommand("--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec");
+    public ExecutionSummary executeTagsInSpec(String tags, String specName) throws Exception {
+        return execute(new String[]{"--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
-    boolean executeRefactor(String oldStep, String newStep) throws IOException, InterruptedException {
-        return executeGaugeCommand("--refactor", oldStep, newStep, "specs");
+    ExecutionSummary executeRefactor(String oldStep, String newStep) throws Exception {
+        return execute(new String[]{"--refactor", oldStep, newStep, "specs"});
     }
 
     private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
@@ -310,6 +314,13 @@ public abstract class GaugeProject {
         });
     }
 
+    public void refactorStep(String oldStep, String newStep) throws Exception {
+        ExecutionSummary result = currentProject.executeRefactor(oldStep, newStep);
+        if (!result.getSuccess()) {
+            System.out.println(currentProject.getLastProcessStdout());
+        }
+    }
+
     public abstract void implementStep(String stepText, String implementation, boolean appendCode) throws Exception;
 
     public abstract Map<String, String> getLanguageSpecificFiles();
@@ -321,8 +332,6 @@ public abstract class GaugeProject {
     public abstract void createHookWithException(String hookLevel, String hookType) throws IOException;
 
     public abstract void createHooksWithTagsAndPrintMessage(String hookLevel, String hookType, String printString, String aggregation, Table tags) throws IOException;
-
-    public abstract void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException;
 
     public String getLastProcessStdout() {
         return lastProcessStdout;

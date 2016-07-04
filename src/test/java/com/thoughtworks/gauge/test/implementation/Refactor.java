@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 public class Refactor {
     @Step("Refactor step <Old step> to <New step>")
-    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+    public void refactorStep(String oldStep, String newStep) throws Exception {
         if (Util.isWindows()) {
             oldStep = oldStep.replaceAll("\\\"", "\\\\\"");
             newStep = newStep.replaceAll("\\\"", "\\\\\"");

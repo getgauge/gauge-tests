@@ -1,0 +1,123 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Spec execution</h1>
+<ul>
+<li>In an empty directory initialize a project named &quot;spec_exec&quot; with the current language
+Basic spec execution</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Create &quot;Sample scenario&quot; in &quot;Basic spec execution&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First step</td>
+<td>&quot;inside first step&quot;</td>
+</tr>
+<tr>
+<td>Second step</td>
+<td>&quot;inside second step&quot;</td>
+</tr>
+<tr>
+<td>Third step</td>
+<td>&quot;inside third step&quot;</td>
+</tr>
+<tr>
+<td>Step with &quot;two&quot; &quot;params&quot;</td>
+<td>&quot;inside step with parameters : &quot; + param0 + &quot; &quot; + param1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the current project and ensure success</p>
+</li>
+<li>
+<p>Console should contain &quot;inside first step&quot;</p>
+</li>
+<li>
+<p>Console should contain &quot;inside second step&quot;</p>
+</li>
+<li>
+<p>Console should contain &quot;inside third step&quot;</p>
+</li>
+<li>
+<p>Console should contain &quot;inside step with parameters : two params&quot;
+Concept execution</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Create concept &quot;Sample concept&quot; with following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concept step one</td>
+<td>&quot;inside first concept step&quot;</td>
+</tr>
+<tr>
+<td>Concept step two</td>
+<td>&quot;inside second concept step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create &quot;Scenario for concept execution&quot; in &quot;Concept execution&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sample concept</td>
+<td></td>
+</tr>
+<tr>
+<td>Fourth step</td>
+<td>&quot;inside fourth step&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;Concept execution&quot; and ensure success</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside first concept step</td>
+</tr>
+<tr>
+<td>inside second concept step</td>
+</tr>
+<tr>
+<td>inside fourth step</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="single_scenario_execution.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="scenario_tagged_expression_execution.html">></a></li></center>

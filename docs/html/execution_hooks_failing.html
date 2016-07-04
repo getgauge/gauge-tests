@@ -1,0 +1,194 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Execution Hooks Failing</h1>
+<p>When a before execution hook fails the after hook will still execute skipping all other executions at that level.</p>
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;exec_hooks_fail&quot; with the current language</p>
+</li>
+<li>
+<p>Create &quot;New scenario&quot; in &quot;01 Hooks Spec&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First step</td>
+<td>&quot;inside step 1&quot;</td>
+</tr>
+<tr>
+<td>Second step</td>
+<td>&quot;inside step 2&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Test a hook failure at suite level</h2>
+<ul>
+<li>
+<p>Create &quot;suite&quot; level &quot;before&quot; hook with exception</p>
+</li>
+<li>
+<p>Create &quot;scenario&quot; level &quot;before&quot; hook with implementation &quot;inside before scenario&quot;</p>
+</li>
+<li>
+<p>Create &quot;suite&quot; level &quot;after&quot; hook with implementation &quot;inside after suite&quot;</p>
+</li>
+<li>
+<p>Execute the spec &quot;01 Hooks Spec&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside before scenario</td>
+</tr>
+<tr>
+<td>inside step 1</td>
+</tr>
+<tr>
+<td>inside step 2</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Test a hook failure at spec level</h2>
+<ul>
+<li>
+<p>Create &quot;suite&quot; level &quot;before&quot; hook with implementation &quot;inside before suite&quot;</p>
+</li>
+<li>
+<p>Create &quot;spec&quot; level &quot;before&quot; hook with exception</p>
+</li>
+<li>
+<p>Create &quot;spec&quot; level &quot;after&quot; hook with implementation &quot;inside after spec&quot;</p>
+</li>
+<li>
+<p>Create &quot;suite&quot; level &quot;after&quot; hook with implementation &quot;inside after suite&quot;</p>
+</li>
+<li>
+<p>Execute the spec &quot;01 Hooks Spec&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside before suite</td>
+</tr>
+<tr>
+<td>inside after spec</td>
+</tr>
+<tr>
+<td>inside after suite</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside step 1</td>
+</tr>
+<tr>
+<td>inside step 2</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Test a hook failure at scenario level</h2>
+<ul>
+<li>
+<p>Create &quot;scenario&quot; level &quot;before&quot; hook with exception</p>
+</li>
+<li>
+<p>Create &quot;scenario&quot; level &quot;after&quot; hook with implementation &quot;inside after scenario&quot;</p>
+</li>
+<li>
+<p>Execute the spec &quot;01 Hooks Spec&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside after scenario</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside step 1</td>
+</tr>
+<tr>
+<td>inside step 2</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Test a hook failure at step level</h2>
+<ul>
+<li>
+<p>Create &quot;step&quot; level &quot;before&quot; hook with exception</p>
+</li>
+<li>
+<p>Create &quot;step&quot; level &quot;after&quot; hook with implementation &quot;inside after step&quot;</p>
+</li>
+<li>
+<p>Execute the spec &quot;01 Hooks Spec&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inside after step</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="duplicate_step_implementation.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="execution_hooks_passing.html">></a></li></center>

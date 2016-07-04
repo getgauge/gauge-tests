@@ -1,0 +1,132 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>spec Formatting</h1>
+<ul>
+<li>In an empty directory initialize a project named &quot;formatting&quot; with the current language</li>
+</ul>
+<h2>formatting should not remove steps, scenarios from spec</h2>
+<ul>
+<li>
+<p>Create a scenario &quot;formatting should not remove steps scenarios from spec&quot; in specification &quot;spec formatting&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step that takes a table1 &lt;dynamic&gt;</td>
+<td>&quot;inside first scenario&quot;</td>
+</tr>
+<tr>
+<td>special param &lt;file:abc&gt;</td>
+<td>&quot;another step&quot;</td>
+</tr>
+<tr>
+<td>special param &lt;table:abc&gt;</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;another scenario&quot; in specification &quot;spec formatting&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>special param &lt;file:abc&gt;</td>
+</tr>
+<tr>
+<td>special param &lt;table:abc&gt;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Format specs and ensure failure</p>
+</li>
+<li>
+<p>Console should contain &quot;Dynamic parameter &lt;dynamic&gt; could not be resolved =&gt; 'Step that takes a table1 &lt;dynamic&gt;'&quot;</p>
+</li>
+<li>
+<p>Console should contain &quot; Dynamic parameter &lt;file:abc&gt; could not be resolved =&gt; 'special param &lt;file:abc&gt;'&quot;</p>
+</li>
+<li>
+<p>Console should contain &quot; Dynamic parameter &lt;table:abc&gt; could not be resolved =&gt; 'special param &lt;table:abc&gt;'&quot;</p>
+</li>
+<li>
+<p>Spec &quot;spec formatting&quot; should not be formatted</p>
+</li>
+</ul>
+<h2>formatting merges scenario with same heading</h2>
+<ul>
+<li>
+<p>Create a scenario &quot;formatting merges scenario with same heading&quot; in specification &quot;spec formatting&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;something&quot;</td>
+<td>&quot;inside somthing&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;in between&quot; in specification &quot;spec formatting&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;step between two duplicate scenario&quot;</td>
+<td>&quot;inside between&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;formatting merges scenario with same heading&quot; in specification &quot;spec formatting&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;something&quot;</td>
+<td>&quot;inside somthing&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Check for validation errors in the project and ensure failure</p>
+</li>
+<li>
+<p>Format specs and ensure failure</p>
+</li>
+<li>
+<p>Console should contain &quot;Parse error: Duplicate scenario definition&quot;</p>
+</li>
+<li>
+<p>Spec &quot;spec formatting&quot; should not be formatted</p>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="undefined_parameter_name_used_in_a_step.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="project_initialization.html">></a></li></center>

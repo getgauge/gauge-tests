@@ -1,0 +1,126 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Step Refactoring through command</h1>
+<p>tags: refactoring</p>
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;spec_refactoring_thru_cmd&quot; with the current language</p>
+</li>
+<li>
+<p>Create a scenario &quot;Sample scenario&quot; in specification &quot;Basic spec execution&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First step</td>
+</tr>
+<tr>
+<td>Second step</td>
+</tr>
+<tr>
+<td>Repeated First step</td>
+</tr>
+<tr>
+<td>Step with &quot;two&quot; &quot;params&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a scenario &quot;Sample scenario2&quot; in specification &quot;Basic spec execution2&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First step</td>
+<td>&quot;inside first step&quot;</td>
+</tr>
+<tr>
+<td>Step with &quot;two&quot; &quot;params&quot;</td>
+<td>&quot;inside first step&quot;</td>
+</tr>
+<tr>
+<td>a step with &quot;a&quot; &quot;b&quot; and &quot;c&quot;</td>
+<td>&quot;inside first step&quot;</td>
+</tr>
+<tr>
+<td>Second step</td>
+<td>&quot;inside second step&quot;</td>
+</tr>
+<tr>
+<td>step1</td>
+<td>&quot;inside step1&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Rename step</h2>
+<ul>
+<li>Refactor step &quot;First step&quot; to &quot;New step&quot;</li>
+<li>The step &quot;First step&quot; should no longer be used</li>
+<li>The step &quot;New step&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success
+Rephrase simple step</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;Step with &lt;a&gt; &lt;b&gt;&quot; to &quot;Step having &lt;b&gt; and &lt;a&gt;&quot;</li>
+<li>The step &quot;Step with &quot;two&quot; &quot;params&quot;&quot; should no longer be used</li>
+<li>The step &quot;Step having &quot;params&quot; and &quot;two&quot;&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success
+Rephrase step having new parameters</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;Step with &lt;a&gt; &lt;b&gt;&quot; to &quot;Step having &lt;b&gt; &lt;c&gt; and &lt;a&gt;&quot;</li>
+<li>The step &quot;Step with &quot;two&quot; &quot;params&quot;&quot; should no longer be used</li>
+<li>The step &quot;Step having &quot;params&quot; &quot;c&quot; and &quot;two&quot;&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success
+Rephrase step removing parameters</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;Step with &lt;a&gt; &lt;b&gt;&quot; to &quot;Step having &lt;b&gt; and &lt;c&gt;&quot;</li>
+<li>The step &quot;Step with &quot;two&quot; &quot;params&quot;&quot; should no longer be used</li>
+<li>The step &quot;Step having &quot;params&quot; and &quot;c&quot;&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success
+Rephrase step with all new parameters</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;Step with &lt;a&gt; &lt;b&gt;&quot; to &quot;Step having &lt;d&gt; and &lt;c&gt;&quot;</li>
+<li>The step &quot;Step with &quot;two&quot; &quot;params&quot;&quot; should no longer be used</li>
+<li>The step &quot;Step having &quot;d&quot; and &quot;c&quot;&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success
+Refactor a non-Existing step</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;hello&quot; to &quot;world&quot;</li>
+<li>The error message &lt;file:resources/refactor_console.txt&gt; should be displayed on console
+Rename an unimplemented step</li>
+</ul>
+<hr />
+<ul>
+<li>Refactor step &quot;Repeated First step&quot; to &quot;again Repeated First step&quot;</li>
+<li>The step &quot;Repeated First step&quot; should no longer be used</li>
+<li>The step &quot;again Repeated First step&quot; should be used in project
+Rename step to step with \</li>
+</ul>
+<hr />
+<p>tags: unimplemented</p>
+<ul>
+<li>Refactor step &quot;step1&quot; to &quot;step with \ slash&quot;</li>
+<li>The step &quot;step1&quot; should no longer be used</li>
+<li>The step &quot;step with \ slash&quot; should be used in project</li>
+<li>Execute the spec &quot;Basic spec execution2&quot; and ensure success</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="should_allow_to_refactor_parameter_in_tear_down.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="table_defined_after_a_comment_of_a_step.html">></a></li></center>

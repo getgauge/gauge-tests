@@ -1,0 +1,106 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Concept Failing</h1>
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;concept_failing&quot; with the current language</p>
+</li>
+<li>
+<p>Create concept &quot;concept with &lt;param0&gt; and &lt;param1&gt;&quot; with following steps</p>
+<table>
+<thead>
+<tr>
+<th>concept steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tell &lt;param0&gt; to &quot;Gauge&quot;</td>
+</tr>
+<tr>
+<td>Step that throws an exception</td>
+</tr>
+<tr>
+<td>Tell &lt;param1&gt; to &quot;Gauge&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create step implementations</p>
+<table>
+<thead>
+<tr>
+<th>step</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step that throws an exception</td>
+<td>throw exception</td>
+</tr>
+<tr>
+<td>Tell &lt;param0&gt; to &lt;param1&gt;</td>
+<td>print params</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Test concept failure Path</h2>
+<ul>
+<li>
+<p>Create &quot;Concept Testing&quot; in &quot;Spec 1&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>scenario steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>concept with &quot;abc&quot; and &quot;xyz&quot;</td>
+</tr>
+<tr>
+<td>Tell &quot;HI&quot; to &quot;Gauge&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the spec &quot;Spec 1&quot; and ensure failure</p>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>console output table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param0=xyz,param1=Gauge</td>
+</tr>
+<tr>
+<td>param0=HI,param1=Gauge</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should contain following lines in order</p>
+<table>
+<thead>
+<tr>
+<th>console output table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>param0=abc,param1=Gauge</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="data_store.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="context_execution.html">></a></li></center>

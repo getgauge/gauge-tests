@@ -1,0 +1,139 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Invalid Duplicate concept definition</h1>
+<p>tags: unimplemented
+Invalid duplicate concept definition</p>
+<hr />
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;invalid_duplicate_concept_definition&quot; with the current language</p>
+</li>
+<li>
+<p>Create concept &quot;concept&quot; with following steps</p>
+<table>
+<thead>
+<tr>
+<th>concept steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>simple step with &quot;static&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create step implementations</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>simple step with &quot;static&quot;</td>
+<td>print params</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a specification &quot;spec1&quot; with the following contexts</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First context</td>
+<td>&quot;inside first context&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a specification &quot;spec2&quot; with the following contexts</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First context</td>
+<td>&quot;inside first context&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create &quot;scenario_invalid_duplicate_concept_definition&quot; in &quot;spec1&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>concept</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create &quot;scenario_invalid_duplicate_concept_definition&quot; in &quot;spec2&quot; with the following steps</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>concept</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Execute the specs and ensure success</p>
+<table>
+<thead>
+<tr>
+<th>spec names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spec1</td>
+</tr>
+<tr>
+<td>spec2</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ParseError]</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="execution_hooks_passing.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="parallel_execution.html">></a></li></center>

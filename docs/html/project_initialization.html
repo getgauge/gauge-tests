@@ -1,0 +1,58 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Project initialization</h1>
+<p>A gauge project follows a simple structure. A Gauge project can be initialized by running
+gauge –init &lt;language&gt;
+where the &lt;language&gt; can be any of the supported languages. Currently gauge supports the following languages.
+Initializing a new project</p>
+<hr />
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;init_proj&quot; with the current language</p>
+</li>
+<li>
+<p>The following file structure should be created</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>manifest.json</td>
+<td>file</td>
+</tr>
+<tr>
+<td>specs</td>
+<td>dir</td>
+</tr>
+<tr>
+<td>specs/example.spec</td>
+<td>file</td>
+</tr>
+<tr>
+<td>env</td>
+<td>dir</td>
+</tr>
+<tr>
+<td>env/default</td>
+<td>dir</td>
+</tr>
+<tr>
+<td>env/default/default.properties</td>
+<td>file</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Verify language specific files are created
+Initializing unknown language project</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>In an empty directory initialize a &quot;unknown&quot; project named &quot;init_proj_unknown&quot;</li>
+<li>Console should contain &quot;Failed to initialize project. Plugin 'unknown' not installed&quot;</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="spec_formmating.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="concept_refactoring.html">></a></li></center>

@@ -1,0 +1,50 @@
+<link rel="stylesheet" type="text/css" href="style.css"><h1>Refactoring the step with special chars in implementation</h1>
+<p>Refactoring code with escape character is formatting the code and causing the following issue</p>
+<ul>
+<li>
+<p>In an empty directory initialize a project named &quot;refactor_step_with_special_chars&quot; with the current language</p>
+</li>
+<li>
+<p>Create a scenario &quot;Sample scenario&quot; in specification &quot;refactor the step with special chars&quot; with the following steps with implementation</p>
+<table>
+<thead>
+<tr>
+<th>step text</th>
+<th>implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A step</td>
+<td>&quot;//*[@id=\&quot;content\&quot;]/section[1]/section/div[2]/a[1]&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2>Rename step</h2>
+<p>tags: refactoring</p>
+<ul>
+<li>
+<p>Refactor step &quot;A step&quot; to &quot;New step&quot;</p>
+</li>
+<li>
+<p>Execute the spec &quot;refactor the step with special chars&quot; and ensure success</p>
+</li>
+<li>
+<p>Console should not contain following lines</p>
+<table>
+<thead>
+<tr>
+<th>output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;//*[@id=&quot;conten&quot;]/section[1]/section/div[2]/a[1]&quot;</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul id="navigation"><center><li class="nav"><a href="refactoring_concept_through_api.html"><</a></li><li class="nav"><a href="index.html">=</a></li><li class="nav"><a href="refactoring_through_api.html">></a></li></center>
