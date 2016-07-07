@@ -26,23 +26,16 @@ public class JavaProject extends GaugeProject {
         return map;
     }
 
-    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
-        List<String> paramTypes = new ArrayList<String>();
+    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+        List<String> paramTypes = new ArrayList<>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String className = Util.getUniqueName();
-        StringBuilder classText = new StringBuilder();
-        classText.append("import com.thoughtworks.gauge.Step;\n");
-        classText.append("public class ").append(className).append("{\n");
-        classText.append("@Step(\"").append(stepValue.value).append("\")\n");
-        classText.append("public void ").append("stepImplementation(");
-        for (int i = 0; i < stepValue.paramCount; i++) {
-            if (i + 1 == stepValue.paramCount) {
-                classText.append("String param").append(i);
-            } else {
-                classText.append("String param").append(i).append(", ");
-            }
-            paramTypes.add("String");
+        StringBuilder classText = createClassTeplate(className, stepValue.value);
+        if (continueOnFailure) {
+            classText.append("\n@ContinueOnFailure\n");
         }
+        classText.append("public void ").append("stepImplementation(");
+        addParameters(classText, paramTypes, stepValue);
         implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
         classText.append(") {\n").append(implementation).append("\n}\n");
         classText.append("}");
@@ -144,5 +137,25 @@ public class JavaProject extends GaugeProject {
 
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "src/test/java").getAbsolutePath();
+    }
+
+    private void addParameters(StringBuilder classText, List<String> paramTypes, StepValueExtractor.StepValue stepValue) {
+        for (int i = 0; i < stepValue.paramCount; i++) {
+            if (i + 1 == stepValue.paramCount) {
+                classText.append("String param").append(i);
+            } else {
+                classText.append("String param").append(i).append(", ");
+            }
+            paramTypes.add("String");
+        }
+    }
+
+    private StringBuilder createClassTeplate(String className, String stepText) {
+        StringBuilder classText = new StringBuilder();
+        classText.append("import com.thoughtworks.gauge.Step;\n");
+        classText.append("import com.thoughtworks.gauge.ContinueOnFailure;\n");
+        classText.append("public class ").append(className).append("{\n");
+        classText.append("@Step(\"").append(stepText).append("\")\n");
+        return classText;
     }
 }

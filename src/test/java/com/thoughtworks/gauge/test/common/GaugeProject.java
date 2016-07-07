@@ -155,7 +155,7 @@ public abstract class GaugeProject {
         for (TableRow row : steps.getTableRows()) {
             concept.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (columnNames.size() == 2) {
-                implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
+                implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false);
             }
         }
         concept.saveAs(conceptFile);
@@ -321,7 +321,7 @@ public abstract class GaugeProject {
         }
     }
 
-    public abstract void implementStep(String stepText, String implementation, boolean appendCode) throws Exception;
+    public abstract void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception;
 
     public abstract Map<String, String> getLanguageSpecificFiles();
 
@@ -336,10 +336,10 @@ public abstract class GaugeProject {
     public String getLastProcessStdout() {
         return lastProcessStdout;
     }
-
     public String getLastProcessStderr() {
         return lastProcessStderr;
     }
+
     public ArrayList<Specification> getAllSpecifications() {
         return specifications;
     }

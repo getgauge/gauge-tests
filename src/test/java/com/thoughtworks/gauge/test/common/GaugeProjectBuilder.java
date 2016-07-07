@@ -56,7 +56,7 @@ public class GaugeProjectBuilder {
         for (TableRow row : steps.getTableRows()) {
             scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (implement)
-                GaugeProject.currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), appendCode);
+                GaugeProject.currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, appendCode);
         }
         spec.addScenarios(scenario);
         spec.save();

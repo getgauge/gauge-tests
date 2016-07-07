@@ -13,7 +13,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
+    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
         throw new RuntimeException("Not implemented");
     }
 

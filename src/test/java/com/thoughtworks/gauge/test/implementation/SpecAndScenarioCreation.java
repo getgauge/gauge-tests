@@ -5,19 +5,26 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.Scenario;
 import com.thoughtworks.gauge.test.common.Specification;
+
 import java.util.List;
+
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 public class SpecAndScenarioCreation {
 
     @Step("Create <scenario name> in <spec name> with the following steps <steps table>")
     public void addContextToSpecification(String scenarioName, String specName, Table steps) throws Exception {
-        createScenario(scenarioName, specName, "", steps);
+        createScenario(scenarioName, specName, "", false, steps);
     }
 
     @Step("Create <scenario name> in <spec name> within sub folder <subFolder> with the following steps <steps table>")
     public void addContextToSpecification(String scenarioName, String specName, String subFolder, Table steps) throws Exception {
-        createScenario(scenarioName, specName, subFolder, steps);
+        createScenario(scenarioName, specName, subFolder, false, steps);
+    }
+
+    @Step("Create a scenario <scenario name> in specification <spec name> with the following continue on failure steps <table>")
+    public void createScenarioWithContinueSteps(String scenarioName, String specName, Table steps) throws Exception {
+        createScenario(scenarioName, specName, "", true, steps);
     }
 
     @Step("Create a specification <spec name> with the following datatable <table>")
@@ -35,12 +42,12 @@ public class SpecAndScenarioCreation {
             throw new Exception("Expecting table with 2 columns: steps and implementations");
         }
         for (TableRow row : steps.getTableRows()) {
-            currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
+            currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false);
         }
     }
 
     private boolean shouldCreateImplementation(TableRow row, List<String> columnNames) {
-        if (columnNames.size() != 2) {
+        if (columnNames.size() < 2) {
             return false;
         }
         String implementation = row.getCell(columnNames.get(1));
@@ -52,7 +59,7 @@ public class SpecAndScenarioCreation {
         return false;
     }
 
-    private void createScenario(String scenarioName, String specName, String subFolder, Table steps) throws Exception {
+    private void createScenario(String scenarioName, String specName, String subFolder, boolean isContinueOnFailure, Table steps) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
         if (spec == null) {
             spec = currentProject.createSpecification(subFolder, specName);
@@ -63,7 +70,8 @@ public class SpecAndScenarioCreation {
             scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             boolean b = shouldCreateImplementation(row, columnNames);
             if (b) {
-                currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false);
+                if (isContinueOnFailure) isContinueOnFailure = Boolean.parseBoolean(row.getCell(columnNames.get(2)));
+                currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), isContinueOnFailure, false);
             }
         }
         spec.addScenarios(scenario);

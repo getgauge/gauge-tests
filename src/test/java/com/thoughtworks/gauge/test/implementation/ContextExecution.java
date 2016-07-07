@@ -40,7 +40,7 @@ public class ContextExecution {
             if (implement) {
                 if (steps.getColumnNames().size() != 2)
                     throw new RuntimeException("Expected two columns for table");
-                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false);
+                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false, false);
             }
             spec.save();
         }
@@ -53,7 +53,7 @@ public class ContextExecution {
             if (implement) {
                 if (steps.getColumnNames().size() != 2)
                     throw new RuntimeException("Expected two columns for table");
-                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false);
+                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false, false);
             }
             spec.save();
         }
@@ -96,5 +96,6 @@ public class ContextExecution {
         spec.addTags(tags);
         spec.save();
     }
+
 
 }

@@ -23,7 +23,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean appendCode) throws Exception {
+    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String className = Util.getUniqueName();
