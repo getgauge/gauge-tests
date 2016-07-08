@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class PythonProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
-    public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory\n";
+    public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory, continue_on_failure\n";
 
     public PythonProject(String projName) throws IOException {
         super("python", projName);
@@ -26,6 +26,8 @@ public class PythonProject extends GaugeProject {
         String fileName = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append(IMPORT);
+        if (continueOnFailure)
+            classText.append("@continue_on_failure\n");
         classText.append("@step(\"").append(stepValue.value).append("\")\n");
         classText.append("def ").append(Util.getUniqueName()).append("(");
         for (int i = 0; i < stepValue.paramCount; i++) {
