@@ -31,8 +31,8 @@ Continue execution after a failed Step marked as continue
      |inside third step       |
      |Failed Step: fourth step|
 
-Stop executuion after a failed step even there are other continueOnFailure steps
---------------------------------------------------------------------------------
+Stop execution after a failed step even there are other continueOnFailure steps
+-------------------------------------------------------------------------------
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
@@ -43,6 +43,7 @@ Stop executuion after a failed step even there are other continueOnFailure steps
      |Fourth step|throw exception    |false   |
      |Fifth step |throw exception    |true    |
      |Next step  |"inside next step" |false   |
+
 * Execute the current project and ensure failure
 
 * Console should contain following lines in order 
@@ -60,4 +61,3 @@ Stop executuion after a failed step even there are other continueOnFailure steps
      |-----------------------|
      |Failed Step: Fifth step|
      |inside next step       |
-

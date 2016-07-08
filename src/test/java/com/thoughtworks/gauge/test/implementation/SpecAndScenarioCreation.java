@@ -38,11 +38,15 @@ public class SpecAndScenarioCreation {
     @Step("Create step implementations <table>")
     public void createStepImplementations(Table steps) throws Exception {
         List<String> columnNames = steps.getColumnNames();
-        if (columnNames.size() != 2) {
-            throw new Exception("Expecting table with 2 columns: steps and implementations");
+        if (columnNames.size() < 2) {
+            throw new Exception("Expecting table with at least 2 columns: steps and implementations");
         }
         for (TableRow row : steps.getTableRows()) {
-            currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false);
+            boolean continueOnFailure = false;
+            if (!row.getCell("continue").isEmpty()){
+                continueOnFailure = Boolean.parseBoolean(row.getCell("continue"));
+            }
+            currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), continueOnFailure, false);
         }
     }
 
