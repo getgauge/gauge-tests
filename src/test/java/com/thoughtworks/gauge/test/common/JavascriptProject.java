@@ -31,7 +31,11 @@ public class JavascriptProject extends GaugeProject {
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String fileName = Util.getUniqueName();
         StringBuilder jsCode = new StringBuilder();
-        jsCode.append("gauge.step(\"").append(stepValue.value).append("\", function (");
+        jsCode.append("gauge.step(\"").append(stepValue.value).append("\",");
+        if (continueOnFailure) {
+            jsCode.append(" { continueOnFailure: true },");
+        }
+        jsCode.append(" function (");
         for (int i = 0; i < stepValue.paramCount; i++) {
             jsCode.append("param").append(i).append(", ");
             paramTypes.add("string");
