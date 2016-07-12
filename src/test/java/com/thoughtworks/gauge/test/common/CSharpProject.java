@@ -30,6 +30,9 @@ public class CSharpProject extends GaugeProject {
         StringBuilder classText = new StringBuilder();
         classText.append("public class ").append(className).append("\n{\n");
         classText.append("[Step(\"").append(stepValue.value).append("\")]\n");
+        if(continueOnFailure) {
+            classText.append("[ContinueOnFailure]\n");
+        }
         classText.append("public void ").append("stepImplementation(");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
