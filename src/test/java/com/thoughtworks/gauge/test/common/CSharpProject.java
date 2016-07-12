@@ -128,14 +128,14 @@ public class CSharpProject extends GaugeProject {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
         String value = row.getCell(columnNames.get(2));
-        return "DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Add(\"" + key + "\",\"" + value + "\");";
+        return "DataStoreFactory." + dataStoreType + "DataStore.Add(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
-        return "Console.WriteLine(DataStoreFactory.GetDataStoreFor(DataStoreType." + dataStoreType + ").Get(\"" + key + "\"));";
+        return "Console.WriteLine(DataStoreFactory." + dataStoreType + "DataStore.Get(\"" + key + "\"));";
     }
 
     private String hookString(String hookLevel, String hookType, List<String> tags) {
