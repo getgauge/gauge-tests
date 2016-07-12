@@ -32,6 +32,7 @@ public class JavaProject extends GaugeProject {
         String className = Util.getUniqueName();
         StringBuilder classText = createClassTeplate(className, stepValue.value);
         if (continueOnFailure) {
+            classText.insert(0, "import com.thoughtworks.gauge.ContinueOnFailure;\n");
             classText.append("\n@ContinueOnFailure\n");
         }
         classText.append("public void ").append("stepImplementation(");
@@ -153,7 +154,6 @@ public class JavaProject extends GaugeProject {
     private StringBuilder createClassTeplate(String className, String stepText) {
         StringBuilder classText = new StringBuilder();
         classText.append("import com.thoughtworks.gauge.Step;\n");
-        classText.append("import com.thoughtworks.gauge.ContinueOnFailure;\n");
         classText.append("public class ").append(className).append("{\n");
         classText.append("@Step(\"").append(stepText).append("\")\n");
         return classText;
