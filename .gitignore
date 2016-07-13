@@ -10,3 +10,4 @@ target
 gauge-tests.iml
 .vagrant
 .gauge/
+docs/
