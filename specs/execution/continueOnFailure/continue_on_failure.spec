@@ -12,6 +12,7 @@ tags: continueOnFailure
 
 Continue execution after a failed Step marked as continue
 ---------------------------------------------------------
+
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
      |step text  |implementation     |continue|

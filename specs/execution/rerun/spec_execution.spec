@@ -14,17 +14,20 @@ Rerun failed scenarios
      |-----------|-------------------|
      |First step |"inside first step"|
      |Second step|throw exception    |
+
 * Create "Sample scenario1" in "Basic_spec_execution1" with the following steps 
 
      |step text |implementation     |
      |----------|-------------------|
      |Third step|"inside third step"|
+
 * Create "Sample scenario2" in "Basic_spec_execution2" with the following steps 
 
      |step text  |implementation      |
      |-----------|--------------------|
      |Fourth step|"inside fourth step"|
      |Fifth step |throw exception     |
+
 * Execute the current project and ensure failure
 * Rerun failed scenarios and ensure failure
 * Console should contain following lines in order 
@@ -33,6 +36,7 @@ Rerun failed scenarios
      |------------------|
      |inside first step |
      |inside fourth step|
+
 * Console should not contain following lines 
 
      |console output   |

@@ -1,5 +1,6 @@
 Parallel Execution
 ==================
+
 * In an empty directory initialize a project named "parallel_exec" with the current language
 * Create "Scenario 11" in "Spec 1" with the following steps 
 
@@ -39,9 +40,11 @@ Parallel Execution
 
 Execute specs successfully
 --------------------------
+
 * Execute the current project in parallel and ensure success
 
 Execute specs successfully in n streams
 ---------------------------------------
+
 * Execute the current project in parallel in "2" streams and ensure success
 * Console should contain "Executing in 2 parallel streams"

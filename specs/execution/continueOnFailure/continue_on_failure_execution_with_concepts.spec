@@ -14,6 +14,7 @@ tags: continueOnFailure
 
 Test concept to continue on failure
 -----------------------------------
+
 * Create step implementations 
 
      |step                         |implementation  |continue|
@@ -44,6 +45,7 @@ Test concept to continue on failure
 
 Test concept to not continue on failure when failing step in not marked as continue
 -----------------------------------------------------------------------------------
+
 * Create step implementations 
 
      |step                         |implementation  |continue|
