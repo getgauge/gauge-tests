@@ -1,8 +1,8 @@
 Duplicate concept definition
-=============================
+============================
 
 Duplicate concept definition
------------------------------
+----------------------------
 
 * In an empty directory initialize a project named "invalid_duplicate_concept_definition" with the current language
 * Create concept "concept" with following steps 
@@ -36,8 +36,9 @@ Duplicate concept definition
      |concept  |
 
 * Execute the current project and ensure failure
-* Console should not contain following lines 
+* Console should contain following lines in order 
 
-     |output                                         |
-     |-----------------------------------------------|
-     |[ParseError] Duplicate concept definition found|
+     |output                            |
+     |----------------------------------|
+     |[ParseError]                      |
+     |Duplicate concept definition found|
