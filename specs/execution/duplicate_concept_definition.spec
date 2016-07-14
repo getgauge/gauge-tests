@@ -1,10 +1,8 @@
-Invalid Duplicate concept definition
-====================================
+Duplicate concept definition
+=============================
 
-tags: unimplemented
-
-Invalid duplicate concept definition
-------------------------------------
+Duplicate concept definition
+-----------------------------
 
 * In an empty directory initialize a project named "invalid_duplicate_concept_definition" with the current language
 * Create concept "concept" with following steps 
@@ -19,13 +17,13 @@ Invalid duplicate concept definition
      |-------------------------|--------------|
      |simple step with "static"|print params  |
 
+* Create concept "concept" with following steps 
+
+     |concept steps            |
+     |-------------------------|
+     |simple step with "static"|
+
 * Create a specification "spec1" with the following contexts 
-
-     |step text    |implementation        |
-     |-------------|----------------------|
-     |First context|"inside first context"|
-
-* Create a specification "spec2" with the following contexts 
 
      |step text    |implementation        |
      |-------------|----------------------|
@@ -37,21 +35,9 @@ Invalid duplicate concept definition
      |---------|
      |concept  |
 
-* Create "scenario_invalid_duplicate_concept_definition" in "spec2" with the following steps 
-
-     |step text|
-     |---------|
-     |concept  |
-
-* Execute the specs and ensure success 
-
-     |spec names|
-     |----------|
-     |spec1     |
-     |spec2     |
-
+* Execute the current project and ensure failure
 * Console should not contain following lines 
 
-     |output      |
-     |------------|
-     |[ParseError]|
+     |output                                         |
+     |-----------------------------------------------|
+     |[ParseError] Duplicate concept definition found|
