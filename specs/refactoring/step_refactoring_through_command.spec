@@ -79,7 +79,6 @@ Rename an unimplemented step
 Rename step to step with \
 --------------------------
 
-tags: unimplemented
 
 * Refactor step "step1" to "step with \\ slash"
 * The step "step1" should no longer be used
