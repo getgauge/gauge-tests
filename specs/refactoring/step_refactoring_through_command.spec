@@ -88,7 +88,7 @@ tags: unimplemented
 Rename in teardown
 ------------------
 
-* Add the following teardown steps in specification "Basic spec execution2"
+* Add the following teardown steps in specification "Basic spec execution2" 
 
      |step text      |implementation          |
      |---------------|------------------------|

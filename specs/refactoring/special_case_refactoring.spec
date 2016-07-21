@@ -7,7 +7,7 @@ Rephrase step with special and keyword parameters
 -------------------------------------------------
 
 * In an empty directory initialize a project named "refactoring_numeric_keyword_parameter" with the current language
-* Create a scenario "scenario refactoring numeric and keyword parameter" in specification "spec refactoring numeric parameter" with the following steps with implementation
+* Create a scenario "scenario refactoring numeric and keyword parameter" in specification "spec refactoring numeric parameter" with the following steps with implementation 
 
      |step text                                    |implementation|
      |---------------------------------------------|--------------|
@@ -20,16 +20,16 @@ Refactoring the step with special chars in implementation
 ---------------------------------------------------------
 
 * In an empty directory initialize a project named "refactor_step_with_special_chars" with the current language
-* Create a scenario "Sample scenario" in specification "refactor the step with special chars" with the following steps with implementation
+* Create a scenario "Sample scenario" in specification "refactor the step with special chars" with the following steps with implementation 
 
-     |step text|implementation                                         |
-     |---------|-------------------------------------------------------|
-     |A step   |"//*[@id=\\"content\\"]/section[1]/section/div[2]/a[1]"|
+     |step text|implementation                                       |
+     |---------|-----------------------------------------------------|
+     |A step   |"//*[@id=\"content\"]/section[1]/section/div[2]/a[1]"|
 
 * Refactor step "A step" to "New step"
 * Execute the spec "refactor the step with special chars" and ensure success
-* Console should not contain following lines
+* Console should not contain following lines 
 
-     |output                                              |
-     |----------------------------------------------------|
-     |"//*[@id=\"conten\"]/section[1]/section/div[2]/a[1]"|
+     |output                                            |
+     |--------------------------------------------------|
+     |"//*[@id="conten"]/section[1]/section/div[2]/a[1]"|
