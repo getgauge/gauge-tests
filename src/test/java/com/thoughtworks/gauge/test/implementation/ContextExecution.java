@@ -38,9 +38,9 @@ public class ContextExecution {
         for (TableRow rows : steps.getTableRows()) {
             spec.addContextSteps(rows.getCell("step text"));
             if (implement) {
-                if (steps.getColumnNames().size() != 2)
+                if (steps.getColumnNames().size() != 2 && steps.getColumnNames().size()!=3)
                     throw new RuntimeException("Expected two columns for table");
-                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), false, false);
+                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), Boolean.parseBoolean(rows.getCell("continue")), false);
             }
             spec.save();
         }
