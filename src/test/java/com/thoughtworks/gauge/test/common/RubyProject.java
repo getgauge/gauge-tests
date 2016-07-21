@@ -23,7 +23,11 @@ public class RubyProject extends GaugeProject {
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
         String fileName = Util.getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
-        rubyCode.append("step '").append(stepValue.value).append("' do |");
+        rubyCode.append("step '").append(stepValue.value).append("'");
+        if(continueOnFailure) {
+            rubyCode.append(", :continue_on_failure => true");
+        }
+        rubyCode.append(" do |");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
                 rubyCode.append("param").append(i);
