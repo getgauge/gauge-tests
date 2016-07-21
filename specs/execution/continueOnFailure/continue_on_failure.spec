@@ -9,9 +9,10 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
-     |step text |implementation |continue|
-     |----------|---------------|--------|
-     |First step|throw exception|true    |
+     |step text |implementation     |continue|
+     |----------|-------------------|--------|
+     |First step|throw exception    |true    |
+     |hello step|"inside hello step"|false   |
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
@@ -28,13 +29,9 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |console output          |
      |------------------------|
      |Failed Step: First step |
+     |inside hello step       |
      |Failed Step: Second step|
-     |Failed Step: Third step |
-
-* Console should not contain following lines 
-
-     |console output          |
-     |------------------------|
+     |inside third step       |
      |Failed Step: fourth step|
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a context step
@@ -78,7 +75,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |----------|-------------------|
      |First step|"inside first step"|
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
      |step text  |implementation     |continue|
      |-----------|-------------------|--------|
@@ -88,7 +85,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Execute the current project and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output          |
      |------------------------|
@@ -99,14 +96,14 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a scenario step
 ---------------------------------------------------------------------------------------------------------------
-* Create a specification "continueOnFailureSpec" with the following contexts
+* Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
      |step text  |implementation     |continue|
      |-----------|-------------------|--------|
@@ -118,7 +115,7 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Execute the current project and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output          |
      |------------------------|
@@ -127,7 +124,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |inside third step       |
      |Failed Step: Fourth step|
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output         |
      |-----------------------|
