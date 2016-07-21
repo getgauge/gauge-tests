@@ -11,3 +11,5 @@ gauge-tests.iml
 .vagrant
 .gauge/
 docs/
+.DS_Store
+
