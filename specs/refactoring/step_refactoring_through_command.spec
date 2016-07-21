@@ -84,3 +84,18 @@ tags: unimplemented
 * The step "step1" should no longer be used
 * The step "step with \\ slash" should be used in project
 * Execute the spec "Basic spec execution2" and ensure success
+
+Rename in teardown
+------------------
+
+* Add the following teardown steps in specification "Basic spec execution2"
+
+     |step text      |implementation          |
+     |---------------|------------------------|
+     |First teardown |"inside first teardown" |
+     |Second teardown|"inside second teardown"|
+
+* Refactor step "First teardown" to "First \"b\" teardown"
+* The step "First \"b\" teardown" should be used in project
+* The step "First teardown" should no longer be used
+* Execute the spec "Basic spec execution2" and ensure success
