@@ -30,7 +30,7 @@ public class ProjectInit {
     @Step("In an empty directory initialize a project named <projName> without example spec")
     public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
         initializeProject(projName);
-        currentProject.deleteSpec("example");
+        currentProject.deleteSpec("specs/example");
     }
 
     @Step("The following file structure should be created <table>")

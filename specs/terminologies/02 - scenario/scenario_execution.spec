@@ -3,7 +3,7 @@ Scenario execution
 
 * In an empty directory initialize a project named "scenarios_execution" without example spec
 
-Execute a scenario by specifying line number in a spec
+Execute one scenario by specifying line number in a spec with multiple scenarios
 ---------------------------------------------------
 
 * Create a specification "specWithMultipleScenarios" with the following contexts
@@ -39,12 +39,9 @@ Execute a scenario by specifying line number in a spec
      |---------------------------|
      |inside second scenario step|
 
-_______________
-
-* Console should contain following lines in order
-
-     |console output                                        |
-     |------------------------------------------------------|
-     |Successfully generated html-report                    |
-     |Specifications:	1 executed	1 passed	0 failed	0 skipped|
-     |Scenarios:	1 executed	1 passed	0 failed	0 skipped     |
+* Statics generated should have
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |1       |1     |0     |0      |
+     

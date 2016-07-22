@@ -12,7 +12,7 @@ concept execution
 Resolve concepts when executing from nested directories in specs
 ----------------------------------------------------------------
 
-* Create "resolve concept" in "concept" within sub folder "subfolder" with the following steps
+* Create "resolve concept" in "concept" within sub folder "specs/subfolder" with the following steps
 
      |scenario steps|
      |--------------|

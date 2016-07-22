@@ -13,11 +13,17 @@ public class GaugeProjectBuilder {
     private boolean implement;
     private boolean appendCode;
     private String subDirPath;
+    private String specsDirPath;
 
     public GaugeProjectBuilder(){}
 
     public GaugeProjectBuilder withScenarioName(String scenarioName){
         this.scenarioName = scenarioName;
+        return this;
+    }
+
+    public GaugeProjectBuilder withSpecsDirPath(String specsDirPath){
+        this.specsDirPath = specsDirPath;
         return this;
     }
 

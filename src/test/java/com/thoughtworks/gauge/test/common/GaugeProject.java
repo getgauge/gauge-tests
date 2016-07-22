@@ -99,8 +99,9 @@ public abstract class GaugeProject {
         return createSpecification("", name);
     }
 
-    public Specification createSpecification(String subDirPath, String name) throws IOException {
-        File specFile = getSpecFile(name, subDirPath);
+    public Specification createSpecification(String specsDirName, String name) throws IOException {
+        String specsDir = (specsDirName == null || specsDirName.isEmpty()) ? this.specsDirName : specsDirName;
+        File specFile = getSpecFile(name, specsDir);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
         }
@@ -110,14 +111,18 @@ public abstract class GaugeProject {
         return specification;
     }
 
-    private File getSpecFile(String name, String subDirPath) {
+    private File getSpecFile(String name, String dirPath) {
         name = Util.getSpecName(name);
-        String dirPath = Util.combinePath(specsDirName, subDirPath);
         if (!new File(projectDir, dirPath).exists()) {
             new File(projectDir, dirPath).mkdir();
         }
         return new File(projectDir, Util.combinePath(dirPath, name) + ".spec");
     }
+
+    private File getSpecFile(String name) {
+        return getSpecFile(name,"");
+    }
+
 
     public Specification findSpecification(String specName) {
         for (Specification specification : specifications) {
@@ -279,7 +284,7 @@ public abstract class GaugeProject {
     }
 
     public void deleteSpec(String specName) {
-        getSpecFile(specName, "").delete();
+        getSpecFile(specName).delete();
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
