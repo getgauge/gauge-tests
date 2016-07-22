@@ -69,6 +69,7 @@ Should not continue when there is a failure before a step with Continue on failu
 
 Should continue when there is a failure with Continue on failure attribute in a scenario step
 ---------------------------------------------------------------------------------------------
+
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
@@ -84,7 +85,6 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |fourth step|throw exception    |true    |
 
 * Execute the current project and ensure failure
-
 * Console should contain following lines in order 
 
      |console output          |
@@ -96,6 +96,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a scenario step
 ---------------------------------------------------------------------------------------------------------------
+
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
@@ -114,7 +115,6 @@ Should not continue when there is a failure before a step with Continue on failu
      |Next step  |"inside next step" |false   |
 
 * Execute the current project and ensure failure
-
 * Console should contain following lines in order 
 
      |console output          |
@@ -133,37 +133,38 @@ Should not continue when there is a failure before a step with Continue on failu
 
 Should continue when there is a failure with Continue on failure attribute in a tear down step
 ----------------------------------------------------------------------------------------------
-* Create a specification "continueOnFailureSpec" with the following contexts
+
+* Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
-     |step text  |implementation      |
-     |-----------|--------------------|
-     |Second step|"inside second step"|
-     |Third step |"inside third step" |
-     |fourth step|throw exception     |
+     |step text  |implementation      |continue|
+     |-----------|--------------------|--------|
+     |Second step|"inside second step"|false   |
+     |Third step |"inside third step" |false   |
+     |Fourth step|throw exception     |true    |
 
-* Add the following teardown steps in specification "continueOnFailureSpec"
+* Add the following teardown steps in specification "continueOnFailureSpec" 
 
-     |step text      |implementation |continue|
-     |---------------|---------------|--------|
-     |First teardown |throw exception|true    |
+     |step text     |implementation |continue|
+     |--------------|---------------|--------|
+     |First teardown|throw exception|true    |
      |Second teardown|throw exception|false   |
      |Third teardown |throw exception|true    |
 
 * Execute the current project and ensure failure
-
 * Console should contain following lines in order
 
-     |console output              |
-     |----------------------------|
-     |inside first step         |
-     |inside second step        |
-     |inside third step         |
+     |console output          |
+     |------------------------|
+     |inside first step       |
+     |inside second step      |
+     |inside third step       |
+     |Failed Step: Fourth step|
      |Failed Step: First teardown |
      |Failed Step: Second teardown|
 
@@ -175,19 +176,20 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a tear down step
 ----------------------------------------------------------------------------------------------------------------
-* Create a specification "continueOnFailureSpec" with the following contexts
+
+* Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
-     |step text  |implementation      |
-     |-----------|--------------------|
-     |Second step|"inside second step"|
-     |Third step |"inside third step" |
-     |fourth step|throw exception     |
+     |step text  |implementation      |continue|
+     |-----------|--------------------|--------|
+     |Second step|"inside second step"|false|
+     |Third step |"inside third step" |false|
+     |fourth step|throw exception     |true|
 
 * Add the following teardown steps in specification "continueOnFailureSpec" 
 
@@ -197,14 +199,13 @@ Should not continue when there is a failure before a step with Continue on failu
      |Second teardown|throw exception|true    |
 
 * Execute the current project and ensure failure
-
 * Console should contain following lines in order 
 
      |console output             |
      |---------------------------|
-     |inside first step        |
-     |inside second step       |
-     |inside third step        |
+     |inside first step          |
+     |inside second step         |
+     |inside third step          |
      |Failed Step: First teardown|
 
 * Console should not contain following lines 
@@ -215,6 +216,7 @@ Should not continue when there is a failure before a step with Continue on failu
 
 Should continue when there is a failure with Continue on failure attribute in a concept step
 --------------------------------------------------------------------------------------------
+
 * Create concept "concept with continue on failure steps" with following steps 
 
      |concept steps                |
@@ -240,7 +242,6 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |say hello                             |
 
 * Execute the spec "Spec with concepts" and ensure failure
-
 * Console should contain following lines in order 
 
      |console output table                      |
@@ -254,6 +255,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a concept step
 --------------------------------------------------------------------------------------------------------------
+
 * Create concept "concept with continue on failure steps" with following steps 
 
      |concept steps                |
@@ -279,7 +281,6 @@ Should not continue when there is a failure before a step with Continue on failu
      |say hello                             |
 
 * Execute the spec "Spec with concepts" and ensure failure
-
 * Console should contain following lines in order 
 
      |console output table                      |

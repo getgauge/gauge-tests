@@ -55,8 +55,12 @@ public class GaugeProjectBuilder {
         List<String> columnNames = steps.getColumnNames();
         for (TableRow row : steps.getTableRows()) {
             scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
-            if (implement)
-                GaugeProject.currentProject.implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, appendCode);
+            if (implement){
+                GaugeProject.currentProject.implementStep(row.getCell("step text"),
+                        row.getCell("implementation"),
+                        Boolean.parseBoolean(row.getCell("continue")),
+                        appendCode);
+            }
         }
         spec.addScenarios(scenario);
         spec.save();

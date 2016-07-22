@@ -40,7 +40,10 @@ public class ContextExecution {
             if (implement) {
                 if (steps.getColumnNames().size() < 2)
                     throw new RuntimeException("Expected minimum two columns for table");
-                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), Boolean.parseBoolean(rows.getCell("continue")), false);
+                currentProject.implementStep(rows.getCell("step text"),
+                        rows.getCell("implementation"),
+                        Boolean.parseBoolean(rows.getCell("continue")),
+                        false);
             }
             spec.save();
         }
@@ -51,9 +54,12 @@ public class ContextExecution {
         for (TableRow rows : steps.getTableRows()) {
             spec.addTeardownSteps(rows.getCell("step text"));
             if (implement) {
-                if (steps.getColumnNames().size() != 2 && steps.getColumnNames().size()!=3)
-                    throw new RuntimeException("Expected two columns for table");
-                currentProject.implementStep(rows.getCell("step text"), rows.getCell("implementation"), Boolean.parseBoolean(rows.getCell("continue")), false);
+                if (steps.getColumnNames().size() < 2)
+                    throw new RuntimeException("Expected minimum two columns for table");
+                currentProject.implementStep(rows.getCell("step text"),
+                        rows.getCell("implementation"),
+                        Boolean.parseBoolean(rows.getCell("continue")),
+                        false);
             }
             spec.save();
         }
@@ -96,6 +102,4 @@ public class ContextExecution {
         spec.addTags(tags);
         spec.save();
     }
-
-
 }
