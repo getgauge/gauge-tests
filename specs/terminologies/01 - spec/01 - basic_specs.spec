@@ -69,41 +69,42 @@ basic spec with multiple scenario passing
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-basic spec with one scenario failing
-------------------------------------
+Spec fails if it has even one scenario failing
+--------------------------------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
+* Create "Sample scenario" in "Basic spec execution" with the following steps
 
-     |step text          |implementation     |
-     |-------------------|-------------------|
-     |First Scenario step|"inside first step"|
+     |step text  |implementation      |
+     |-----------|--------------------|
+     |First step |"inside first step" |
+     |Second step|"inside second step"|
+     |Third step |throw exception     |
 
-* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation 
+* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation
 
      |step text           |implementation      |
      |--------------------|--------------------|
      |Second Scenario step|"inside second step"|
 
-* Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation 
+* Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation
 
-     |step text          |implementation |
-     |-------------------|---------------|
-     |Third Scenario step|throw exception|
+     |step text          |implementation     |
+     |-------------------|-------------------|
+     |Third Scenario step|"inside third step"|
 
 * Execute the current project and ensure failure
 
-a scenario with even one test is considered as a failing spec
-* Console should contain following lines in order 
+* Console should contain following lines in order
 
-     |console output                                   |
-     |-------------------------------------------------|
-     |inside first step                                |
-     |inside second step                               |
-     |Failed Step: Third Scenario step                 |
-     |Specification: specs/Basic spec execution.spec:15|
+     |console output         |
+     |-----------------------|
+     |inside first step      |
+     |inside second step     |
+     |Failed Step: Third step|
 
 * Statics generated should have
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |3       |2     |1     |0      |
+
