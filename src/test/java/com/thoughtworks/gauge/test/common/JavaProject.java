@@ -22,7 +22,7 @@ public class JavaProject extends GaugeProject {
         map.put("src", "dir");
         map.put("libs", "dir");
         map.put(Util.combinePath("src","test","java","StepImplementation.java"), "file");
-        map.put(Util.combinePath("env","default","java","properties"), "file");
+        map.put(Util.combinePath("env","default","java.properties"), "file");
         return map;
     }
 
