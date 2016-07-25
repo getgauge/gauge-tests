@@ -114,7 +114,7 @@ public abstract class GaugeProject {
     private File getSpecFile(String name, String dirPath) {
         name = Util.getSpecName(name);
         if (!new File(projectDir, dirPath).exists()) {
-            new File(projectDir, dirPath).mkdir();
+            new File(projectDir, dirPath).mkdirs();
         }
         return new File(projectDir, Util.combinePath(dirPath, name) + ".spec");
     }
