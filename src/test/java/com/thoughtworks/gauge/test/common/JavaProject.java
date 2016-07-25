@@ -21,8 +21,8 @@ public class JavaProject extends GaugeProject {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("src", "dir");
         map.put("libs", "dir");
-        map.put("src/test/java/StepImplementation.java", "file");
-        map.put("env/default/java.properties", "file");
+        map.put(Util.combinePath("src","test","java","StepImplementation.java"), "file");
+        map.put(Util.combinePath("env","default","java","properties"), "file");
         return map;
     }
 
@@ -137,7 +137,7 @@ public class JavaProject extends GaugeProject {
     }
 
     private String getStepImplementationsDir() {
-        return new File(getProjectDir(), "src/test/java").getAbsolutePath();
+        return Util.combinePath(getProjectDir().getAbsolutePath(), "src", "test","java");
     }
 
     private void addParameters(StringBuilder classText, List<String> paramTypes, StepValueExtractor.StepValue stepValue) {

@@ -3,10 +3,12 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,13 +19,14 @@ public class Util {
 
     public static final String DEFAULT_SPEC_FILENAME = "default";
 
-    public static String combinePath(String path1, String path2) {
-        if(path1==null)
-            return path2;
-        if(path2==null)
-            return path1;
-        String combined_path = new File(path1, path2).getPath();
-        return combined_path;
+    public static String combinePath(String... paths) {
+        File file = new File(paths[0]);
+
+        for (int i = 1; i < paths.length ; i++) {
+            file = new File(file, paths[i]);
+        }
+
+        return file.getPath();
     }
 
     public static void writeToFile(String absolutePath, String data) throws IOException {

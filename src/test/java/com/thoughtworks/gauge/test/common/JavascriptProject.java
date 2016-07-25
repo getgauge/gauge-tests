@@ -51,8 +51,8 @@ public class JavascriptProject extends GaugeProject {
     public Map<String, String> getLanguageSpecificFiles() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("tests", "dir");
-        map.put("tests/step_implementation.js", "file");
-        map.put("env/default/js.properties", "file");
+        map.put(Util.combinePath("tests","step_implementation.js"), "file");
+        map.put(Util.combinePath("env","default","js.properties"), "file");
         return map;
     }
 
