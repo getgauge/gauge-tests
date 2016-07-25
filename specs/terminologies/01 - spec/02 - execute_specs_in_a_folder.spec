@@ -67,7 +67,7 @@ Execute a spec in a sub folder
      |--------------|
      |Sample concept|
 
-* Execute the spec folder "specs/subfolder/" and ensure success
+* Execute the spec folder "specs/subFolder/" and ensure success
 
 * Statics generated should have
      |Statistics name|executed|passed|failed|skipped|
