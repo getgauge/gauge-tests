@@ -23,7 +23,9 @@ public class Util {
         File file = new File(paths[0]);
 
         for (int i = 1; i < paths.length ; i++) {
-            file = new File(file, paths[i]);
+            for (String path :paths[i].split(File.pathSeparator)) {
+                file = new File(file, path);
+            }
         }
 
         return file.getPath();
