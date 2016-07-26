@@ -274,7 +274,7 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
 
-     |step text                            |
+     |step text                             |
      |--------------------------------------|
      |say hello                             |
      |concept with continue on failure steps|

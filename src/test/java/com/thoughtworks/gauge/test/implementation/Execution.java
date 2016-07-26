@@ -70,21 +70,6 @@ public class Execution {
         assertOn(currentProject.executeSpec(specName), true);
     }
 
-    @Step("Execute the specs and ensure success <table>")
-    public void executeSpecAndEnsureSuccess(Table givenSpecNames) throws Exception {
-        List<String> columnNames = givenSpecNames.getColumnNames();
-        List<String> specNames = new ArrayList<>();
-        for (TableRow row : givenSpecNames.getTableRows()) {
-            String specName = row.getCell(columnNames.get(0));
-            Specification specification = currentProject.findSpecification(specName);
-            assertThat(specification).isNotNull();
-
-            specNames.add(specName);
-        }
-
-        assertOn(currentProject.executeSpec(specNames), true);
-    }
-
     @Step("Execute the spec <spec name> with scenario at <line number> and ensure success")
     public void executeScenarioWithLineNumber(String specName, int lineNumber) throws Exception {
         Specification spec = currentProject.findSpecification(specName);
@@ -113,16 +98,6 @@ public class Execution {
 
         assertThat(spec).isNotNull();
         assertOn(currentProject.executeTagsInSpec(tags, specName), true);
-    }
-
-    @Step("Check for validation errors in the project and ensure failure")
-    public void validateAndEnsureFailure() throws Exception {
-        assertOn(currentProject.validate(), false);
-    }
-
-    @Step("Check for validation errors in the project and ensure success")
-    public void validateAndEnsureSuccess() throws Exception {
-        assertOn(currentProject.validate(), true);
     }
 
     private String getFormattedProcessOutput() {

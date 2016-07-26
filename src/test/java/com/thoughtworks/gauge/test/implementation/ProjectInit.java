@@ -4,10 +4,10 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
+import com.thoughtworks.gauge.test.common.builders.ProjectBuilder;
 import com.thoughtworks.gauge.test.common.Util;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-
 import java.io.File;
 import java.util.Map;
 
@@ -15,22 +15,25 @@ public class ProjectInit {
 
     private GaugeProject currentProject = null;
 
-    @Step("In an empty directory initialize a <language> project named <projName>")
-    public void initializeProjectWithLanguage(String language, String projName) throws Exception {
-        currentProject = GaugeProject.createProject(language, projName);
-        currentProject.initialize();
+    @Step("In an empty directory, use default initialization of a project named <projName> in language <language>")
+    public void initializeProjectWithLanguage(String projName, String language) throws Exception {
+        currentProject = new ProjectBuilder().withLangauge(language).withProjectName(projName).build();
     }
 
-    @Step({"In an empty directory initialize a project named <projName> with the current language"})
+    @Step({ "In an empty directory, use default initialization of a project named <projName> with the current language" })
+    public void defaultInitializationProject(String projName) throws Exception {
+        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage()).withProjectName(projName).build();
+    }
+
+    @Step({ "In an empty directory initialize a project named <projName> with the current language" })
     public void initializeProject(String projName) throws Exception {
-        String currentLanguage = Util.getCurrentLanguage();
-        initializeProjectWithLanguage(currentLanguage, projName);
+        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage())
+                .withProjectName(projName).withoutExampleSpec().build();
     }
 
     @Step("In an empty directory initialize a project named <projName> without example spec")
     public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
-        initializeProject(projName);
-        currentProject.deleteSpec(Util.combinePath("specs","example"));
+        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage()).withProjectName(projName).withoutExampleSpec().build();
     }
 
     @Step("The following file structure should be created <table>")
@@ -53,7 +56,7 @@ public class ProjectInit {
     public void verifyFilesForLanguageIsCreated() {
         SoftAssertions softly = new SoftAssertions();
         Map<String, String> files = currentProject.getLanguageSpecificFiles();
-        files.forEach((k, v) -> {
+        files.forEach(( k,  v) -> {
             File fileName = new File(getPathRelativeToCurrentProjectDir(k));
             String fileType = v.toLowerCase();
             softly.assertThat(fileType).isIn("dir", "file");

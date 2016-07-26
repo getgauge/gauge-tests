@@ -14,7 +14,7 @@ Should be able to take screenshot using a custom logic
      |----------|-------------------|
      |hello step|"inside hello step"|
 
-* Create a scenario "generate custom screenshot" in specification "custom_screenshot" with the following steps with implementation
+* Create a scenario "generate custom screenshot" in specification "custom_screenshot" with the following steps with implementation 
 
      |step text  |implementation |
      |-----------|---------------|

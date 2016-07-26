@@ -3,7 +3,8 @@ Concept Steps Collection
 
 tags: api
 
-* In an empty directory initialize a project named "concept_steps_collection" with the current language
+* In an empty directory, use default initialization of a project named "concept_steps_collection" with the current language
+
 * Create concept "concept1 <b>" with following steps 
 
      |step text |implementation      |

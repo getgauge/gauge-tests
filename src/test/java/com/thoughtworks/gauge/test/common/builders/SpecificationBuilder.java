@@ -1,57 +1,67 @@
-package com.thoughtworks.gauge.test.common;
+package com.thoughtworks.gauge.test.common.builders;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.common.GaugeProject;
+import com.thoughtworks.gauge.test.common.Specification;
 
-public class GaugeProjectBuilder {
+import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+
+public class SpecificationBuilder {
+    private ScenarioBuilder scenarioBuilder;
+    private TagsBuilder tagsBuilder;
 
     private String scenarioName;
     private String specName;
-    private Table scenarioSteps;
     private boolean appendCode;
     private String subDirPath;
     private String specsDirPath;
     private Table contextSteps;
     private Table tearDownSteps;
 
-    public GaugeProjectBuilder(){}
+    public SpecificationBuilder(){
+        scenarioBuilder = new ScenarioBuilder();
+        tagsBuilder = new TagsBuilder();
+    }
 
-    public GaugeProjectBuilder withContextSteps(Table contextSteps) {
+    public SpecificationBuilder withContextSteps(Table contextSteps) {
         this.contextSteps = contextSteps;
         return this;
     }
 
-    public GaugeProjectBuilder withScenarioName(String scenarioName){
+    public SpecificationBuilder withScenarioName(String scenarioName){
+        this.tagsBuilder.withScenarioName(scenarioName);
+        this.scenarioBuilder.withScenarioName(scenarioName);
         this.scenarioName = scenarioName;
         return this;
     }
 
-    public GaugeProjectBuilder withSpecsDirPath(String specsDirPath){
+    public SpecificationBuilder withSpecsDirPath(String specsDirPath){
         this.specsDirPath = specsDirPath;
         return this;
     }
 
-    public GaugeProjectBuilder withSubDirPath(String subDirPath){
+    public SpecificationBuilder withSubDirPath(String subDirPath){
         this.subDirPath = subDirPath;
         return this;
     }
 
-    public GaugeProjectBuilder withSpecName(String specName){
+    public SpecificationBuilder withSpecName(String specName){
         this.specName = specName;
         return this;
     }
 
-    public GaugeProjectBuilder withSteps(Table steps){
-        this.scenarioSteps = steps;
+    public SpecificationBuilder withSteps(Table steps){
+        this.scenarioBuilder.withSteps(steps);
         return this;
     }
 
-    public GaugeProjectBuilder withAppendCode(boolean appendCode){
-        this.appendCode = appendCode;
+    public SpecificationBuilder withAppendCode(boolean appendCode){
+        this.scenarioBuilder.withAppendCode(appendCode);
         return this;
     }
 
-    public GaugeProjectBuilder withTeardownSteps(Table tearDownSteps) {
+    public SpecificationBuilder withTeardownSteps(Table tearDownSteps) {
         this.tearDownSteps = tearDownSteps;
         return this;
     }
@@ -66,28 +76,26 @@ public class GaugeProjectBuilder {
             for (TableRow row : contextSteps.getTableRows()) {
                 spec.addContextSteps(row.getCell("step text"));
                 implement(contextSteps, row);
-                spec.save();
             }
         }
 
-        if(scenarioName!=null) {
-            Scenario scenario = new Scenario(scenarioName);
-            for (TableRow row : scenarioSteps.getTableRows()) {
-                scenario.addItem(row.getCell("step text"), row.getCell("Type"));
-                implement(scenarioSteps,row);
-            }
-            spec.addScenarios(scenario);
-            spec.save();
-        }
+        if(scenarioBuilder.canBuild())
+            spec.addScenarios(scenarioBuilder.buildScenario());
+
+        if(tagsBuilder.canBuild())
+            tagsBuilder.withScenario(currentProject.findScenario(scenarioName, spec.getScenarios()))
+                .withSpecification(spec)
+                .build();
 
         if(tearDownSteps!=null)
         {
             for (TableRow row : tearDownSteps.getTableRows()) {
                 spec.addTeardownSteps(row.getCell("step text"));
                 implement(tearDownSteps, row);
-                spec.save();
             }
         }
+
+        spec.save();
     }
 
     private void implement(Table impl, TableRow row) throws Exception {
@@ -95,7 +103,12 @@ public class GaugeProjectBuilder {
             GaugeProject.currentProject.implementStep(row.getCell("step text"),
                     row.getCell("implementation"),
                     Boolean.parseBoolean(row.getCell("continue on failure")),
-                    appendCode);
+                    this.appendCode);
         }
+    }
+
+    public SpecificationBuilder withTags(String tags) {
+        this.tagsBuilder.withTags(tags);
+        return this;
     }
 }

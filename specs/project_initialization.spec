@@ -8,7 +8,7 @@ where the <language> can be any of the supported languages. Currently gauge supp
 Initializing a new project
 --------------------------
 
-* In an empty directory initialize a project named "init_proj" with the current language
+* In an empty directory, use default initialization of a project named "init_proj" with the current language
 * The following file structure should be created 
 
      |name                          |type|
@@ -25,6 +25,6 @@ Initializing a new project
 Initializing unknown language project
 -------------------------------------
 
-* In an empty directory initialize a "unknown" project named "init_proj_unknown"
+* In an empty directory, use default initialization of a project named "init_proj_unknown" in language "unknown"
 * Console should contain "Failed to initialize project. Plugin 'unknown' not installed"
 * Directory "init_proj_unknown" should be empty
