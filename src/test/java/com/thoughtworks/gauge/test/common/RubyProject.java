@@ -122,7 +122,10 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
-
+        StringBuilder rubyFileText = new StringBuilder();
+        rubyFileText.append("Gauge.configure {|c| c.screengrabber =  -> { return \"" +stubScreenshot+"\" }}");
+        rubyFileText.append("\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".rb"), rubyFileText.toString());
     }
 
     private String getStepImplementationsDir() {

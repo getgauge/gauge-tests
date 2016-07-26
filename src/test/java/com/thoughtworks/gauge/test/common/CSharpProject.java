@@ -143,6 +143,16 @@ public class CSharpProject extends GaugeProject {
 
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+        String className = Util.getUniqueName();
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("public class "+ className +" : IScreenGrabber {\n");
+        sb.append("\n");
+        sb.append("    public byte[] TakeScreenshot() {\n");
+        sb.append("        return Encoding.UTF8.GetBytes(\"" + stubScreenshot +"\");\n");
+        sb.append("    }\n");
+        sb.append("}");
+        Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), sb.toString());
 
     }
 
