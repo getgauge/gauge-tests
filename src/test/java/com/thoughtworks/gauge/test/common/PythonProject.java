@@ -126,6 +126,11 @@ public class PythonProject extends GaugeProject {
         return "    print(DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().get(\"" + key + "\"))";
     }
 
+    @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "step_impl").getAbsolutePath();
     }

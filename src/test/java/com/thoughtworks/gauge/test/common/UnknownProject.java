@@ -56,4 +56,9 @@ public class UnknownProject extends GaugeProject {
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         throw new RuntimeException("Not implemented");
     }
+
+    @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+
+    }
 }

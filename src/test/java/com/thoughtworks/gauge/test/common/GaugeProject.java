@@ -120,7 +120,7 @@ public abstract class GaugeProject {
     }
 
     private File getSpecFile(String name) {
-        return getSpecFile(name,"");
+        return getSpecFile(name, "");
     }
 
 
@@ -225,7 +225,7 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
-        return execute(new String []{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
+        return execute(new String[]{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
     }
 
     public ExecutionSummary executeSpecWithRowRange(String specName, String rowRange) throws Exception {
@@ -263,6 +263,7 @@ public abstract class GaugeProject {
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
+        processBuilder.environment().put("screenshot_on_failure", "true");
 
         filterConflictingEnv(processBuilder);
         Process lastProcess = processBuilder.start();
@@ -341,6 +342,7 @@ public abstract class GaugeProject {
     public String getLastProcessStdout() {
         return lastProcessStdout;
     }
+
     public String getLastProcessStderr() {
         return lastProcessStderr;
     }
@@ -356,4 +358,6 @@ public abstract class GaugeProject {
     public abstract String getDataStoreWriteStatement(TableRow row, List<String> columnNames);
 
     public abstract String getDataStorePrintValueStatement(TableRow row, List<String> columnNames);
+
+    public abstract void configureCustomScreengrabber(String stubScreenshot) throws IOException;
 }

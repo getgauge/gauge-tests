@@ -120,6 +120,11 @@ public class RubyProject extends GaugeProject {
         return "puts Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.get(\"" + key + "\")";
     }
 
+    @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "step_implementations").getAbsolutePath();
     }

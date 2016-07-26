@@ -141,6 +141,11 @@ public class CSharpProject extends GaugeProject {
         return "Console.WriteLine(DataStoreFactory." + dataStoreType + "DataStore.Get(\"" + key + "\"));";
     }
 
+    @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+
+    }
+
     private String hookString(String hookLevel, String hookType, List<String> tags) {
         String tagsText = isSuiteLevel(hookLevel) ? "" : Util.joinList(Util.quotifyValues(tags));
         return String.format("[%s(%s)]", hookName(hookLevel, hookType), tagsText);

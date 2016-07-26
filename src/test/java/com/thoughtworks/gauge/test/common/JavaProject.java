@@ -59,6 +59,21 @@ public class JavaProject extends GaugeProject {
     }
 
     @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+        String className = Util.getUniqueName();
+        StringBuilder sb = new StringBuilder();
+        sb.append("import com.thoughtworks.gauge.screenshot.ICustomScreenshotGrabber;\n");
+        sb.append("\n");
+        sb.append("public class "+ className +" implements ICustomScreenshotGrabber {\n");
+        sb.append("\n");
+        sb.append("    public byte[] takeScreenshot() {\n");
+        sb.append("        return \"" + stubScreenshot +"\".getBytes();\n");
+        sb.append("    }\n");
+        sb.append("}");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), sb.toString());
+    }
+
+    @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {

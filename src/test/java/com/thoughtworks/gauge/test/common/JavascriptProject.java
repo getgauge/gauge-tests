@@ -129,6 +129,11 @@ public class JavascriptProject extends GaugeProject {
         return "console.log(gauge.dataStore." + dataStoreType.toLowerCase() + "Store.get(\"" + key + "\"));";
     }
 
+    @Override
+    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+
+    }
+
     private String getStepImplementationsDir() {
         return new File(getProjectDir(), "tests").getAbsolutePath();
     }
