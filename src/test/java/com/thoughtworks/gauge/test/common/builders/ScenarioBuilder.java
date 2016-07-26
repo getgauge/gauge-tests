@@ -4,12 +4,14 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Scenario;
+import com.thoughtworks.gauge.test.common.Specification;
 
 public class ScenarioBuilder {
 
     private String scenarioName;
     private Table scenarioSteps;
     private boolean appendCode;
+    private Specification spec;
 
     public ScenarioBuilder withScenarioName(String scenarioName) {
         this.scenarioName = scenarioName;
@@ -26,14 +28,14 @@ public class ScenarioBuilder {
         return this;
     }
 
-    public Scenario buildScenario() throws Exception {
+    private Scenario buildScenario() throws Exception {
         if(!canBuild())
             throw new Exception("scenario name and steps needed for initialization");
 
         Scenario scenario = new Scenario(scenarioName);
         for (TableRow row : scenarioSteps.getTableRows()) {
             scenario.addItem(row.getCell("step text"), row.getCell("Type"));
-            implement(scenarioSteps,row);
+            GaugeProject.implement(scenarioSteps, row,appendCode);
         }
 
         return scenario;
@@ -43,14 +45,13 @@ public class ScenarioBuilder {
         return (scenarioName!=null && scenarioSteps!=null);
     }
 
-    private void implement(Table impl, TableRow row) throws Exception {
-        if(impl.getColumnNames().contains("implementation")) {
-            GaugeProject.currentProject.implementStep(row.getCell("step text"),
-                    row.getCell("implementation"),
-                    Boolean.parseBoolean(row.getCell("continue on failure")),
-                    appendCode);
-        }
+    public ScenarioBuilder withSpecification(Specification spec) {
+        this.spec = spec;
+        return this;
     }
 
+    public void build() throws Exception {
+        spec.addScenarios(buildScenario());
+    }
 }
 

@@ -9,7 +9,6 @@ public class TagsBuilder {
 
     private String scenarioName;
     private String tags;
-    private Scenario scenario;
     private Specification spec;
 
     public TagsBuilder withScenarioName(String scenarioName) {
@@ -19,11 +18,6 @@ public class TagsBuilder {
 
     public TagsBuilder withTags(String tags) {
         this.tags = tags;
-        return this;
-    }
-
-    public TagsBuilder withScenario(Scenario scenario) {
-        this.scenario = scenario;
         return this;
     }
 

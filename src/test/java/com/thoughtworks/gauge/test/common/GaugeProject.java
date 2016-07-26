@@ -327,6 +327,15 @@ public abstract class GaugeProject {
         }
     }
 
+    public static void implement(Table impl, TableRow row,boolean appendCode) throws Exception {
+        if(impl.getColumnNames().contains("implementation")) {
+            GaugeProject.currentProject.implementStep(row.getCell("step text"),
+                    row.getCell("implementation"),
+                    Boolean.parseBoolean(row.getCell("continue on failure")),
+                    appendCode);
+        }
+    }
+
     public abstract void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception;
 
     public abstract Map<String, String> getLanguageSpecificFiles();

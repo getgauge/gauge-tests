@@ -10,29 +10,28 @@ import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 public class SpecificationBuilder {
     private ScenarioBuilder scenarioBuilder;
     private TagsBuilder tagsBuilder;
+    private ContextBuilder contextBuilder;
+    private TeardownBuilder teardownBuilder;
 
-    private String scenarioName;
     private String specName;
-    private boolean appendCode;
     private String subDirPath;
     private String specsDirPath;
-    private Table contextSteps;
-    private Table tearDownSteps;
 
     public SpecificationBuilder(){
         scenarioBuilder = new ScenarioBuilder();
         tagsBuilder = new TagsBuilder();
+        contextBuilder = new ContextBuilder();
+        teardownBuilder = new TeardownBuilder();
     }
 
     public SpecificationBuilder withContextSteps(Table contextSteps) {
-        this.contextSteps = contextSteps;
+        this.contextBuilder.withContextSteps(contextSteps);
         return this;
     }
 
     public SpecificationBuilder withScenarioName(String scenarioName){
         this.tagsBuilder.withScenarioName(scenarioName);
         this.scenarioBuilder.withScenarioName(scenarioName);
-        this.scenarioName = scenarioName;
         return this;
     }
 
@@ -57,12 +56,14 @@ public class SpecificationBuilder {
     }
 
     public SpecificationBuilder withAppendCode(boolean appendCode){
+        this.contextBuilder.withAppendCode(appendCode);
+        this.teardownBuilder.withAppendCode(appendCode);
         this.scenarioBuilder.withAppendCode(appendCode);
         return this;
     }
 
     public SpecificationBuilder withTeardownSteps(Table tearDownSteps) {
-        this.tearDownSteps = tearDownSteps;
+        this.teardownBuilder.withTeardownSteps(tearDownSteps);
         return this;
     }
 
@@ -72,39 +73,24 @@ public class SpecificationBuilder {
             spec = GaugeProject.currentProject.createSpecification(subDirPath,specName);
         }
 
-        if(contextSteps!=null) {
-            for (TableRow row : contextSteps.getTableRows()) {
-                spec.addContextSteps(row.getCell("step text"));
-                implement(contextSteps, row);
-            }
-        }
+        contextBuilder.withSpecification(spec);
+        teardownBuilder.withSpecification(spec);
+        scenarioBuilder.withSpecification(spec);
+        tagsBuilder.withSpecification(spec);
+
+        if(contextBuilder.canBuild())
+            contextBuilder.build();
 
         if(scenarioBuilder.canBuild())
-            spec.addScenarios(scenarioBuilder.buildScenario());
+            scenarioBuilder.build();
 
         if(tagsBuilder.canBuild())
-            tagsBuilder.withScenario(currentProject.findScenario(scenarioName, spec.getScenarios()))
-                .withSpecification(spec)
-                .build();
+            tagsBuilder.build();
 
-        if(tearDownSteps!=null)
-        {
-            for (TableRow row : tearDownSteps.getTableRows()) {
-                spec.addTeardownSteps(row.getCell("step text"));
-                implement(tearDownSteps, row);
-            }
-        }
+        if(teardownBuilder.canBuild())
+            teardownBuilder.build();
 
         spec.save();
-    }
-
-    private void implement(Table impl, TableRow row) throws Exception {
-        if(impl.getColumnNames().contains("implementation")) {
-            GaugeProject.currentProject.implementStep(row.getCell("step text"),
-                    row.getCell("implementation"),
-                    Boolean.parseBoolean(row.getCell("continue on failure")),
-                    this.appendCode);
-        }
     }
 
     public SpecificationBuilder withTags(String tags) {
