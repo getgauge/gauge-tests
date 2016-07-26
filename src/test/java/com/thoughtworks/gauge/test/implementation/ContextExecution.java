@@ -70,8 +70,7 @@ public class ContextExecution {
         new GaugeProjectBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withSteps(steps)
-                .withImplement(true)
-                .createScenarioAndSteps();
+                .buildAndAddToProject();
     }
 
     @Step("Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>")
@@ -79,7 +78,7 @@ public class ContextExecution {
         new GaugeProjectBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withSteps(steps)
-                .createScenarioAndSteps();
+                .buildAndAddToProject();
     }
 
     @Step("Add tags <tags> to scenario <scenario name> in specification <specification name>")

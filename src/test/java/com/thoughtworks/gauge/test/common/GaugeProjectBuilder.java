@@ -39,11 +39,7 @@ public class GaugeProjectBuilder {
 
     public GaugeProjectBuilder withSteps(Table steps){
         this.steps = steps;
-        return this;
-    }
-
-    public GaugeProjectBuilder withImplement(boolean implement){
-        this.implement = implement;
+        this.implement = steps.getColumnNames().contains("implementation");
         return this;
     }
 
@@ -52,7 +48,7 @@ public class GaugeProjectBuilder {
         return this;
     }
 
-    public void createScenarioAndSteps() throws Exception {
+    public void buildAndAddToProject() throws Exception {
         Specification spec = GaugeProject.currentProject.findSpecification(specName);
         if (spec == null) {
             spec = GaugeProject.currentProject.createSpecification(subDirPath,specName);
@@ -71,4 +67,5 @@ public class GaugeProjectBuilder {
         spec.addScenarios(scenario);
         spec.save();
     }
+
 }

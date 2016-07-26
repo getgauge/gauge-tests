@@ -26,9 +26,8 @@ public class DataStore {
         new GaugeProjectBuilder().withScenarioName(scenario)
                 .withSpecName(spec)
                 .withSteps(table)
-                .withImplement(true)
                 .withAppendCode(true)
-                .createScenarioAndSteps();
+                .buildAndAddToProject();
     }
 
     @Step("Create a scenario <readScenario> in specification <newSpec> with step to read from datastore <table>")
@@ -44,9 +43,8 @@ public class DataStore {
         new GaugeProjectBuilder().withScenarioName(scenario)
                 .withSpecName(spec)
                 .withSteps(table)
-                .withImplement(true)
                 .withAppendCode(true)
-                .createScenarioAndSteps();
+                .buildAndAddToProject();
     }
 
     @Step("Create a scenario <writeScenario> in specification <newSpec> with step to write to datastore <table>")
@@ -61,8 +59,7 @@ public class DataStore {
         new GaugeProjectBuilder().withScenarioName(scenario)
                 .withSpecName(spec)
                 .withSteps(table)
-                .withImplement(true)
                 .withAppendCode(true)
-                .createScenarioAndSteps();
+                .buildAndAddToProject();
     }
 }
