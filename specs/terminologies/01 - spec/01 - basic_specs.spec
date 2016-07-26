@@ -19,14 +19,15 @@ basic spec with one scenario passing
 
 * Console should contain following lines in order 
 
-     |console output                                        |
-     |------------------------------------------------------|
-     |inside first step                                     |
-     |inside second step                                    |
-     |inside third step                                     |
-     |inside step with parameters : two params              |
+     |console output                          |
+     |----------------------------------------|
+     |inside first step                       |
+     |inside second step                      |
+     |inside third step                       |
+     |inside step with parameters : two params|
 
-* Statics generated should have
+* Statics generated should have 
+
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
@@ -57,22 +58,23 @@ basic spec with multiple scenario passing
 
 * Console should contain following lines in order 
 
-     |console output                                        |
-     |------------------------------------------------------|
-     |inside first step                                     |
-     |inside second step                                    |
-     |inside third step                                     |
+     |console output    |
+     |------------------|
+     |inside first step |
+     |inside second step|
+     |inside third step |
 
-* Statics generated should have
+* Statics generated should have 
+
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
 Spec fails if it has even one scenario failing
---------------------------------------------------------
+----------------------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps
+* Create "Sample scenario" in "Basic spec execution" with the following steps 
 
      |step text  |implementation      |
      |-----------|--------------------|
@@ -80,13 +82,13 @@ Spec fails if it has even one scenario failing
      |Second step|"inside second step"|
      |Third step |throw exception     |
 
-* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation
+* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation 
 
      |step text           |implementation      |
      |--------------------|--------------------|
      |Second Scenario step|"inside second step"|
 
-* Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation
+* Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation 
 
      |step text          |implementation     |
      |-------------------|-------------------|
@@ -94,7 +96,7 @@ Spec fails if it has even one scenario failing
 
 * Execute the current project and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output         |
      |-----------------------|
@@ -102,7 +104,8 @@ Spec fails if it has even one scenario failing
      |inside second step     |
      |Failed Step: Third step|
 
-* Statics generated should have
+* Statics generated should have 
+
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |

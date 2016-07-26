@@ -9,7 +9,7 @@ tags: api
      |step text          |implementation              |
      |-------------------|----------------------------|
      |Scenario step 1 <a>|"inside first scenario step"|
- 
+
 * Create a scenario "second scenario" in specification "Specification 1" with the following steps 
 
      |step text          |
@@ -30,7 +30,7 @@ tags: api
 
 * Create step implementations 
 
-     |step               |implementation|
+     |step text          |implementation|
      |-------------------|--------------|
      |Scenario step 5 "e"|print params  |
 

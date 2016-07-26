@@ -13,73 +13,27 @@ import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 public class ContextExecution {
 
-    @Step("Create a specification <spec name> with the following contexts <steps table>")
+    @Step({"Create a specification <spec name> with the following contexts <steps table>",
+            "Create a specification <spec name> with the following unimplemented contexts <steps table>"})
     public void createContextsInSpec(String specName, Table steps) throws Exception {
-        createContexts(specName, steps, true);
-    }
-
-    @Step("Create a specification <spec name> with the following unimplemented contexts <steps table>")
-    public void createUnimplementedContextsInSpec(String specName, Table steps) throws Exception {
-        createContexts(specName, steps, false);
-    }
-
-    @Step("Add the following teardown steps in specification <spec name> <steps table>")
-    public void createTeardownInSpec(String specName, Table steps) throws Exception {
-        createTeardownSteps(specName, steps, true);
-    }
-
-    @Step("Add the following unimplemented teardown steps in specification <spec name> <steps table>")
-    public void createUnimplementedTeardownInSpec(String specName, Table steps) throws Exception {
-        createTeardownSteps(specName, steps, false);
-    }
-
-    private void createContexts(String specName, Table steps, boolean implement) throws Exception {
-//        new GaugeProjectBuilder()
-//                .withSpecName(specName)
-//                .withSteps(steps)
-//                .buildAndAddToProject();
-
-        Specification spec = currentProject.createSpecification(specName);
-        for (TableRow rows : steps.getTableRows()) {
-            spec.addContextSteps(rows.getCell("step text"));
-            if (implement) {
-                if (steps.getColumnNames().size() < 2)
-                    throw new RuntimeException("Expected minimum two columns for table");
-                currentProject.implementStep(rows.getCell("step text"),
-                        rows.getCell("implementation"),
-                        Boolean.parseBoolean(rows.getCell("continue")),
-                        false);
-            }
-            spec.save();
-        }
-    }
-
-    private void createTeardownSteps(String specName, Table steps, boolean implement) throws Exception {
-        Specification spec = currentProject.findSpecification(specName);
-        for (TableRow rows : steps.getTableRows()) {
-            spec.addTeardownSteps(rows.getCell("step text"));
-            if (implement) {
-                if (steps.getColumnNames().size() < 2)
-                    throw new RuntimeException("Expected minimum two columns for table");
-                currentProject.implementStep(rows.getCell("step text"),
-                        rows.getCell("implementation"),
-                        Boolean.parseBoolean(rows.getCell("continue")),
-                        false);
-            }
-            spec.save();
-        }
-    }
-
-    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps with implementation <steps table>")
-    public void createScenarioWithImpl(String scenarioName, String specName, Table steps) throws Exception {
-        new GaugeProjectBuilder().withScenarioName(scenarioName)
+        new GaugeProjectBuilder()
                 .withSpecName(specName)
-                .withSteps(steps)
+                .withContextSteps(steps)
                 .buildAndAddToProject();
     }
 
-    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>")
-    public void createScenario(String scenarioName, String specName, Table steps) throws Exception {
+    @Step({"Add the following teardown steps in specification <spec name> <steps table>",
+            "Add the following unimplemented teardown steps in specification <spec name> <steps table>"})
+    public void createTeardownInSpec(String specName, Table steps) throws Exception {
+        new GaugeProjectBuilder()
+                .withSpecName(specName)
+                .withTeardownSteps(steps)
+                .buildAndAddToProject();
+    }
+
+    @Step({"Create a scenario <scenario name> in specification <spec name> with the following steps with implementation <steps table>",
+            "Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>"})
+    public void createScenarioWithImpl(String scenarioName, String specName, Table steps) throws Exception {
         new GaugeProjectBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withSteps(steps)

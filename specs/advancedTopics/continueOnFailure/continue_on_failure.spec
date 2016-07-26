@@ -9,18 +9,18 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
-     |step text |implementation     |continue|
-     |----------|-------------------|--------|
-     |First step|throw exception    |true    |
-     |hello step|"inside hello step"|false   |
+     |step text |implementation     |continue on failure|
+     |----------|-------------------|-------------------|
+     |First step|throw exception    |true               |
+     |hello step|"inside hello step"|false              |
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation     |continue|
-     |-----------|-------------------|--------|
-     |Second step|throw exception    |true    |
-     |Third step |"inside third step"|false   |
-     |fourth step|throw exception    |true    |
+     |step text  |implementation     |continue on failure|
+     |-----------|-------------------|-------------------|
+     |Second step|throw exception    |true               |
+     |Third step |"inside third step"|false              |
+     |fourth step|throw exception    |true               |
 
 * Execute the current project and ensure failure
 
@@ -39,17 +39,17 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
-     |step text  |implementation     |continue|
-     |-----------|-------------------|--------|
-     |First step |throw exception    |true    |
-     |Second step|throw exception    |false   |
-     |Third step |"inside third step"|true    |
+     |step text  |implementation     |continue on failure|
+     |-----------|-------------------|-------------------|
+     |First step |throw exception    |true               |
+     |Second step|throw exception    |false              |
+     |Third step |"inside third step"|true               |
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation |continue|
-     |-----------|---------------|--------|
-     |fourth step|throw exception|true    |
+     |step text  |implementation |continue on failure|
+     |-----------|---------------|-------------------|
+     |fourth step|throw exception|true               |
 
 * Execute the current project and ensure failure
 
@@ -78,11 +78,11 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation     |continue|
-     |-----------|-------------------|--------|
-     |Second step|throw exception    |true    |
-     |Third step |"inside third step"|false   |
-     |fourth step|throw exception    |true    |
+     |step text  |implementation     |continue on failure|
+     |-----------|-------------------|-------------------|
+     |Second step|throw exception    |true               |
+     |Third step |"inside third step"|false              |
+     |fourth step|throw exception    |true               |
 
 * Execute the current project and ensure failure
 * Console should contain following lines in order 
@@ -106,13 +106,13 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation     |continue|
-     |-----------|-------------------|--------|
-     |Second step|throw exception    |true    |
-     |Third step |"inside third step"|false   |
-     |Fourth step|throw exception    |false   |
-     |Fifth step |throw exception    |true    |
-     |Next step  |"inside next step" |false   |
+     |step text  |implementation     |continue on failure|
+     |-----------|-------------------|-------------------|
+     |Second step|throw exception    |true               |
+     |Third step |"inside third step"|false              |
+     |Fourth step|throw exception    |false              |
+     |Fifth step |throw exception    |true               |
+     |Next step  |"inside next step" |false              |
 
 * Execute the current project and ensure failure
 * Console should contain following lines in order 
@@ -142,33 +142,33 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
-     |step text  |implementation      |continue|
-     |-----------|--------------------|--------|
-     |Second step|"inside second step"|false   |
-     |Third step |"inside third step" |false   |
-     |Fourth step|throw exception     |true    |
+     |step text  |implementation      |continue on failure|
+     |-----------|--------------------|-------------------|
+     |Second step|"inside second step"|false              |
+     |Third step |"inside third step" |false              |
+     |Fourth step|throw exception     |true               |
 
 * Add the following teardown steps in specification "continueOnFailureSpec" 
 
-     |step text     |implementation |continue|
-     |--------------|---------------|--------|
-     |First teardown|throw exception|true    |
-     |Second teardown|throw exception|false   |
-     |Third teardown |throw exception|true    |
+     |step text      |implementation |continue on failure|
+     |---------------|---------------|-------------------|
+     |First teardown |throw exception|true               |
+     |Second teardown|throw exception|false              |
+     |Third teardown |throw exception|true               |
 
 * Execute the current project and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
-     |console output          |
-     |------------------------|
-     |inside first step       |
-     |inside second step      |
-     |inside third step       |
-     |Failed Step: Fourth step|
+     |console output              |
+     |----------------------------|
+     |inside first step           |
+     |inside second step          |
+     |inside third step           |
+     |Failed Step: Fourth step    |
      |Failed Step: First teardown |
      |Failed Step: Second teardown|
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output             |
      |---------------------------|
@@ -185,18 +185,18 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
-     |step text  |implementation      |continue|
-     |-----------|--------------------|--------|
-     |Second step|"inside second step"|false|
-     |Third step |"inside third step" |false|
-     |fourth step|throw exception     |true|
+     |step text  |implementation      |continue on failure|
+     |-----------|--------------------|-------------------|
+     |Second step|"inside second step"|false              |
+     |Third step |"inside third step" |false              |
+     |fourth step|throw exception     |true               |
 
 * Add the following teardown steps in specification "continueOnFailureSpec" 
 
-     |step text      |implementation |continue|
-     |---------------|---------------|--------|
-     |First teardown |throw exception|false   |
-     |Second teardown|throw exception|true    |
+     |step text      |implementation |continue on failure|
+     |---------------|---------------|-------------------|
+     |First teardown |throw exception|false              |
+     |Second teardown|throw exception|true               |
 
 * Execute the current project and ensure failure
 * Console should contain following lines in order 
@@ -227,15 +227,15 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Create step implementations 
 
-     |step                         |implementation  |continue|
-     |-----------------------------|----------------|--------|
-     |say hello                    |"hello world"   |false   |
-     |Step that throws an exception|throw exception |true    |
-     |say hello again              |"hello universe"|false   |
+     |step text                    |implementation  |continue on failure|
+     |-----------------------------|----------------|-------------------|
+     |say hello                    |"hello world"   |false              |
+     |Step that throws an exception|throw exception |true               |
+     |say hello again              |"hello universe"|false              |
 
 * Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
 
-     |scenario steps                        |
+     |step text                             |
      |--------------------------------------|
      |say hello                             |
      |concept with continue on failure steps|
@@ -266,15 +266,15 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Create step implementations 
 
-     |step                         |implementation  |continue|
-     |-----------------------------|----------------|--------|
-     |say hello                    |"hello world"   |false   |
-     |Step that throws an exception|throw exception |false   |
-     |say hello again              |"hello universe"|false   |
+     |step text                    |implementation  |continue on failure|
+     |-----------------------------|----------------|-------------------|
+     |say hello                    |"hello world"   |false              |
+     |Step that throws an exception|throw exception |false              |
+     |say hello again              |"hello universe"|false              |
 
 * Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
 
-     |scenario steps                        |
+     |step text                            |
      |--------------------------------------|
      |say hello                             |
      |concept with continue on failure steps|

@@ -12,7 +12,7 @@ Concept Failing
 
 * Create step implementations 
 
-     |step                         |implementation |
+     |step text                    |implementation |
      |-----------------------------|---------------|
      |Step that throws an exception|throw exception|
      |Tell <param0> to <param1>    |print params   |
@@ -22,7 +22,7 @@ Test concept failure Path
 
 * Create "Concept Testing" in "Spec 1" with the following steps 
 
-     |scenario steps              |
+     |step text                   |
      |----------------------------|
      |concept with "abc" and "xyz"|
      |Tell "HI" to "Gauge"        |

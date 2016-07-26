@@ -8,7 +8,7 @@ tags: continueOnFailure
 Should continue when there is a failure with Continue on failure attribute in a nested concept step
 ---------------------------------------------------------------------------------------------------
 
-* Create concept "concept level 1" with following steps
+* Create concept "concept level 1" with following steps 
 
      |concept steps                              |
      |-------------------------------------------|
@@ -17,7 +17,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |concept level 2                            |
      |say "concept level 1 again"                |
 
-* Create concept "concept level 2" with following steps
+* Create concept "concept level 2" with following steps 
 
      |concept steps                              |
      |-------------------------------------------|
@@ -27,7 +27,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |concept level 3                            |
      |say "concept level 2 third time"           |
 
-* Create concept "concept level 3" with following steps
+* Create concept "concept level 3" with following steps 
 
      |concept steps                |
      |-----------------------------|
@@ -35,17 +35,17 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |Step that throws an exception|
      |say "concept level 3 again"  |
 
-* Create step implementations
+* Create step implementations 
 
-     |step                                       |implementation |continue|
-     |-------------------------------------------|---------------|--------|
-     |say <param0>                               |print params   |false   |
-     |Step that throws an exception and continues|throw exception|true    |
-     |Step that throws an exception              |throw exception|false   |
+     |step text                                  |implementation |continue on failure|
+     |-------------------------------------------|---------------|-------------------|
+     |say <param0>                               |print params   |false              |
+     |Step that throws an exception and continues|throw exception|true               |
+     |Step that throws an exception              |throw exception|false              |
 
-* Create "continue on failure even the failure in concept" in "Spec with nested concepts" with the following steps
+* Create "continue on failure even the failure in concept" in "Spec with nested concepts" with the following steps 
 
-     |scenario steps     |
+     |step text          |
      |-------------------|
      |say "hello world"  |
      |concept level 1    |
@@ -53,7 +53,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 
 * Execute the spec "Spec with nested concepts" and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output table                                    |
      |--------------------------------------------------------|
@@ -65,7 +65,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |concept level 3                                         |
      |Failed Step: Step that throws an exception              |
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output table      |
      |--------------------------|
@@ -76,7 +76,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 Should not continue when there is a failure before a step with Continue on failure attribute in a nested concept step
 ---------------------------------------------------------------------------------------------------------------------
 
-* Create concept "concept level 1" with following steps
+* Create concept "concept level 1" with following steps 
 
      |concept steps                              |
      |-------------------------------------------|
@@ -86,7 +86,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Step that throws an exception              |
      |say "concept level 1 again"                |
 
-* Create concept "concept level 2" with following steps
+* Create concept "concept level 2" with following steps 
 
      |concept steps                              |
      |-------------------------------------------|
@@ -97,7 +97,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Step that throws an exception              |
      |say "concept level 2 third time"           |
 
-* Create concept "concept level 3" with following steps
+* Create concept "concept level 3" with following steps 
 
      |concept steps                              |
      |-------------------------------------------|
@@ -107,23 +107,23 @@ Should not continue when there is a failure before a step with Continue on failu
      |concept level 4                            |
      |say "concept level 3 again"                |
 
-* Create concept "concept level 4" with following steps
+* Create concept "concept level 4" with following steps 
 
      |concept steps        |
      |---------------------|
      |say "concept level 4"|
 
-* Create step implementations
+* Create step implementations 
 
-     |step                                       |implementation |continue|
-     |-------------------------------------------|---------------|--------|
-     |say <param0>                               |print params   |false   |
-     |Step that throws an exception              |throw exception|false   |
-     |Step that throws an exception and continues|throw exception|true    |
+     |step text                                  |implementation |continue on failure|
+     |-------------------------------------------|---------------|-------------------|
+     |say <param0>                               |print params   |false              |
+     |Step that throws an exception              |throw exception|false              |
+     |Step that throws an exception and continues|throw exception|true               |
 
-* Create "continue on failure even the failure in concept" in "Spec with nested concepts" with the following steps
+* Create "continue on failure even the failure in concept" in "Spec with nested concepts" with the following steps 
 
-     |scenario steps     |
+     |step text          |
      |-------------------|
      |say "hello world"  |
      |concept level 1    |
@@ -131,7 +131,7 @@ Should not continue when there is a failure before a step with Continue on failu
 
 * Execute the spec "Spec with nested concepts" and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output table                                    |
      |--------------------------------------------------------|
@@ -143,7 +143,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |concept level 3                                         |
      |Failed Step: Step that throws an exception              |
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output table      |
      |--------------------------|

@@ -1,11 +1,12 @@
-# GAUGE testing GAUGE!
+GAUGE testing GAUGE!
+====================
 [![Gauge Badge](http://getgauge.io/Gauge_Badge.svg)](http://getgauge.io)
 
 Tests for Gauge Command-Line Utility using Gauge
 
 ### Steps to get started
 - [Install Gauge](http://getgauge.io/download.html)
-  - Homebrew on Mac OS X :  
+  - Homebrew on Mac OS X :
       ```
       brew install gauge
       ```
@@ -25,7 +26,7 @@ Tests for Gauge Command-Line Utility using Gauge
 
 - Clone this repo.
 
-- Executing specs   
+- Executing specs
 
   ```
   sh starttests.sh {language}

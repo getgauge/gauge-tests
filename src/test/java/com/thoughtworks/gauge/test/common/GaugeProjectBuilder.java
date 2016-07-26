@@ -3,19 +3,23 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 
-import java.util.List;
-
 public class GaugeProjectBuilder {
 
     private String scenarioName;
     private String specName;
-    private Table steps;
-    private boolean implement;
+    private Table scenarioSteps;
     private boolean appendCode;
     private String subDirPath;
     private String specsDirPath;
+    private Table contextSteps;
+    private Table tearDownSteps;
 
     public GaugeProjectBuilder(){}
+
+    public GaugeProjectBuilder withContextSteps(Table contextSteps) {
+        this.contextSteps = contextSteps;
+        return this;
+    }
 
     public GaugeProjectBuilder withScenarioName(String scenarioName){
         this.scenarioName = scenarioName;
@@ -38,8 +42,7 @@ public class GaugeProjectBuilder {
     }
 
     public GaugeProjectBuilder withSteps(Table steps){
-        this.steps = steps;
-        this.implement = steps.getColumnNames().contains("implementation");
+        this.scenarioSteps = steps;
         return this;
     }
 
@@ -48,24 +51,51 @@ public class GaugeProjectBuilder {
         return this;
     }
 
+    public GaugeProjectBuilder withTeardownSteps(Table tearDownSteps) {
+        this.tearDownSteps = tearDownSteps;
+        return this;
+    }
+
     public void buildAndAddToProject() throws Exception {
         Specification spec = GaugeProject.currentProject.findSpecification(specName);
         if (spec == null) {
             spec = GaugeProject.currentProject.createSpecification(subDirPath,specName);
         }
-        Scenario scenario = new Scenario(scenarioName);
-        List<String> columnNames = steps.getColumnNames();
-        for (TableRow row : steps.getTableRows()) {
-            scenario.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
-            if (implement){
-                GaugeProject.currentProject.implementStep(row.getCell("step text"),
-                        row.getCell("implementation"),
-                        Boolean.parseBoolean(row.getCell("continue")),
-                        appendCode);
+
+        if(contextSteps!=null) {
+            for (TableRow row : contextSteps.getTableRows()) {
+                spec.addContextSteps(row.getCell("step text"));
+                implement(contextSteps, row);
+                spec.save();
             }
         }
-        spec.addScenarios(scenario);
-        spec.save();
+
+        if(scenarioName!=null) {
+            Scenario scenario = new Scenario(scenarioName);
+            for (TableRow row : scenarioSteps.getTableRows()) {
+                scenario.addItem(row.getCell("step text"), row.getCell("Type"));
+                implement(scenarioSteps,row);
+            }
+            spec.addScenarios(scenario);
+            spec.save();
+        }
+
+        if(tearDownSteps!=null)
+        {
+            for (TableRow row : tearDownSteps.getTableRows()) {
+                spec.addTeardownSteps(row.getCell("step text"));
+                implement(tearDownSteps, row);
+                spec.save();
+            }
+        }
     }
 
+    private void implement(Table impl, TableRow row) throws Exception {
+        if(impl.getColumnNames().contains("implementation")) {
+            GaugeProject.currentProject.implementStep(row.getCell("step text"),
+                    row.getCell("implementation"),
+                    Boolean.parseBoolean(row.getCell("continue on failure")),
+                    appendCode);
+        }
+    }
 }

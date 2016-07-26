@@ -1,5 +1,5 @@
 Validation Errors occuring during execution
-====================================
+===========================================
 
 * In an empty directory initialize a project named "spec_exec_with_validation_err" with the current language
 

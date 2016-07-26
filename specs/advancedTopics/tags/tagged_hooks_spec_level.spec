@@ -6,21 +6,21 @@ tags: tagged_hooks, execution_hooks
 * In an empty directory initialize a project named "tagged_hook_spec" without example spec
 * Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation 
 
-     |step text                            |implementation                    |
+     |step text                            |implementation                         |
      |-------------------------------------|---------------------------------------|
      |first spec first scenario first step |"first spec first scenario first step" |
      |first spec first scenario second step|"first spec first scenario second step"|
 
 * Create a scenario "First scenario" in specification "Second Spec" with the following steps with implementation 
 
-     |step text                             |implementation                     |
+     |step text                             |implementation                          |
      |--------------------------------------|----------------------------------------|
      |second spec first scenario first step |"second spec first scenario first step" |
      |second spec first scenario second step|"second spec first scenario second step"|
 
 * Create a scenario "First scenario" in specification "Third Spec" with the following steps with implementation 
 
-     |step text                            |implementation                    |
+     |step text                            |implementation                         |
      |-------------------------------------|---------------------------------------|
      |third spec first scenario first step |"third spec first scenario first step" |
      |third spec first scenario second step|"third spec first scenario second step"|

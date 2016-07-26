@@ -8,7 +8,7 @@ tags: execution, rerun
 Rerun failed scenarios
 ----------------------
 
-* Create "Sample scenario" in "Basic_spec_execution" with the following steps
+* Create "Sample scenario" in "Basic_spec_execution" with the following steps 
 
      |step text  |implementation     |
      |-----------|-------------------|

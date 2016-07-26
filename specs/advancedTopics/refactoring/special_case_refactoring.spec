@@ -30,6 +30,6 @@ Refactoring the step with special chars in implementation
 * Execute the spec "refactor the step with special chars" and ensure success
 * Console should not contain following lines 
 
-     |output                                              |
-     |----------------------------------------------------|
-     |"//*[@id=\"conten\"]/section[1]/section/div[2]/a[1]"|
+     |output                                            |
+     |--------------------------------------------------|
+     |"//*[@id="conten"]/section[1]/section/div[2]/a[1]"|

@@ -10,7 +10,7 @@ tags: refactoring, api
      |-----------------------------------------|
      |nested concept with <param0> and <param1>|
      |simple step with "static"                |
- 
+
 * Create concept "concept" with following steps 
 
      |concept steps            |

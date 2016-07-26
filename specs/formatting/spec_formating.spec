@@ -34,17 +34,20 @@ Formatting should not remove steps, scenarios from spec
 Formatting merges scenario with same heading
 --------------------------------------------
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps 
+
      |step text  |implementation   |
      |-----------|-----------------|
      |"something"|"inside somthing"|
 
-* Create a scenario "in between" in specification "spec formatting" with the following steps
+* Create a scenario "in between" in specification "spec formatting" with the following steps 
+
      |step text                            |implementation  |
      |-------------------------------------|----------------|
      |"step between two duplicate scenario"|"inside between"|
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps 
+
      |step text  |implementation   |
      |-----------|-----------------|
      |"something"|"inside somthing"|

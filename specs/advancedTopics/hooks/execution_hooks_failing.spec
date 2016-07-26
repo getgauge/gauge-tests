@@ -42,7 +42,7 @@ Test a hook failure at spec level
      |inside after spec  |
      |inside after suite |
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output|
      |--------------|

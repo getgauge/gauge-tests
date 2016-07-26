@@ -36,7 +36,7 @@ tagged expression
      |inside second scenario step|
      |inside third scenario step |
      |inside fourth scenario step|
-     
+
 * Execute the tags "tag1 && tag2" in spec "tags_expression_execution" and ensure success
 * Console should contain following lines in order 
 
@@ -44,13 +44,13 @@ tagged expression
      |---------------------------|
      |inside second scenario step|
      |inside fourth scenario step|
-     
+
 * Console should not contain following lines 
 
      |console output            |
      |--------------------------|
      |inside third scenario step|
-     
+
 * Execute the tags "tag1 && (tag2|tag4)" in spec "tags_expression_execution" and ensure success
 * Console should contain following lines in order 
 

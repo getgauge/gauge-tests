@@ -4,30 +4,30 @@ Tagged hooks scenario level - Both AND and OR aggregation
 tags: tagged_hooks, execution_hooks
 
 * In an empty directory initialize a project named "tagged_hook_scen" without example spec
-* Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation
+* Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation 
 
-     |step text                            |implementation                    |
+     |step text                            |implementation                         |
      |-------------------------------------|---------------------------------------|
      |first spec first scenario first step |"first spec first scenario first step" |
      |first spec first scenario second step|"first spec first scenario second step"|
 
-* Create a scenario "Second scenario" in specification "First Spec" with the following steps with implementation
+* Create a scenario "Second scenario" in specification "First Spec" with the following steps with implementation 
 
-     |step text                             |implementation                     |
+     |step text                             |implementation                          |
      |--------------------------------------|----------------------------------------|
      |first spec second scenario first step |"first spec second scenario first step" |
      |first spec second scenario second step|"first spec second scenario second step"|
 
-* Create a scenario "First scenario" in specification "Second Spec" with the following steps with implementation
+* Create a scenario "First scenario" in specification "Second Spec" with the following steps with implementation 
 
-     |step text                             |implementation                     |
+     |step text                             |implementation                          |
      |--------------------------------------|----------------------------------------|
      |second spec first scenario first step |"second spec first scenario first step" |
      |second spec first scenario second step|"second spec first scenario second step"|
 
-* Create a scenario "First scenario" in specification "Third Spec" with the following steps with implementation
+* Create a scenario "First scenario" in specification "Third Spec" with the following steps with implementation 
 
-     |step text                            |implementation                    |
+     |step text                            |implementation                         |
      |-------------------------------------|---------------------------------------|
      |third spec first scenario first step |"third spec first scenario first step" |
      |third spec first scenario second step|"third spec first scenario second step"|
@@ -40,7 +40,7 @@ tags: tagged_hooks, execution_hooks
 AND aggregation of hooks
 ------------------------
 
-* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "AND" aggregated tags
+* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "AND" aggregated tags 
 
      |tags|
      |----|
@@ -48,14 +48,14 @@ AND aggregation of hooks
      |tag2|
      |tag4|
 
-* Create "scenario" level "after" hook with implementation "inside after scenario hook1" with "AND" aggregated tags
+* Create "scenario" level "after" hook with implementation "inside after scenario hook1" with "AND" aggregated tags 
 
      |tags|
      |----|
      |tag1|
      |tag2|
 
-* Create "scenario" level "after" hook with implementation "inside after scenario hook2" with "AND" aggregated tags
+* Create "scenario" level "after" hook with implementation "inside after scenario hook2" with "AND" aggregated tags 
 
      |tags|
      |----|
@@ -88,14 +88,14 @@ AND aggregation of hooks
 OR aggregation of hooks
 -----------------------
 
-* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "OR" aggregated tags
+* Create "scenario" level "before" hook with implementation "inside before scenario hook" with "OR" aggregated tags 
 
      |tags|
      |----|
      |tag6|
      |tag4|
 
-* Create "scenario" level "after" hook with implementation "inside after scenario hook" with "OR" aggregated tags
+* Create "scenario" level "after" hook with implementation "inside after scenario hook" with "OR" aggregated tags 
 
      |tags|
      |----|

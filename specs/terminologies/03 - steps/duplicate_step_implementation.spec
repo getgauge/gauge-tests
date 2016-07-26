@@ -8,7 +8,7 @@ Duplicate step implementation should atleast give a warning
 
 * In an empty directory initialize a project named "duplicate_step_implementation" with the current language
 
-* Create a scenario "scenaro1" in specification "duplicate step implementation" with the following steps with implementation
+* Create a scenario "scenaro1" in specification "duplicate step implementation" with the following steps with implementation 
 
      |step text       |implementation              |
      |----------------|----------------------------|

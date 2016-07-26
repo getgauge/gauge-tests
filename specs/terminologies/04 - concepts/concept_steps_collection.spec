@@ -4,14 +4,14 @@ Concept Steps Collection
 tags: api
 
 * In an empty directory initialize a project named "concept_steps_collection" with the current language
-* Create concept "concept1 <b>" with following steps
+* Create concept "concept1 <b>" with following steps 
 
      |step text |implementation      |
      |----------|--------------------|
      |step 1 "a"|"inside first step" |
      |step 2    |"inside second step"|
 
-* Create concept "concept2" with following steps
+* Create concept "concept2" with following steps 
 
      |step text|
      |---------|

@@ -6,7 +6,7 @@ Data Store
 Scenario data store refreshes after every scenario run.
 -------------------------------------------------------
 
-* Create a specification "newSpec" with the following contexts
+* Create a specification "newSpec" with the following contexts 
 
      |step text    |implementation        |
      |-------------|----------------------|
@@ -25,7 +25,7 @@ Scenario data store refreshes after every scenario run.
 Spec data store persists data between scenario runs
 ---------------------------------------------------
 
-* Create a specification "newSpec" with the following contexts
+* Create a specification "newSpec" with the following contexts 
 
      |step text    |implementation        |
      |-------------|----------------------|
@@ -51,7 +51,7 @@ Suite data store persists data between spec runs
 ------------------------------------------------
 
 specs are read and run alphabetically, so we create specs in alphabetical order of names i.e. "first write spec", "second read spec"
-* Create a specification "first write spec" with the following contexts
+* Create a specification "first write spec" with the following contexts 
 
      |step text    |implementation        |
      |-------------|----------------------|

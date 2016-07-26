@@ -55,7 +55,7 @@ public class SpecAndScenarioCreation {
         for (TableRow row : steps.getTableRows()) {
             currentProject.implementStep(row.getCell(columnNames.get(0)),
                     row.getCell(columnNames.get(1)),
-                    Boolean.parseBoolean(row.getCell("continue")), false);
+                    Boolean.parseBoolean(row.getCell("continue on failure")), false);
         }
     }
 
