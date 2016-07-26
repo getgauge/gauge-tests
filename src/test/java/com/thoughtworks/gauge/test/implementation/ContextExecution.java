@@ -34,6 +34,11 @@ public class ContextExecution {
     }
 
     private void createContexts(String specName, Table steps, boolean implement) throws Exception {
+//        new GaugeProjectBuilder()
+//                .withSpecName(specName)
+//                .withSteps(steps)
+//                .buildAndAddToProject();
+
         Specification spec = currentProject.createSpecification(specName);
         for (TableRow rows : steps.getTableRows()) {
             spec.addContextSteps(rows.getCell("step text"));
