@@ -21,7 +21,10 @@ public class ProjectBuilder {
 
     public GaugeProject build() throws Exception {
         GaugeProject currentProject = GaugeProject.createProject(language, projName);
-        currentProject.initialize();
+        if(!currentProject.initialize())
+            throw new Exception("Unable to initialize gauge project.\nSTDERR:\n\n"
+                + currentProject.getLastProcessStderr() + "\n\nSTDOUT:\n\n"
+                + currentProject.getLastProcessStdout());
 
         if(this.deleteExampleSpec)
             currentProject.deleteSpec(Util.combinePath("specs","example"));
