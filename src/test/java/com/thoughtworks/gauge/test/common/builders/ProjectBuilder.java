@@ -19,9 +19,9 @@ public class ProjectBuilder {
         return this;
     }
 
-    public GaugeProject build() throws Exception {
+    public GaugeProject build(boolean expectFailure) throws Exception {
         GaugeProject currentProject = GaugeProject.createProject(language, projName);
-        if(!currentProject.initialize())
+        if(!currentProject.initialize() && !expectFailure)
             throw new Exception("Unable to initialize gauge project.\nSTDERR:\n\n"
                 + currentProject.getLastProcessStderr() + "\n\nSTDOUT:\n\n"
                 + currentProject.getLastProcessStdout());

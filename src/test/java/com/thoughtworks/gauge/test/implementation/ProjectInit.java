@@ -17,23 +17,36 @@ public class ProjectInit {
 
     @Step("In an empty directory, use default initialization of a project named <projName> in language <language>")
     public void initializeProjectWithLanguage(String projName, String language) throws Exception {
-        currentProject = new ProjectBuilder().withLangauge(language).withProjectName(projName).build();
+        currentProject = new ProjectBuilder()
+                .withLangauge(language)
+                .withProjectName(projName)
+                .build(language.equals("unknown"));
     }
 
     @Step({ "In an empty directory, use default initialization of a project named <projName> with the current language" })
     public void defaultInitializationProject(String projName) throws Exception {
-        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage()).withProjectName(projName).build();
+        currentProject = new ProjectBuilder()
+                .withLangauge(Util.getCurrentLanguage())
+                .withProjectName(projName)
+                .build(false);
     }
 
     @Step({ "In an empty directory initialize a project named <projName> with the current language" })
     public void initializeProject(String projName) throws Exception {
-        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage())
-                .withProjectName(projName).withoutExampleSpec().build();
+        currentProject = new ProjectBuilder()
+                .withLangauge(Util.getCurrentLanguage())
+                .withProjectName(projName)
+                .withoutExampleSpec()
+                .build(false);
     }
 
     @Step("In an empty directory initialize a project named <projName> without example spec")
     public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
-        currentProject = new ProjectBuilder().withLangauge(Util.getCurrentLanguage()).withProjectName(projName).withoutExampleSpec().build();
+        currentProject = new ProjectBuilder()
+                .withLangauge(Util.getCurrentLanguage())
+                .withProjectName(projName)
+                .withoutExampleSpec()
+                .build(false);
     }
 
     @Step("The following file structure should be created <table>")
