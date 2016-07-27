@@ -148,8 +148,8 @@ public class CSharpProject extends GaugeProject {
         sb.append("\n");
         sb.append("public class "+ className +" : IScreenGrabber {\n");
         sb.append("\n");
-        sb.append("    public byte[] TakeScreenshot() {\n");
-        sb.append("        return Encoding.UTF8.GetBytes(\"" + stubScreenshot +"\");\n");
+        sb.append("    public byte[] TakeScreenShot() {\n");
+        sb.append("        return System.Text.Encoding.UTF8.GetBytes(\"" + stubScreenshot +"\");\n");
         sb.append("    }\n");
         sb.append("}");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), sb.toString());
