@@ -86,11 +86,7 @@ public abstract class GaugeProject {
     }
 
     public boolean initialize() throws Exception {
-        String originalTmp = System.getProperty("java.io.tmpdir");
-        System.setProperty("java.io.tmpdir", Files.createTempDirectory("template_").toAbsolutePath().toString());
-        boolean b = executeGaugeCommand("--init", language);
-        System.setProperty("java.io.tmpdir", originalTmp);
-        return b;
+        return executeGaugeCommand("--init", language);
     }
 
     public String getStdOut() throws IOException {
