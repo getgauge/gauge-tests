@@ -31,6 +31,9 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <inParallel>true</inParallel>
+    </properties>
     <build>
         <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
         <plugins>
@@ -50,9 +53,9 @@
                 <executions>
                     <execution>
                         <phase>test</phase>
-                        <configuration>
+                        <configuration combine.self="override">
                             <specsDir>specs</specsDir>
-                            <inParallel>true</inParallel>
+                            <inParallel>${inParallel}</inParallel>
                         </configuration>
                         <goals>
                             <goal>execute</goal>
