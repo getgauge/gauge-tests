@@ -52,7 +52,7 @@
                         <phase>test</phase>
                         <configuration>
                             <specsDir>specs</specsDir>
-                            <inParallel>false</inParallel>
+                            <inParallel>true</inParallel>
                         </configuration>
                         <goals>
                             <goal>execute</goal>

@@ -34,7 +34,8 @@ public abstract class GaugeProject {
         this.language = language;
         currentProject = this;
 
-        this.projectDir = Files.createTempDirectory(projName + "_").toFile();
+        this.projectDir = Files.createTempDirectory(projName + "_" + UUID.randomUUID() + "_").toFile();
+        projectDir.deleteOnExit();
         registerShutDownHook();
     }
 
