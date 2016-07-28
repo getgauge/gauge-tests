@@ -29,12 +29,13 @@ public abstract class GaugeProject {
     private String lastProcessStdout;
     private GaugeService service;
     private String lastProcessStderr;
+    private static int projectCount = 0;
 
     protected GaugeProject(String language, String projName) throws IOException {
         this.language = language;
         currentProject = this;
 
-        this.projectDir = Files.createTempDirectory(projName + "_" + UUID.randomUUID() + "_").toFile();
+        this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
         projectDir.deleteOnExit();
         registerShutDownHook();
     }
