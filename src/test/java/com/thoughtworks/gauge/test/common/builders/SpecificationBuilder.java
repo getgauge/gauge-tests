@@ -1,11 +1,8 @@
 package com.thoughtworks.gauge.test.common.builders;
 
 import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
-
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 public class SpecificationBuilder {
     private ScenarioBuilder scenarioBuilder;
@@ -16,6 +13,7 @@ public class SpecificationBuilder {
     private String specName;
     private String subDirPath;
     private String specsDirPath;
+    private Table datatable;
 
     public SpecificationBuilder(){
         scenarioBuilder = new ScenarioBuilder();
@@ -78,6 +76,9 @@ public class SpecificationBuilder {
         scenarioBuilder.withSpecification(spec);
         tagsBuilder.withSpecification(spec);
 
+        if(datatable!=null)
+            spec.addDataTable(datatable);
+
         if(contextBuilder.canBuild())
             contextBuilder.build();
 
@@ -95,6 +96,11 @@ public class SpecificationBuilder {
 
     public SpecificationBuilder withTags(String tags) {
         this.tagsBuilder.withTags(tags);
+        return this;
+    }
+
+    public SpecificationBuilder withDataTable(Table datatable) {
+        this.datatable = datatable;
         return this;
     }
 }

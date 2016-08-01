@@ -4,7 +4,7 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.builders.SpecificationBuilder;
 
-public class ContextExecution {
+public class Context {
 
     @Step({"Create a specification <spec name> with the following contexts <steps table>",
             "Create a specification <spec name> with the following unimplemented contexts <steps table>"})
@@ -30,22 +30,6 @@ public class ContextExecution {
         new SpecificationBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withSteps(steps)
-                .buildAndAddToProject();
-    }
-
-    @Step("Add tags <tags> to scenario <scenario name> in specification <specification name>")
-    public void addTagsToScenario(String tags, String scenarioName, String specName) throws Exception {
-        new SpecificationBuilder().withScenarioName(scenarioName)
-                .withSpecName(specName)
-                .withTags(tags)
-                .buildAndAddToProject();
-    }
-
-    @Step("Add tags <tags> to specification <specification name>")
-    public void addTagsToSpec(String tags, String specName) throws Exception {
-        new SpecificationBuilder()
-                .withSpecName(specName)
-                .withTags(tags)
                 .buildAndAddToProject();
     }
 }

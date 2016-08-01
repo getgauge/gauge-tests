@@ -6,7 +6,7 @@ import com.thoughtworks.gauge.Table;
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 
-public class ExecutionHooksCreation {
+public class ExecutionHooks {
 
     @Step("Create <hook level> level <hook type> hook with implementation <print string>")
     public void createHookWithImpl(String hookLevel, String hookType, String printString) throws Exception {
