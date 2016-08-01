@@ -111,12 +111,12 @@ public class SpecificationBuilder {
     }
 
     public SpecificationBuilder withDataStoreWriteStatement(List<String> columnNames,TableRow row) {
-        scenarioBuilder.addSteps(columnNames, row.getCell(columnNames.get(0)), currentProject.getDataStoreWriteStatement(row, columnNames));
+        scenarioBuilder.addSteps(columnNames, row.getCell("step text"), currentProject.getDataStoreWriteStatement(row, columnNames));
         return this;
     }
 
     public SpecificationBuilder withDataStorePrintValues(List<String> columnNames, TableRow tableRow) {
-        scenarioBuilder.addSteps(columnNames, tableRow.getCell(columnNames.get(0)), currentProject.getDataStorePrintValueStatement(tableRow, columnNames));
+        scenarioBuilder.addSteps(columnNames, tableRow.getCell("step text"), currentProject.getDataStorePrintValueStatement(tableRow, columnNames));
         return this;
     }
 }

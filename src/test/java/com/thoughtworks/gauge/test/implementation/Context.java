@@ -25,7 +25,8 @@ public class Context {
     }
 
     @Step({"Create a scenario <scenario name> in specification <spec name> with the following steps with implementation <steps table>",
-            "Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>"})
+            "Create a scenario <scenario name> in specification <spec name> with the following steps <steps table>",
+            "Create a scenario <second scenario> in specification <spec name> with the following steps unimplemented <steps>"})
     public void createScenarioWithImpl(String scenarioName, String specName, Table steps) throws Exception {
         new SpecificationBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)

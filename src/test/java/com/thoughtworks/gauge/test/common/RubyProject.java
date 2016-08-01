@@ -102,9 +102,9 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
-        String value = row.getCell(columnNames.get(2));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
+        String value = row.getCell("value");
         return "Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.put(\"" + key + "\", \"" + value + "\")";
     }
 
@@ -115,8 +115,8 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
         return "puts Gauge::DataStoreFactory." + dataStoreType.toLowerCase() + "_datastore.get(\"" + key + "\")";
     }
 

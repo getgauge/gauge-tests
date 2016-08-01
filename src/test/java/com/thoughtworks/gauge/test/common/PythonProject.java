@@ -107,9 +107,9 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
-        String value = row.getCell(columnNames.get(2));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
+        String value = row.getCell("value");
         return "    print(DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().put(\"" + key + "\", \"" + value + "\"))";
     }
 
@@ -121,8 +121,8 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
         return "    print(DataStoreFactory." + dataStoreType.toLowerCase() + "_data_store().get(\"" + key + "\"))";
     }
 

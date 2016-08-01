@@ -128,16 +128,16 @@ public class CSharpProject extends GaugeProject {
 
     @Override
     public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
-        String value = row.getCell(columnNames.get(2));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
+        String value = row.getCell("value");
         return "DataStoreFactory." + dataStoreType + "DataStore.Add(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
-        String dataStoreType = row.getCell(columnNames.get(3));
-        String key = row.getCell(columnNames.get(1));
+        String dataStoreType = row.getCell("datastore type");
+        String key = row.getCell("key");
         return "Console.WriteLine(DataStoreFactory." + dataStoreType + "DataStore.Get(\"" + key + "\"));";
     }
 

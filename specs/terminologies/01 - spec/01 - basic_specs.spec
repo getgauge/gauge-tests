@@ -3,8 +3,8 @@ A basic spec has only scenarios
 
 * In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
 
-basic spec with one scenario passing
-------------------------------------
+basic spec with one scenario, passing
+-------------------------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 
 
@@ -33,8 +33,8 @@ basic spec with one scenario passing
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-basic spec with multiple scenario passing
------------------------------------------
+basic spec with multiple scenarios, passing
+-------------------------------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 
 
@@ -71,8 +71,8 @@ basic spec with multiple scenario passing
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-Spec fails if it has even one scenario failing
-----------------------------------------------
+Spec fails if it has even one scenario failing irrespective of the passing and skipped scenarios in it
+------------------------------------------------------------------------------------------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 
 
@@ -82,11 +82,11 @@ Spec fails if it has even one scenario failing
      |Second step|"inside second step"|
      |Third step |throw exception     |
 
-* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation 
+* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps unimplemented 
 
-     |step text           |implementation      |
-     |--------------------|--------------------|
-     |Second Scenario step|"inside second step"|
+     |step text|
+     |---------|
+     |some step|
 
 * Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation 
 
@@ -109,5 +109,36 @@ Spec fails if it has even one scenario failing
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
-     |Scenarios      |3       |2     |1     |0      |
+     |Scenarios      |2       |1     |1     |1      |
+
+Spec should be skipped if it has all scenarios with unimplemented steps
+-----------------------------------------------------------------------
+
+* Create a scenario "first scenario" in specification "Basic spec execution" with the following steps unimplemented 
+
+     |step text |
+     |----------|
+     |some step1|
+
+* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps unimplemented 
+
+     |step text |
+     |----------|
+     |some step2|
+
+* Execute the current project and ensure failure
+
+* Console should contain following lines in order 
+
+     |console output                               |
+     |---------------------------------------------|
+     |Step implementation not found => 'some step1'|
+     |Step implementation not found => 'some step2'|
+
+* Statics generated should have 
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |0       |0     |0     |1      |
+     |Scenarios      |0       |0     |0     |2      |
 
