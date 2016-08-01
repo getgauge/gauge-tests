@@ -1,6 +1,8 @@
 A basic spec has only scenarios
 ===============================
 
+tags: spec
+
 * In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
 
 basic spec with one scenario, passing

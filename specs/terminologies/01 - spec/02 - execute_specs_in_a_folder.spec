@@ -1,6 +1,8 @@
 Execute specs in a folder
 =========================
 
+tags: spec
+
 * In an empty directory initialize a project named "scenarios_execution" without example spec
 
 Execute multiple specs from a folder

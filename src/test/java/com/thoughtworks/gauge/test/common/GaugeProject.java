@@ -117,16 +117,27 @@ public abstract class GaugeProject {
 
     private File getSpecFile(String name, String dirPath) {
         name = Util.getSpecName(name);
+        return getFile(name, dirPath,".spec");
+    }
+
+    private File getFile(String name, String dirPath,String extension) {
         if (!new File(projectDir, dirPath).exists()) {
             new File(projectDir, dirPath).mkdirs();
         }
-        return new File(projectDir, Util.combinePath(dirPath, name) + ".spec");
+        return new File(projectDir, Util.combinePath(dirPath, name) + extension);
     }
 
     private File getSpecFile(String name) {
         return getSpecFile(name, "");
     }
 
+    public File createCsv(String name, String dirPath){
+        return getFile(name,specsDirName,".csv");
+    }
+
+    public File createTxt(String name, String dirPath){
+        return getFile(name,specsDirName,".txt");
+    }
 
     public Specification findSpecification(String specName) {
         for (Specification specification : specifications) {

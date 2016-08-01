@@ -4,8 +4,10 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
+import com.thoughtworks.gauge.test.common.builders.DataFileBuilder;
 import com.thoughtworks.gauge.test.common.builders.ProjectBuilder;
 import com.thoughtworks.gauge.test.common.Util;
+import com.thoughtworks.gauge.test.common.builders.SpecificationBuilder;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import java.io.File;
@@ -23,7 +25,7 @@ public class ProjectInit {
                 .build(language.equals("unknown"));
     }
 
-    @Step({ "In an empty directory, use default initialization of a project named <projName> with the current language" })
+    @Step({"In an empty directory, use default initialization of a project named <projName> with the current language"})
     public void defaultInitializationProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
@@ -31,7 +33,7 @@ public class ProjectInit {
                 .build(false);
     }
 
-    @Step({ "In an empty directory initialize a project named <projName> with the current language" })
+    @Step({"In an empty directory initialize a project named <projName> with the current language"})
     public void initializeProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
@@ -69,7 +71,7 @@ public class ProjectInit {
     public void verifyFilesForLanguageIsCreated() {
         SoftAssertions softly = new SoftAssertions();
         Map<String, String> files = currentProject.getLanguageSpecificFiles();
-        files.forEach(( k,  v) -> {
+        files.forEach((k, v) -> {
             File fileName = new File(getPathRelativeToCurrentProjectDir(k));
             String fileType = v.toLowerCase();
             softly.assertThat(fileType).isIn("dir", "file");
@@ -91,5 +93,20 @@ public class ProjectInit {
         File[] files = currentProject.getProjectDir().listFiles();
         Assert.assertNotNull(files);
         Assert.assertEquals(files.length, 0);
+    }
+
+    @Step("Create a csv file <aTable>")
+    public void createACsv(String name) throws Exception {
+        new DataFileBuilder()
+                .withCsvFile(name)
+                .build();
+    }
+
+    @Step("Create a txt file <aFile>")
+    public void createAText(String name) throws Exception {
+        new DataFileBuilder()
+                .withTextFile(name)
+                .build();
+
     }
 }

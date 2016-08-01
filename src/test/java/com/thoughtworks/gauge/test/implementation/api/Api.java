@@ -62,8 +62,8 @@ public class Api {
         ArrayList<String> steps = new ArrayList<>();
         List<String> columnNames = table.getColumnNames();
         table.getTableRows().forEach(row -> {
-            List<String> parameters = Arrays.asList(row.getCell(columnNames.get(2)).trim().split(","));
-            StepValue e = new StepValue(row.getCell(columnNames.get(0)).trim(), row.getCell(columnNames.get(1)).trim(), parameters);
+            List<String> parameters = Arrays.asList(row.getCell("parameters").trim().split(","));
+            StepValue e = new StepValue(row.getCell("step text").trim(), row.getCell("step annotation text").trim(), parameters);
             steps.add(e.getStepText());
         });
 

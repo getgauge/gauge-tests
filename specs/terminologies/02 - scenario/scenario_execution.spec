@@ -1,6 +1,8 @@
 Scenario execution
 ==================
 
+tags: scenario
+
 * In an empty directory initialize a project named "scenarios_execution" without example spec
 
 Execute one scenario by specifying line number in a spec with multiple scenarios

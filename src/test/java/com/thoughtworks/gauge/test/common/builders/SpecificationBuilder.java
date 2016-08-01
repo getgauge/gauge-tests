@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class SpecificationBuilder {
     private ScenarioBuilder scenarioBuilder;
@@ -119,4 +120,5 @@ public class SpecificationBuilder {
         scenarioBuilder.addSteps(columnNames, tableRow.getCell("step text"), currentProject.getDataStorePrintValueStatement(tableRow, columnNames));
         return this;
     }
+
 }

@@ -3,6 +3,8 @@ package com.thoughtworks.gauge.test.common.builders;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
+
 public class ProjectBuilder {
 
     private String language;

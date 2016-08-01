@@ -1,7 +1,7 @@
 Duplicate step implementation
 =============================
 
-tags: duplicate_step_impl
+tags: step
 
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------
