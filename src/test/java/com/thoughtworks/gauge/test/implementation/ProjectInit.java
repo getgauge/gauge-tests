@@ -95,14 +95,14 @@ public class ProjectInit {
         Assert.assertEquals(files.length, 0);
     }
 
-    @Step("Create a csv file <aTable>")
+    @Step("Create a csv file <aCsvFileName>")
     public void createACsv(String name) throws Exception {
         new DataFileBuilder()
                 .withCsvFile(name)
                 .build();
     }
 
-    @Step("Create a txt file <aFile>")
+    @Step("Create a txt file <aTxtFileName>")
     public void createAText(String name) throws Exception {
         new DataFileBuilder()
                 .withTextFile(name)

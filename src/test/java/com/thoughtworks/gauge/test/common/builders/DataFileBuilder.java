@@ -1,19 +1,26 @@
 package com.thoughtworks.gauge.test.common.builders;
 
 import com.thoughtworks.gauge.test.common.GaugeProject;
+import com.thoughtworks.gauge.test.common.Util;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DataFileBuilder {
     private String csvFile;
     private String txtFile;
     private String subDirPath;
 
-    public void build()
-    {
+    public void build() throws IOException {
+        File file = null;
         if(csvFile!=null)
-            GaugeProject.currentProject.createCsv(csvFile,subDirPath);
+            file = GaugeProject.currentProject.createCsv(csvFile, subDirPath);
+
 
         if(txtFile!=null)
-            GaugeProject.currentProject.createTxt(txtFile,subDirPath);
+            file = GaugeProject.currentProject.createTxt(txtFile,subDirPath);
+
+        Util.writeToFile(file.getAbsolutePath(), this.toString());
     }
 
     public DataFileBuilder withSubDirPath(String subDirPath){
