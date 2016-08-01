@@ -6,6 +6,11 @@ import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Scenario;
 import com.thoughtworks.gauge.test.common.Specification;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+
 public class ScenarioBuilder {
 
     private String scenarioName;
@@ -52,6 +57,14 @@ public class ScenarioBuilder {
 
     public void build() throws Exception {
         spec.addScenarios(buildScenario());
+    }
+
+    public ScenarioBuilder addSteps(List<String> columnNames, String cell, String step) {
+        if(this.scenarioSteps == null)
+            scenarioSteps = new Table(Arrays.asList(columnNames.get(0), "implementation"));
+
+        scenarioSteps.addRow(Arrays.asList(cell, step));
+        return this;
     }
 }
 

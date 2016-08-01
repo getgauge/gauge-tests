@@ -1,8 +1,14 @@
 package com.thoughtworks.gauge.test.common.builders;
 
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 
 public class SpecificationBuilder {
     private ScenarioBuilder scenarioBuilder;
@@ -101,6 +107,16 @@ public class SpecificationBuilder {
 
     public SpecificationBuilder withDataTable(Table datatable) {
         this.datatable = datatable;
+        return this;
+    }
+
+    public SpecificationBuilder withDataStoreWriteStatement(List<String> columnNames,TableRow row) {
+        scenarioBuilder.addSteps(columnNames, row.getCell(columnNames.get(0)), currentProject.getDataStoreWriteStatement(row, columnNames));
+        return this;
+    }
+
+    public SpecificationBuilder withDataStorePrintValues(List<String> columnNames, TableRow tableRow) {
+        scenarioBuilder.addSteps(columnNames, tableRow.getCell(columnNames.get(0)), currentProject.getDataStorePrintValueStatement(tableRow, columnNames));
         return this;
     }
 }

@@ -13,6 +13,8 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
+
 public abstract class GaugeProject {
 
     private static final String PRODUCT_ROOT = "GAUGE_ROOT";
@@ -66,7 +68,7 @@ public abstract class GaugeProject {
 
     public void createGaugeService() throws IOException, InterruptedException {
         int freePortForApi = SocketUtils.findFreePortForApi();
-        Process process = currentProject.executeGaugeDaemon(freePortForApi);
+        Process process = getCurrentProject().executeGaugeDaemon(freePortForApi);
         GaugeConnection gaugeConnection = initializeGaugeConnection(freePortForApi);
         service = new GaugeService(process, gaugeConnection);
     }
@@ -331,7 +333,7 @@ public abstract class GaugeProject {
 
     public static void implement(Table impl, TableRow row,boolean appendCode) throws Exception {
         if(impl.getColumnNames().contains("implementation")) {
-            GaugeProject.currentProject.implementStep(row.getCell("step text"),
+            currentProject.implementStep(row.getCell("step text"),
                     row.getCell("implementation"),
                     Boolean.parseBoolean(row.getCell("continue on failure")),
                     appendCode);
