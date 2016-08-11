@@ -55,11 +55,9 @@ public class RubyProject extends GaugeProject {
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("puts ");
             for (int i = 0; i < stepValue.paramCount; i++) {
-                if (paramTypes.get(i).toLowerCase().equals("string")) {
-                    builder.append("\"param").append(i).append("=\"+").append("param").append(i);
-                    if (i != stepValue.paramCount - 1) {
-                        builder.append("+\",\"+");
-                    }
+                builder.append("\"param").append(i).append("=\"+").append("param").append(i).append(".to_s");
+                if (i != stepValue.paramCount - 1) {
+                    builder.append("+\",\"+");
                 }
             }
             builder.append("\n");
@@ -69,7 +67,7 @@ public class RubyProject extends GaugeProject {
             if (appendCode) {
                 builder.append(implementation);
             } else {
-                builder.append("puts ").append(implementation).append("\n");
+                builder.append("puts ").append(implementation).append(".to_s").append("\n");
             }
         }
         return builder.toString();

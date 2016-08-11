@@ -36,11 +36,11 @@ public class CSharpProject extends GaugeProject {
         classText.append("public void ").append("stepImplementation(");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
-                classText.append("string param").append(i);
+                classText.append("object param").append(i);
             } else {
-                classText.append("string param").append(i).append(", ");
+                classText.append("object param").append(i).append(", ");
             }
-            paramTypes.add("string");
+            paramTypes.add("Object");
         }
         implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
         classText.append(")\n{\n").append(implementation).append("\n}\n");
@@ -54,11 +54,9 @@ public class CSharpProject extends GaugeProject {
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("Console.WriteLine(");
             for (int i = 0; i < stepValue.paramCount; i++) {
-                if (paramTypes.get(i).toLowerCase().equals("string")) {
-                    builder.append("\"param").append(i).append("=\"+").append("param").append(i);
-                    if (i != stepValue.paramCount - 1) {
-                        builder.append("+\",\"+");
-                    }
+                builder.append("\"param").append(i).append("=\"+").append("param").append(i);
+                if (i != stepValue.paramCount - 1) {
+                    builder.append("+\",\"+");
                 }
             }
             builder.append(");\n");

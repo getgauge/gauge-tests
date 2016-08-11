@@ -39,11 +39,33 @@ public class ScenarioBuilder {
 
         Scenario scenario = new Scenario(scenarioName);
         for (TableRow row : scenarioSteps.getTableRows()) {
-            scenario.addItem(row.getCell("step text"), row.getCell("Type"));
+            scenario.addItem(getStepText(row.getCell("step text"),row), row.getCell("Type"));
             GaugeProject.implement(scenarioSteps, row,appendCode);
         }
 
         return scenario;
+    }
+
+    private static String getStepText(String stepText,TableRow row)
+    {
+        int numberOfHeaders = row.getCell("inlineTableHeaders").split(",").length;
+        String headers = "|"+(row.getCell("inlineTableHeaders").replaceAll(",","|"))+"|";
+
+        if(headers=="||")
+            return stepText;
+
+        StringBuilder tableContent = new StringBuilder("\n"+headers);
+
+        for (int index=1;index<=numberOfHeaders;index++) {
+            String columnValues = "|"+(row.getCell("row" + index).replaceAll(",","|\n|"))+"|";
+
+            if(columnValues=="||")
+                break;
+
+            tableContent.append("\n");
+            tableContent.append(columnValues);
+        }
+        return stepText.replace("<inlineTable>",tableContent.toString());
     }
 
     public boolean canBuild(){

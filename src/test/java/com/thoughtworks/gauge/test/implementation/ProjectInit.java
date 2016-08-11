@@ -11,6 +11,8 @@ import com.thoughtworks.gauge.test.common.builders.SpecificationBuilder;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class ProjectInit {
@@ -99,6 +101,15 @@ public class ProjectInit {
     public void createACsv(String name) throws Exception {
         new DataFileBuilder()
                 .withCsvFile(name)
+                .build();
+    }
+
+    @Step("Create a csv file <aCsvFileName> with <content>")
+    public void createACsvWithContent(String name,String content) throws Exception {
+
+        new DataFileBuilder()
+                .withCsvFile(name)
+                .withContent(Arrays.asList(content.split("\n")))
                 .build();
     }
 

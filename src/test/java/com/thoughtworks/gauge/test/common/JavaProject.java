@@ -79,11 +79,9 @@ public class JavaProject extends GaugeProject {
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
             builder.append("System.out.println(");
             for (int i = 0; i < stepValue.paramCount; i++) {
-                if (paramTypes.get(i).toLowerCase().equals("string")) {
-                    builder.append("\"param").append(i).append("=\"+").append("param").append(i);
-                    if (i != stepValue.paramCount - 1) {
-                        builder.append("+\",\"+");
-                    }
+                builder.append("\"param").append(i).append("=\"+").append("param").append(i);
+                if (i != stepValue.paramCount - 1) {
+                    builder.append("+\",\"+");
                 }
             }
             builder.append(");\n");
@@ -158,11 +156,11 @@ public class JavaProject extends GaugeProject {
     private void addParameters(StringBuilder classText, List<String> paramTypes, StepValueExtractor.StepValue stepValue) {
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
-                classText.append("String param").append(i);
+                classText.append("Object param").append(i);
             } else {
-                classText.append("String param").append(i).append(", ");
+                classText.append("Object param").append(i).append(", ");
             }
-            paramTypes.add("String");
+            paramTypes.add("Object");
         }
     }
 

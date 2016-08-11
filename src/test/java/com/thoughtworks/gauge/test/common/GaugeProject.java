@@ -4,6 +4,8 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
+import jdk.nashorn.internal.objects.Global;
+import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -344,6 +346,7 @@ public abstract class GaugeProject {
 
     public static void implement(Table impl, TableRow row,boolean appendCode) throws Exception {
         if(impl.getColumnNames().contains("implementation")) {
+
             currentProject.implementStep(row.getCell("step text"),
                     row.getCell("implementation"),
                     Boolean.parseBoolean(row.getCell("continue on failure")),
