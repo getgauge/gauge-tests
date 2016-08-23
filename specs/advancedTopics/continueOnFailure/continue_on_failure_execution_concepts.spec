@@ -5,6 +5,87 @@ tags: continueOnFailure
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
+Should continue when there is a failure with Continue on failure attribute in a concept step
+--------------------------------------------------------------------------------------------
+
+* Create concept "concept with continue on failure steps" with following steps
+
+     |concept steps                |
+     |-----------------------------|
+     |say hello                    |
+     |Step that throws an exception|
+     |say hello again              |
+
+* Create step implementations
+
+     |step text                    |implementation  |continue on failure|
+     |-----------------------------|----------------|-------------------|
+     |say hello                    |"hello world"   |false              |
+     |Step that throws an exception|throw exception |true               |
+     |say hello again              |"hello universe"|false              |
+
+* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps
+
+     |step text                             |
+     |--------------------------------------|
+     |say hello                             |
+     |concept with continue on failure steps|
+     |say hello                             |
+
+* Execute the spec "Spec with concepts" and ensure failure
+* Console should contain following lines in order
+
+     |console output table                      |
+     |------------------------------------------|
+     |hello world                               |
+     |hello world                               |
+     |Failed Step: Step that throws an exception|
+     |hello universe                            |
+     |hello world                               |
+
+
+Should not continue when there is a failure before a step with Continue on failure attribute in a concept step
+--------------------------------------------------------------------------------------------------------------
+
+* Create concept "concept with continue on failure steps" with following steps
+
+     |concept steps                |
+     |-----------------------------|
+     |say hello                    |
+     |Step that throws an exception|
+     |say hello again              |
+
+* Create step implementations
+
+     |step text                    |implementation  |continue on failure|
+     |-----------------------------|----------------|-------------------|
+     |say hello                    |"hello world"   |false              |
+     |Step that throws an exception|throw exception |false              |
+     |say hello again              |"hello universe"|false              |
+
+* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps
+
+     |step text                             |
+     |--------------------------------------|
+     |say hello                             |
+     |concept with continue on failure steps|
+     |say hello                             |
+
+* Execute the spec "Spec with concepts" and ensure failure
+* Console should contain following lines in order
+
+     |console output table                      |
+     |------------------------------------------|
+     |hello world                               |
+     |hello world                               |
+     |Failed Step: Step that throws an exception|
+
+* Console should not contain following lines
+
+     |console output table|
+     |--------------------|
+     |hello universe      |
+
 Should continue when there is a failure with Continue on failure attribute in a nested concept step
 ---------------------------------------------------------------------------------------------------
 
