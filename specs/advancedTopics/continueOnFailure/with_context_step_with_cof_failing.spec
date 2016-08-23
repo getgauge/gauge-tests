@@ -93,6 +93,10 @@ With failures in setup after step cof fails - the test should stop at the failur
      |inside hello step                      |
      |Failed Step: step 4 continue on failure|
      |Failed Step: fail step                 |
+     |Failed Step: step 5 continue on failure|
+     |inside Normal step3                    |
+     |Failed Step: step 6 continue on failure|
+     |inside Normal step4                    |
 
 * Console should not contain following lines 
 
@@ -101,10 +105,6 @@ With failures in setup after step cof fails - the test should stop at the failur
      |Failed Step: Second step               |
      |inside third step                      |
      |Failed Step: fourth step               |
-     |Failed Step: step 5 continue on failure|
-     |inside Normal step3                    |
-     |Failed Step: step 6 continue on failure|
-     |inside Normal step4                    |
 
 * Statics generated should have 
 
