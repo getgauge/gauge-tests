@@ -58,7 +58,7 @@ public class PythonProject extends GaugeProject {
             builder.append("    print(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 if (paramTypes.get(i).toLowerCase().equals("string")) {
-                    builder.append("\"param").append(i).append("=\"+").append("param").append(i);
+                    builder.append("\"param").append(i).append("=\"+").append("param").append(i).append(".__str__()");
                     if (i != stepValue.paramCount - 1) {
                         builder.append("+\",\"+");
                     }
@@ -71,7 +71,7 @@ public class PythonProject extends GaugeProject {
             if (appendCode) {
                 builder.append(implementation);
             } else {
-                builder.append("    print(").append(implementation).append(")\n");
+                builder.append("    print(").append(implementation).append(".__str__()").append(")\n");
             }
         }
         return builder.toString();
@@ -128,7 +128,13 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
-
+        StringBuilder sb = new StringBuilder();
+        sb.append("from getgauge.python import screenshot\n");
+        sb.append("\n");
+        sb.append("@screenshot\n");
+        sb.append("def takeScreenshot():\n");
+        sb.append("    return str.encode(\"").append(stubScreenshot).append("\")\n");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".py"), sb.toString());
     }
 
     private String getStepImplementationsDir() {
