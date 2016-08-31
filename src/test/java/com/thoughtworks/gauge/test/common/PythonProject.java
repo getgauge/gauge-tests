@@ -27,7 +27,7 @@ public class PythonProject extends GaugeProject {
         StringBuilder classText = new StringBuilder();
         classText.append(IMPORT);
         if (continueOnFailure)
-            classText.append("@continue_on_failure\n");
+            classText.append("@continue_on_failure([Exception])\n");
         classText.append("@step(\"").append(stepValue.value).append("\")\n");
         classText.append("def ").append(Util.getUniqueName()).append("(");
         for (int i = 0; i < stepValue.paramCount; i++) {
