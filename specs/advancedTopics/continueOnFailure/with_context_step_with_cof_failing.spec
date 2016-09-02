@@ -19,18 +19,18 @@ With failures only in steps with cof across setup, scenario and teardown - the t
      |step text                 |implementation       |continue on failure|
      |--------------------------|---------------------|-------------------|
      |step 2 continue on failure|throw exception      |true               |
-     |Normal step1              |"inside normal step1"|false              |
+     |normal step1              |"inside normal step1"|false              |
      |step 3 continue on failure|throw exception      |true               |
-     |Normal step2              |"inside normal step2"|false              |
+     |normal step2              |"inside normal step2"|false              |
 
 * Add the following teardown steps in specification "continueOnFailureSpec" 
 
      |step text                 |
      |--------------------------|
      |step 2 continue on failure|
-     |Normal step1              |
+     |normal step1              |
      |step 3 continue on failure|
-     |Normal step2              |
+     |normal step2              |
 
 * Execute the current project and ensure failure
 
@@ -80,9 +80,9 @@ With failures in setup - the test should execute tear down steps, wihtout execut
      |step text                 |implementation       |continue on failure|
      |--------------------------|---------------------|-------------------|
      |step 5 continue on failure|throw exception      |true               |
-     |Normal step3              |"inside normal step3"|false              |
+     |normal step3              |"inside normal step3"|false              |
      |step 6 continue on failure|throw exception      |true               |
-     |Normal step4              |"inside normal step4"|false              |
+     |normal step4              |"inside normal step4"|false              |
 
 * Execute the current project and ensure failure
 
@@ -94,9 +94,9 @@ With failures in setup - the test should execute tear down steps, wihtout execut
      |Failed Step: step 4 continue on failure|
      |Failed Step: fail step                 |
      |Failed Step: step 5 continue on failure|
-     |inside Normal step3                    |
+     |inside normal step3                    |
      |Failed Step: step 6 continue on failure|
-     |inside Normal step4                    |
+     |inside normal step4                    |
 
 * Console should not contain following lines 
 
@@ -120,7 +120,7 @@ With failures in scenario after step cof fails - the test should stop at the fai
 
      |step text                 |implementation       |continue on failure|
      |--------------------------|---------------------|-------------------|
-     |Normal step5              |"inside Normal step5"|false              |
+     |normal step5              |"inside normal step5"|false              |
      |step 7 continue on failure|throw exception      |true               |
 
 * Create a scenario "continueOnFailureScenario3" in specification "continueOnFailureSpec3" with the following continue on failure steps 
@@ -129,16 +129,16 @@ With failures in scenario after step cof fails - the test should stop at the fai
      |--------------------------|---------------------|-------------------|
      |step 8 continue on failure|throw exception      |true               |
      |fail step2                |throw exception      |false              |
-     |Normal step6              |"inside Normal step6"|false              |
+     |normal step6              |"inside normal step6"|false              |
 
 * Add the following teardown steps in specification "continueOnFailureSpec3" 
 
      |step text                  |implementation       |continue on failure|
      |---------------------------|---------------------|-------------------|
      |step 9 continue on failure |throw exception      |true               |
-     |Normal step7               |"inside normal step7"|false              |
+     |normal step7               |"inside normal step7"|false              |
      |step 10 continue on failure|throw exception      |true               |
-     |Normal step8               |"inside normal step8"|false              |
+     |normal step8               |"inside normal step8"|false              |
 
 * Execute the current project and ensure failure
 
@@ -147,19 +147,19 @@ With failures in scenario after step cof fails - the test should stop at the fai
      |console output                         |
      |---------------------------------------|
      |Failed Step: step 7 continue on failure|
-     |inside Normal step5                    |
+     |inside normal step5                    |
      |Failed Step: step 8 continue on failure|
      |Failed Step: fail step2                |
+     |Failed Step: step 9 continue on failure |
+     |inside normal step7                     |
+     |Failed Step: step 10 continue on failure|
+     |inside normal step8                     |
 
 * Console should not contain following lines 
 
      |console output                          |
      |----------------------------------------|
-     |inside Normal step6                     |
-     |Failed Step: step 9 continue on failure |
-     |inside Normal step7                     |
-     |Failed Step: step 10 continue on failure|
-     |inside Normal step8                     |
+     |inside normal step6                     |
 
 * Statics generated should have 
 

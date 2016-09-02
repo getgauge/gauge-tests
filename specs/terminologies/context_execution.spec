@@ -37,12 +37,12 @@ basic context execution
      |inside second context      |
      |inside second scenario step|
 
-* Statics generated should have
+* Statics generated should have 
 
-    |Statistics name|executed|passed|failed|skipped|
-    |---------------|--------|------|------|-------|
-    |Specifications |1       |1     |0     |0      |
-    |Scenarios      |2       |2     |0     |0      |
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |2       |2     |0     |0      |
 
 
 Normal context step - with no cof fails then tear down steps are expected to execute
@@ -66,7 +66,7 @@ Normal context step - with no cof fails then tear down steps are expected to exe
      |--------------------|-----------------------------|
      |Second Scenario step|"inside second scenario step"|
 
-* Add the following teardown steps in specification "continueOnFailureSpec2" 
+* Add the following teardown steps in specification "basic context execution" 
 
      |step text   |implementation       |
      |------------|---------------------|
@@ -78,10 +78,10 @@ Normal context step - with no cof fails then tear down steps are expected to exe
 
      |console output             |
      |---------------------------|
-     |"inside first context"     |
+     |inside first context       |
      |Failed Step: Second context|
-     |"inside normal step3"      |
-     |"inside normal step4"      |
+     |inside normal step3        |
+     |inside normal step4        |
 
 * Console should not contain following lines 
 
