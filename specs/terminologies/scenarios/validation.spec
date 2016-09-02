@@ -1,5 +1,7 @@
 Scenario validations
 =====================
+tags: validation
+
 * In an empty directory initialize a project named "validation" with the current language
 
 Validation Failure

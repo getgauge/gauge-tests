@@ -56,8 +56,8 @@ With failures only in steps with cof across setup, scenario and teardown - the t
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-With failures in setup after step cof fails - the test should stop at the failure with no cof in setup
-------------------------------------------------------------------------------------------------------
+With failures in setup - the test should execute tear down steps, wihtout executing scenario steps
+-------------------------------------------------------------------------------------
 
 * Create a specification "continueOnFailureSpec2" with the following contexts 
 

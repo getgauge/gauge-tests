@@ -1,5 +1,8 @@
 Step validation
 ===============
+
+tags: validation
+
 * In an empty directory initialize a project named "validation" with the current language
 
 step should not be empty
