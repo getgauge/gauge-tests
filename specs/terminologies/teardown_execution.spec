@@ -36,6 +36,16 @@ Passing teardown execution
      |inside first teardown      |
      |inside second teardown     |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |2       |2     |0     |0      |
+
+
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+
 Unimplemented teardown execution
 --------------------------------
 
@@ -65,6 +75,17 @@ Unimplemented teardown execution
      |--------------------------------------------------|
      |Step implementation not found => 'First teardown' |
      |Step implementation not found => 'Second teardown'|
+
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |0       |0     |0     |1      |
+     |Scenarios      |0       |0     |0     |2      |
+
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"
 
 Failed teardown execution
 -------------------------
@@ -103,3 +124,14 @@ Failed teardown execution
      |Failed Step: First teardown|
      |inside second scenario step|
      |Failed Step: First teardown|
+
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |2       |0     |2     |0      |
+
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"

@@ -18,3 +18,10 @@ Duplicate step implementation should atleast give a warning
 * Execute the spec "duplicate step implementation" and ensure failure
 
 * Console should contain "Duplicate step implementation"
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |0       |0     |0     |1      |
+     |Scenarios      |0       |0     |0     |1      |
