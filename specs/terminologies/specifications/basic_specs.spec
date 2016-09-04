@@ -113,6 +113,8 @@ Spec fails if it has even one scenario failing irrespective of the passing and s
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |2       |1     |1     |1      |
 
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+
 Spec should be skipped if it has all scenarios with unimplemented steps
 -----------------------------------------------------------------------
 
@@ -144,3 +146,4 @@ Spec should be skipped if it has all scenarios with unimplemented steps
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
+* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"

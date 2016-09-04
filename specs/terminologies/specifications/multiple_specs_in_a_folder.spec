@@ -39,6 +39,8 @@ Execute multiple specs from a folder
      |Specifications |3       |3     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
+* verify statistics in html with totalCount "3", passCount "3", failCount "0", skippedCount "0"
+
 Execute a spec from a folder which is not specs
 -----------------------------------------------
 
@@ -58,6 +60,7 @@ Execute a spec from a folder which is not specs
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
 
 Execute a spec in a sub folder
 ------------------------------
@@ -84,3 +87,4 @@ Execute a spec in a sub folder
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
