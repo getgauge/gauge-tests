@@ -43,6 +43,14 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |hello universe                            |
      |hello world                               |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a concept step
 --------------------------------------------------------------------------------------------------------------
@@ -85,6 +93,15 @@ Should not continue when there is a failure before a step with Continue on failu
      |console output table|
      |--------------------|
      |hello universe      |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
 
 Should continue when there is a failure with Continue on failure attribute in a nested concept step
 ---------------------------------------------------------------------------------------------------
@@ -154,6 +171,16 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |concept level 2 third time|
      |concept level 1 again     |
      |goodbye world             |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+
 Should not continue when there is a failure before a step with Continue on failure attribute in a nested concept step
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -233,3 +260,12 @@ Should not continue when there is a failure before a step with Continue on failu
      |concept level 2 third time|
      |concept level 1 again     |
      |goodbye world             |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"

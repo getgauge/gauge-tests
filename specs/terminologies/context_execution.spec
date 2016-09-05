@@ -98,5 +98,4 @@ Normal context step - with no cof fails then tear down steps are expected to exe
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |2       |0     |2     |0      |
 
-
 * verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"

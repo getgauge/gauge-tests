@@ -31,6 +31,15 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |inside third step       |
      |Failed Step: fourth step|
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+
 Should not continue when there is a failure before a step with Continue on failure attribute in a scenario step
 ---------------------------------------------------------------------------------------------------------------
 
@@ -67,3 +76,12 @@ Should not continue when there is a failure before a step with Continue on failu
      |-----------------------|
      |Failed Step: Fifth step|
      |inside next step       |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"

@@ -27,3 +27,12 @@ Should be able to invoke a concept with no parameters
      |inside first concept step |
      |inside second concept step|
      |inside fourth step        |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |1       |1     |0     |0      |
+
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"

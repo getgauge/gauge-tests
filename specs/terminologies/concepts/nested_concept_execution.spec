@@ -45,6 +45,15 @@ Nested Concept execution
      |param0=first,param1=second|
      |param0=static             |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |1       |1     |0     |0      |
+
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+
 Nested Concept execution with data table
 ----------------------------------------
 
@@ -80,3 +89,12 @@ Nested Concept execution with data table
      |param0=static             |
      |param0=3,param1=srikanth  |
      |param0=static             |
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |1     |0     |0      |
+     |Scenarios      |1       |1     |0     |0      |
+
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"

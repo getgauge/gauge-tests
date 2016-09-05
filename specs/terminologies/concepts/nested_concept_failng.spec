@@ -52,3 +52,12 @@ Test concept failure Path
      |param0=HI,param1=Gauge    |
      |param0=abc,param1=concept1|
      |param0=abc,param1=concept2|
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"

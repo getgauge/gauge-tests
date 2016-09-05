@@ -43,8 +43,26 @@ Execute specs successfully
 
 * Execute the current project in parallel and ensure success
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |6       |6     |0     |0      |
+     |Scenarios      |6       |6     |0     |0      |
+
+* verify statistics in html with totalCount "6", passCount "6", failCount "0", skippedCount "0"
+
 Execute specs successfully in n streams
 ---------------------------------------
 
 * Execute the current project in parallel in "2" streams and ensure success
 * Console should contain "Executing in 2 parallel streams"
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |6       |6     |0     |0      |
+     |Scenarios      |6       |6     |0     |0      |
+
+* verify statistics in html with totalCount "6", passCount "6", failCount "0", skippedCount "0"

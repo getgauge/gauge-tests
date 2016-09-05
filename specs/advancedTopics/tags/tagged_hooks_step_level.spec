@@ -85,6 +85,15 @@ AND aggregation of hooks
 * Console should contain "inside before step hook1" "2" times
 * Console should contain "inside before step hook2" "2" times
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |3       |3     |0     |0      |
+     |Scenarios      |4       |4     |0     |0      |
+
+* verify statistics in html with totalCount "3", passCount "3", failCount "0", skippedCount "0"
+
 OR aggregation of hooks
 -----------------------
 
@@ -127,3 +136,12 @@ OR aggregation of hooks
 
 * Console should contain "inside before step hook" "4" times
 * Console should contain "inside after step hook" "6" times
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |3       |3     |0     |0      |
+     |Scenarios      |4       |4     |0     |0      |
+
+* verify statistics in html with totalCount "3", passCount "3", failCount "0", skippedCount "0"

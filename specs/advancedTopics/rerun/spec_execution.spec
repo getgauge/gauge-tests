@@ -29,6 +29,16 @@ Rerun failed scenarios
      |Fifth step |throw exception     |
 
 * Execute the current project and ensure failure
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |3       |1     |2     |0      |
+     |Scenarios      |3       |1     |2     |0      |
+
+* verify statistics in html with totalCount "3", passCount "1", failCount "2", skippedCount "0"
+
 * Rerun failed scenarios and ensure failure
 * Console should contain following lines in order 
 
@@ -42,3 +52,12 @@ Rerun failed scenarios
      |console output   |
      |-----------------|
      |inside third step|
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |2       |0     |2     |0      |
+     |Scenarios      |2       |0     |2     |0      |
+
+* verify statistics in html with totalCount "2", passCount "0", failCount "2", skippedCount "0"

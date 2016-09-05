@@ -31,6 +31,8 @@ steps with inline table parameter
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+
 steps with csv table parameter
 ------------------------------
 
@@ -58,3 +60,5 @@ steps with csv table parameter
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
+
+* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"

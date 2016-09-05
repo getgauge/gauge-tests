@@ -26,6 +26,15 @@ Test a hook failure at suite level
      |inside step 1         |
      |inside step 2         |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |0       |0     |0     |0      |
+     |Scenarios      |0       |0     |0     |0      |
+
+* verify statistics in html with totalCount "0", passCount "0", failCount "0", skippedCount "0"
+
 Test a hook failure at spec level
 ---------------------------------
 
@@ -49,6 +58,15 @@ Test a hook failure at spec level
      |inside step 1 |
      |inside step 2 |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |0       |0     |0     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+
 Test a hook failure at scenario level
 -------------------------------------
 
@@ -68,6 +86,15 @@ Test a hook failure at scenario level
      |inside step 1 |
      |inside step 2 |
 
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+
 Test a hook failure at step level
 ---------------------------------
 
@@ -79,3 +106,12 @@ Test a hook failure at step level
      |console output   |
      |-----------------|
      |inside after step|
+
+* Statics generated should have
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
