@@ -19,27 +19,9 @@ basic spec with one scenario, passing
 
 * Execute the current project and ensure success
 
-* Console should contain following lines in order 
+* Verify Console Details <table:resources/terminologies/specifications/basic_steps/one_scenario_passing/console_statistics.csv><table:resources/terminologies/specifications/basic_steps/one_scenario_passing/console_output.csv>
 
-     |console output                          |
-     |----------------------------------------|
-     |inside first step                       |
-     |inside second step                      |
-     |inside third step                       |
-     |inside step with parameters : two params|
-
-* Statics generated should have 
-
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |1     |0     |0      |
-     |Scenarios      |1       |1     |0     |0      |
-
-* verify statistics in html with 
-
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |1        |0        |0           |
+* Verify HTML Details <table:resources/terminologies/specifications/basic_steps/one_scenario_passing/html_statistics.csv><table:resources/terminologies/specifications/basic_steps/one_scenario_passing/html_scenario.csv>
 
 basic spec with multiple scenarios, passing
 -------------------------------------------
@@ -64,20 +46,9 @@ basic spec with multiple scenarios, passing
 
 * Execute the current project and ensure success
 
-* Console should contain following lines in order 
+* Verify Console Details <table:resources/terminologies/specifications/basic_steps/multiple_scenarios_passing/console_statistics.csv><table:resources/terminologies/specifications/basic_steps/scenario_failing_skipped/console_output.csv>
 
-     |console output    |
-     |------------------|
-     |inside first step |
-     |inside second step|
-     |inside third step |
-
-* Statics generated should have 
-
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |1     |0     |0      |
-     |Scenarios      |3       |3     |0     |0      |
+* Verify HTML Details <table:resources/terminologies/specifications/basic_steps/multiple_scenarios_passing/html_statistics.csv><table:resources/terminologies/specifications/basic_steps/scenario_failing_skipped/html_scenario.csv>
 
 Spec fails if it has even one scenario failing irrespective of the passing and skipped scenarios in it
 ------------------------------------------------------------------------------------------------------
@@ -104,26 +75,9 @@ Spec fails if it has even one scenario failing irrespective of the passing and s
 
 * Execute the current project and ensure failure
 
-* Console should contain following lines in order 
+* Verify Console Details <table:resources/terminologies/specifications/basic_steps/scenario_failing_skipped/console_statistics.csv><table:resources/terminologies/specifications/basic_steps/multiple_scenarios_passing/console_output.csv>
 
-     |console output         |
-     |-----------------------|
-     |inside first step      |
-     |inside second step     |
-     |Failed Step: Third step|
-
-* Statics generated should have 
-
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |2       |1     |1     |1      |
-
-* verify statistics in html with
-
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
+* Verify HTML Details <table:resources/terminologies/specifications/basic_steps/scenario_failing_skipped/html_statistics.csv><table:resources/terminologies/specifications/basic_steps/multiple_scenarios_passing/html_scenario.csv>
 
 Spec should be skipped if it has all scenarios with unimplemented steps
 -----------------------------------------------------------------------
@@ -161,4 +115,3 @@ Spec should be skipped if it has all scenarios with unimplemented steps
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
      |1         |0        |0        |1           |
-     
