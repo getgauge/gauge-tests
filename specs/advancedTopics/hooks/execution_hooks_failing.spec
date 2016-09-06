@@ -130,4 +130,4 @@ Test a hook failure at step level
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
-     |1         |1        |1        |0           |
+     |1         |0        |1        |0           |

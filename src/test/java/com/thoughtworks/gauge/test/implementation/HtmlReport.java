@@ -59,10 +59,10 @@ public class HtmlReport {
             String actualPassCount = statistics.getTableRows().get(0).getCell("passCount");
             String actualFailCount = statistics.getTableRows().get(0).getCell("failCount");
             String actualSkippedCount = statistics.getTableRows().get(0).getCell("skippedCount");
-            assertEquals(expectedTotalCount, actualTotalCount);
-            assertEquals(expectedPassCount, actualPassCount);
-            assertEquals(expectedFailCount, actualFailCount);
-            assertEquals(expectedSkippedCount, actualSkippedCount);
+            assertEquals("Total count:",expectedTotalCount, actualTotalCount);
+            assertEquals("Pass count:",expectedPassCount, actualPassCount);
+            assertEquals("Fail count:",expectedFailCount, actualFailCount);
+            assertEquals("Skipped count:",expectedSkippedCount, actualSkippedCount);
         }
     }
 }
