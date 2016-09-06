@@ -50,7 +50,11 @@ Execute specs successfully
      |Specifications |6       |6     |0     |0      |
      |Scenarios      |6       |6     |0     |0      |
 
-* verify statistics in html with totalCount "6", passCount "6", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |6         |6        |0        |0           |
 
 Execute specs successfully in n streams
 ---------------------------------------
@@ -65,4 +69,8 @@ Execute specs successfully in n streams
      |Specifications |6       |6     |0     |0      |
      |Scenarios      |6       |6     |0     |0      |
 
-* verify statistics in html with totalCount "6", passCount "6", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |6         |6        |0        |0           |

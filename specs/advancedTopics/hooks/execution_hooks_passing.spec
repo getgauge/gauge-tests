@@ -50,7 +50,11 @@ Suite and Spec Level Hooks
      |Specifications |2       |2     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-* verify statistics in html with totalCount "2", passCount "2", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |2         |2        |0        |0           |
 
 Scenario and step level hooks
 -----------------------------
@@ -80,7 +84,11 @@ Scenario and step level hooks
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 Test all level Execution hooks
 ------------------------------
@@ -110,4 +118,8 @@ Test all level Execution hooks
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |

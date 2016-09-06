@@ -39,7 +39,11 @@ Spec execution with unimplemented step in scenarios
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |1      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 Spec execution with unimplemented step in context step
 ------------------------------------------------------
@@ -71,7 +75,11 @@ Spec execution with unimplemented step in context step
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |1      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |0        |1           |
 
 Spec execution with unimplemented step in context step and scenario
 -------------------------------------------------------------------
@@ -110,7 +118,11 @@ Spec execution with unimplemented step in context step and scenario
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |0        |1           |
 
 Spec with no heading
 --------------------
@@ -172,4 +184,8 @@ Skip spec if all scenarios are skipped
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |0        |1           |

@@ -25,3 +25,9 @@ Duplicate step implementation should atleast give a warning
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |1      |
+
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |0        |1           |

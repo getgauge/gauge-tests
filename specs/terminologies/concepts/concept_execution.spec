@@ -27,4 +27,9 @@ Resolve concepts when executing from nested directories in specs
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
+     

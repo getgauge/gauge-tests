@@ -43,8 +43,11 @@ Passing teardown execution
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
+* verify statistics in html with
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 Unimplemented teardown execution
 --------------------------------
@@ -84,8 +87,11 @@ Unimplemented teardown execution
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
+* verify statistics in html with
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "0", skippedCount "1"
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |0        |1           |
 
 Failed teardown execution
 -------------------------
@@ -133,5 +139,8 @@ Failed teardown execution
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |2       |0     |2     |0      |
 
+* verify statistics in html with
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |

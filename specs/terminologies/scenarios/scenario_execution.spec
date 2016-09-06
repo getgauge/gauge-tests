@@ -48,4 +48,8 @@ Execute one scenario by specifying line number in a spec with multiple scenarios
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |

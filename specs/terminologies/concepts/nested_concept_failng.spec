@@ -60,4 +60,8 @@ Test concept failure Path
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |

@@ -45,8 +45,8 @@ public class HtmlReport {
         }
     }
 
-    @Step("verify statistics in html with totalCount <actualTotalCount>, passCount <actualPassCount>, failCount <actualFailCount>, skippedCount <actualSkippedCount>")
-    public void verifyStatistics(String actualTotalCount, String actualPassCount, String actualFailCount, String actualSkippedCount) throws IOException {
+    @Step("verify statistics in html with <statistics>")
+    public void verifyStatistics(Table statistics) throws IOException {
         String reportsPath = "file://" + Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
         try (final WebClient webClient = new WebClient()) {
             final HtmlPage page = webClient.getPage(reportsPath);
@@ -55,6 +55,10 @@ public class HtmlReport {
             String expectedPassCount = ((HtmlListItem) selectors.querySelectorAll(".pass").get(0)).getFirstChild().asText();
             String expectedFailCount = ((HtmlListItem) selectors.querySelectorAll(".fail").get(0)).getFirstChild().asText();
             String expectedSkippedCount = ((HtmlListItem) selectors.querySelectorAll(".skip").get(0)).getFirstChild().asText();
+            String actualTotalCount = statistics.getTableRows().get(0).getCell("totalCount");
+            String actualPassCount = statistics.getTableRows().get(0).getCell("passCount");
+            String actualFailCount = statistics.getTableRows().get(0).getCell("failCount");
+            String actualSkippedCount = statistics.getTableRows().get(0).getCell("skippedCount");
             assertEquals(expectedTotalCount, actualTotalCount);
             assertEquals(expectedPassCount, actualPassCount);
             assertEquals(expectedFailCount, actualFailCount);

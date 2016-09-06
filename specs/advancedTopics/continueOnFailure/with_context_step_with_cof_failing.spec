@@ -56,8 +56,11 @@ With failures only in steps with cof across setup, scenario and teardown - the t
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
 
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 With failures in setup - the test should execute tear down steps, wihtout executing scenario steps
 -------------------------------------------------------------------------------------
@@ -116,7 +119,11 @@ With failures in setup - the test should execute tear down steps, wihtout execut
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 With failures in scenario after step cof fails - the test should stop at the failure with no cof in setup
 ---------------------------------------------------------------------------------------------------------
@@ -173,7 +180,11 @@ With failures in scenario after step cof fails - the test should stop at the fai
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 Should not continue when there is a failure with no cof before any Continue on step failures
 --------------------------------------------------------------------------------------------
@@ -213,5 +224,9 @@ Should not continue when there is a failure with no cof before any Continue on s
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 

@@ -92,7 +92,11 @@ AND aggregation of hooks
      |Specifications |3       |3     |0     |0      |
      |Scenarios      |4       |4     |0     |0      |
 
-* verify statistics in html with totalCount "3", passCount "3", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |3         |3        |0        |0           |
 
 OR aggregation of hooks
 -----------------------
@@ -144,4 +148,8 @@ OR aggregation of hooks
      |Specifications |3       |3     |0     |0      |
      |Scenarios      |4       |4     |0     |0      |
 
-* verify statistics in html with totalCount "3", passCount "3", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |3         |3        |0        |0           |

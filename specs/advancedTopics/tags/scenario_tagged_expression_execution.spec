@@ -71,7 +71,11 @@ tagged expression with & operator
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 tagged expression with | operator
 ---------------------------------
@@ -93,7 +97,11 @@ tagged expression with | operator
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |4       |4     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 * Execute the tags "tag3 || tag1" in spec "tags_expression_execution" and ensure success
 * Console should contain following lines in order 
@@ -112,7 +120,11 @@ tagged expression with | operator
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |4       |4     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 tagged expression with ! operator
 ---------------------------------
@@ -139,7 +151,11 @@ tagged expression with ! operator
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 tagged expression with (!&|) operator
 -------------------------------------
@@ -166,5 +182,9 @@ tagged expression with (!&|) operator
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 

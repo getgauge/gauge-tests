@@ -33,7 +33,11 @@ Test a hook failure at suite level
      |Specifications |0       |0     |0     |0      |
      |Scenarios      |0       |0     |0     |0      |
 
-* verify statistics in html with totalCount "0", passCount "0", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |0         |0        |0        |0           |
 
 Test a hook failure at spec level
 ---------------------------------
@@ -65,7 +69,11 @@ Test a hook failure at spec level
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |0       |0     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 Test a hook failure at scenario level
 -------------------------------------
@@ -93,7 +101,11 @@ Test a hook failure at scenario level
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 Test a hook failure at step level
 ---------------------------------
@@ -114,4 +126,8 @@ Test a hook failure at step level
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |1        |0           |

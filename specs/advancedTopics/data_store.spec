@@ -29,7 +29,11 @@ Scenario data store refreshes after every scenario run.
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 Spec data store persists data between scenario runs
 ---------------------------------------------------
@@ -63,7 +67,11 @@ Spec data store persists data between scenario runs
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with totalCount "1", passCount "1", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
 Suite data store persists data between spec runs
 ------------------------------------------------
@@ -103,4 +111,8 @@ specs are read and run alphabetically, so we create specs in alphabetical order 
      |Specifications |2       |2     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with totalCount "2", passCount "2", failCount "0", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |2         |2        |0        |0           |

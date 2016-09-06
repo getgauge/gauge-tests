@@ -5,6 +5,7 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -108,6 +109,20 @@ public class SpecificationBuilder {
 
     public SpecificationBuilder withDataTable(Table datatable) {
         this.datatable = datatable;
+        return this;
+    }
+
+    public SpecificationBuilder withScenarioDataStoreWriteStatement(String key,String value) {
+        ArrayList<String> columns = new ArrayList<>();
+        columns.add("key");
+        columns.add("value");
+
+        TableRow row = new TableRow();
+        row.addCell("key",key);
+        row.addCell("value",value);
+        row.addCell("datastore type","Scenario");
+
+        currentProject.getDataStoreWriteStatement(row, columns);
         return this;
     }
 

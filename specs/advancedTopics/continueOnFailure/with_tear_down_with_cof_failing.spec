@@ -52,7 +52,11 @@ Should continue when there is a failure with Continue on failure attribute only 
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 Should not continue when there is a failure before a step with Continue on failure attribute in a tear down step
 ----------------------------------------------------------------------------------------------------------------
@@ -101,7 +105,11 @@ Should not continue when there is a failure before a step with Continue on failu
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |
 
 With failures in teardown steps after step cof fails - the test should stop at the failure with no cof in setup
 ---------------------------------------------------------------------------------------------------------------
@@ -158,4 +166,8 @@ With failures in teardown steps after step cof fails - the test should stop at t
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with totalCount "1", passCount "0", failCount "1", skippedCount "0"
+* verify statistics in html with
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |0        |1        |0           |

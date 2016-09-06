@@ -9,6 +9,9 @@ public class Scenario {
     public void addContextToSpecification(String scenarioName, String specName, Table steps) throws Exception {
         new SpecificationBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
+                .withScenarioDataStoreWriteStatement("specName", specName)
+                .withScenarioDataStoreWriteStatement("Scenario name",scenarioName)
+                .withScenarioDataStoreWriteStatement(scenarioName,steps.toString())
                 .withSteps(steps)
                 .buildAndAddToProject();
     }
