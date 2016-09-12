@@ -115,4 +115,3 @@ Spec should be skipped if it has all scenarios with unimplemented steps
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
      |1         |0        |0        |1           |
-     
