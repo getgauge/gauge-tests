@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.thoughtworks.gauge.test</groupId>
         <artifactId>gauge-tests</artifactId>
-        <version>0.4.0-SNAPSHOT</version>
+        <version>LATEST</version>
     </parent>
     <groupId>com.thoughtworks.gauge.test</groupId>
     <artifactId>cross-platform-tests</artifactId>
