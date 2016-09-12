@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,23 +22,25 @@ public class JavaProject extends GaugeProject {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("src", "dir");
         map.put("libs", "dir");
-        map.put(Util.combinePath("src","test","java","StepImplementation.java"), "file");
-        map.put(Util.combinePath("env","default","java.properties"), "file");
+        map.put(Util.combinePath("src", "test", "java", "StepImplementation.java"), "file");
+        map.put(Util.combinePath("env", "default", "java.properties"), "file");
         return map;
     }
 
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
+        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
         String className = Util.getUniqueName();
         StringBuilder classText = createClassTeplate(className, stepValue.value);
-        if (continueOnFailure) {
+        if (stepImpl.isContinueOnFailure()) {
             classText.insert(0, "import com.thoughtworks.gauge.ContinueOnFailure;\n");
-            classText.append("\n@ContinueOnFailure\n");
+            classText.append("\n@ContinueOnFailure");
+            classText.append("(").append(String.join(",", stepImpl.getErrorTypes())).append(")\n");
         }
         classText.append("public void ").append("stepImplementation(");
         addParameters(classText, paramTypes, stepValue);
-        implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
+        String implementation = stepImpl.getImplementation();
+        implementation = getStepImplementation(stepValue, implementation, paramTypes, stepImpl.isValidStatement());
         classText.append(") {\n").append(implementation).append("\n}\n");
         classText.append("}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
@@ -64,10 +67,10 @@ public class JavaProject extends GaugeProject {
         StringBuilder sb = new StringBuilder();
         sb.append("import com.thoughtworks.gauge.screenshot.ICustomScreenshotGrabber;\n");
         sb.append("\n");
-        sb.append("public class "+ className +" implements ICustomScreenshotGrabber {\n");
+        sb.append("public class " + className + " implements ICustomScreenshotGrabber {\n");
         sb.append("\n");
         sb.append("    public byte[] takeScreenshot() {\n");
-        sb.append("        return \"" + stubScreenshot +"\".getBytes();\n");
+        sb.append("        return \"" + stubScreenshot + "\".getBytes();\n");
         sb.append("    }\n");
         sb.append("}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), sb.toString());
@@ -87,6 +90,8 @@ public class JavaProject extends GaugeProject {
             builder.append(");\n");
         } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
+        } else if (implementation.toLowerCase().startsWith("throw")) {
+            return "throw new " + implementation.trim().substring(implementation.indexOf(' ')) + "();";
         } else {
             if (appendCode) {
                 builder.append(implementation);
@@ -150,7 +155,7 @@ public class JavaProject extends GaugeProject {
     }
 
     private String getStepImplementationsDir() {
-        return Util.combinePath(getProjectDir().getAbsolutePath(), "src", "test","java");
+        return Util.combinePath(getProjectDir().getAbsolutePath(), "src", "test", "java");
     }
 
     private void addParameters(StringBuilder classText, List<String> paramTypes, StepValueExtractor.StepValue stepValue) {

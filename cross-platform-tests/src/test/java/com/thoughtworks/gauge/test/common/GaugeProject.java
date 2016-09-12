@@ -4,8 +4,7 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
-import jdk.nashorn.internal.objects.Global;
-import jdk.nashorn.internal.parser.JSONParser;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,8 +13,6 @@ import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
-
-import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public abstract class GaugeProject {
 
@@ -177,7 +174,7 @@ public abstract class GaugeProject {
         for (TableRow row : steps.getTableRows()) {
             concept.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (columnNames.size() == 2) {
-                implementStep(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false);
+                implementStep(new StepImpl(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false, ""));
             }
         }
         concept.saveAs(conceptFile);
@@ -346,15 +343,12 @@ public abstract class GaugeProject {
 
     public static void implement(Table impl, TableRow row,boolean appendCode) throws Exception {
         if(impl.getColumnNames().contains("implementation")) {
-
-            currentProject.implementStep(row.getCell("step text"),
-                    row.getCell("implementation"),
-                    Boolean.parseBoolean(row.getCell("continue on failure")),
-                    appendCode);
+            StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"), Boolean.parseBoolean(row.getCell("continue on failure")), appendCode, row.getCell("error type"));
+            currentProject.implementStep(stepImpl);
         }
     }
 
-    public abstract void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception;
+    public abstract void implementStep(StepImpl stepImpl) throws Exception;
 
     public abstract Map<String, String> getLanguageSpecificFiles();
 

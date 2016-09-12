@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +19,13 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
+        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
         String fileName = Util.getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
         rubyCode.append("step '").append(stepValue.value).append("'");
-        if(continueOnFailure) {
+        if(stepImpl.isContinueOnFailure()) {
             rubyCode.append(", :continue_on_failure => true");
         }
         rubyCode.append(" do |");
@@ -36,7 +37,7 @@ public class RubyProject extends GaugeProject {
             }
             paramTypes.add("string");
         }
-        rubyCode.append("|\n").append(getStepImplementation(stepValue, implementation, paramTypes, appendCode)).append("\nend");
+        rubyCode.append("|\n").append(getStepImplementation(stepValue, stepImpl.getImplementation(), paramTypes, stepImpl.isValidStatement())).append("\nend");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".rb"), rubyCode.toString());
     }
 

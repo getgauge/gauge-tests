@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +14,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         throw new RuntimeException("Not implemented");
     }
 

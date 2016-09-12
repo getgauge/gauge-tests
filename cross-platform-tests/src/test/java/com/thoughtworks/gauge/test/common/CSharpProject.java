@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,14 +24,14 @@ public class CSharpProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
+        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
         String className = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append("public class ").append(className).append("\n{\n");
         classText.append("[Step(\"").append(stepValue.value).append("\")]\n");
-        if(continueOnFailure) {
+        if(stepImpl.isContinueOnFailure()) {
             classText.append("[ContinueOnFailure]\n");
         }
         classText.append("public void ").append("stepImplementation(");
@@ -42,7 +43,8 @@ public class CSharpProject extends GaugeProject {
             }
             paramTypes.add("Object");
         }
-        implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
+        String implementation = stepImpl.getImplementation();
+        implementation = getStepImplementation(stepValue, implementation, paramTypes, stepImpl.isValidStatement());
         classText.append(")\n{\n").append(implementation).append("\n}\n");
         classText.append("}\n");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), classText.toString());

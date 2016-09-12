@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
@@ -20,13 +21,13 @@ public class PythonProject extends GaugeProject {
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
+        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
         String fileName = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append(IMPORT);
-        if (continueOnFailure)
+        if (stepImpl.isContinueOnFailure())
             classText.append("@continue_on_failure([Exception])\n");
         classText.append("@step(\"").append(stepValue.value).append("\")\n");
         classText.append("def ").append(Util.getUniqueName()).append("(");
@@ -38,7 +39,8 @@ public class PythonProject extends GaugeProject {
             }
             paramTypes.add("string");
         }
-        implementation = getStepImplementation(stepValue, implementation, paramTypes, appendCode);
+        String implementation = stepImpl.getImplementation();
+        implementation = getStepImplementation(stepValue, implementation, paramTypes, stepImpl.isValidStatement());
         classText.append("):\n").append(implementation).append("\n\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".py"), classText.toString());
     }

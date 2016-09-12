@@ -40,7 +40,7 @@ public class ScenarioBuilder {
         Scenario scenario = new Scenario(scenarioName);
         for (TableRow row : scenarioSteps.getTableRows()) {
             scenario.addItem(getStepText(row.getCell("step text"),row), row.getCell("Type"));
-            GaugeProject.implement(scenarioSteps, row,appendCode);
+            GaugeProject.implement(scenarioSteps, row, appendCode);
         }
 
         return scenario;

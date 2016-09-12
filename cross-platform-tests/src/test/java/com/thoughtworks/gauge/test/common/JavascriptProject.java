@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,19 +21,19 @@ public class JavascriptProject extends GaugeProject {
     public static String toTitleCase(String input) {
         input = input.toLowerCase();
         char c =  input.charAt(0);
-        String s = new String("" + c);
+        String s = "" + c;
         String f = s.toUpperCase();
         return f + input.substring(1);
     }
 
     @Override
-    public void implementStep(String stepText, String implementation, boolean continueOnFailure, boolean appendCode) throws Exception {
+    public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepText);
+        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
         String fileName = Util.getUniqueName();
         StringBuilder jsCode = new StringBuilder();
         jsCode.append("gauge.step(\"").append(stepValue.value).append("\",");
-        if (continueOnFailure) {
+        if (stepImpl.isContinueOnFailure()) {
             jsCode.append(" { continueOnFailure: true },");
         }
         jsCode.append(" function (");
@@ -41,7 +42,7 @@ public class JavascriptProject extends GaugeProject {
             paramTypes.add("string");
         }
         jsCode.append("done) {\n");
-        jsCode.append(getStepImplementation(stepValue, implementation, paramTypes, appendCode));
+        jsCode.append(getStepImplementation(stepValue, stepImpl.getImplementation(), paramTypes, stepImpl.isValidStatement()));
         jsCode.append("\ndone();");
         jsCode.append("\n});");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), fileName + ".js"), jsCode.toString());
