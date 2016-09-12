@@ -15,7 +15,7 @@
         <inParallel>true</inParallel>
     </properties>
     <build>
-        <testSourceDirectory>${project.basedir}/html-report-tests/src/test/java</testSourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -34,7 +34,7 @@
                     <execution>
                         <phase>test</phase>
                         <configuration combine.self="override">
-                            <specsDir>cross-platform-tests/specs</specsDir>
+                            <specsDir>specs</specsDir>
                             <inParallel>${inParallel}</inParallel>
                         </configuration>
                         <goals>

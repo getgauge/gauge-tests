@@ -1,25 +1,66 @@
-A basic spec has only scenarios
-===============================
+HTML Reports with basic specs
+=============================
 
 tags: spec
 
 * In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
 
-basic spec with one scenario, passing
--------------------------------------
+Spec passes when all scenarios pass
+-----------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps
+* Create "Sample scenario" in "Basic spec execution" with the following steps 
 
-     |step text               |implementation                                          |
-     |------------------------|--------------------------------------------------------|
-     |First step              |"inside first step"                                     |
-     |Second step             |"inside second step"                                    |
-     |Third step              |"inside third step"                                     |
-     |Step with "two" "params"|"inside step with parameters : " + param0 + " " + param1|
+     |step text          |implementation     |
+     |-------------------|-------------------|
+     |First Scenario step|"inside first step"|
+
+* Create a scenario "second scenario" in specification "Basic spec execution" with the following steps with implementation 
+
+     |step text           |implementation      |
+     |--------------------|--------------------|
+     |Second Scenario step|"inside second step"|
+
+* Create a scenario "third scenario" in specification "Basic spec execution" with the following steps with implementation 
+
+     |step text          |implementation     |
+     |-------------------|-------------------|
+     |Third Scenario step|"inside third step"|
 
 * Execute the current project and ensure success
 
-* Verify Console Details <table:resources/specifications/one_scenario_passing/console_statistics.csv><table:resources/specifications/one_scenario_passing/console_output.csv>
+* verify statistics in html with 
 
-* Verify HTML Details <table:resources/specifications/one_scenario_passing/html_statistics.csv><table:resources/specifications/one_scenario_passing/html_scenario.csv>
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
 
+Spec fails even if one scenario fails - irrespective of passing and skipped scenarios
+-------------------------------------------------------------------------------------
+
+* Create "Failing scenario" in "Basic spec execution" with the following steps 
+
+     |step text  |implementation      |
+     |-----------|--------------------|
+     |First step |"inside first step" |
+     |Second step|"inside second step"|
+     |Third step |throw exception     |
+
+* Create a scenario "skipped scenario" in specification "Basic spec execution" with the following steps unimplemented 
+
+     |step text|
+     |---------|
+     |some step|
+
+* Create a scenario "passing scenario" in specification "Basic spec execution" with the following steps with implementation 
+
+     |step text          |implementation     |
+     |-------------------|-------------------|
+     |Third Scenario step|"inside third step"|
+
+* Execute the current project and ensure failure
+
+* verify statistics in html with 
+
+     |totalCount|passCount|failCount|skippedCount|
+     |----------|---------|---------|------------|
+     |1         |1        |0        |0           |
