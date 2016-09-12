@@ -1,0 +1,11 @@
+# Create <hook_level> level hooks with implementations <before_impl> for before and <after_impl> for after hook
+* Create <hook_level> level "before" hook with implementation <before_impl>
+* Create <hook_level> level "after" hook with implementation <after_impl>
+
+# Steps from api should have the following <table>
+* Fetch all steps from gauge
+* Verify all the steps are present <table> with default steps <table:resources/default_steps.csv>
+
+# Concepts from api should have the following <table>
+* Fetch all concepts from gauge
+* Verify all the steps are present <table>
