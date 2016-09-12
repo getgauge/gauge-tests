@@ -1,6 +1,6 @@
 Continue on failure
 ===================
-tags: continueOnFailure
+tags: continueOnFailure, java-only
 
 * In an empty directory initialize a project named "ContinueOnFailure" without example spec
 
