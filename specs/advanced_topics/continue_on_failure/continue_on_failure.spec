@@ -123,8 +123,6 @@ Continue execution only for mentioned error/exception in "Continue on Failure" s
 Stop execution on failure due to unspecified errors
 ---------------------------------------------------
 
-tags: csharp, ruby
-
 * Create a scenario "Continue on failure only on specified error" in specification "continueOnFailureSpec" with the following steps to continue on corresponding failures
 
      |step text  |implementation     |continue on failure|error type                |
