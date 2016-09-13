@@ -1,7 +1,7 @@
 Concept Refactoring
 ===================
 
-tags: refactoring
+tags: refactoring, java, csharp, ruby
 
 * In an empty directory initialize a project named "concept_refactoring" with the current language
 * Create concept "concept with <param0> and <param1>" with following steps 

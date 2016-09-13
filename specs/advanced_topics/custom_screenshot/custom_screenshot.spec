@@ -1,6 +1,8 @@
 Custom Screenshot
 =================
 
+tags: java, csharp, ruby
+
 Should be able to take screenshot using a custom logic
 ------------------------------------------------------
 

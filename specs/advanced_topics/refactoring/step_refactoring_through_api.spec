@@ -1,7 +1,7 @@
 StepRefactoring through API
 ===========================
 
-tags: refactoring, api
+tags: refactoring, api, java, csharp, ruby
 
 * In an empty directory initialize a project named "refactor_thru_api" with the current language
 

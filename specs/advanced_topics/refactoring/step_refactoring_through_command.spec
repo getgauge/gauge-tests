@@ -1,7 +1,7 @@
 Step Refactoring through command
 ================================
 
-tags: refactoring
+tags: refactoring, java, csharp, ruby
 
 * In an empty directory initialize a project named "spec_refactoring_thru_cmd" with the current language
 * Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 

@@ -1,6 +1,8 @@
 Parallel Execution
 ==================
 
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "parallel_exec" with the current language
 * Create "Scenario 11" in "Spec 1" with the following steps 
 

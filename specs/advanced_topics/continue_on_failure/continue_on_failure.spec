@@ -1,6 +1,7 @@
 Continue on failure
 ===================
-tags: continueOnFailure
+
+tags: continueOnFailure, java
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
@@ -12,6 +13,8 @@ tags: continueOnFailure
 
 Continue execution on any error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------
+
+tags: csharp, ruby
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
@@ -46,6 +49,8 @@ Continue execution on any error/exception in "Continue on Failure" step
 
 Stop execution on failure of some other step
 --------------------------------------------
+
+tags: csharp, ruby
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
@@ -89,6 +94,7 @@ Stop execution on failure of some other step
 
 Continue execution only for mentioned error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------------------
+
 * Create a scenario "Continue of failure for specified error" in specification "continueOnFailureSpec" with the following steps to continue on corresponding failures
 
      |step text  |implementation      |continue on failure|error type            |
@@ -116,6 +122,8 @@ Continue execution only for mentioned error/exception in "Continue on Failure" s
 
 Stop execution on failure due to unspecified errors
 ---------------------------------------------------
+
+tags: csharp, ruby
 
 * Create a scenario "Continue on failure only on specified error" in specification "continueOnFailureSpec" with the following steps to continue on corresponding failures
 

@@ -1,5 +1,8 @@
 Teardown Execution
 ==================
+
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "teardown_exec" with the current language
 
 Passing teardown execution

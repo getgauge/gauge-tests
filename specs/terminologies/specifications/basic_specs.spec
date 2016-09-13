@@ -1,7 +1,7 @@
 A basic spec has only scenarios
 ===============================
 
-tags: spec
+tags: spec, java, csharp, ruby
 
 * In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
 

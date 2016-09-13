@@ -1,6 +1,7 @@
 Continue on failure in setup / teardown
 =======================================
-tags: continueOnFailure
+
+tags: continueOnFailure, java, csharp, ruby
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 

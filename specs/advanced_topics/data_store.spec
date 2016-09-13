@@ -1,6 +1,8 @@
 Data Store
 ==========
 
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "data_store" with the current language
 
 Scenario data store refreshes after every scenario run.

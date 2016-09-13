@@ -1,7 +1,7 @@
 with simple value parameter
 ===========================
 
-tags: parameter
+tags: parameter, java, csharp, ruby
 
 * In an empty directory initialize a project named "scenarios_with_simple_parameter" without example spec
 

@@ -1,6 +1,8 @@
 Concept Failing
 ===============
 
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "concept_failing" with the current language
 * Create concept "concept with <param0> and <param1>" with following steps 
 

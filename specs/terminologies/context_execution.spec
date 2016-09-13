@@ -1,6 +1,8 @@
 Context Execution
 =================
 
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "context_exec" with the current language
 
 basic context execution

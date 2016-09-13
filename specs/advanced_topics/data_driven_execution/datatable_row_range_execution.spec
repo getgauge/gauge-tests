@@ -1,7 +1,7 @@
 Datatable row range execution
 =============================
 
-tags: Data-table, execution
+tags: Data-table, execution, java, csharp, ruby
 
 * In an empty directory initialize a project named "datatable_row_exec" with the current language
 * Create a specification "row range data table execution" with the following datatable 

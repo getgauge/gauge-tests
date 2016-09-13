@@ -1,7 +1,7 @@
 Step validation
 ===============
 
-tags: validation
+tags: validation, java, csharp, ruby
 
 * In an empty directory initialize a project named "validation" with the current language
 

@@ -1,5 +1,8 @@
 concepts with no parameters
 ===========================
+
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "single_scen_exec" with the current language
 
 Should be able to invoke a concept with no parameters

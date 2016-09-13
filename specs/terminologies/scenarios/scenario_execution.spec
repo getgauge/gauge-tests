@@ -1,7 +1,7 @@
 Scenario execution
 ==================
 
-tags: scenario
+tags: scenario, java, csharp, ruby
 
 * In an empty directory initialize a project named "scenarios_execution" without example spec
 

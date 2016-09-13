@@ -1,7 +1,7 @@
 Special Case Refactoring
 ========================
 
-tags: refactoring
+tags: refactoring, java, csharp, ruby
 
 Rephrase step with special and keyword parameters
 -------------------------------------------------

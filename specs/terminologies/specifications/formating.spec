@@ -1,6 +1,8 @@
 Spec Formatting
 ===============
 
+tags: java, csharp, ruby
+
 * In an empty directory initialize a project named "formatting" with the current language
 
 Formatting should not remove steps, scenarios from spec

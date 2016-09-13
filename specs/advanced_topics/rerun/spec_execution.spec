@@ -1,7 +1,7 @@
 Rerun Failed Tests
 ==================
 
-tags: execution, rerun
+tags: execution, rerun, java, csharp, ruby
 
 * In an empty directory initialize a project named "spec_exec" with the current language
 

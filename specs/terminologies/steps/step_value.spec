@@ -1,7 +1,7 @@
 Step Value
 ==========
 
-tags: api
+tags: api, java, csharp, ruby
 
 * In an empty directory initialize a project named "step_value" with the current language
 
