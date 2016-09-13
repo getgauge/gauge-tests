@@ -4,8 +4,8 @@ tags: continueOnFailure
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
-Should continue when there is a failure with Continue on failure attribute in a scenario step
----------------------------------------------------------------------------------------------
+Continue execution on failure of "Continue on Failure" step
+-----------------------------------------------------------
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
@@ -44,8 +44,8 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
 
-Should not continue when there is a failure before a step with Continue on failure attribute in a scenario step
----------------------------------------------------------------------------------------------------------------
+Stop execution on failure of some other step
+--------------------------------------------
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 

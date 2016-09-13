@@ -1,11 +1,11 @@
-Continue on failure in setup
-============================
+Continue on failure in setup / teardown
+=======================================
 tags: continueOnFailure
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
-With failures only in steps with cof across setup, scenario and teardown - the test should execute all steps
-------------------------------------------------------------------------------------------------------------
+Continue on failure in setup and teardown
+-----------------------------------------
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
@@ -62,8 +62,8 @@ With failures only in steps with cof across setup, scenario and teardown - the t
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
 
-With failures in setup - the test should execute tear down steps, wihtout executing scenario steps
---------------------------------------------------------------------------------------------------
+Execute teardown if some other step fails in setup
+--------------------------------------------------
 
 * Create a specification "continueOnFailureSpec2" with the following contexts 
 
@@ -110,111 +110,6 @@ With failures in setup - the test should execute tear down steps, wihtout execut
      |------------------------|
      |Failed Step: Second step|
      |inside third step       |
-     |Failed Step: fourth step|
-
-* Statistics generated should have 
-
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |1       |0     |1     |0      |
-
-* verify statistics in html with 
-
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
-
-With failures in scenario after step cof fails - the test should stop at the failure with no cof in setup
----------------------------------------------------------------------------------------------------------
-
-* Create a specification "continueOnFailureSpec3" with the following contexts 
-
-     |step text                 |implementation       |continue on failure|
-     |--------------------------|---------------------|-------------------|
-     |normal step5              |"inside normal step5"|false              |
-     |step 7 continue on failure|throw exception      |true               |
-
-* Create a scenario "continueOnFailureScenario3" in specification "continueOnFailureSpec3" with the following continue on failure steps 
-
-     |step text                 |implementation       |continue on failure|
-     |--------------------------|---------------------|-------------------|
-     |step 8 continue on failure|throw exception      |true               |
-     |fail step2                |throw exception      |false              |
-     |normal step6              |"inside normal step6"|false              |
-
-* Add the following teardown steps in specification "continueOnFailureSpec3" 
-
-     |step text                  |implementation       |continue on failure|
-     |---------------------------|---------------------|-------------------|
-     |step 9 continue on failure |throw exception      |true               |
-     |normal step7               |"inside normal step7"|false              |
-     |step 10 continue on failure|throw exception      |true               |
-     |normal step8               |"inside normal step8"|false              |
-
-* Execute the current project and ensure failure
-
-* Console should contain following lines in order 
-
-     |console output                          |
-     |----------------------------------------|
-     |Failed Step: step 7 continue on failure |
-     |inside normal step5                     |
-     |Failed Step: step 8 continue on failure |
-     |Failed Step: fail step2                 |
-     |Failed Step: step 9 continue on failure |
-     |inside normal step7                     |
-     |Failed Step: step 10 continue on failure|
-     |inside normal step8                     |
-
-* Console should not contain following lines 
-
-     |console output     |
-     |-------------------|
-     |inside normal step6|
-
-* Statistics generated should have 
-
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |1       |0     |1     |0      |
-
-* verify statistics in html with 
-
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
-
-Should not continue when there is a failure with no cof before any Continue on step failures
---------------------------------------------------------------------------------------------
-
-* Create a specification "continueOnFailureSpec5" with the following contexts 
-
-     |step text  |implementation     |continue on failure|
-     |-----------|-------------------|-------------------|
-     |Second step|throw exception    |false              |
-     |Third step |"inside third step"|true               |
-
-* Create a scenario "continueOnFailureScenario5" in specification "continueOnFailureSpec5" with the following continue on failure steps 
-
-     |step text  |implementation |continue on failure|
-     |-----------|---------------|-------------------|
-     |fourth step|throw exception|true               |
-
-* Execute the current project and ensure failure
-
-* Console should contain following lines in order 
-
-     |console output          |
-     |------------------------|
-     |Failed Step: Second step|
-
-* Console should not contain following lines 
-
-     |console output          |
-     |------------------------|
-     |Failed Step: Third step |
      |Failed Step: fourth step|
 
 * Statistics generated should have 
