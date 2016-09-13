@@ -1,4 +1,4 @@
-Continue on Failure
+Continue on failure
 ===================
 tags: continueOnFailure
 
@@ -89,7 +89,7 @@ Stop execution on failure of some other step
 
 Continue execution only for mentioned error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------------------
-* Create a scenario "Continue of failure for specified error" in specification "continueOnFailure" with the following steps to continue on corresponding failures 
+* Create a scenario "Continue of failure for specified error" in specification "continueOnFailureSpec" with the following steps to continue on corresponding failures
 
      |step text  |implementation      |continue on failure|error type            |
      |-----------|--------------------|-------------------|----------------------|
@@ -117,7 +117,7 @@ Continue execution only for mentioned error/exception in "Continue on Failure" s
 Stop execution on failure due to unspecified errors
 ---------------------------------------------------
 
-* Create a scenario "Continue on failure only on specified error" in specification "continueOnFailure" with the following steps to continue on corresponding failures 
+* Create a scenario "Continue on failure only on specified error" in specification "continueOnFailureSpec" with the following steps to continue on corresponding failures
 
      |step text  |implementation     |continue on failure|error type                |
      |-----------|-------------------|-------------------|--------------------------|
