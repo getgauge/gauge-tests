@@ -1,7 +1,7 @@
 Step Refactoring through command
 ================================
 
-tags: refactoring, java, csharp, ruby
+tags: refactoring
 
 * In an empty directory initialize a project named "spec_refactoring_thru_cmd" with the current language
 * Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
@@ -26,6 +26,8 @@ tags: refactoring, java, csharp, ruby
 Rename step
 -----------
 
+tags: java, csharp, ruby
+
 * Refactor step "First step" to "New step"
 * The step "First step" should no longer be used
 * The step "New step" should be used in project
@@ -33,6 +35,8 @@ Rename step
 
 Rephrase simple step
 --------------------
+
+tags: java, csharp, ruby
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <a>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -42,6 +46,8 @@ Rephrase simple step
 Rephrase step having new parameters
 -----------------------------------
 
+tags: java, csharp, ruby
+
 * Refactor step "Step with <a> <b>" to "Step having <b> <c> and <a>"
 * The step "Step with \"two\" \"params\"" should no longer be used
 * The step "Step having \"params\" \"c\" and \"two\"" should be used in project
@@ -49,6 +55,8 @@ Rephrase step having new parameters
 
 Rephrase step removing parameters
 ---------------------------------
+
+tags: java, csharp, ruby
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <c>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -58,6 +66,8 @@ Rephrase step removing parameters
 Rephrase step with all new parameters
 -------------------------------------
 
+tags: java, csharp, ruby
+
 * Refactor step "Step with <a> <b>" to "Step having <d> and <c>"
 * The step "Step with \"two\" \"params\"" should no longer be used
 * The step "Step having \"d\" and \"c\"" should be used in project
@@ -66,11 +76,15 @@ Rephrase step with all new parameters
 Refactor a non-Existing step
 ----------------------------
 
+tags: java, csharp, ruby
+
 * Refactor step "hello" to "world"
 * The error message <file:resources/refactor_console.txt> should be displayed on console
 
 Rename an unimplemented step
 ----------------------------
+
+tags: java, csharp, ruby
 
 * Refactor step "Repeated First step" to "again Repeated First step"
 * The step "Repeated First step" should no longer be used
@@ -78,6 +92,7 @@ Rename an unimplemented step
 
 Rename step to step with \
 --------------------------
+
 tags: unimplemented
 
 * Refactor step "step1" to "step with \\ slash"
@@ -87,6 +102,8 @@ tags: unimplemented
 
 Rename in teardown
 ------------------
+
+tags: java, csharp, ruby
 
 * Add the following teardown steps in specification "Basic spec execution2" 
 
