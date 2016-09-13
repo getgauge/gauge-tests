@@ -30,14 +30,14 @@ Rerun failed scenarios
 
 * Execute the current project and ensure failure
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |3       |1     |2     |0      |
      |Scenarios      |3       |1     |2     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -57,14 +57,14 @@ Rerun failed scenarios
      |-----------------|
      |inside third step|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |2       |0     |2     |0      |
      |Scenarios      |2       |0     |2     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

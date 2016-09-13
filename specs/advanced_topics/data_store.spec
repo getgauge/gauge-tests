@@ -22,14 +22,14 @@ Scenario data store refreshes after every scenario run.
 * Execute the current project and ensure success
 * Console should contain "Some temporary datastore value"
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -60,14 +60,14 @@ Spec data store persists data between scenario runs
 * Execute the current project and ensure success
 * Console should contain "Some temporary datastore value"
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -104,14 +104,14 @@ specs are read and run alphabetically, so we create specs in alphabetical order 
 * Execute the current project and ensure success
 * Console should contain "Some temporary datastore value"
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |2       |2     |0     |0      |
      |Scenarios      |2       |2     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

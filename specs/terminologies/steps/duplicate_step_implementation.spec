@@ -19,14 +19,14 @@ Duplicate step implementation should atleast give a warning
 
 * Console should contain "Duplicate step implementation"
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |1      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

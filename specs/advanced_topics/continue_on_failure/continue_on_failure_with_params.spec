@@ -30,7 +30,7 @@ Continue on failure for specified error
      |Failed Step: Third step |
      |inside fourth step      |
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
@@ -61,7 +61,7 @@ Continue on failure for specified errors only
      |-----------------|
      |inside third step|
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
@@ -91,11 +91,10 @@ If the option parameter error is not specified along with Continue on failure, i
      |Failed Step: Third step |
      |inside fourth step      |
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
-
 

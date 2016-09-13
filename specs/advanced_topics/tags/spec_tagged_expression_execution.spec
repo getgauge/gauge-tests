@@ -60,14 +60,14 @@ tagged expression
      |inside third scenario step |
      |inside fourth scenario step|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

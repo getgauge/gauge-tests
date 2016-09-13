@@ -28,14 +28,14 @@ Should be able to invoke a concept with no parameters
      |inside second concept step|
      |inside fourth step        |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

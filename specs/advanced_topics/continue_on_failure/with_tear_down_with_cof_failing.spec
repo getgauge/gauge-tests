@@ -5,22 +5,22 @@ tags: continueOnFailure
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
 Should continue when there is a failure with Continue on failure attribute only in a tear down step
-----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
-* Create a specification "continueOnFailureSpec" with the following contexts
+* Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
      |step text  |implementation      |continue on failure|
      |-----------|--------------------|-------------------|
      |Second step|"inside second step"|false              |
      |Third step |"inside third step" |false              |
 
-* Add the following teardown steps in specification "continueOnFailureSpec"
+* Add the following teardown steps in specification "continueOnFailureSpec" 
 
      |step text      |implementation |continue on failure|
      |---------------|---------------|-------------------|
@@ -29,7 +29,7 @@ Should continue when there is a failure with Continue on failure attribute only 
      |Third teardown |throw exception|true               |
 
 * Execute the current project and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output              |
      |----------------------------|
@@ -39,20 +39,20 @@ Should continue when there is a failure with Continue on failure attribute only 
      |Failed Step: First teardown |
      |Failed Step: Second teardown|
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output             |
      |---------------------------|
      |Failed Step: Third teardown|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -61,13 +61,13 @@ Should continue when there is a failure with Continue on failure attribute only 
 Should not continue when there is a failure before a step with Continue on failure attribute in a tear down step
 ----------------------------------------------------------------------------------------------------------------
 
-* Create a specification "continueOnFailureSpec" with the following contexts
+* Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
      |step text  |implementation      |continue on failure|
      |-----------|--------------------|-------------------|
@@ -75,7 +75,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Third step |"inside third step" |false              |
      |fourth step|throw exception     |true               |
 
-* Add the following teardown steps in specification "continueOnFailureSpec"
+* Add the following teardown steps in specification "continueOnFailureSpec" 
 
      |step text      |implementation |continue on failure|
      |---------------|---------------|-------------------|
@@ -83,7 +83,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Second teardown|throw exception|true               |
 
 * Execute the current project and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output             |
      |---------------------------|
@@ -92,20 +92,20 @@ Should not continue when there is a failure before a step with Continue on failu
      |inside third step          |
      |Failed Step: First teardown|
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output              |
      |----------------------------|
      |Failed Step: Second teardown|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -114,21 +114,21 @@ Should not continue when there is a failure before a step with Continue on failu
 With failures in teardown steps after step cof fails - the test should stop at the failure with no cof in setup
 ---------------------------------------------------------------------------------------------------------------
 
-* Create a specification "continueOnFailureSpec4" with the following contexts
+* Create a specification "continueOnFailureSpec4" with the following contexts 
 
      |step text                  |implementation       |continue on failure|
      |---------------------------|---------------------|-------------------|
      |step 11 continue on failure|throw exception      |true               |
      |Normal step9               |"inside Normal step9"|false              |
 
-* Create a scenario "continueOnFailureScenario4" in specification "continueOnFailureSpec4" with the following continue on failure steps
+* Create a scenario "continueOnFailureScenario4" in specification "continueOnFailureSpec4" with the following continue on failure steps 
 
      |step text                  |implementation        |continue on failure|
      |---------------------------|----------------------|-------------------|
      |Normal step10              |"inside Normal step10"|false              |
      |step 12 continue on failure|throw exception       |true               |
 
-* Add the following teardown steps in specification "continueOnFailureSpec4"
+* Add the following teardown steps in specification "continueOnFailureSpec4" 
 
      |step text                  |implementation        |continue on failure|
      |---------------------------|----------------------|-------------------|
@@ -140,7 +140,7 @@ With failures in teardown steps after step cof fails - the test should stop at t
 
 * Execute the current project and ensure failure
 
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output                          |
      |----------------------------------------|
@@ -152,21 +152,21 @@ With failures in teardown steps after step cof fails - the test should stop at t
      |inside Normal step11                    |
      |Failed Step: fail step3                 |
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output                          |
      |----------------------------------------|
      |Failed Step: step 14 continue on failure|
      |inside Normal step12                    |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

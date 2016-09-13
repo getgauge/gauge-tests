@@ -18,20 +18,20 @@ steps with inline table parameter
 
 * Console should contain following lines in order 
 
-     |console output                          |
-     |----------------------------------------|
-     |inside step with parameters : \|header\||
-     |\|one   \|                              |
-     |\|two   \|                              |
+     |console output                        |
+     |--------------------------------------|
+     |inside step with parameters : |header||
+     ||one   |                              |
+     ||two   |                              |
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -52,20 +52,20 @@ steps with csv table parameter
 
 * Console should contain following lines in order 
 
-     |console output                          |
-     |----------------------------------------|
-     |inside step with parameters : \|header\||
-     |\|one   \|                              |
-     |\|two   \|                              |
+     |console output                        |
+     |--------------------------------------|
+     |inside step with parameters : |header||
+     ||one   |                              |
+     ||two   |                              |
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

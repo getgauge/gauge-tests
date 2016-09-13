@@ -41,14 +41,14 @@ Execute one scenario by specifying line number in a spec with multiple scenarios
      |---------------------------|
      |inside second scenario step|
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

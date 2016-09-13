@@ -8,7 +8,7 @@ tags: continueOnFailure
 Should continue when there is a failure with Continue on failure attribute in a concept step
 --------------------------------------------------------------------------------------------
 
-* Create concept "concept with continue on failure steps" with following steps
+* Create concept "concept with continue on failure steps" with following steps 
 
      |concept steps                |
      |-----------------------------|
@@ -16,7 +16,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |Step that throws an exception|
      |say hello again              |
 
-* Create step implementations
+* Create step implementations 
 
      |step text                    |implementation  |continue on failure|
      |-----------------------------|----------------|-------------------|
@@ -24,7 +24,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |Step that throws an exception|throw exception |true               |
      |say hello again              |"hello universe"|false              |
 
-* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps
+* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
 
      |step text                             |
      |--------------------------------------|
@@ -33,7 +33,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |say hello                             |
 
 * Execute the spec "Spec with concepts" and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output table                      |
      |------------------------------------------|
@@ -43,14 +43,14 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |hello universe                            |
      |hello world                               |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -59,7 +59,7 @@ Should continue when there is a failure with Continue on failure attribute in a 
 Should not continue when there is a failure before a step with Continue on failure attribute in a concept step
 --------------------------------------------------------------------------------------------------------------
 
-* Create concept "concept with continue on failure steps" with following steps
+* Create concept "concept with continue on failure steps" with following steps 
 
      |concept steps                |
      |-----------------------------|
@@ -67,7 +67,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Step that throws an exception|
      |say hello again              |
 
-* Create step implementations
+* Create step implementations 
 
      |step text                    |implementation  |continue on failure|
      |-----------------------------|----------------|-------------------|
@@ -75,7 +75,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |Step that throws an exception|throw exception |false              |
      |say hello again              |"hello universe"|false              |
 
-* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps
+* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
 
      |step text                             |
      |--------------------------------------|
@@ -84,7 +84,7 @@ Should not continue when there is a failure before a step with Continue on failu
      |say hello                             |
 
 * Execute the spec "Spec with concepts" and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |console output table                      |
      |------------------------------------------|
@@ -92,20 +92,20 @@ Should not continue when there is a failure before a step with Continue on failu
      |hello world                               |
      |Failed Step: Step that throws an exception|
 
-* Console should not contain following lines
+* Console should not contain following lines 
 
      |console output table|
      |--------------------|
      |hello universe      |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -180,14 +180,14 @@ Should continue when there is a failure with Continue on failure attribute in a 
      |concept level 1 again     |
      |goodbye world             |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -273,14 +273,14 @@ Should not continue when there is a failure before a step with Continue on failu
      |concept level 1 again     |
      |goodbye world             |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

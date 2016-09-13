@@ -1,5 +1,5 @@
 Spec Validation Errors occuring during execution
-===========================================
+================================================
 
 tags: validation
 
@@ -32,14 +32,14 @@ Spec execution with unimplemented step in scenarios
      |inside first step                                           |
      |inside second step                                          |
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |1     |0     |0      |
      |Scenarios      |1       |1     |0     |1      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -68,14 +68,14 @@ Spec execution with unimplemented step in context step
      |------------------------------------------------|
      |Step implementation not found => 'First context'|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |1      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -111,14 +111,14 @@ Spec execution with unimplemented step in context step and scenario
      |Step implementation not found => 'First context'            |
      |Step implementation not found => 'Second unimplemented step'|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -177,14 +177,14 @@ Skip spec if all scenarios are skipped
      |Step implementation not found => 'Third unimplemented step' |
      |Step implementation not found => 'Fourth unimplemented step'|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

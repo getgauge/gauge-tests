@@ -55,14 +55,14 @@ AND aggregation of hooks
 
 * Console should contain "inside before spec hook" "2" times
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |3       |3     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -102,14 +102,14 @@ OR aggregation of hooks
 * Console should contain "inside before spec hook" "2" times
 * Console should contain "inside after spec hook" "1" times
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |3       |3     |0     |0      |
      |Scenarios      |3       |3     |0     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

@@ -103,14 +103,14 @@ Spec should be skipped if it has all scenarios with unimplemented steps
      |Step implementation not found => 'some step1'|
      |Step implementation not found => 'some step2'|
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |0       |0     |0     |1      |
      |Scenarios      |0       |0     |0     |2      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|

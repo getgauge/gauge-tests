@@ -1,4 +1,3 @@
 # Verify Console Details <statistics><output>
 * Console should contain following lines in order <output>
-
-* Statics generated should have <statistics>
+* Statistics generated should have <statistics>

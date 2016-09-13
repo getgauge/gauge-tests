@@ -5,7 +5,7 @@ tags: continueOnFailure
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
 With failures only in steps with cof across setup, scenario and teardown - the test should execute all steps
-----------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
@@ -49,21 +49,21 @@ With failures only in steps with cof across setup, scenario and teardown - the t
      |Failed Step: step 3 continue on failure|
      |inside normal step2                    |
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
 
 With failures in setup - the test should execute tear down steps, wihtout executing scenario steps
--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 * Create a specification "continueOnFailureSpec2" with the following contexts 
 
@@ -106,20 +106,20 @@ With failures in setup - the test should execute tear down steps, wihtout execut
 
 * Console should not contain following lines 
 
-     |console output                         |
-     |---------------------------------------|
-     |Failed Step: Second step               |
-     |inside third step                      |
-     |Failed Step: fourth step               |
+     |console output          |
+     |------------------------|
+     |Failed Step: Second step|
+     |inside third step       |
+     |Failed Step: fourth step|
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -156,12 +156,12 @@ With failures in scenario after step cof fails - the test should stop at the fai
 
 * Console should contain following lines in order 
 
-     |console output                         |
-     |---------------------------------------|
-     |Failed Step: step 7 continue on failure|
-     |inside normal step5                    |
-     |Failed Step: step 8 continue on failure|
-     |Failed Step: fail step2                |
+     |console output                          |
+     |----------------------------------------|
+     |Failed Step: step 7 continue on failure |
+     |inside normal step5                     |
+     |Failed Step: step 8 continue on failure |
+     |Failed Step: fail step2                 |
      |Failed Step: step 9 continue on failure |
      |inside normal step7                     |
      |Failed Step: step 10 continue on failure|
@@ -169,18 +169,18 @@ With failures in scenario after step cof fails - the test should stop at the fai
 
 * Console should not contain following lines 
 
-     |console output                          |
-     |----------------------------------------|
-     |inside normal step6                     |
+     |console output     |
+     |-------------------|
+     |inside normal step6|
 
-* Statics generated should have 
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
@@ -217,16 +217,15 @@ Should not continue when there is a failure with no cof before any Continue on s
      |Failed Step: Third step |
      |Failed Step: fourth step|
 
-* Statics generated should have
+* Statistics generated should have 
 
      |Statistics name|executed|passed|failed|skipped|
      |---------------|--------|------|------|-------|
      |Specifications |1       |0     |1     |0      |
      |Scenarios      |1       |0     |1     |0      |
 
-* verify statistics in html with
+* verify statistics in html with 
 
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
-
