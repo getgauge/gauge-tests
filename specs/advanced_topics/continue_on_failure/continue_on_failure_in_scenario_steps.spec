@@ -4,22 +4,22 @@ tags: continueOnFailure
 
 * In an empty directory initialize a project named "continueOnFailure" without example spec
 
-Continue execution on failure of "Continue on Failure" step
------------------------------------------------------------
-
 * Create a specification "continueOnFailureSpec" with the following contexts 
 
      |step text |implementation     |
      |----------|-------------------|
      |First step|"inside first step"|
 
+Continue execution on any error/exception in "Continue on Failure" step
+-----------------------------------------------------------------------
+
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation     |continue on failure|
-     |-----------|-------------------|-------------------|
-     |Second step|throw exception    |true               |
-     |Third step |"inside third step"|false              |
-     |fourth step|throw exception    |true               |
+     |step text  |implementation     |continue on failure|error type|
+     |-----------|-------------------|-------------------|----------|
+     |Second step|throw exception    |true               |          |
+     |Third step |"inside third step"|false              |          |
+     |fourth step|throw exception    |true               |          |
 
 * Execute the current project and ensure failure
 * Console should contain following lines in order 
@@ -47,22 +47,15 @@ Continue execution on failure of "Continue on Failure" step
 Stop execution on failure of some other step
 --------------------------------------------
 
-* Create a specification "continueOnFailureSpec" with the following contexts 
-
-     |step text |implementation     |
-     |----------|-------------------|
-     |First step|"inside first step"|
-
-
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
 
-     |step text  |implementation     |continue on failure|
-     |-----------|-------------------|-------------------|
-     |Second step|throw exception    |true               |
-     |Third step |"inside third step"|false              |
-     |Fourth step|throw exception    |false              |
-     |Fifth step |throw exception    |true               |
-     |Next step  |"inside next step" |false              |
+     |step text  |implementation     |continue on failure|error type|
+     |-----------|-------------------|-------------------|----------|
+     |Second step|throw exception    |true               |          |
+     |Third step |"inside third step"|false              |          |
+     |Fourth step|throw exception    |false              |          |
+     |Fifth step |throw exception    |true               |          |
+     |Next step  |"inside next step" |false              |          |
 
 * Execute the current project and ensure failure
 * Console should contain following lines in order 
@@ -93,3 +86,61 @@ Stop execution on failure of some other step
      |totalCount|passCount|failCount|skippedCount|
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
+
+Continue execution only for mentioned error/exception in "Continue on Failure" step
+-----------------------------------------------------------------------------------
+* Create a scenario "Continue of failure for specified error" in specification "continueOnFailure" with the following steps to continue on corresponding failures 
+
+     |step text  |implementation      |continue on failure|error type            |
+     |-----------|--------------------|-------------------|----------------------|
+     |Second step|throw exception     |true               |RuntimeException.class|
+     |Third step |throw AssertionError|true               |AssertionError.class  |
+     |Fourth step|"inside fourth step"|false              |                      |
+
+* Execute the current project and ensure failure
+* Console should contain following lines in order 
+
+     |console output          |
+     |------------------------|
+     |inside first step       |
+     |Failed Step: Second step|
+     |Failed Step: Third step |
+     |inside fourth step      |
+
+* Statistics generated should have 
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
+
+Stop execution on failure due to unspecified errors
+---------------------------------------------------
+
+* Create a scenario "Continue on failure only on specified error" in specification "continueOnFailure" with the following steps to continue on corresponding failures 
+
+     |step text  |implementation     |continue on failure|error type                |
+     |-----------|-------------------|-------------------|--------------------------|
+     |Second step|throw exception    |true               |NullPointerException.class|
+     |Third step |"inside third step"|true               |                          |
+
+* Execute the current project and ensure failure
+* Console should contain following lines in order 
+
+     |console output          |
+     |------------------------|
+     |inside first step       |
+     |Failed Step: Second step|
+
+* Console should not contain following lines 
+
+     |console output   |
+     |-----------------|
+     |inside third step|
+
+* Statistics generated should have 
+
+     |Statistics name|executed|passed|failed|skipped|
+     |---------------|--------|------|------|-------|
+     |Specifications |1       |0     |1     |0      |
+     |Scenarios      |1       |0     |1     |0      |
