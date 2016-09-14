@@ -25,7 +25,7 @@ Spec Tagged Expression Execution
 
 * Add tags "tag3, tag2" to scenario "fourth scenario" in specification "tags_expression_execution"
 
-tagged expression
+Tagged expression
 -----------------
 
 * Execute the tags "!tag1" in spec "tags_expression_execution" and ensure success

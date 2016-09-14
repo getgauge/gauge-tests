@@ -1,4 +1,4 @@
-Execution Hooks Failing
+Execution Hooks Failure
 =======================
 
 tags: java, csharp, ruby
@@ -13,8 +13,8 @@ When a before execution hook fails the after hook will still execute skipping al
      |First step |"inside step 1"|
      |Second step|"inside step 2"|
 
-Test a hook failure at suite level
-----------------------------------
+Hook failure at suite level
+---------------------------
 
 * Create "suite" level "before" hook with exception
 * Create "scenario" level "before" hook with implementation "inside before scenario"
@@ -41,8 +41,8 @@ Test a hook failure at suite level
      |----------|---------|---------|------------|
      |0         |0        |0        |0           |
 
-Test a hook failure at spec level
----------------------------------
+Hook failure at spec level
+--------------------------
 
 * Create "suite" level "before" hook with implementation "inside before suite"
 * Create "spec" level "before" hook with exception
@@ -77,8 +77,8 @@ Test a hook failure at spec level
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
 
-Test a hook failure at scenario level
--------------------------------------
+Hook failure at scenario level
+------------------------------
 
 * Create "scenario" level "before" hook with exception
 * Create "scenario" level "after" hook with implementation "inside after scenario"
@@ -109,8 +109,8 @@ Test a hook failure at scenario level
      |----------|---------|---------|------------|
      |1         |0        |1        |0           |
 
-Test a hook failure at step level
----------------------------------
+Hook failure at step level
+--------------------------
 
 * Create "step" level "before" hook with exception
 * Create "step" level "after" hook with implementation "inside after step"

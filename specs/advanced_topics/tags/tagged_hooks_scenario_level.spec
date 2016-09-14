@@ -1,5 +1,5 @@
-Tagged hooks scenario level - Both AND and OR aggregation
-=========================================================
+Tagged hooks scenario level
+===========================
 
 tags: tagged_hooks, execution_hooks
 

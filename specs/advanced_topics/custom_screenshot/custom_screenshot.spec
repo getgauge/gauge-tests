@@ -3,8 +3,8 @@ Custom Screenshot
 
 tags: java, csharp, ruby
 
-Should be able to take screenshot using a custom logic
-------------------------------------------------------
+Take screenshot using custom logic
+----------------------------------
 
 * In an empty directory initialize a project named "custom_screenshot" with the current language
 

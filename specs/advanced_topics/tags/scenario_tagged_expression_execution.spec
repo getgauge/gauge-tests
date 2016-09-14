@@ -31,7 +31,7 @@ Scenario Tagged Expression Execution
 
 * Add tags "tag3, tag2" to scenario "fourth scenario" in specification "tags_expression_execution"
 
-tagged expression with & operator
+Tagged expression with & operator
 ---------------------------------
 
 * Execute the tags "tag1 & tag2" in spec "tags_expression_execution" and ensure success
@@ -77,7 +77,7 @@ tagged expression with & operator
      |----------|---------|---------|------------|
      |1         |1        |0        |0           |
 
-tagged expression with | operator
+Tagged expression with | operator
 ---------------------------------
 
 * Execute the tags "tag3 | tag1" in spec "tags_expression_execution" and ensure success
@@ -126,7 +126,7 @@ tagged expression with | operator
      |----------|---------|---------|------------|
      |1         |1        |0        |0           |
 
-tagged expression with ! operator
+Tagged expression with ! operator
 ---------------------------------
 
 * Execute the tags "!tag1" in spec "tags_expression_execution" and ensure success
@@ -157,7 +157,7 @@ tagged expression with ! operator
      |----------|---------|---------|------------|
      |1         |1        |0        |0           |
 
-tagged expression with (!&|) operator
+Tagged expression with (!&|) operator
 -------------------------------------
 
 * Execute the tags "!tag3 & (tag2|tag1)" in spec "tags_expression_execution" and ensure success

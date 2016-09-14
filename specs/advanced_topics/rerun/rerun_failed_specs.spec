@@ -1,4 +1,4 @@
-Rerun Failed Tests
+Rerun Failed Specs
 ==================
 
 tags: execution, rerun, java, csharp, ruby

@@ -5,8 +5,8 @@ tags: java, csharp, ruby
 
 * In an empty directory initialize a project named "data_store" with the current language
 
-Scenario data store refreshes after every scenario run.
--------------------------------------------------------
+Scenario data store refreshes after every scenario run
+------------------------------------------------------
 
 * Create a specification "newSpec" with the following contexts 
 

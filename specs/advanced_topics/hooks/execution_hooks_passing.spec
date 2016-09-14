@@ -1,4 +1,4 @@
-Execution Hooks passing
+Execution Hooks Success
 =======================
 
 tags: java, csharp, ruby
@@ -92,8 +92,8 @@ Scenario and step level hooks
      |----------|---------|---------|------------|
      |1         |1        |0        |0           |
 
-Test all level Execution hooks
-------------------------------
+All level Execution hooks
+-------------------------
 
 * Create "spec" level hooks with implementations "inside before spec hook" for before and "inside after spec hook" for after hook
 * Create "suite" level hooks with implementations "inside before suite hook" for before and "inside after suite hook" for after hook

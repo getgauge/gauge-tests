@@ -40,8 +40,8 @@ tags: java, csharp, ruby
      |-----------------|-----------------------------|
      |First step spec 6|"inside first step in spec 6"|
 
-Execute specs successfully
---------------------------
+Execute specs parallelly
+------------------------
 
 * Execute the current project in parallel and ensure success
 
@@ -58,8 +58,8 @@ Execute specs successfully
      |----------|---------|---------|------------|
      |6         |6        |0        |0           |
 
-Execute specs successfully in n streams
----------------------------------------
+Execute specs parallelly in n streams
+-------------------------------------
 
 * Execute the current project in parallel in "2" streams and ensure success
 * Console should contain "Executing in 2 parallel streams"

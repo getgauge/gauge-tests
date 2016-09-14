@@ -1,5 +1,5 @@
-Tagged hooks spec level - Both AND and OR aggregation
-=====================================================
+Tagged hooks spec level
+=======================
 
 tags: tagged_hooks, execution_hooks
 
