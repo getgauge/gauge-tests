@@ -1,12 +1,12 @@
-with table as parameter
-=======================
+Table parameter
+===============
 
 tags: parameter, java, csharp, ruby
 
 * In an empty directory initialize a project named "scenarios_with_table_parameter" without example spec
 
-steps with inline table parameter
----------------------------------
+Inline table parameter
+----------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 
 
@@ -37,7 +37,7 @@ steps with inline table parameter
      |----------|---------|---------|------------|
      |1         |1        |0        |0           |
 
-steps with csv table parameter
+External table parameter (csv)
 ------------------------------
 
 * Create a csv file "abc" with "header\none\ntwo"

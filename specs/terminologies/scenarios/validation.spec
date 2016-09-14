@@ -1,5 +1,5 @@
-Scenario validations
-=====================
+Scenario validation
+===================
 
 tags: validation, java, csharp, ruby
 
@@ -8,7 +8,7 @@ tags: validation, java, csharp, ruby
 Validation Failure
 ------------------
 
-* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps
+* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps 
 
      |step text  |
      |-----------|
@@ -16,7 +16,7 @@ Validation Failure
      |Second Step|
 
 * Check for validation errors in the project and ensure failure
-* Console should contain following lines in order
+* Console should contain following lines in order 
 
      |Console output                                |
      |----------------------------------------------|
@@ -26,7 +26,7 @@ Validation Failure
 Validation Success
 ------------------
 
-* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps
+* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps 
 
      |step text  |implementation|
      |-----------|--------------|
