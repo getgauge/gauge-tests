@@ -1,7 +1,7 @@
 Refactoring Concept through API
 ===============================
 
-tags: refactoring, api, java, csharp, ruby
+tags: refactoring, api, java, csharp, ruby, python
 
 * In an empty directory initialize a project named "refactor_concept_thru_api" with the current language
 * Create concept "concept with <param0> and <param1>" with following steps 

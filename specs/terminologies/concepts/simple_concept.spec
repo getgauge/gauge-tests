@@ -1,7 +1,7 @@
 concepts with no parameters
 ===========================
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 
 * In an empty directory initialize a project named "single_scen_exec" with the current language
 

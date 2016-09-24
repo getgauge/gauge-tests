@@ -1,7 +1,7 @@
 Execution Hooks Success
 =======================
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 
 Execution hooks can be used to run arbitrary test code as different levels during the test suite execution. They are available at suite,
 spec, scenario and step level.

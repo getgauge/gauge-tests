@@ -1,7 +1,7 @@
 Spec Formatting
 ===============
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 
 * In an empty directory initialize a project named "formatting" with the current language
 

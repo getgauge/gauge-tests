@@ -1,7 +1,7 @@
 concept execution
 =================
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 * In an empty directory initialize a project named "concept_execution" with the current language
 
 * Create concept "sample_concept" with following steps 

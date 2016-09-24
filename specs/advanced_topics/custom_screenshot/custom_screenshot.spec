@@ -1,7 +1,7 @@
 Custom Screenshot
 =================
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 
 Take screenshot using custom logic
 ----------------------------------

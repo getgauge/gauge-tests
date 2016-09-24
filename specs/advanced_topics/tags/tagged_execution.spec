@@ -1,6 +1,8 @@
 Tagged Execution
 ================
 
+tags: java, csharp, ruby, python
+
 * In an empty directory initialize a project named "tagged_exec" with the current language
 
 Passing tagged execution

@@ -1,7 +1,7 @@
 Datatable Execution
 ===================
 
-tags: Data-table, execution, java, csharp, ruby
+tags: Data-table, execution, java, csharp, ruby, python
 
 * In an empty directory initialize a project named "datatable_exec" with the current language
 

@@ -1,7 +1,7 @@
 Duplicate step implementation
 =============================
 
-tags: step, java, csharp, ruby
+tags: step, java, csharp, ruby, python
 
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------

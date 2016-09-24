@@ -1,7 +1,7 @@
 Execution Hooks Failure
 =======================
 
-tags: java, csharp, ruby
+tags: java, csharp, ruby, python
 
 When a before execution hook fails the after hook will still execute skipping all other executions at that level.
 

@@ -1,6 +1,8 @@
 Spec Tagged Expression Execution
 ================================
 
+tags: java, csharp, ruby, python
+
 * In an empty directory initialize a project named "spec_tagged_expression_exec" with the current language
 * Add tags "tag1" to specification "tags_expression_execution"
 * Create a scenario "second scenario" in specification "tags_expression_execution" with the following steps with implementation 
