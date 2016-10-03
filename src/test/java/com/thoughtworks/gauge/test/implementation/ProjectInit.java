@@ -27,7 +27,7 @@ public class ProjectInit {
                 .build(language.equals("unknown"));
     }
 
-    @Step({"In an empty directory, use default initialization of a project named <projName> with the current language"})
+    @Step("In an empty directory, use default initialization of a project named <projName> with the current language")
     public void defaultInitializationProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
@@ -35,7 +35,7 @@ public class ProjectInit {
                 .build(false);
     }
 
-    @Step({"In an empty directory initialize a project named <projName> with the current language"})
+    @Step("In an empty directory initialize a project named <projName> with the current language")
     public void initializeProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
@@ -90,34 +90,32 @@ public class ProjectInit {
         return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
     }
 
-    @Step("Directory <init_proj_unknown> should be empty")
+    @Step("Directory <dirName> should be empty")
     public void verifyEmptyDir(String dirName) {
         File[] files = currentProject.getProjectDir().listFiles();
         Assert.assertNotNull(files);
         Assert.assertEquals(files.length, 0);
     }
 
-    @Step("Create a csv file <aCsvFileName>")
-    public void createACsv(String name) throws Exception {
+    @Step("Create a csv file <name>")
+    public void createCSV(String name) throws Exception {
         new DataFileBuilder()
                 .withCsvFile(name)
                 .build();
     }
 
-    @Step("Create a csv file <aCsvFileName> with <content>")
-    public void createACsvWithContent(String name,String content) throws Exception {
-
+    @Step("Create a csv file <name> with <content>")
+    public void createCSVWithContent(String name, String content) throws Exception {
         new DataFileBuilder()
                 .withCsvFile(name)
                 .withContent(Arrays.asList(content.split("\n")))
                 .build();
     }
 
-    @Step("Create a txt file <aTxtFileName>")
-    public void createAText(String name) throws Exception {
+    @Step("Create a txt file <name>")
+    public void createTextFile(String name) throws Exception {
         new DataFileBuilder()
                 .withTextFile(name)
                 .build();
-
     }
 }
