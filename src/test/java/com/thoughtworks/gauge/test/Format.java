@@ -1,3 +1,5 @@
+package com.thoughtworks.gauge.test;
+
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
