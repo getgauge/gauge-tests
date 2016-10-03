@@ -26,7 +26,7 @@ tags: java, csharp, ruby, python
      |Step that throws an exception|throw exception|
      |Tell <param0> to <param1>    |print params   |
 
-Test concept failure Path
+Concept execution failure
 -------------------------
 
 * Create "Concept Testing" in "Spec 2" with the following steps 

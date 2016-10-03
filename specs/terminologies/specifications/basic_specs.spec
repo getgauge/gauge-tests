@@ -1,11 +1,11 @@
-A basic spec has only scenarios
-===============================
+Spec with scenarios
+===================
 
 tags: spec, java, csharp, ruby, python
 
 * In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
 
-basic spec with one scenario, passing
+Basic spec with one scenario, passing
 -------------------------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 
@@ -23,7 +23,7 @@ basic spec with one scenario, passing
 
 * Verify HTML Details <table:resources/terminologies/specifications/basic_steps/one_scenario_passing/html_statistics.csv><table:resources/terminologies/specifications/basic_steps/one_scenario_passing/html_scenario.csv>
 
-basic spec with multiple scenarios, passing
+Basic spec with multiple scenarios, passing
 -------------------------------------------
 
 * Create "Sample scenario" in "Basic spec execution" with the following steps 

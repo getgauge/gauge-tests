@@ -3,8 +3,8 @@ Custom Screenshot
 
 tags: java, csharp, ruby, python
 
-Take screenshot using custom logic
-----------------------------------
+Screenshot using custom logic
+-----------------------------
 
 * In an empty directory initialize a project named "custom_screenshot" with the current language
 

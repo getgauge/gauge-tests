@@ -1,12 +1,12 @@
-concepts with no parameters
+Concepts with no parameters
 ===========================
 
 tags: java, csharp, ruby, python
 
 * In an empty directory initialize a project named "single_scen_exec" with the current language
 
-Should be able to invoke a concept with no parameters
------------------------------------------------------
+Invoke a concept with no parameters
+-----------------------------------
 
 * Create concept "Sample concept with no parameters" with following steps 
 

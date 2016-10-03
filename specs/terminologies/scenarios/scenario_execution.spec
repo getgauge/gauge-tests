@@ -5,8 +5,8 @@ tags: scenario, java, csharp, ruby, python
 
 * In an empty directory initialize a project named "scenarios_execution" without example spec
 
-Execute one scenario by specifying line number
-----------------------------------------------
+Scenario execution by specifying line number
+--------------------------------------------
 
 * Create a specification "specWithMultipleScenarios" with the following contexts 
 

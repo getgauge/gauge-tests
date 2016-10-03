@@ -1,11 +1,11 @@
-Concept Validation Errors occuring during execution
-===========================================
+Concept Validation
+==================
 
 tags: validation, java, csharp, ruby, python
 
 * In an empty directory initialize a project named "concept_exec_with_validation_err" with the current language
 
-Duplicate Concept Defination
+Duplicate concept definition
 ----------------------------
 
 * Create concept "Concept Heading" with following steps 
@@ -35,7 +35,7 @@ Duplicate Concept Defination
      |-------------------------------------------------------|
      |Duplicate concept definition found => 'Concept Heading'|
 
-Concept Calling itself
+Concept calling itself
 ----------------------
 
 * Create concept "Concept Heading" with following steps 
@@ -57,7 +57,7 @@ Concept Calling itself
      |-----------------------------------|
      |Circular reference found in concept|
 
-Cyclic Concept Dependency
+Cyclic concept dependency
 -------------------------
 
 * Create concept "Concept Heading" with following steps 
@@ -86,10 +86,10 @@ Cyclic Concept Dependency
      |Circular reference found in concept|
 
 
-Concept should not contain scenario heading
--------------------------------------------
+Scenario in concepts
+--------------------
 
-* Create concept "concept with scenario heading" with following steps 
+* Create concept "concept with scenarios" with following steps 
 
      |concept steps      |Impl   |Type   |
      |-------------------|-------|-------|
