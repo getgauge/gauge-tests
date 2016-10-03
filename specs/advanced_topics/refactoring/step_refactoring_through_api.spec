@@ -3,7 +3,7 @@ Step Refactoring through API
 
 tags: refactoring, api, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "refactor_thru_api" with the current language
+* In an empty directory initialize a project named "refactor_thru_api" without example spec
 
 * Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps 
 

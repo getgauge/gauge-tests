@@ -6,7 +6,7 @@ tags: step, java, csharp, ruby, python
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------
 
-* In an empty directory initialize a project named "duplicate_step_implementation" with the current language
+* In an empty directory initialize a project named "duplicate_step_implementation" without example spec
 
 * Create a scenario "scenaro1" in specification "duplicate step implementation" with the following steps with implementation 
 

@@ -3,7 +3,7 @@ Step Refactoring through command
 
 tags: refactoring
 
-* In an empty directory initialize a project named "spec_refactoring_thru_cmd" with the current language
+* In an empty directory initialize a project named "spec_refactoring_thru_cmd" without example spec
 * Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
 
      |step text               |

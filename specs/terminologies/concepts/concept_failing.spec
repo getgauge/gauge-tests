@@ -3,7 +3,7 @@ Concept Failing
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "concept_failing" with the current language
+* In an empty directory initialize a project named "concept_failing" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 
 
      |concept steps                |

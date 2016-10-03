@@ -3,7 +3,7 @@ Context Execution
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "context_exec" with the current language
+* In an empty directory initialize a project named "context_exec" without example spec
 
 basic context execution
 -----------------------

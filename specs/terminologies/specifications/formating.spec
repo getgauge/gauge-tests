@@ -3,7 +3,7 @@ Spec Formatting
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "formatting" with the current language
+* In an empty directory initialize a project named "formatting" without example spec
 
 Formatting should not remove steps, scenarios from spec
 -------------------------------------------------------

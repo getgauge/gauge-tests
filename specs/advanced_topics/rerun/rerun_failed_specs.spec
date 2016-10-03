@@ -3,7 +3,7 @@ Rerun Failed Specs
 
 tags: execution, rerun, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "spec_exec" with the current language
+* In an empty directory initialize a project named "spec_exec" without example spec
 
 Rerun failed scenarios
 ----------------------

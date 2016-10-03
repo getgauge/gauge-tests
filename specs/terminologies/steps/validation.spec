@@ -3,7 +3,7 @@ Step validation
 
 tags: validation, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "validation" with the current language
+* In an empty directory initialize a project named "validation" without example spec
 
 step should not be empty
 ------------------------

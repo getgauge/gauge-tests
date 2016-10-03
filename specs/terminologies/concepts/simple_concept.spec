@@ -3,7 +3,7 @@ Concepts with no parameters
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "single_scen_exec" with the current language
+* In an empty directory initialize a project named "single_scen_exec" without example spec
 
 Invoke a concept with no parameters
 -----------------------------------

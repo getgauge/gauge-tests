@@ -3,7 +3,7 @@ Data Store
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "data_store" with the current language
+* In an empty directory initialize a project named "data_store" without example spec
 
 Scenario data store refreshes after every scenario run
 ------------------------------------------------------
