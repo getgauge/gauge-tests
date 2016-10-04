@@ -2,7 +2,7 @@ concept execution
 =================
 
 tags: java, csharp, ruby, python
-* In an empty directory initialize a project named "concept_execution" without example spec
+* Initialize a project named "concept_execution" without example spec
 
 * Create concept "sample_concept" with following steps 
 

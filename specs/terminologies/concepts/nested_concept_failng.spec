@@ -2,7 +2,7 @@ Nested Concept Failing
 ======================
 
 tags: java, csharp, ruby, python
-* In an empty directory initialize a project named "nested_concept_fail" without example spec
+* Initialize a project named "nested_concept_fail" without example spec
 * Create concept "concept1 with <param0> and <param1>" with following steps 
 
      |concept steps                      |

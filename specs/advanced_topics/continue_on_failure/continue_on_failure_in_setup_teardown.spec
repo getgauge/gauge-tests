@@ -3,7 +3,7 @@ Continue on failure in setup / teardown
 
 tags: continueOnFailure, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "continueOnFailure" without example spec
+* Initialize a project named "continueOnFailure" without example spec
 
 Continue on failure in setup and teardown
 -----------------------------------------

@@ -3,7 +3,7 @@ Concept Refactoring
 
 tags: refactoring, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "concept_refactoring" without example spec
+* Initialize a project named "concept_refactoring" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 
 
      |concept steps                            |

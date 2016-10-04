@@ -10,7 +10,7 @@ where the <language> can be any of the supported languages. Currently gauge supp
 Initializing a new project
 --------------------------
 
-* In an empty directory, use default initialization of a project named "init_proj" with the current language
+* Initialize a project named "init_proj" with the example specs
 * The following file structure should be created 
 
      |name                          |type|

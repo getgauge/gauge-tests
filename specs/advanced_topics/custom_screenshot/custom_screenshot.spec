@@ -6,7 +6,7 @@ tags: java, csharp, ruby, python
 Screenshot using custom logic
 -----------------------------
 
-* In an empty directory initialize a project named "custom_screenshot" without example spec
+* Initialize a project named "custom_screenshot" without example spec
 
 * Configure project to take custom screenshot and return "some screenshot" as byte array
 

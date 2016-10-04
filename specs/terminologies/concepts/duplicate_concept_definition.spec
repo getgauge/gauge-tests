@@ -6,7 +6,7 @@ tags: java, csharp, ruby, python
 Duplicate concept definition
 ----------------------------
 
-* In an empty directory initialize a project named "invalid_duplicate_concept_definition" without example spec
+* Initialize a project named "invalid_duplicate_concept_definition" without example spec
 * Create concept "concept" with following steps 
 
      |concept steps            |

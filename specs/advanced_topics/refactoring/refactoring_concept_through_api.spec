@@ -3,7 +3,7 @@ Refactoring Concept through API
 
 tags: refactoring, api, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "refactor_concept_thru_api" without example spec
+* Initialize a project named "refactor_concept_thru_api" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 
 
      |concept steps                            |

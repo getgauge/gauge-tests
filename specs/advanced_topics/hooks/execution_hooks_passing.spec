@@ -6,7 +6,7 @@ tags: java, csharp, ruby, python
 Execution hooks can be used to run arbitrary test code as different levels during the test suite execution. They are available at suite,
 spec, scenario and step level.
 
-* In an empty directory initialize a project named "exec_hooks_pass" without example spec
+* Initialize a project named "exec_hooks_pass" without example spec
 * Create "Testing Hooks scenario 1" in "01 Hooks Spec" with the following steps 
 
      |step text          |implementation     |

@@ -27,7 +27,7 @@ public class ProjectInit {
                 .build(language.equals("unknown"));
     }
 
-    @Step("In an empty directory, use default initialization of a project named <projName> with the current language")
+    @Step("Initialize a project named <projName> with the example specs")
     public void defaultInitializationProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
@@ -35,7 +35,7 @@ public class ProjectInit {
                 .build(false);
     }
 
-    @Step("In an empty directory initialize a project named <projName> without example spec")
+    @Step("Initialize a project named <projName> without example spec")
     public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
         currentProject = new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())

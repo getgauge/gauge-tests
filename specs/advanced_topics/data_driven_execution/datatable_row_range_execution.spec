@@ -3,7 +3,7 @@ Datatable row range execution
 
 tags: Data-table, execution, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "datatable_row_exec" without example spec
+* Initialize a project named "datatable_row_exec" without example spec
 * Create a specification "row range data table execution" with the following datatable 
 
      |id|name   |phone|

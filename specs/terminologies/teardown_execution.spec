@@ -3,7 +3,7 @@ Teardown Execution
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "teardown_exec" without example spec
+* Initialize a project named "teardown_exec" without example spec
 
 Passing teardown execution
 --------------------------

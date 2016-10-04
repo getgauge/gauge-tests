@@ -3,7 +3,7 @@ Parallel Execution
 
 tags: java, csharp, ruby, python
 
-* In an empty directory initialize a project named "parallel_exec" without example spec
+* Initialize a project named "parallel_exec" without example spec
 * Create "Scenario 11" in "Spec 1" with the following steps 
 
      |step text        |implementation               |

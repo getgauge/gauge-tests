@@ -3,7 +3,7 @@ Datatable Execution
 
 tags: Data-table, execution, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "datatable_exec" without example spec
+* Initialize a project named "datatable_exec" without example spec
 
 Simple Datatable Execution
 --------------------------

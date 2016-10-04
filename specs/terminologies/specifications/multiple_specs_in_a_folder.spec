@@ -3,7 +3,7 @@ Execute specs in a folder
 
 tags: spec, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "scenarios_execution" without example spec
+* Initialize a project named "scenarios_execution" without example spec
 
 Execute multiple specs from a folder
 ------------------------------------

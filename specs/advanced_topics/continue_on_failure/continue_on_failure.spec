@@ -3,7 +3,7 @@ Continue on failure
 
 tags: continueOnFailure, java
 
-* In an empty directory initialize a project named "continueOnFailure" without example spec
+* Initialize a project named "continueOnFailure" without example spec
 
 * Create a specification "continueOnFailureSpec" with the following contexts 
 

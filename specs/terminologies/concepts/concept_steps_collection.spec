@@ -3,7 +3,7 @@ Concept Steps Collection
 
 tags: api, java, csharp, ruby, python
 
-* In an empty directory, use default initialization of a project named "concept_steps_collection" with the current language
+* Initialize a project named "concept_steps_collection" with the example specs
 
 * Create concept "concept1 <b>" with following steps 
 

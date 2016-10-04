@@ -3,7 +3,7 @@ Spec with scenarios
 
 tags: spec, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "spec_with_passing_scenarios" without example spec
+* Initialize a project named "spec_with_passing_scenarios" without example spec
 
 Basic spec with one scenario, passing
 -------------------------------------

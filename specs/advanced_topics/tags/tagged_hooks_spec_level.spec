@@ -3,7 +3,7 @@ Tagged hooks spec level
 
 tags: tagged_hooks, execution_hooks, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "tagged_hook_spec" without example spec
+* Initialize a project named "tagged_hook_spec" without example spec
 * Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation 
 
      |step text                            |implementation                         |

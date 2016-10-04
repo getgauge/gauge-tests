@@ -6,7 +6,7 @@ tags: refactoring, java, csharp, ruby, python
 Rephrase step with special and keyword parameters
 -------------------------------------------------
 
-* In an empty directory initialize a project named "refactoring_numeric_keyword_parameter" without example spec
+* Initialize a project named "refactoring_numeric_keyword_parameter" without example spec
 * Create a scenario "scenario refactoring numeric and keyword parameter" in specification "spec refactoring numeric parameter" with the following steps with implementation 
 
      |step text                                    |implementation|
@@ -19,7 +19,7 @@ Rephrase step with special and keyword parameters
 Refactor the step with special chars in implementation
 ------------------------------------------------------
 
-* In an empty directory initialize a project named "refactor_step_with_special_chars" without example spec
+* Initialize a project named "refactor_step_with_special_chars" without example spec
 * Create a scenario "Sample scenario" in specification "refactor the step with special chars" with the following steps with implementation 
 
      |step text|implementation                                         |

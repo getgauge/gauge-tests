@@ -3,7 +3,7 @@ Step Value
 
 tags: api, java, csharp, ruby, python
 
-* In an empty directory initialize a project named "step_value" without example spec
+* Initialize a project named "step_value" without example spec
 
 * Create a csv file "abc"
 
