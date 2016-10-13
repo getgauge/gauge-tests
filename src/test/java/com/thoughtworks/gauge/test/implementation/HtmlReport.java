@@ -23,8 +23,6 @@ import static org.junit.Assert.assertEquals;
 
 public class HtmlReport {
 
-    private String reportsPath = "file://" + Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
-
     @Step("Generated html report should have <some screenshot> for <table>")
     public void verifyCustomScreenshot(String stubScreenshot, Table stepTexts) throws IOException {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
@@ -34,7 +32,7 @@ public class HtmlReport {
         String expected = "data:image/png;base64," + Base64.getEncoder().encodeToString(stubScreenshot.getBytes());
 
         final WebClient webClient = new WebClient();
-        final HtmlPage page = webClient.getPage(reportsPath);
+        final HtmlPage page = webClient.getPage(getReportsPath());
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
 
@@ -55,7 +53,7 @@ public class HtmlReport {
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
 
         final WebClient webClient = new WebClient();
-        final HtmlPage page = webClient.getPage(reportsPath);
+        final HtmlPage page = webClient.getPage(getReportsPath());
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
 
         String expectedTotalCount = ((HtmlDivision) selectors.querySelectorAll(".total-specs").get(0)).getFirstChild().asText();
@@ -73,5 +71,9 @@ public class HtmlReport {
         String expectedSkippedCount = ((HtmlListItem) selectors.querySelectorAll(".skip").get(0)).getFirstChild().asText();
         String actualSkippedCount = statistics.getTableRows().get(0).getCell("skippedCount");
         assertEquals("Skipped count:", expectedSkippedCount, actualSkippedCount);
+    }
+
+    private String getReportsPath() {
+        return "file://" + Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
     }
 }
