@@ -15,8 +15,7 @@ Continue on failure in setup and teardown
      |step 1 continue on failure|throw exception    |true               |
      |hello step                |"inside hello step"|false              |
 
-* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following continue on failure steps 
-
+* Create "continueOnFailureScenario" in "continueOnFailureSpec" with the following steps
      |step text                 |implementation       |continue on failure|
      |--------------------------|---------------------|-------------------|
      |step 2 continue on failure|throw exception      |true               |
@@ -74,8 +73,7 @@ Execute teardown if some other step fails in setup
      |step 4 continue on failure|throw exception    |true               |
      |fail step                 |throw exception    |false              |
 
-* Create a scenario "continueOnFailureScenario2" in specification "continueOnFailureSpec2" with the following continue on failure steps 
-
+* Create "continueOnFailureScenario2" in "continueOnFailureSpec2" with the following steps
      |step text  |implementation     |continue on failure|
      |-----------|-------------------|-------------------|
      |Second step|throw exception    |true               |

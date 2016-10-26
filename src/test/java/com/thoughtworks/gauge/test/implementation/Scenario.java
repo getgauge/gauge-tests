@@ -33,11 +33,4 @@ public class Scenario {
                 .buildAndAddToProject();
     }
 
-    @Step("Create a scenario <scenario name> in specification <spec name> with the following steps to continue on corresponding failures <table>")
-    public void createScenarioStepsWhichContinueOnGivenErrors(String scenarioName, String specName, Table steps) throws Exception {
-        new SpecificationBuilder().withScenarioName(scenarioName)
-                .withSpecName(specName)
-                .withSteps(steps)
-                .buildAndAddToProject();
-    }
 }
