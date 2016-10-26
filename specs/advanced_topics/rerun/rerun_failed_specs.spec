@@ -8,20 +8,20 @@ tags: execution, rerun, java, csharp, ruby, python
 Rerun failed scenarios
 ----------------------
 
-* Create "Sample scenario" in "Basic_spec_execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps with implementation 
 
      |step text  |implementation     |
      |-----------|-------------------|
      |First step |"inside first step"|
      |Second step|throw exception    |
 
-* Create "Sample scenario1" in "Basic_spec_execution1" with the following steps 
+* Create a scenario "Sample scenario1" in specification "Basic_spec_execution1" with the following steps with implementation 
 
      |step text |implementation     |
      |----------|-------------------|
      |Third step|"inside third step"|
 
-* Create "Sample scenario2" in "Basic_spec_execution2" with the following steps 
+* Create a scenario "Sample scenario2" in specification "Basic_spec_execution2" with the following steps with implementation 
 
      |step text  |implementation      |
      |-----------|--------------------|

@@ -24,7 +24,7 @@ Continue on failure in a concept step
      |Step that throws an exception|throw exception |true               |
      |say hello again              |"hello universe"|false              |
 
-* Create "continue on failure even the failure in concept" in "Spec with concepts" with the following steps 
+* Create a scenario "continue on failure even the failure in concept" in specification "Spec with concepts" with the following steps with implementation 
 
      |step text                             |
      |--------------------------------------|
@@ -94,7 +94,7 @@ Continue on failure in a nested concept step
      |Step that throws an exception and continues|throw exception|true               |
      |Step that throws an exception              |throw exception|false              |
 
-* Create "continue on failure even the failure in concept" in "Spec with nested concepts" with the following steps 
+* Create a scenario "continue on failure even the failure in concept" in specification "Spec with nested concepts" with the following steps with implementation 
 
      |step text          |
      |-------------------|

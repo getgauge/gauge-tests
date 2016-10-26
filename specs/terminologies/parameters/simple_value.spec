@@ -8,7 +8,7 @@ tags: parameter, java, csharp, ruby, python
 Inline simple parameters
 ------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation 
 
      |step text                 |implementation                                          |
      |--------------------------|--------------------------------------------------------|

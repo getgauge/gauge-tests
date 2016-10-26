@@ -16,7 +16,8 @@ Continue execution on any error/exception in "Continue on Failure" step
 
 tags: csharp, ruby, python
 
-* Create "continueOnFailureScenario" in "continueOnFailureSpec" with the following steps
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
+
      |step text  |implementation     |continue on failure|error type|
      |-----------|-------------------|-------------------|----------|
      |Second step|throw exception    |true               |          |
@@ -51,7 +52,8 @@ Stop execution on failure of some other step
 
 tags: csharp, ruby, python
 
-* Create "continueOnFailureScenario" in "continueOnFailureSpec" with the following steps
+* Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
+
      |step text  |implementation     |continue on failure|error type|
      |-----------|-------------------|-------------------|----------|
      |Second step|throw exception    |true               |          |
@@ -93,7 +95,8 @@ tags: csharp, ruby, python
 Continue execution only for mentioned error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------------------
 
-* Create "Continue of failure for specified error" in "continueOnFailureSpec" with the following steps
+* Create a scenario "Continue of failure for specified error" in specification "continueOnFailureSpec" with the following steps with implementation 
+
      |step text  |implementation      |continue on failure|error type            |
      |-----------|--------------------|-------------------|----------------------|
      |Second step|throw exception     |true               |RuntimeException.class|
@@ -120,7 +123,8 @@ Continue execution only for mentioned error/exception in "Continue on Failure" s
 Stop execution on failure due to unspecified errors
 ---------------------------------------------------
 
-* Create "Continue on failure only on specified error" in "continueOnFailureSpec" with the following steps
+* Create a scenario "Continue on failure only on specified error" in specification "continueOnFailureSpec" with the following steps with implementation 
+
      |step text  |implementation     |continue on failure|error type                |
      |-----------|-------------------|-------------------|--------------------------|
      |Second step|throw exception    |true               |NullPointerException.class|

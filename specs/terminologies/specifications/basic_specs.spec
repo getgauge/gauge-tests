@@ -8,8 +8,7 @@ tags: spec, java, csharp, ruby, python
 Basic spec with one scenario, passing
 -------------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
-
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation
      |step text               |implementation                                          |
      |------------------------|--------------------------------------------------------|
      |First step              |"inside first step"                                     |
@@ -26,7 +25,7 @@ Basic spec with one scenario, passing
 Basic spec with multiple scenarios, passing
 -------------------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation
 
      |step text          |implementation     |
      |-------------------|-------------------|
@@ -53,8 +52,7 @@ Basic spec with multiple scenarios, passing
 Spec fails if it has even one scenario failing irrespective of the passing and skipped scenarios in it
 ------------------------------------------------------------------------------------------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
-
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation
      |step text  |implementation      |
      |-----------|--------------------|
      |First step |"inside first step" |

@@ -4,7 +4,7 @@ Step Refactoring through command
 tags: refactoring
 
 * Initialize a project named "spec_refactoring_thru_cmd" without example spec
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text               |
      |------------------------|

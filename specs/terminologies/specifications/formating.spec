@@ -8,7 +8,7 @@ tags: java, csharp, ruby, python
 Formatting should not remove steps, scenarios from spec
 -------------------------------------------------------
 
-* Create a scenario "formatting should not remove steps scenarios from spec" in specification "spec formatting" with the following steps 
+* Create a scenario "formatting should not remove steps scenarios from spec" in specification "spec formatting" with the following steps with implementation
 
      |step text                         |implementation         |
      |----------------------------------|-----------------------|
@@ -16,7 +16,7 @@ Formatting should not remove steps, scenarios from spec
      |special param <file:abc>          |"another step"         |
      |special param <table:abc>         |                       |
 
-* Create a scenario "another scenario" in specification "spec formatting" with the following steps 
+* Create a scenario "another scenario" in specification "spec formatting" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
@@ -36,20 +36,19 @@ Formatting should not remove steps, scenarios from spec
 Formatting merges scenario with same heading
 --------------------------------------------
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps 
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation
 
      |step text  |implementation   |
      |-----------|-----------------|
      |"something"|"inside somthing"|
 
-* Create a scenario "in between" in specification "spec formatting" with the following steps 
+* Create a scenario "in between" in specification "spec formatting" with the following steps with implementation
 
      |step text                            |implementation  |
      |-------------------------------------|----------------|
      |"step between two duplicate scenario"|"inside between"|
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps 
-
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation
      |step text  |implementation   |
      |-----------|-----------------|
      |"something"|"inside somthing"|

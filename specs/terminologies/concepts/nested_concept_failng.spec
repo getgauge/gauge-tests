@@ -29,7 +29,7 @@ tags: java, csharp, ruby, python
 Concept execution failure
 -------------------------
 
-* Create "Concept Testing" in "Spec 2" with the following steps 
+* Create a scenario "Concept Testing" in specification "Spec 2" with the following steps with implementation 
 
      |step text                    |
      |-----------------------------|

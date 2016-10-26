@@ -72,7 +72,7 @@ Cyclic concept dependency
      |---------------|
      |Concept Heading|
 
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text      |
      |---------------|

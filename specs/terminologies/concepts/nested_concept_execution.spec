@@ -33,7 +33,7 @@ tags: java, csharp, ruby, python
 Nested Concept execution
 ------------------------
 
-* Create "Scenario for concept execution" in "2 level nested Concept execution" with the following steps 
+* Create a scenario "Scenario for concept execution" in specification "2 level nested Concept execution" with the following steps with implementation 
 
      |step text                        |
      |---------------------------------|
@@ -71,7 +71,7 @@ Nested Concept execution with data table
      |2 |prateek |007  |
      |3 |srikanth|100  |
 
-* Create "Table scenario" in "nested concept execution with data table" with the following steps 
+* Create a scenario "Table scenario" in specification "nested concept execution with data table" with the following steps with implementation 
 
      |step text                      |
      |-------------------------------|

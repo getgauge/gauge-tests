@@ -8,7 +8,7 @@ tags: parameter, java, csharp, ruby, python
 Inline table parameter
 ----------------------
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation 
 
      |step text               |implementation                           |inlineTableHeaders|row1   |
      |------------------------|-----------------------------------------|------------------|-------|
@@ -18,11 +18,11 @@ Inline table parameter
 
 * Console should contain following lines in order 
 
-     |console output                        |
-     |--------------------------------------|
-     |inside step with parameters : |header||
-     ||one   |                              |
-     ||two   |                              |
+     |console output               |
+     |-----------------------------|
+     |inside step with parameters :|
+     |                             |
+     |                             |
 
 * Statistics generated should have 
 
@@ -42,7 +42,7 @@ External table parameter (csv)
 
 * Create a csv file "abc" with "header\none\ntwo"
 
-* Create "Sample scenario" in "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps with implementation 
 
      |step text                       |implementation                           |
      |--------------------------------|-----------------------------------------|
@@ -52,11 +52,11 @@ External table parameter (csv)
 
 * Console should contain following lines in order 
 
-     |console output                        |
-     |--------------------------------------|
-     |inside step with parameters : |header||
-     ||one   |                              |
-     ||two   |                              |
+     |console output               |
+     |-----------------------------|
+     |inside step with parameters :|
+     |                             |
+     |                             |
 
 * Statistics generated should have 
 

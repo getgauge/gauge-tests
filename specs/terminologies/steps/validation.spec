@@ -8,7 +8,7 @@ tags: validation, java, csharp, ruby, python
 step should not be empty
 ------------------------
 
-* Create a scenario "step should not be empty" in specification "spec step_should_not_be_empty" with the following steps
+* Create a scenario "step should not be empty" in specification "spec step_should_not_be_empty" with the following steps with implementation
 
      |step text|implementation     |
      |---------|-------------------|

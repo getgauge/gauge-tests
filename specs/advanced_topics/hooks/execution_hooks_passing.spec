@@ -7,19 +7,19 @@ Execution hooks can be used to run arbitrary test code as different levels durin
 spec, scenario and step level.
 
 * Initialize a project named "exec_hooks_pass" without example spec
-* Create "Testing Hooks scenario 1" in "01 Hooks Spec" with the following steps 
+* Create a scenario "Testing Hooks scenario 1" in specification "01 Hooks Spec" with the following steps with implementation 
 
      |step text          |implementation     |
      |-------------------|-------------------|
      |First scenario step|"inside first step"|
 
-* Create "Testing Hooks scenario 2" in "01 Hooks Spec" with the following steps 
+* Create a scenario "Testing Hooks scenario 2" in specification "01 Hooks Spec" with the following steps with implementation 
 
      |step text           |implementation      |
      |--------------------|--------------------|
      |Second scenario step|"inside second step"|
 
-* Create "Testing Hooks scenario new" in "02 Hooks Spec" with the following steps 
+* Create a scenario "Testing Hooks scenario new" in specification "02 Hooks Spec" with the following steps with implementation 
 
      |step text              |implementation         |
      |-----------------------|-----------------------|

@@ -31,7 +31,7 @@ Duplicate concept definition
      |-------------|----------------------|
      |First context|"inside first context"|
 
-* Create "scenario_invalid_duplicate_concept_definition" in "spec1" with the following steps 
+* Create a scenario "scenario_invalid_duplicate_concept_definition" in specification "spec1" with the following steps with implementation 
 
      |step text|
      |---------|

@@ -8,7 +8,7 @@ tags: validation, java, csharp, ruby, python
 Validation Failure
 ------------------
 
-* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps 
+* Create a scenario "Scenario with unimplemented steps" in specification "Validation Spec" with the following steps with implementation 
 
      |step text  |
      |-----------|
@@ -26,7 +26,7 @@ Validation Failure
 Validation Success
 ------------------
 
-* Create "Scenario with unimplemented steps" in "Validation Spec" with the following steps 
+* Create a scenario "Scenario with unimplemented steps" in specification "Validation Spec" with the following steps with implementation 
 
      |step text  |implementation|
      |-----------|--------------|

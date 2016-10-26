@@ -6,7 +6,7 @@ tags: java, csharp, ruby, python
 When a before execution hook fails the after hook will still execute skipping all other executions at that level.
 
 * Initialize a project named "exec_hooks_fail" without example spec
-* Create "New scenario" in "01 Hooks Spec" with the following steps 
+* Create a scenario "New scenario" in specification "01 Hooks Spec" with the following steps with implementation 
 
      |step text  |implementation |
      |-----------|---------------|

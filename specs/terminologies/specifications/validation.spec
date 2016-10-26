@@ -8,7 +8,7 @@ tags: validation, java, csharp, ruby, python
 Spec execution with unimplemented step in scenarios
 ---------------------------------------------------
 
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
@@ -97,7 +97,7 @@ Spec execution with unimplemented step in context step and scenario
      |First step |"inside first step" |
      |Second step|"inside second step"|
 
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
@@ -127,7 +127,7 @@ Spec execution with unimplemented step in context step and scenario
 Spec with no heading
 --------------------
 
-* Create a scenario "Sample scenario" in specification "" with the following steps 
+* Create a scenario "Sample scenario" in specification "" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
@@ -140,7 +140,7 @@ Spec with no heading
 Scenario with no heading
 ------------------------
 
-* Create a scenario "" in specification "Scenario with no heading" with the following steps 
+* Create a scenario "" in specification "Scenario with no heading" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
@@ -153,14 +153,14 @@ Scenario with no heading
 Skip spec if all scenarios are skipped
 --------------------------------------
 
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text                |
      |-------------------------|
      |First unimplemented step |
      |Second unimplemented step|
 
-* Create a scenario "Sample scenario2" in specification "Basic spec execution" with the following steps 
+* Create a scenario "Sample scenario2" in specification "Basic spec execution" with the following steps unimplemented
 
      |step text                |
      |-------------------------|

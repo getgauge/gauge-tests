@@ -15,7 +15,7 @@ tags: api, java, csharp, ruby, python
      |-----------------------|----------------------------|
      |step with no parameters|"inside first scenario step"|
 
-* Create a scenario "second scenario" in specification "Specification 1" with the following steps 
+* Create a scenario "second scenario" in specification "Specification 1" with the following steps unimplemented
 
      |step text                     |
      |------------------------------|

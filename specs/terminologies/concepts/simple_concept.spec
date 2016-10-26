@@ -15,7 +15,7 @@ Invoke a concept with no parameters
      |Concept step one|"inside first concept step" |
      |Concept step two|"inside second concept step"|
 
-* Create "Scenario for concept execution" in "Concept execution" with the following steps 
+* Create a scenario "Scenario for concept execution" in specification "Concept execution" with the following steps with implementation 
 
      |step text                        |implementation      |
      |---------------------------------|--------------------|

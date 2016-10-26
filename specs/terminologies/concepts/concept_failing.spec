@@ -22,7 +22,7 @@ tags: java, csharp, ruby, python
 Test concept failure Path
 -------------------------
 
-* Create "Concept Testing" in "Spec 1" with the following steps 
+* Create a scenario "Concept Testing" in specification "Spec 1" with the following steps with implementation 
 
      |step text                   |
      |----------------------------|
