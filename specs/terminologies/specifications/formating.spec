@@ -23,6 +23,8 @@ Formatting should not remove steps, scenarios from spec
      |special param <file:abc> |
      |special param <table:abc>|
 
+* Check for validation errors in the project and ensure failure
+
 * Format specs and ensure failure
 
 * Console should contain "Dynamic parameter <dynamic> could not be resolved => 'Step that takes a table1 <dynamic>'"
