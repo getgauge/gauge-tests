@@ -15,7 +15,7 @@ Duplicate step implementation should atleast give a warning
      |Concept step one|"inside first concept step" |
      |Concept step one|"inside second concept step"|
 
-* Execute the spec "duplicate step implementation" and ensure failure
+* Execute the spec "duplicate step implementation" and ensure success
 
 * Console should contain "Duplicate step implementation"
 

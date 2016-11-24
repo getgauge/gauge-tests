@@ -22,7 +22,7 @@ Spec execution with unimplemented step in scenarios
      |First step |"inside first step" |
      |Second step|"inside second step"|
 
-* Execute the spec "Basic spec execution" and ensure failure
+* Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
      |console output                                              |
@@ -61,7 +61,7 @@ Spec execution with unimplemented step in context step
      |First step |"inside first step" |
      |Second step|"inside second step"|
 
-* Execute the spec "Basic spec execution" and ensure failure
+* Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
      |console output                                  |
@@ -103,7 +103,7 @@ Spec execution with unimplemented step in context step and scenario
      |-------------------------|
      |Second unimplemented step|
 
-* Execute the spec "Basic spec execution" and ensure failure
+* Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
      |console output                                              |
@@ -167,7 +167,7 @@ Skip spec if all scenarios are skipped
      |Third unimplemented step |
      |Fourth unimplemented step|
 
-* Execute the spec "Basic spec execution" and ensure failure
+* Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
      |console output                                              |

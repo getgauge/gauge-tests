@@ -74,8 +74,8 @@ Unimplemented teardown execution
      |First teardown |
      |Second teardown|
 
-* Execute the spec "basic teardown execution" and ensure failure
-* Console should contain following lines in order 
+* Execute the spec "basic teardown execution" and ensure success
+* Console should contain following lines in order
 
      |console output                                    |
      |--------------------------------------------------|

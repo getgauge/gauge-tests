@@ -92,7 +92,7 @@ Spec should be skipped if it has all scenarios with unimplemented steps
      |----------|
      |some step2|
 
-* Execute the current project and ensure failure
+* Execute the current project and ensure success
 
 * Console should contain following lines in order 
 
