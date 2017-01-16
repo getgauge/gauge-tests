@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.thoughtworks.gauge</groupId>
             <artifactId>gauge-java</artifactId>
-            <version>0.5.2.nightly-2017-01-12</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
