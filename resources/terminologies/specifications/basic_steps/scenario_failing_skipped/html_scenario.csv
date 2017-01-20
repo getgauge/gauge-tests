@@ -1,4 +1,4 @@
-name,step text, output
+name,step text,output
 Sample scenario,First Scenario step, inside first step
 second scenario,Second Scenario step,inside second step
 third scenario,Third Scenario step, inside third step
