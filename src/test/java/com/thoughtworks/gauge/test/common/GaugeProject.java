@@ -16,7 +16,7 @@ import java.util.*;
 
 public abstract class GaugeProject {
 
-    private static final String PRODUCT_ROOT = "GAUGE_ROOT";
+    private static final List<String> PRODUCT_ENVS =  Arrays.asList("GAUGE_ROOT", "GAUGE_HOME");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
@@ -304,7 +304,7 @@ public abstract class GaugeProject {
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
         processBuilder.environment().keySet().stream()
-                .filter(env -> !env.toUpperCase().equals(PRODUCT_ROOT) && env.toUpperCase().contains(PRODUCT_PREFIX))
+                .filter(env -> !PRODUCT_ENVS.contains(env.toUpperCase()) && env.toUpperCase().contains(PRODUCT_PREFIX))
                 .forEach(env -> processBuilder.environment().put(env, ""));
     }
 
