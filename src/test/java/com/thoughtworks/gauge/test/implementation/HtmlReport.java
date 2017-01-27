@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.Util;
@@ -47,13 +48,16 @@ public class HtmlReport {
     }
 
     @Step("verify statistics in html with <statistics>")
-    public void verifyStatistics(Table statistics) throws IOException {
+    public void verifyStatistics(Table statistics) throws IOException, InterruptedException {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
 
         final WebClient webClient = new WebClient();
         final HtmlPage page = webClient.getPage(getReportsPath());
+        JavaScriptJobManager manager = page.getEnclosingWindow().getJobManager();
+        while (manager.getJobCount() > 0)
+            Thread.sleep(1000);
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
 
         String expectedTotalCount = ((HtmlDivision) selectors.querySelectorAll(".total-specs").get(0)).getFirstChild().asText();
