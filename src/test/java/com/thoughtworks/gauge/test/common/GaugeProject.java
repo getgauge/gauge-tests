@@ -10,13 +10,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public abstract class GaugeProject {
 
-    private static final List<String> PRODUCT_ENVS =  Arrays.asList("GAUGE_ROOT", "GAUGE_HOME");
+    private static final List<String> PRODUCT_ENVS = Arrays.asList("GAUGE_ROOT", "GAUGE_HOME");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
@@ -37,8 +37,6 @@ public abstract class GaugeProject {
         currentProject = this;
 
         this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
-        projectDir.deleteOnExit();
-        registerShutDownHook();
     }
 
     public static GaugeProject getCurrentProject() {
@@ -116,10 +114,10 @@ public abstract class GaugeProject {
 
     private File getSpecFile(String name, String dirPath) {
         name = Util.getSpecName(name);
-        return getFile(name, dirPath,".spec");
+        return getFile(name, dirPath, ".spec");
     }
 
-    private File getFile(String name, String dirPath,String extension) {
+    private File getFile(String name, String dirPath, String extension) {
         if (!new File(projectDir, dirPath).exists()) {
             new File(projectDir, dirPath).mkdirs();
         }
@@ -130,12 +128,12 @@ public abstract class GaugeProject {
         return getSpecFile(name, "");
     }
 
-    public File createCsv(String name, String dirPath){
-        return getFile(name,specsDirName,".csv");
+    public File createCsv(String name, String dirPath) {
+        return getFile(name, specsDirName, ".csv");
     }
 
-    public File createTxt(String name, String dirPath){
-        return getFile(name,specsDirName,".txt");
+    public File createTxt(String name, String dirPath) {
+        return getFile(name, specsDirName, ".txt");
     }
 
     public Specification findSpecification(String specName) {
@@ -308,32 +306,6 @@ public abstract class GaugeProject {
                 .forEach(env -> processBuilder.environment().put(env, ""));
     }
 
-    private void registerShutDownHook() {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                Path directory = Paths.get(projectDir.getAbsolutePath());
-                try {
-                    Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
-                        @Override
-                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                            Files.delete(file);
-                            return FileVisitResult.CONTINUE;
-                        }
-
-                        @Override
-                        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                            Files.delete(dir);
-                            return FileVisitResult.CONTINUE;
-                        }
-                    });
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
-        });
-    }
-
     public void refactorStep(String oldStep, String newStep) throws Exception {
         ExecutionSummary result = currentProject.executeRefactor(oldStep, newStep);
         if (!result.getSuccess()) {
@@ -341,8 +313,8 @@ public abstract class GaugeProject {
         }
     }
 
-    public static void implement(Table impl, TableRow row,boolean appendCode) throws Exception {
-        if(impl.getColumnNames().contains("implementation")) {
+    public static void implement(Table impl, TableRow row, boolean appendCode) throws Exception {
+        if (impl.getColumnNames().contains("implementation")) {
             StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"), Boolean.parseBoolean(row.getCell("continue on failure")), appendCode, row.getCell("error type"));
             currentProject.implementStep(stepImpl);
         }

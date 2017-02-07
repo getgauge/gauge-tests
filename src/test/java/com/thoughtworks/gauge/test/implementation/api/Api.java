@@ -1,6 +1,9 @@
 package com.thoughtworks.gauge.test.implementation.api;
 
-import com.thoughtworks.gauge.*;
+import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.StepValue;
+import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
 
 import java.io.IOException;
@@ -79,12 +82,6 @@ public class Api {
     @Step("verify refactoring didn't change files")
     public void verifyRefactoring() {
         assertThat(refactorResponse.getFilesChangedList()).isEmpty();
-    }
-
-    @AfterScenario
-    public void tearDown() {
-        if (currentProject.getService() != null)
-            currentProject.getService().getGaugeProcess().destroy();
     }
 
     private List<String> getSteps(Table table) {
