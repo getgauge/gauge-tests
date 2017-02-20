@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Api {
@@ -24,18 +24,18 @@ public class Api {
 
     @Step("Start Gauge daemon")
     public void startGauge() throws IOException, InterruptedException {
-        currentProject.createGaugeService();
+        getCurrentProject().createGaugeService();
     }
 
     @Step("Fetch all steps from gauge")
     public void fetchAllSteps() throws IOException {
-        allSteps = currentProject.getService().getGaugeConnection().fetchAllSteps()
-                .stream().map(stepValue -> stepValue.getStepText()).collect(Collectors.toList());
+        allSteps = getCurrentProject().getService().getGaugeConnection().fetchAllSteps()
+                .stream().map(StepValue::getStepText).collect(Collectors.toList());
     }
 
     @Step("Fetch all concepts from gauge")
     public void fetchAllConcepts() throws IOException {
-        allConcepts = currentProject.getService().getGaugeConnection().fetchAllConcepts()
+        allConcepts = getCurrentProject().getService().getGaugeConnection().fetchAllConcepts()
                 .stream().map(stepValue -> stepValue.getStepValue().getStepText()).collect(Collectors.toList());
     }
 
@@ -56,7 +56,7 @@ public class Api {
 
     @Step("fetch step values for the following <table>")
     public void fetchStepValues(Table table) {
-        GaugeConnection gaugeConnection = currentProject.getService().getGaugeConnection();
+        GaugeConnection gaugeConnection = getCurrentProject().getService().getGaugeConnection();
         stepValues = table.getColumnValues(0).stream().map(s -> gaugeConnection.getStepValue(s).getStepText()).collect(Collectors.toList());
     }
 
@@ -75,7 +75,7 @@ public class Api {
 
     @Step("Refactor step <old step> to <new step> via api")
     public void refactor(String oldStep, String newStep) throws Exception {
-        refactorResponse = currentProject.getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
+        refactorResponse = getCurrentProject().getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
         assertThat(refactorResponse.getSuccess()).isTrue().withFailMessage("Refactoring resulted in error");
     }
 
@@ -88,7 +88,7 @@ public class Api {
         List<String> columnNames = table.getColumnNames();
         final List<String> steps = new ArrayList<>();
         for (TableRow row : table.getTableRows()) {
-            StepValue stepValue = currentProject.getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
+            StepValue stepValue = getCurrentProject().getService().getGaugeConnection().getStepValue(row.getCell(columnNames.get(0)));
             if (stepValue != null && stepValue.getStepText() != null)
                 steps.add(stepValue.getStepText().trim());
         }

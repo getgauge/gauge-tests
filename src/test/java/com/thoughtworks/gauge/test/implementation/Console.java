@@ -6,14 +6,14 @@ import com.thoughtworks.gauge.test.common.Util;
 
 import java.io.IOException;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Console {
 
     @Step("Console should not contain following lines <table>")
     public void consoleShouldNotContainFollowingLines(Table table) throws IOException {
-        String output = currentProject.getStdOut();
+        String output = getCurrentProject().getStdOut();
         for (String s : table.getColumnValues(0)) {
             assertThat(output).doesNotContain(s);
         }
@@ -21,7 +21,7 @@ public class Console {
 
     @Step("Console should contain <text> <number of times> times")
     public void consoleShouldContain(String text, int numberOfTimes) throws IOException {
-        String output = currentProject.getStdOut();
+        String output = getCurrentProject().getStdOut();
         int matchCount = Util.countOccurrences(output, text);
         String errorMessage = "Expected '" + output + "' to have '" + text + "' " + numberOfTimes + " times. Found " + matchCount + " times.";
 
@@ -32,15 +32,15 @@ public class Console {
 
     @Step({"Console should contain <message>", "The error message <message> should be displayed on console"})
     public void consoleShouldContain(String message) throws IOException {
-        String output = currentProject.getStdOut();
+        String output = getCurrentProject().getStdOut();
         assertThat(output).contains(message);
     }
 
     @Step("Console should contain following lines in order <console output table>")
     public void consoleShouldContainFollowingLinesInOrder(Table table) throws IOException {
-        String output = currentProject.getStdOut();
+        String output = getCurrentProject().getStdOut();
 
-        for (String s : table.getColumnValues(0)){
+        for (String s : table.getColumnValues(0)) {
             assertThat(output).contains(s);
         }
     }

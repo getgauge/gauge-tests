@@ -11,17 +11,17 @@ public class ContextBuilder {
     private Specification specification;
 
     public void build() throws Exception {
-        if(!canBuild()) {
+        if (!canBuild()) {
             throw new Exception("need context steps");
         }
         for (TableRow row : contextSteps.getTableRows()) {
             specification.addContextSteps(row.getCell("step text"));
-            GaugeProject.implement(contextSteps, row,appendCode);
+            GaugeProject.implement(contextSteps, row, appendCode);
         }
     }
 
-    public boolean canBuild(){
-        return contextSteps!=null;
+    public boolean canBuild() {
+        return contextSteps != null;
     }
 
     public ContextBuilder withSpecification(Specification spec) {

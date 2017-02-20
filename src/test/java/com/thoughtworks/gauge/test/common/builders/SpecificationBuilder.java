@@ -2,14 +2,11 @@ package com.thoughtworks.gauge.test.common.builders;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class SpecificationBuilder {
@@ -23,7 +20,7 @@ public class SpecificationBuilder {
     private String specsDirPath;
     private Table datatable;
 
-    public SpecificationBuilder(){
+    public SpecificationBuilder() {
         scenarioBuilder = new ScenarioBuilder();
         tagsBuilder = new TagsBuilder();
         contextBuilder = new ContextBuilder();
@@ -35,33 +32,33 @@ public class SpecificationBuilder {
         return this;
     }
 
-    public SpecificationBuilder withScenarioName(String scenarioName){
+    public SpecificationBuilder withScenarioName(String scenarioName) {
         this.tagsBuilder.withScenarioName(scenarioName);
         this.scenarioBuilder.withScenarioName(scenarioName);
         return this;
     }
 
-    public SpecificationBuilder withSpecsDirPath(String specsDirPath){
+    public SpecificationBuilder withSpecsDirPath(String specsDirPath) {
         this.specsDirPath = specsDirPath;
         return this;
     }
 
-    public SpecificationBuilder withSubDirPath(String subDirPath){
+    public SpecificationBuilder withSubDirPath(String subDirPath) {
         this.subDirPath = subDirPath;
         return this;
     }
 
-    public SpecificationBuilder withSpecName(String specName){
+    public SpecificationBuilder withSpecName(String specName) {
         this.specName = specName;
         return this;
     }
 
-    public SpecificationBuilder withSteps(Table steps){
+    public SpecificationBuilder withSteps(Table steps) {
         this.scenarioBuilder.withSteps(steps);
         return this;
     }
 
-    public SpecificationBuilder withAppendCode(boolean appendCode){
+    public SpecificationBuilder withAppendCode(boolean appendCode) {
         this.contextBuilder.withAppendCode(appendCode);
         this.teardownBuilder.withAppendCode(appendCode);
         this.scenarioBuilder.withAppendCode(appendCode);
@@ -74,9 +71,9 @@ public class SpecificationBuilder {
     }
 
     public void buildAndAddToProject() throws Exception {
-        Specification spec = GaugeProject.currentProject.findSpecification(specName);
+        Specification spec = getCurrentProject().findSpecification(specName);
         if (spec == null) {
-            spec = GaugeProject.currentProject.createSpecification(subDirPath,specName);
+            spec = getCurrentProject().createSpecification(subDirPath, specName);
         }
 
         contextBuilder.withSpecification(spec);
@@ -84,19 +81,19 @@ public class SpecificationBuilder {
         scenarioBuilder.withSpecification(spec);
         tagsBuilder.withSpecification(spec);
 
-        if(datatable!=null)
+        if (datatable != null)
             spec.addDataTable(datatable);
 
-        if(contextBuilder.canBuild())
+        if (contextBuilder.canBuild())
             contextBuilder.build();
 
-        if(scenarioBuilder.canBuild())
+        if (scenarioBuilder.canBuild())
             scenarioBuilder.build();
 
-        if(tagsBuilder.canBuild())
+        if (tagsBuilder.canBuild())
             tagsBuilder.build();
 
-        if(teardownBuilder.canBuild())
+        if (teardownBuilder.canBuild())
             teardownBuilder.build();
 
         spec.save();
@@ -112,27 +109,27 @@ public class SpecificationBuilder {
         return this;
     }
 
-    public SpecificationBuilder withScenarioDataStoreWriteStatement(String key,String value) {
+    public SpecificationBuilder withScenarioDataStoreWriteStatement(String key, String value) {
         ArrayList<String> columns = new ArrayList<>();
         columns.add("key");
         columns.add("value");
 
         TableRow row = new TableRow();
-        row.addCell("key",key);
-        row.addCell("value",value);
-        row.addCell("datastore type","Scenario");
+        row.addCell("key", key);
+        row.addCell("value", value);
+        row.addCell("datastore type", "Scenario");
 
-        currentProject.getDataStoreWriteStatement(row, columns);
+        getCurrentProject().getDataStoreWriteStatement(row, columns);
         return this;
     }
 
-    public SpecificationBuilder withDataStoreWriteStatement(List<String> columnNames,TableRow row) {
-        scenarioBuilder.addSteps(columnNames, row.getCell("step text"), currentProject.getDataStoreWriteStatement(row, columnNames));
+    public SpecificationBuilder withDataStoreWriteStatement(List<String> columnNames, TableRow row) {
+        scenarioBuilder.addSteps(columnNames, row.getCell("step text"), getCurrentProject().getDataStoreWriteStatement(row, columnNames));
         return this;
     }
 
     public SpecificationBuilder withDataStorePrintValues(List<String> columnNames, TableRow tableRow) {
-        scenarioBuilder.addSteps(columnNames, tableRow.getCell("step text"), currentProject.getDataStorePrintValueStatement(tableRow, columnNames));
+        scenarioBuilder.addSteps(columnNames, tableRow.getCell("step text"), getCurrentProject().getDataStorePrintValueStatement(tableRow, columnNames));
         return this;
     }
 

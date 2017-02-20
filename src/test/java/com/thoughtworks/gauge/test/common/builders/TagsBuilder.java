@@ -3,7 +3,7 @@ package com.thoughtworks.gauge.test.common.builders;
 import com.thoughtworks.gauge.test.common.Scenario;
 import com.thoughtworks.gauge.test.common.Specification;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class TagsBuilder {
 
@@ -27,19 +27,19 @@ public class TagsBuilder {
     }
 
     public boolean canBuild() {
-        return tags!=null;
+        return tags != null;
     }
 
     public void build() throws Exception {
-        if(!canBuild())
+        if (!canBuild())
             throw new Exception("should have tags with scenarios or specs");
 
-        if(scenarioName!=null && tags!=null) {
-            Scenario currentScenario = currentProject.findScenario(scenarioName, spec.getScenarios());
+        if (scenarioName != null && tags != null) {
+            Scenario currentScenario = getCurrentProject().findScenario(scenarioName, spec.getScenarios());
             currentScenario.addTags(tags);
         }
 
-        if(scenarioName==null && tags!=null){
+        if (scenarioName == null && tags != null) {
             spec.addTags(tags);
         }
     }

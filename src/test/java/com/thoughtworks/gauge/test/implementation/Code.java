@@ -2,8 +2,6 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.TableRow;
-import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.builders.ImplementationBuilder;
 
 public class Code {

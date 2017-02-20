@@ -18,7 +18,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -78,6 +78,6 @@ public class HtmlReport {
     }
 
     private String getReportsPath() {
-        return "file://" + Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
+        return "file://" + Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
     }
 }

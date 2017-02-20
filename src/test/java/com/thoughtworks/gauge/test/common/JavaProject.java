@@ -4,7 +4,6 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.StepImpl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

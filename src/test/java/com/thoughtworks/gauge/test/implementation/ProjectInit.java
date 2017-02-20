@@ -4,14 +4,13 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
+import com.thoughtworks.gauge.test.common.Util;
 import com.thoughtworks.gauge.test.common.builders.DataFileBuilder;
 import com.thoughtworks.gauge.test.common.builders.ProjectBuilder;
-import com.thoughtworks.gauge.test.common.Util;
-import com.thoughtworks.gauge.test.common.builders.SpecificationBuilder;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 

@@ -12,8 +12,8 @@ public class Scenario {
         new SpecificationBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withScenarioDataStoreWriteStatement("specName", specName)
-                .withScenarioDataStoreWriteStatement("Scenario name",scenarioName)
-                .withScenarioDataStoreWriteStatement(scenarioName,steps.toString())
+                .withScenarioDataStoreWriteStatement("Scenario name", scenarioName)
+                .withScenarioDataStoreWriteStatement(scenarioName, steps.toString())
                 .withSteps(steps)
                 .buildAndAddToProject();
     }

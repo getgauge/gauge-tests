@@ -6,7 +6,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class Hooks {
     @AfterScenario
@@ -21,8 +21,8 @@ public class Hooks {
 
     @AfterScenario
     public void tearDown() {
-        if (currentProject.getService() != null)
-            currentProject.getService().getGaugeProcess().destroy();
+        if (getCurrentProject().getService() != null)
+            getCurrentProject().getService().getGaugeProcess().destroy();
     }
 
 }

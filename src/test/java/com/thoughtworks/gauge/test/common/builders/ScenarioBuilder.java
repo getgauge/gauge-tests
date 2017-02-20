@@ -9,8 +9,6 @@ import com.thoughtworks.gauge.test.common.Specification;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-
 public class ScenarioBuilder {
 
     private String scenarioName;
@@ -23,7 +21,7 @@ public class ScenarioBuilder {
         return this;
     }
 
-    public ScenarioBuilder withSteps(Table steps){
+    public ScenarioBuilder withSteps(Table steps) {
         this.scenarioSteps = steps;
         return this;
     }
@@ -34,42 +32,41 @@ public class ScenarioBuilder {
     }
 
     private Scenario buildScenario() throws Exception {
-        if(!canBuild())
+        if (!canBuild())
             throw new Exception("scenario name and steps needed for initialization");
 
         Scenario scenario = new Scenario(scenarioName);
         for (TableRow row : scenarioSteps.getTableRows()) {
-            scenario.addItem(getStepText(row.getCell("step text"),row), row.getCell("Type"));
+            scenario.addItem(getStepText(row.getCell("step text"), row), row.getCell("Type"));
             GaugeProject.implement(scenarioSteps, row, appendCode);
         }
 
         return scenario;
     }
 
-    private static String getStepText(String stepText,TableRow row)
-    {
+    private static String getStepText(String stepText, TableRow row) {
         int numberOfHeaders = row.getCell("inlineTableHeaders").split(",").length;
-        String headers = "|"+(row.getCell("inlineTableHeaders").replaceAll(",","|"))+"|";
+        String headers = "|" + (row.getCell("inlineTableHeaders").replaceAll(",", "|")) + "|";
 
-        if(headers=="||")
+        if (headers == "||")
             return stepText;
 
-        StringBuilder tableContent = new StringBuilder("\n"+headers);
+        StringBuilder tableContent = new StringBuilder("\n" + headers);
 
-        for (int index=1;index<=numberOfHeaders;index++) {
-            String columnValues = "|"+(row.getCell("row" + index).replaceAll(",","|\n|"))+"|";
+        for (int index = 1; index <= numberOfHeaders; index++) {
+            String columnValues = "|" + (row.getCell("row" + index).replaceAll(",", "|\n|")) + "|";
 
-            if(columnValues=="||")
+            if (columnValues == "||")
                 break;
 
             tableContent.append("\n");
             tableContent.append(columnValues);
         }
-        return stepText.replace("<inlineTable>",tableContent.toString());
+        return stepText.replace("<inlineTable>", tableContent.toString());
     }
 
-    public boolean canBuild(){
-        return (scenarioName!=null && scenarioSteps!=null);
+    public boolean canBuild() {
+        return (scenarioName != null && scenarioSteps != null);
     }
 
     public ScenarioBuilder withSpecification(Specification spec) {
@@ -82,7 +79,7 @@ public class ScenarioBuilder {
     }
 
     public ScenarioBuilder addSteps(List<String> columnNames, String cell, String step) {
-        if(this.scenarioSteps == null)
+        if (this.scenarioSteps == null)
             scenarioSteps = new Table(Arrays.asList(columnNames.get(0), "implementation"));
 
         scenarioSteps.addRow(Arrays.asList(cell, step));

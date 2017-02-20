@@ -7,10 +7,10 @@ public class ExecutionSummary {
     private String stderr;
 
 
-    public ExecutionSummary(String command, boolean success, String stdout, String stderr){
+    public ExecutionSummary(String command, boolean success, String stdout, String stderr) {
         this.command = command;
         this.stdout = stdout;
-        this.Success= success;
+        this.Success = success;
         this.stderr = stderr;
     }
 

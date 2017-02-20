@@ -36,7 +36,7 @@ public class StepImpl {
         return isValidStatement;
     }
 
-    public List<String> getErrorTypes(){
+    public List<String> getErrorTypes() {
         return errorTypes;
     }
 }

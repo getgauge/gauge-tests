@@ -17,7 +17,7 @@ public class Concept {
     }
 
     public void addItem(String item, String type) {
-        if (type.equalsIgnoreCase(Comment.TYPE)){
+        if (type.equalsIgnoreCase(Comment.TYPE)) {
             this.items.add(new Comment(item));
             return;
         }

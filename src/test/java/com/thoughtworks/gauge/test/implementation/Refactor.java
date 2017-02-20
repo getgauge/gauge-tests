@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
@@ -24,7 +24,7 @@ public class Refactor {
             oldStep = oldStep.replaceAll("\\\"", "\\\\\"");
             newStep = newStep.replaceAll("\\\"", "\\\\\"");
         }
-        currentProject.refactorStep(oldStep, newStep);
+        getCurrentProject().refactorStep(oldStep, newStep);
     }
 
     @Step("The step <First step> should no longer be used")

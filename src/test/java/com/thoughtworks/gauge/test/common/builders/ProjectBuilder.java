@@ -3,8 +3,6 @@ package com.thoughtworks.gauge.test.common.builders;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
-
 public class ProjectBuilder {
 
     private String language;
@@ -23,13 +21,13 @@ public class ProjectBuilder {
 
     public GaugeProject build(boolean expectFailure) throws Exception {
         GaugeProject currentProject = GaugeProject.createProject(language, projName);
-        if(!currentProject.initialize() && !expectFailure)
+        if (!currentProject.initialize() && !expectFailure)
             throw new Exception("Unable to initialize gauge project.\nSTDERR:\n\n"
-                + currentProject.getLastProcessStderr() + "\n\nSTDOUT:\n\n"
-                + currentProject.getLastProcessStdout());
+                    + currentProject.getLastProcessStderr() + "\n\nSTDOUT:\n\n"
+                    + currentProject.getLastProcessStdout());
 
-        if(this.deleteExampleSpec)
-            currentProject.deleteSpec(Util.combinePath("specs","example"));
+        if (this.deleteExampleSpec)
+            currentProject.deleteSpec(Util.combinePath("specs", "example"));
         return currentProject;
     }
 

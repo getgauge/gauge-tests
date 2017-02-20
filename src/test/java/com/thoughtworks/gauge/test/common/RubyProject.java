@@ -25,7 +25,7 @@ public class RubyProject extends GaugeProject {
         String fileName = Util.getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
         rubyCode.append("step '").append(stepValue.value).append("'");
-        if(stepImpl.isContinueOnFailure()) {
+        if (stepImpl.isContinueOnFailure()) {
             rubyCode.append(", :continue_on_failure => true");
         }
         rubyCode.append(" do |");
@@ -45,8 +45,8 @@ public class RubyProject extends GaugeProject {
     public Map<String, String> getLanguageSpecificFiles() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("step_implementations", "dir");
-        map.put(Util.combinePath("step_implementations","step_implementation.rb"), "file");
-        map.put(Util.combinePath("env","default","ruby.properties"), "file");
+        map.put(Util.combinePath("step_implementations", "step_implementation.rb"), "file");
+        map.put(Util.combinePath("env", "default", "ruby.properties"), "file");
         return map;
     }
 
@@ -122,7 +122,7 @@ public class RubyProject extends GaugeProject {
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
         StringBuilder rubyFileText = new StringBuilder();
-        rubyFileText.append("Gauge.configure {|c| c.screengrabber =  -> { return \"" +stubScreenshot+"\" }}");
+        rubyFileText.append("Gauge.configure {|c| c.screengrabber =  -> { return \"" + stubScreenshot + "\" }}");
         rubyFileText.append("\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".rb"), rubyFileText.toString());
     }

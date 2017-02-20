@@ -31,7 +31,7 @@ public class CSharpProject extends GaugeProject {
         StringBuilder classText = new StringBuilder();
         classText.append("public class ").append(className).append("\n{\n");
         classText.append("[Step(\"").append(stepValue.value).append("\")]\n");
-        if(stepImpl.isContinueOnFailure()) {
+        if (stepImpl.isContinueOnFailure()) {
             classText.append("[ContinueOnFailure]\n");
         }
         classText.append("public void ").append("stepImplementation(");
@@ -146,10 +146,10 @@ public class CSharpProject extends GaugeProject {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        sb.append("public class "+ className +" : IScreenGrabber {\n");
+        sb.append("public class " + className + " : IScreenGrabber {\n");
         sb.append("\n");
         sb.append("    public byte[] TakeScreenShot() {\n");
-        sb.append("        return System.Text.Encoding.UTF8.GetBytes(\"" + stubScreenshot +"\");\n");
+        sb.append("        return System.Text.Encoding.UTF8.GetBytes(\"" + stubScreenshot + "\");\n");
         sb.append("    }\n");
         sb.append("}");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), sb.toString());

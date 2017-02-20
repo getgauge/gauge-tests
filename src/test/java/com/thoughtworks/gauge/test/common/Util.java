@@ -3,12 +3,10 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,8 +20,8 @@ public class Util {
     public static String combinePath(String... paths) {
         File file = new File(paths[0]);
 
-        for (int i = 1; i < paths.length ; i++) {
-            for (String path :paths[i].split(File.pathSeparator)) {
+        for (int i = 1; i < paths.length; i++) {
+            for (String path : paths[i].split(File.pathSeparator)) {
                 file = new File(file, path);
             }
         }

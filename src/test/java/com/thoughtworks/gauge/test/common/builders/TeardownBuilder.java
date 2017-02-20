@@ -21,7 +21,7 @@ public class TeardownBuilder {
     }
 
     public boolean canBuild() {
-        return tearDownSteps!=null;
+        return tearDownSteps != null;
     }
 
     public TeardownBuilder withSpecification(Specification spec) {
@@ -30,11 +30,11 @@ public class TeardownBuilder {
     }
 
     public void build() throws Exception {
-        if(!canBuild())
+        if (!canBuild())
             throw new Exception("needed teardown steps");
         for (TableRow row : tearDownSteps.getTableRows()) {
             specification.addTeardownSteps(row.getCell("step text"));
-            GaugeProject.implement(tearDownSteps, row,appendCode);
+            GaugeProject.implement(tearDownSteps, row, appendCode);
         }
     }
 }

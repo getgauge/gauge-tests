@@ -4,8 +4,6 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.builders.HooksBuilder;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.currentProject;
-
 
 public class ExecutionHooks {
 
@@ -14,7 +12,7 @@ public class ExecutionHooks {
         new HooksBuilder().withHookLevel(hookLevel)
                 .withHookType(hookType)
                 .withImplementation(implementation)
-        .build();
+                .build();
     }
 
     @Step("Create <hook level> level <hook type> hook with exception")
