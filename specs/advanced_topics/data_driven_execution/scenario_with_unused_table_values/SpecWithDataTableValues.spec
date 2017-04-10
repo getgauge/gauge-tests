@@ -5,10 +5,11 @@ Created by sswaroop on 4/10/17
 This is an executable specification file which follows markdown syntax.
 Every heading in this file denotes a scenario. Every bulleted point denotes a step.
 
+* Initialize a project named "Data_Driven_execution" without example spec
+
 Scenarios with Unused data table value
 --------------------------------------
-* Initialize a project named "Data_Driven_execution" without example spec
-* Create a specification "SimpleSpec_UnsedDataTableValue" with the following datatable 
+* Create a specification "SimpleSpec_UnsedDataTableValue" with the following datatable
 
      |one |two |three|
      |----|----|-----|
@@ -43,8 +44,7 @@ Simple spec with unused data table values
 
 Scenarios with context and teardown having Unused data table value
 ------------------------------------------------------------------
-* Initialize a project named "Data_Driven_execution" without example spec
-* Create a specification "SimpleSpec_UnsedDataTableValue" with the following datatable 
+* Create a specification "ContextSpec_UnusedDataTableValue" with the following datatable
 
      |one |two |three|
      |----|----|-----|
@@ -59,41 +59,32 @@ Scenarios with context and teardown having Unused data table value
      |Step without param        |"simple"      |
      |scenario step with <param>|"param"       |
 
-Spec with unused data table values in context and tear down
-* Create a specification "ContextSpec_UnsedDataTableValue" with the following datatable 
-
-     |one |two |three|
-     |----|----|-----|
-     |val1|val2|val31|
-     |val1|val2|val32|
-     |val1|val2|val33|
-
-* Create a specification "ContextSpec_UnsedDataTableValue" with the following contexts 
+* Create a specification "ContextSpec_UnusedDataTableValue" with the following contexts
 
      |step text         |
      |------------------|
      |Step without param|
      |Concept "3"       |
 
-* Add the following teardown steps in specification "ContextSpec_UnsedDataTableValue" 
+* Add the following teardown steps in specification "ContextSpec_UnusedDataTableValue"
 
      |step text         |
      |------------------|
      |Step without param|
      |Concept "3"       |
 
-* Create a scenario "ScenariosNotUsingDataTableValue3" in specification "ContextSpec_UnsedDataTableValue" with the following steps 
+* Create a scenario "ScenariosNotUsingDataTableValue3" in specification "ContextSpec_UnusedDataTableValue" with the following steps
 
      |step text         |
      |------------------|
      |Step without param|
 
+* Execute the current project and ensure success
 * Console should contain "ScenariosNotUsingDataTableValue3" "1" times
 
 Scenarios with Using data table values
 --------------------------------------
-* Initialize a project named "Data_Driven_execution" without example spec
-* Create a specification "SimpleSpec_UsedDataTableValue" with the following datatable 
+* Create a specification "SimpleSpec_UsedDataTableValue" with the following datatable
 
      |one |two |three|
      |----|----|-----|
@@ -128,8 +119,6 @@ Scenarios with Using data table values
 
 Scenarios with context Using data table value
 ---------------------------------------------
-* Initialize a project named "Data_Driven_execution" without example spec
-
 * Create concept "Concept <param>" with following steps 
 
      |step text                 |implementation|
@@ -164,8 +153,6 @@ Spec with unused data table values in context and tear down
 
 Scenarios with teardown Using data table value
 ----------------------------------------------
-* Initialize a project named "Data_Driven_execution" without example spec
-
 * Create concept "Concept <param>" with following steps 
 
      |step text                 |implementation|
