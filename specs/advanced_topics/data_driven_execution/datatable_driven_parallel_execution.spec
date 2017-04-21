@@ -21,7 +21,7 @@ Execute specs parallelly for each datatable
      |-------------------------|--------------|
      |print <id> <name> <phone>|print params  |
 
-* Execute the current project in parallel and ensure success
+* Execute the current project in parallel in "4" streams and ensure success
 
 * Console should contain "Executing in 3 parallel streams"
 
@@ -39,7 +39,7 @@ Execute specs parallelly for each datatable
      |1         |1        |0        |0           |
 
 Execute specs parallely in n streams
--------------------------------------
+------------------------------------
 * Create a scenario "datatable scenario" in specification "data table driven parallel execution" with the following steps with implementation 
 
      |step text                |implementation|
@@ -71,7 +71,7 @@ Execute specs sequentially if datatable row values not used
      |-------------------------|--------------|
      |This is the only step    |print params  |
 
-* Execute the current project in parallel and ensure success
+* Execute the current project in parallel in "4" streams and ensure success
 
 * Console should not contain following lines 
 
@@ -104,7 +104,7 @@ Datatable driven parallel execution should execute before spec hooks per row
      |-------------------------|--------------|
      |print <id> <name> <phone>|print params  |
 
-* Execute the current project in parallel and ensure success
+* Execute the current project in parallel in "4" streams and ensure success
 
 * Console should contain "Executing in 3 parallel streams"
 
@@ -136,7 +136,7 @@ Datatable driven parallel execution with hook failure
      |First step               |print params  |
      |print <id> <name> <phone>|print params  |
 
-* Execute the current project in parallel and ensure failure
+* Execute the current project in parallel in "4" streams and ensure failure
 
 * Console should contain "Executing in 3 parallel streams"
 
