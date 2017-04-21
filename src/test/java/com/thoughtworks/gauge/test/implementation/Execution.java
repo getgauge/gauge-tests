@@ -37,6 +37,11 @@ public class Execution {
         assertOn(getCurrentProject().executeInParallel(), true);
     }
 
+    @Step("Execute the current project in parallel and ensure failure")
+    public void executeCurrentProjectInParallelAndEnsureFailure() throws Exception {
+        assertOn(getCurrentProject().executeInParallel(), false);
+    }
+
     @Step("Execute the current project in parallel in <n> streams and ensure success")
     public void executeCurrentProjectInParallelStreamsAndEnsureSuccess(int n) throws Exception {
         assertOn(getCurrentProject().executeInParallel(n), true);
