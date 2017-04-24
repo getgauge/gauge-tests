@@ -103,7 +103,7 @@ specs are read and run alphabetically, so we create specs in alphabetical order 
      |--------------------|----------|-----|--------------|
      |Read suite datastore|gauge_test|     |Suite         |
 
-* Execute the current project and ensure success
+* Execute the specs in order and ensure success
 * Console should contain "Some temporary datastore value"
 
 * Statistics generated should have 
