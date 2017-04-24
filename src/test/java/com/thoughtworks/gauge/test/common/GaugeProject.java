@@ -13,11 +13,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Arrays.asList;
 
 public abstract class GaugeProject {
 
-    private static final List<String> PRODUCT_ENVS = Arrays.asList("GAUGE_ROOT", "GAUGE_HOME");
+    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
@@ -202,6 +207,14 @@ public abstract class GaugeProject {
         return execute(args);
     }
 
+    public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
+        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose"));
+        for (String specName : specNames) {
+            args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
+        }
+        return execute(args.toArray(new String[args.size()]));
+    }
+
     private ExecutionSummary execute(String[] args) throws Exception {
         boolean success = executeGaugeCommand(args);
         return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
@@ -272,8 +285,6 @@ public abstract class GaugeProject {
         command.add(executableName);
         Collections.addAll(command, args);
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
-        System.out.println("Execting " + processBuilder.command());
-        Gauge.writeMessage("Execting " + processBuilder.command());
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();

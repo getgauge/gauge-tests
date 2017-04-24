@@ -1,6 +1,7 @@
 package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.ExecutionSummary;
 import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
@@ -51,6 +52,11 @@ public class Execution {
     @Step("Execute the specs in order and ensure success")
     public void executeSpecsInOrderAndEnsureSuccess() throws Exception {
         assertOn(getCurrentProject().execute(true), true);
+    }
+
+    @Step("Execute the following specs in order and ensure success <specs>")
+    public void executeGivenSpecsInOrderAndEnsureSuccess(Table specs) throws Exception {
+        assertOn(getCurrentProject().executeSpecsInOrder(specs.getColumnValues(0)), true);
     }
 
     @Step("Execute the current project and ensure failure")
