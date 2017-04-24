@@ -1,6 +1,7 @@
 package com.thoughtworks.gauge.test.common;
 
 
+import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
@@ -271,6 +272,8 @@ public abstract class GaugeProject {
         command.add(executableName);
         Collections.addAll(command, args);
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
+        System.out.println("Execting " + processBuilder.command());
+        Gauge.writeMessage("Execting " + processBuilder.command());
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
