@@ -208,7 +208,7 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
-        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose"));
+        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose", "--sort"));
         for (String specName : specNames) {
             args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
         }
