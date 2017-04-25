@@ -78,7 +78,6 @@ Spec data store persists data between scenario runs
 Suite data store persists data between spec runs
 ------------------------------------------------
 
-specs are read and run alphabetically, so we create specs in alphabetical order of names i.e. "first write spec", "second read spec"
 * Create a specification "first write spec" with the following contexts 
 
      |step text    |implementation        |
