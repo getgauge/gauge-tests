@@ -203,12 +203,12 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary execute(boolean sorted) throws Exception {
-        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
+        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--order=sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
         return execute(args);
     }
 
     public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
-        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose", "--sort"));
+        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose"));
         for (String specName : specNames) {
             args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
         }
@@ -286,7 +286,6 @@ public abstract class GaugeProject {
         Collections.addAll(command, args);
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
-        System.out.println(processBuilder.command());
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
