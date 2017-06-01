@@ -203,7 +203,7 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary execute(boolean sorted) throws Exception {
-        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--order=sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
+        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
         return execute(args);
     }
 
