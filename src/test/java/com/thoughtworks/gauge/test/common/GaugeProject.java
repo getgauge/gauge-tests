@@ -1,7 +1,6 @@
 package com.thoughtworks.gauge.test.common;
 
 
-import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
@@ -91,7 +90,7 @@ public abstract class GaugeProject {
     }
 
     public boolean initialize() throws Exception {
-        return executeGaugeCommand("--init", language);
+        return executeGaugeCommand("init", language);
     }
 
     public String getStdOut() throws IOException {
@@ -187,28 +186,28 @@ public abstract class GaugeProject {
     }
 
     public boolean executeSpecFolder(String specFolder) throws Exception {
-        return executeGaugeCommand("--simple-console", "--verbose", specFolder);
+        return executeGaugeCommand("run", "--simple-console", "--verbose", specFolder);
     }
 
     public boolean executeSpecFromFolder(String spec, String specFolder) throws Exception {
         File oldProjectDir = this.projectDir;
         this.projectDir = new File(oldProjectDir, specFolder);
-        boolean exitCode = executeGaugeCommand("--simple-console", "--verbose", spec);
+        boolean exitCode = executeGaugeCommand("run", "--simple-console", "--verbose", spec);
         this.projectDir = oldProjectDir;
         return exitCode;
     }
 
     public boolean formatSpecFolder(String specFolder) throws Exception {
-        return executeGaugeCommand("--format", specFolder);
+        return executeGaugeCommand("format", specFolder);
     }
 
     public ExecutionSummary execute(boolean sorted) throws Exception {
-        String[] args = sorted ? new String[]{"--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"--simple-console", "--verbose", "specs/"};
+        String[] args = sorted ? new String[]{"run", "--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"run", "--simple-console", "--verbose", "specs/"};
         return execute(args);
     }
 
     public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
-        ArrayList<String> args = new ArrayList<>(asList("--simple-console", "--verbose"));
+        ArrayList<String> args = new ArrayList<>(asList("run", "--simple-console", "--verbose"));
         for (String specName : specNames) {
             args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
         }
@@ -221,56 +220,45 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary executeInParallel() throws Exception {
-        return execute(new String[]{"--parallel", "--verbose", "specs/"});
+        return execute(new String[]{"run", "--parallel", "--verbose", "specs/"});
     }
 
     public ExecutionSummary executeInParallel(int nStreams) throws Exception {
-        return execute(new String[]{"--parallel", "-n=" + nStreams, "--verbose", "specs/"});
+        return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--verbose", "specs/"});
     }
 
     public ExecutionSummary validate() throws Exception {
-        return execute(new String[]{"--validate", "specs/"});
-    }
-
-    public ExecutionSummary executeSpec(List<String> specNames) throws Exception {
-        List<String> args = new ArrayList<>();
-        args.add("--simple-console");
-        args.add("--verbose");
-        for (String specName : specNames) {
-            args.add("specs" + File.separator + Util.getSpecName(specName) + ".spec");
-        }
-        return execute(args.toArray(new String[0]));
+        return execute(new String[]{"validate", "specs/"});
     }
 
     public ExecutionSummary executeSpec(String specName) throws Exception {
-        return execute(new String[]{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
     public ExecutionSummary rerun() throws Exception {
-        return execute(new String[]{"--simple-console", "--verbose", "--failed"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--failed"});
     }
 
     public ExecutionSummary executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
-        return execute(new String[]{"--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
     }
 
     public ExecutionSummary executeSpecWithRowRange(String specName, String rowRange) throws Exception {
-        return execute(new String[]{"--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
     public ExecutionSummary executeTagsInSpec(String tags, String specName) throws Exception {
-        return execute(new String[]{"--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
     ExecutionSummary executeRefactor(String oldStep, String newStep) throws Exception {
-        return execute(new String[]{"--refactor", oldStep, newStep, "specs"});
+        return execute(new String[]{"refactor", oldStep, newStep, "specs"});
     }
 
     private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
-        command.add("--daemonize");
-        command.add("--api-port");
+        command.add("daemon");
         command.add(String.valueOf(apiPort));
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
