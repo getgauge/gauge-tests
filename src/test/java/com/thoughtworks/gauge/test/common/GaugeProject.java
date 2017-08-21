@@ -262,6 +262,8 @@ public abstract class GaugeProject {
         command.add(String.valueOf(apiPort));
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
+        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED","false");
+
         filterConflictingEnv(processBuilder);
         Process process = processBuilder.start();
         Thread.sleep(3000);
@@ -278,6 +280,7 @@ public abstract class GaugeProject {
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
+        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED","false");
 
         filterConflictingEnv(processBuilder);
         Process lastProcess = processBuilder.start();
