@@ -54,6 +54,11 @@ public class PythonProject extends GaugeProject {
     }
 
     @Override
+    public String getLanguageSpecificGitIgnoreText() {
+        return "";
+    }
+
+    @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {

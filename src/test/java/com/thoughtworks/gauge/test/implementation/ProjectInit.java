@@ -11,6 +11,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -74,6 +75,16 @@ public class ProjectInit {
             }
         });
         softly.assertAll();
+    }
+
+
+    @Step("Verify language specific .gitignore is created")
+    public void verifyGitIngoreForLanguageIsCreated() throws IOException {
+        String gitignore = currentProject.getLanguageSpecificGitIgnoreText();
+        File fileName = new File(getPathRelativeToCurrentProjectDir(".gitignore"));
+        Assert.assertTrue(fileName.exists());
+        String content = Util.read(fileName.getAbsolutePath());
+        Assert.assertEquals(gitignore, content);
     }
 
     private String getPathRelativeToCurrentProjectDir(String path) {

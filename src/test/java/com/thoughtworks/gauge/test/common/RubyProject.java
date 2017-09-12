@@ -51,6 +51,18 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
+    public String getLanguageSpecificGitIgnoreText() {
+        return "# Gauge - metadata dir\n" +
+                ".gauge\n\n" +
+                "# Gauge - log files dir\n" +
+                "logs\n\n" +
+                "# Gauge - java class output directory\n" +
+                "gauge_bin\n\n" +
+                "# Gauge - ruby dependencies dir\n" +
+                "vendor\n\n";
+    }
+
+    @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
         if (implementation.toLowerCase().equals(PRINT_PARAMS)) {

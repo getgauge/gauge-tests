@@ -24,6 +24,11 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
+    public String getLanguageSpecificGitIgnoreText() {
+        return "";
+    }
+
+    @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         throw new RuntimeException("Not implemented");
     }

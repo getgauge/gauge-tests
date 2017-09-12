@@ -24,6 +24,11 @@ public class CSharpProject extends GaugeProject {
     }
 
     @Override
+    public String getLanguageSpecificGitIgnoreText() {
+        return "";
+    }
+
+    @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
         StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
