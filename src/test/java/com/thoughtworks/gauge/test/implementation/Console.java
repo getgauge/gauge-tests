@@ -2,9 +2,11 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.datastore.DataStoreFactory;
 import com.thoughtworks.gauge.test.common.Util;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,6 +44,21 @@ public class Console {
 
         for (String s : table.getColumnValues(0)) {
             assertThat(output).contains(s);
+        }
+    }
+
+    @Step("Console should contain <duplicateConceptNumbers> duplicate concept definition list <conceptName>")
+    public void consoleShouldContainDuplicateConceptDefinitionList(int duplicateConceptNumbers, String conceptName) throws IOException {
+        String output = getCurrentProject().getStdOut();
+
+        assertThat(output).contains("[ParseError]");
+        assertThat(output).contains("Duplicate concept definition found => '"+conceptName+"' => at");
+
+        List<String> names = (List<String>) DataStoreFactory.getScenarioDataStore().get(conceptName);
+        assertThat(names).asList().hasSize(duplicateConceptNumbers);
+
+        for (String s : names) {
+            assertThat(output).contains(s+":1");
         }
     }
 }

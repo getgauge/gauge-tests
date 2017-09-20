@@ -19,8 +19,9 @@ public class ConceptBuilder {
         return this;
     }
 
-    public void build() throws Exception {
+    public Concept build() throws Exception {
         Concept concept = getCurrentProject().createConcept(conceptName, steps);
         getCurrentProject().addConcepts(concept);
+        return concept;
     }
 }
