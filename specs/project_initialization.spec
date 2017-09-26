@@ -8,7 +8,7 @@ where the <language> can be any of the supported languages. Currently gauge supp
 Initializing a new project
 --------------------------
 
-tags: java, csharp, ruby, python
+tags: java, csharp, ruby, python, js
 
 * Initialize a project named "init_proj" with the example specs
 * The following file structure should be created 
@@ -24,10 +24,10 @@ tags: java, csharp, ruby, python
 
 * Verify language specific files are created
 
-Initializing a new project wiitout existing gitignore
+Initializing a new project without existing gitignore
 -----------------------------------------------------
 
-tags: java, ruby
+tags: java, ruby, python, js
 
 * Initialize a project named "init_proj" with the example specs
 * The following file structure should be created 
@@ -49,7 +49,7 @@ tags: java, ruby
 Initializing unknown language project
 -------------------------------------
 
-tags: java, csharp, ruby, python
+tags: java, csharp, ruby, python, js
 
 * In an empty directory, use default initialization of a project named "init_proj_unknown" in language "unknown"
 * Console should contain following lines in order 

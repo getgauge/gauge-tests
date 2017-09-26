@@ -1,21 +1,21 @@
 Refactoring Concept through API
 ===============================
 
-tags: refactoring, api, java, csharp, ruby, python
+tags: refactoring, api, java, csharp, ruby, python, js
 
 * Initialize a project named "refactor_concept_thru_api" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 
 
-     |concept steps                            |
-     |-----------------------------------------|
-     |nested concept with <param0> and <param1>|
-     |simple step with "static"                |
+   |concept steps                            |
+   |-----------------------------------------|
+   |nested concept with <param0> and <param1>|
+   |simple step with "static"                |
 
 * Create concept "concept" with following steps 
 
-     |concept steps            |
-     |-------------------------|
-     |simple step with "static"|
+   |concept steps            |
+   |-------------------------|
+   |simple step with "static"|
 
 * Start Gauge daemon
 

@@ -1,27 +1,27 @@
 Spec Formatting
 ===============
 
-tags: java, csharp, ruby, python
+tags: java, csharp, ruby, python, js
 
 * Initialize a project named "formatting" without example spec
 
 Formatting should not remove steps, scenarios from spec
 -------------------------------------------------------
 
-* Create a scenario "formatting should not remove steps scenarios from spec" in specification "spec formatting" with the following steps with implementation
+* Create a scenario "formatting should not remove steps scenarios from spec" in specification "spec formatting" with the following steps with implementation 
 
-     |step text                         |implementation         |
-     |----------------------------------|-----------------------|
-     |Step that takes a table1 <dynamic>|"inside first scenario"|
-     |special param <file:abc>          |"another step"         |
-     |special param <table:abc>         |                       |
+   |step text                         |implementation         |
+   |----------------------------------|-----------------------|
+   |Step that takes a table1 <dynamic>|"inside first scenario"|
+   |special param <file:abc>          |"another step"         |
+   |special param <table:abc>         |                       |
 
-* Create a scenario "another scenario" in specification "spec formatting" with the following steps unimplemented
+* Create a scenario "another scenario" in specification "spec formatting" with the following steps unimplemented 
 
-     |step text                |
-     |-------------------------|
-     |special param <file:abc> |
-     |special param <table:abc>|
+   |step text                |
+   |-------------------------|
+   |special param <file:abc> |
+   |special param <table:abc>|
 
 * Check for validation errors in the project and ensure failure
 
@@ -38,22 +38,23 @@ Formatting should not remove steps, scenarios from spec
 Formatting merges scenario with same heading
 --------------------------------------------
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation 
 
-     |step text  |implementation   |
-     |-----------|-----------------|
-     |"something"|"inside somthing"|
+   |step text  |implementation   |
+   |-----------|-----------------|
+   |"something"|"inside somthing"|
 
-* Create a scenario "in between" in specification "spec formatting" with the following steps with implementation
+* Create a scenario "in between" in specification "spec formatting" with the following steps with implementation 
 
-     |step text                            |implementation  |
-     |-------------------------------------|----------------|
-     |"step between two duplicate scenario"|"inside between"|
+   |step text                            |implementation  |
+   |-------------------------------------|----------------|
+   |"step between two duplicate scenario"|"inside between"|
 
-* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation
-     |step text  |implementation   |
-     |-----------|-----------------|
-     |"something"|"inside somthing"|
+* Create a scenario "formatting merges scenario with same heading" in specification "spec formatting" with the following steps with implementation 
+
+   |step text  |implementation   |
+   |-----------|-----------------|
+   |"something"|"inside somthing"|
 
 * Check for validation errors in the project and ensure failure
 

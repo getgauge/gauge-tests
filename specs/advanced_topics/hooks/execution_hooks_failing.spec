@@ -1,17 +1,17 @@
 Execution Hooks Failure
 =======================
 
-tags: java, csharp, ruby, python
+tags: java, csharp, ruby, python, js
 
 When a before execution hook fails the after hook will still execute skipping all other executions at that level.
 
 * Initialize a project named "exec_hooks_fail" without example spec
 * Create a scenario "New scenario" in specification "01 Hooks Spec" with the following steps with implementation 
 
-     |step text  |implementation |
-     |-----------|---------------|
-     |First step |"inside step 1"|
-     |Second step|"inside step 2"|
+   |step text  |implementation |
+   |-----------|---------------|
+   |First step |"inside step 1"|
+   |Second step|"inside step 2"|
 
 Hook failure at suite level
 ---------------------------
@@ -22,24 +22,24 @@ Hook failure at suite level
 * Execute the spec "01 Hooks Spec" and ensure failure
 * Console should not contain following lines 
 
-     |console output        |
-     |----------------------|
-     |inside before scenario|
-     |inside step 1         |
-     |inside step 2         |
+   |console output        |
+   |----------------------|
+   |inside before scenario|
+   |inside step 1         |
+   |inside step 2         |
 
 * Statistics generated should have 
 
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |0       |0     |0     |0      |
-     |Scenarios      |0       |0     |0     |0      |
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |0       |0     |0     |0      |
+   |Scenarios      |0       |0     |0     |0      |
 
 * verify statistics in html with 
 
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |0         |0        |0        |0           |
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |0         |0        |0        |0           |
 
 Hook failure at spec level
 --------------------------
@@ -51,31 +51,31 @@ Hook failure at spec level
 * Execute the spec "01 Hooks Spec" and ensure failure
 * Console should contain following lines in order 
 
-     |console output     |
-     |-------------------|
-     |inside before suite|
-     |inside after spec  |
-     |inside after suite |
+   |console output     |
+   |-------------------|
+   |inside before suite|
+   |inside after spec  |
+   |inside after suite |
 
 * Console should not contain following lines 
 
-     |console output|
-     |--------------|
-     |inside step 1 |
-     |inside step 2 |
+   |console output|
+   |--------------|
+   |inside step 1 |
+   |inside step 2 |
 
 * Statistics generated should have 
 
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |0       |0     |0     |0      |
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |1       |0     |1     |0      |
+   |Scenarios      |0       |0     |0     |0      |
 
 * verify statistics in html with 
 
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |1         |0        |1        |0           |
 
 Hook failure at scenario level
 ------------------------------
@@ -85,29 +85,29 @@ Hook failure at scenario level
 * Execute the spec "01 Hooks Spec" and ensure failure
 * Console should contain following lines in order 
 
-     |console output       |
-     |---------------------|
-     |inside after scenario|
+   |console output       |
+   |---------------------|
+   |inside after scenario|
 
 * Console should not contain following lines 
 
-     |console output|
-     |--------------|
-     |inside step 1 |
-     |inside step 2 |
+   |console output|
+   |--------------|
+   |inside step 1 |
+   |inside step 2 |
 
 * Statistics generated should have 
 
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |1       |0     |1     |0      |
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |1       |0     |1     |0      |
+   |Scenarios      |1       |0     |1     |0      |
 
 * verify statistics in html with 
 
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |1         |0        |1        |0           |
 
 Hook failure at step level
 --------------------------
@@ -117,19 +117,19 @@ Hook failure at step level
 * Execute the spec "01 Hooks Spec" and ensure failure
 * Console should contain following lines in order 
 
-     |console output   |
-     |-----------------|
-     |inside after step|
+   |console output   |
+   |-----------------|
+   |inside after step|
 
 * Statistics generated should have 
 
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |1       |0     |1     |0      |
-     |Scenarios      |1       |0     |1     |0      |
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |1       |0     |1     |0      |
+   |Scenarios      |1       |0     |1     |0      |
 
 * verify statistics in html with 
 
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |1        |0           |
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |1         |0        |1        |0           |

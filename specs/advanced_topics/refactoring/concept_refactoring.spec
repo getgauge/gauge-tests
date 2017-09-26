@@ -1,21 +1,21 @@
 Concept Refactoring
 ===================
 
-tags: refactoring, java, csharp, ruby, python
+tags: refactoring, java, csharp, ruby, python, js
 
 * Initialize a project named "concept_refactoring" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 
 
-     |concept steps                            |
-     |-----------------------------------------|
-     |nested concept with <param0> and <param1>|
-     |simple step with "static"                |
+   |concept steps                            |
+   |-----------------------------------------|
+   |nested concept with <param0> and <param1>|
+   |simple step with "static"                |
 
 * Create concept "concept" with following steps 
 
-     |concept steps            |
-     |-------------------------|
-     |simple step with "static"|
+   |concept steps            |
+   |-------------------------|
+   |simple step with "static"|
 
 Rename concept
 --------------

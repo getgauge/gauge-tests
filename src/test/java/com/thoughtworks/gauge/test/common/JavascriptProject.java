@@ -59,7 +59,17 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public String getLanguageSpecificGitIgnoreText() {
-        return "";
+        return "# Gauge - metadata dir\n" +
+                ".gauge\n" +
+                "\n" +
+                "# Gauge - log files dir\n" +
+                "logs\n" +
+                "\n" +
+                "# Gauge - reports dir\n" +
+                "reports\n" +
+                "\n" +
+                "# Gauge - JavaScript node dependencies\n" +
+                "node_modules\n\n";
     }
 
     @Override
@@ -76,7 +86,7 @@ public class JavascriptProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
+        } else if (implementation.toLowerCase().startsWith("throw")) {
             builder.append("  throw new Error(\"exception raised\");\n\n");
         } else {
             if (appendCode) {

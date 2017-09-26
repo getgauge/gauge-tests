@@ -1,7 +1,7 @@
 Duplicate step implementation
 =============================
 
-tags: step, java, csharp, ruby, python
+tags: step, java, csharp, ruby, python, js
 
 Duplicate step implementation should atleast give a warning
 -----------------------------------------------------------
@@ -10,10 +10,10 @@ Duplicate step implementation should atleast give a warning
 
 * Create a scenario "scenaro1" in specification "duplicate step implementation" with the following steps with implementation 
 
-     |step text       |implementation              |
-     |----------------|----------------------------|
-     |Concept step one|"inside first concept step" |
-     |Concept step one|"inside second concept step"|
+   |step text       |implementation              |
+   |----------------|----------------------------|
+   |Concept step one|"inside first concept step" |
+   |Concept step one|"inside second concept step"|
 
 * Execute the spec "duplicate step implementation" and ensure success
 
@@ -21,13 +21,13 @@ Duplicate step implementation should atleast give a warning
 
 * Statistics generated should have 
 
-     |Statistics name|executed|passed|failed|skipped|
-     |---------------|--------|------|------|-------|
-     |Specifications |0       |0     |0     |1      |
-     |Scenarios      |0       |0     |0     |1      |
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |0       |0     |0     |1      |
+   |Scenarios      |0       |0     |0     |1      |
 
 * verify statistics in html with 
 
-     |totalCount|passCount|failCount|skippedCount|
-     |----------|---------|---------|------------|
-     |1         |0        |0        |1           |
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |1         |0        |0        |1           |

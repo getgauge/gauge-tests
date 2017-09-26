@@ -1,27 +1,27 @@
 Step Refactoring through API
 ============================
 
-tags: refactoring, api, java, csharp, ruby, python
+tags: refactoring, api, java, csharp, ruby, python, js
 
 * Initialize a project named "refactor_thru_api" without example spec
 
-* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps unimplemented
+* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps unimplemented 
 
-     |step text               |
-     |------------------------|
-     |First step              |
-     |Second step             |
-     |Repeated First step     |
-     |Step with "two" "params"|
+   |step text               |
+   |------------------------|
+   |First step              |
+   |Second step             |
+   |Repeated First step     |
+   |Step with "two" "params"|
 
 * Create a scenario "Sample scenario2" in specification "Basic_spec_execution2" with the following steps with implementation 
 
-     |step text                  |implementation      |
-     |---------------------------|--------------------|
-     |First step                 |"inside first step" |
-     |Step with "two" "params"   |"inside first step" |
-     |a step with "a" "b" and "c"|"inside first step" |
-     |Second step                |"inside second step"|
+   |step text                  |implementation      |
+   |---------------------------|--------------------|
+   |First step                 |"inside first step" |
+   |Step with "two" "params"   |"inside first step" |
+   |a step with "a" "b" and "c"|"inside first step" |
+   |Second step                |"inside second step"|
 
 * Start Gauge daemon
 

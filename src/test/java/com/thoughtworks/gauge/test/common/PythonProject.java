@@ -55,7 +55,17 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public String getLanguageSpecificGitIgnoreText() {
-        return "";
+        return "# Gauge - metadata dir\n" +
+                ".gauge\n" +
+                "\n" +
+                "# Gauge - log files dir\n" +
+                "logs\n" +
+                "\n" +
+                "# Gauge - reports dir\n" +
+                "reports\n" +
+                "\n" +
+                "# Gauge - python compiled files\n" +
+                "*.pyc\n\n";
     }
 
     @Override
