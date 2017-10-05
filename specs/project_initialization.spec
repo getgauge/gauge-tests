@@ -56,7 +56,7 @@ tags: java, csharp, ruby, python, js
 
    |console output                                                       |
    |---------------------------------------------------------------------|
-   |Compatible langauge plugin unknown is not installed.                 |
+   |Compatible language plugin unknown is not installed.                 |
    |Failed to install plugin 'unknown'.                                  |
    |Reason: Invalid plugin. Could not download unknown-install.json file.|
 
