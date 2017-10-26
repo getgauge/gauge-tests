@@ -13,14 +13,14 @@ Tests for Gauge Command-Line Utility using Gauge
   - [Download Installer](http://getgauge.io/download.html)
 - [Install language plugin](http://getgauge.io/documentation/user/current/plugins/installation.html) by running<br>
   ```
-  gauge --install {language}
+  gauge install {language}
   ```
 
   ```
-  gauge --install java
-  gauge --install ruby
-  gauge --install csharp
-  gauge --install js
+  gauge install java
+  gauge install ruby
+  gauge install csharp
+  gauge install js
   ```
 - Install [Maven](https://maven.apache.org/)
 
