@@ -52,7 +52,7 @@ public class Console {
         String output = getCurrentProject().getStdOut();
 
         assertThat(output).contains("[ParseError]");
-        assertThat(output).contains("Duplicate concept definition found => '"+conceptName+"' => at");
+        assertThat(output).contains("Duplicate concept definition found => '"+conceptName+"'");
 
         List<String> names = (List<String>) DataStoreFactory.getScenarioDataStore().get(conceptName);
         assertThat(names).asList().hasSize(duplicateConceptNumbers);
