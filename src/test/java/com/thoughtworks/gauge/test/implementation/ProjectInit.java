@@ -91,11 +91,12 @@ public class ProjectInit {
         return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
     }
 
-    @Step("Directory <dirName> should be empty")
-    public void verifyEmptyDir(String dirName) {
+    @Step("Directory <dirName> should be have only <gaugeDir> directory")
+    public void verifyGaugeDir(String dirName, String gaugeDir) {
         File[] files = currentProject.getProjectDir().listFiles();
         Assert.assertNotNull(files);
-        Assert.assertEquals(files.length, 0);
+        Assert.assertEquals(files.length, 1);
+        Assert.assertEquals(files[0].getName(),gaugeDir);
     }
 
     @Step("Create a csv file <name>")
