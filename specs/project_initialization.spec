@@ -60,4 +60,4 @@ tags: java, csharp, ruby, python, js
    |Failed to install plugin 'unknown'.                                  |
    |Reason: Invalid plugin. Could not download unknown-install.json file.|
 
-* Directory "init_proj_unknown" should be empty
+* Directory "init_proj_unknown" should be have only ".gauge" directory
