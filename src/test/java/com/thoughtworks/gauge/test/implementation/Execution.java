@@ -5,27 +5,25 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.ExecutionSummary;
 import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
-
 import java.io.IOException;
-
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
 
+    public enum Result{
+        FAILURE,
+        SUCCESS
+    }
 
     @Step("Execute the spec <spec> from folder <specs/subfolder> and ensure success")
     public void executeFromSpecFolderAndEnsureSuccess(String spec, String subFolder) throws Exception {
-        assertThat(getCurrentProject().executeSpecFromFolder(spec + ".spec", subFolder))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        assertThat(getCurrentProject().executeSpecFromFolder(spec + ".spec", subFolder)).isTrue().withFailMessage(getFormattedProcessOutput());
     }
 
     @Step("Execute the spec folder <specs/subfolder> and ensure success")
     public void executeTheSpecFolderAndEnsureSuccess(String subFolder) throws Exception {
-        assertThat(getCurrentProject().executeSpecFolder(subFolder))
-                .isTrue()
-                .withFailMessage(getFormattedProcessOutput());
+        assertThat(getCurrentProject().executeSpecFolder(subFolder)).isTrue().withFailMessage(getFormattedProcessOutput());
     }
 
     @Step("Execute the current project and ensure success")
@@ -46,7 +44,6 @@ public class Execution {
     @Step("Execute the current project in parallel in <n> streams and ensure success")
     public void executeCurrentProjectInParallelStreamsAndEnsureSuccess(int n) throws Exception {
         assertOn(getCurrentProject().executeInParallel(n), true);
-
     }
 
     @Step("Execute the specs in order and ensure success")
@@ -66,14 +63,13 @@ public class Execution {
 
     @Step("Rerun failed scenarios and ensure failure")
     public void rerunCurrentProjectAndEnsureFailure() throws Exception {
-        assertOn(getCurrentProject().rerun(), false);
+        assertOn(getCurrentProject().rerunFailed(), false);
     }
 
     @Step("Execute the spec <spec name> and ensure success")
     public void executeSpecAndEnsureSuccess(String specName) throws Exception {
         Specification spec = getCurrentProject().findSpecification(specName);
         assertThat(spec).isNotNull();
-
         assertOn(getCurrentProject().executeSpec(specName), true);
     }
 
@@ -96,31 +92,30 @@ public class Execution {
         Specification spec = getCurrentProject().findSpecification(specName);
         assertThat(spec).isNotNull();
         assertOn(getCurrentProject().executeSpec(specName), false);
-
     }
 
     @Step("Execute the tags <tags> in spec <spec name> and ensure success")
     public void executeTagsAndEnsureSuccess(String tags, String specName) throws Exception {
         Specification spec = getCurrentProject().findSpecification(specName);
-
         assertThat(spec).isNotNull();
         assertOn(getCurrentProject().executeTagsInSpec(tags, specName), true);
     }
 
     private String getFormattedProcessOutput() {
-        return "\n*************** Process output start************\n" +
-                getCurrentProject().getLastProcessStdout() +
-                "\n*************** Process output end************\n";
+        return "\n*************** Process output start************\n" + getCurrentProject().getLastProcessStdout() + "\n*************** Process output end************\n";
     }
 
     private ExecutionSummaryAssert assertOn(ExecutionSummary summary, boolean result) {
-        return ExecutionSummaryAssert.assertThat(summary)
-                .hasSuccess(result)
-                .withFailMessage(getFormattedProcessOutput());
+        return ExecutionSummaryAssert.assertThat(summary).hasSuccess(result).withFailMessage(getFormattedProcessOutput());
     }
 
     @Step("Configure project to take custom screenshot and return <some screenshot> as byte array")
     public void configureScreengrabber(String stubScreenshot) throws IOException {
         getCurrentProject().configureCustomScreengrabber(stubScreenshot);
+    }
+
+    @Step("Repeat last run and ensure <result>")
+    public void repeatLastRun(Result argResult) throws Exception {
+        assertOn(getCurrentProject().repeatLastRun(), argResult==Result.SUCCESS);
     }
 }

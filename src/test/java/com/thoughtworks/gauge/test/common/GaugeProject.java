@@ -235,7 +235,11 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
     }
 
-    public ExecutionSummary rerun() throws Exception {
+    public ExecutionSummary repeatLastRun() throws Exception {
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--repeat"});
+    }
+
+    public ExecutionSummary rerunFailed() throws Exception {
         return execute(new String[]{"run", "--simple-console", "--verbose", "--failed"});
     }
 

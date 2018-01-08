@@ -1,8 +1,6 @@
 package com.thoughtworks.gauge.test.implementation;
 
-import com.thoughtworks.gauge.Step;
-import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.*;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 import com.thoughtworks.gauge.test.common.builders.DataFileBuilder;
@@ -118,5 +116,10 @@ public class ProjectInit {
         new DataFileBuilder()
                 .withTextFile(name)
                 .build();
+    }
+
+    @BeforeStep
+    public void beforeScenario(){
+        Gauge.writeMessage("before");
     }
 }
