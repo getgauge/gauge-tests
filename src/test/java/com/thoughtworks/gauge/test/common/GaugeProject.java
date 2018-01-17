@@ -21,7 +21,7 @@ import static java.util.Arrays.asList;
 
 public abstract class GaugeProject {
 
-    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME");
+    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
