@@ -88,7 +88,8 @@ public class PythonProject extends GaugeProject {
             if (appendCode) {
                 builder.append(implementation);
             } else {
-                builder.append("    print(").append(implementation).append(".__str__()").append(")\n");
+                implementation = implementation.isEmpty() ? "" : implementation + ".__str__()";
+                builder.append("    print(").append(implementation).append(")\n");
             }
         }
         return builder.toString();
