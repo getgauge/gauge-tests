@@ -59,6 +59,8 @@ public abstract class GaugeProject {
                 return new RubyProject(projName);
             case "csharp":
                 return new CSharpProject(projName);
+            case "dotnet":
+                return new DotnetProject(projName);
             case "js":
                 return new JavascriptProject(projName);
             case "python":

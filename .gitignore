@@ -12,4 +12,6 @@ gauge-tests.iml
 .gauge/
 docs/
 .DS_Store
-
+.classpath
+.project
+.settings
