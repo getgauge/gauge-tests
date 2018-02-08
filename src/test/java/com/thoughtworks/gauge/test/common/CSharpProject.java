@@ -36,9 +36,10 @@ public class CSharpProject extends GaugeProject {
         else {
             StringBuilder commaSeparated = new StringBuilder();
             for(String stepText:stepTexts){
-                commaSeparated.append("\"").append(stepText).append("\"");
+                commaSeparated.append("\"").append(stepText).append("\",");
             }
-            return step.append("[Step({").append(commaSeparated).append("})]\n");
+            StringBuilder res = step.append("[Step(").append(commaSeparated.substring(0,commaSeparated.length()-1)).append(")]\n");
+            return res;
         }
     }
 
