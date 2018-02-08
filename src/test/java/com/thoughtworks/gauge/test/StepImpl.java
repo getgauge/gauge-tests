@@ -20,8 +20,15 @@ public class StepImpl {
         this.errorTypes.add(errorTypes);
     }
 
-    public String getStepText() {
-        return stepText;
+    public String[] getAllStepTexts(){
+        if(!stepText.startsWith("["))
+            return new String[]{stepText};
+
+        return stepText.substring(1, stepText.length() - 1).split(",");
+    }
+
+    public String getFirstStepText(){
+        return getAllStepTexts()[0];
     }
 
     public String getImplementation() {

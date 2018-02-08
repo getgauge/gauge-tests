@@ -40,9 +40,13 @@ public class JavaProject extends GaugeProject {
 
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
+
+        StepValueExtractor stepValueExtractor = new StepValueExtractor();
+        StepValueExtractor.StepValue stepValue =  stepValueExtractor.getFor(stepImpl.getFirstStepText());
+        ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
+
         String className = Util.getUniqueName();
-        StringBuilder classText = createClassTeplate(className, stepValue.value);
+        StringBuilder classText = createClassTeplate(className, stepValues);
         if (stepImpl.isContinueOnFailure()) {
             classText.insert(0, "import com.thoughtworks.gauge.ContinueOnFailure;\n");
             classText.append("\n@ContinueOnFailure");
@@ -180,11 +184,25 @@ public class JavaProject extends GaugeProject {
         }
     }
 
-    private StringBuilder createClassTeplate(String className, String stepText) {
+    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+        StringBuilder step = new StringBuilder();
+        if(stepTexts.size()==1){
+            return step.append("@Step(\"").append(stepTexts.get(0)).append("\")\n");
+        }
+        else {
+            StringBuilder commaSeparated = new StringBuilder();
+            for(String stepText:stepTexts){
+                commaSeparated.append("\"").append(stepText).append("\",");
+            }
+            return step.append("@Step({").append(commaSeparated).append("})\n");
+        }
+    }
+
+    private StringBuilder createClassTeplate(String className, ArrayList<String> stepTexts) {
         StringBuilder classText = new StringBuilder();
         classText.append("import com.thoughtworks.gauge.Step;\n");
         classText.append("public class ").append(className).append("{\n");
-        classText.append("@Step(\"").append(stepText).append("\")\n");
+        classText.append(createStepTeplate(stepTexts));
         return classText;
     }
 }

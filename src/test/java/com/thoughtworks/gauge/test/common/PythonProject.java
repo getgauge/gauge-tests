@@ -20,16 +20,32 @@ public class PythonProject extends GaugeProject {
         super("python", projName);
     }
 
+    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+        StringBuilder step = new StringBuilder();
+        if(stepTexts.size()==1){
+            return step.append("@step(\"").append(stepTexts.get(0)).append("\")\n");
+        }
+        else {
+            StringBuilder commaSeparated = new StringBuilder();
+            for(String stepText:stepTexts){
+                commaSeparated.append("\"").append(stepText).append("\",");
+            }
+            return step.append("@step([").append(commaSeparated).append("])\n");
+        }
+    }
+
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
+        StepValueExtractor stepValueExtractor = new StepValueExtractor();
+        ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
+        StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         String fileName = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append(IMPORT);
         if (stepImpl.isContinueOnFailure())
             classText.append("@continue_on_failure([Exception])\n");
-        classText.append("@step(\"").append(stepValue.value).append("\")\n");
+        classText.append(createStepTeplate(stepValues));
         classText.append("def ").append(Util.getUniqueName()).append("(");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {

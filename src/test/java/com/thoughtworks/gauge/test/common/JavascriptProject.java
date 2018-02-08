@@ -26,13 +26,27 @@ public class JavascriptProject extends GaugeProject {
         return f + input.substring(1);
     }
 
+    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+        StringBuilder step = new StringBuilder();
+        if(stepTexts.size()==1){
+            return step.append("gauge.step(\"").append(stepTexts.get(0)).append("\",");
+        }
+        else {
+            StringBuilder commaSeparated = new StringBuilder();
+            for(String stepText:stepTexts){
+                commaSeparated.append("\"").append(stepText).append("\",");
+            }
+            return step.append("gauge.step(").append(commaSeparated).append(",");
+        }
+    }
+
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
+        StepValueExtractor stepValueExtractor = new StepValueExtractor();
+        StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         String fileName = Util.getUniqueName();
-        StringBuilder jsCode = new StringBuilder();
-        jsCode.append("gauge.step(\"").append(stepValue.value).append("\",");
+        StringBuilder jsCode = new StringBuilder(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
         if (stepImpl.isContinueOnFailure()) {
             jsCode.append(" { continueOnFailure: true },");
         }

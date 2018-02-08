@@ -1,6 +1,16 @@
 package com.thoughtworks.gauge.test.common;
 
+import java.util.ArrayList;
+
 public class StepValueExtractor {
+    public ArrayList<String> getValueFor(String[] values){
+        ArrayList<String> stepValues = new ArrayList<>();
+        for(String value:values){
+            stepValues.add(getFor(value).value);
+        }
+        return stepValues;
+    }
+
     public StepValue getFor(String value) {
         StringBuilder extractedValue = new StringBuilder();
         char[] chars = value.toCharArray();

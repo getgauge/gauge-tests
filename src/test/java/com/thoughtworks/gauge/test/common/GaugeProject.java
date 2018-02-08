@@ -317,11 +317,8 @@ public abstract class GaugeProject {
                 .forEach(env -> processBuilder.environment().put(env, ""));
     }
 
-    public void refactorStep(String oldStep, String newStep) throws Exception {
-        ExecutionSummary result = getCurrentProject().executeRefactor(oldStep, newStep);
-        if (!result.getSuccess()) {
-            System.out.println(getCurrentProject().getLastProcessStdout());
-        }
+    public ExecutionSummary refactorStep(String oldStep, String newStep) throws Exception {
+        return getCurrentProject().executeRefactor(oldStep, newStep);
     }
 
     public static void implement(Table impl, TableRow row, boolean appendCode) throws Exception {

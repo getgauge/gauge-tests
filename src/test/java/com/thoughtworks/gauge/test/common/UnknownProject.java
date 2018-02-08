@@ -49,8 +49,9 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
+    public ExecutionSummary refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
 
+        return null;
     }
 
     @Override

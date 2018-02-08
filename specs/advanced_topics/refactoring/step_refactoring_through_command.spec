@@ -4,7 +4,7 @@ Step Refactoring through command
 tags: refactoring
 
 * Initialize a project named "spec_refactoring_thru_cmd" without example spec
-* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented 
+* Create a scenario "Sample scenario" in specification "Basic spec execution" with the following steps unimplemented
 
    |step text               |
    |------------------------|
@@ -13,7 +13,7 @@ tags: refactoring
    |Repeated First step     |
    |Step with "two" "params"|
 
-* Create a scenario "Sample scenario2" in specification "Basic spec execution2" with the following steps with implementation 
+* Create a scenario "Sample scenario2" in specification "Basic spec execution2" with the following steps with implementation
 
    |step text                  |implementation      |
    |---------------------------|--------------------|
@@ -22,6 +22,22 @@ tags: refactoring
    |a step with "a" "b" and "c"|"inside first step" |
    |Second step                |"inside second step"|
    |step1                      |"inside step1"      |
+
+Should not refactor alias steps
+-------------------------------
+tags: java, csharp, ruby, python, js
+
+* Create a scenario "Sample scenario2" in specification "Basic spec execution" with the following steps with implementation
+
+   |step text               |implementation|
+   |------------------------|----|
+   |[alias one,alias two]   |"inside alias"|
+
+* Step with alias "alias one" to "alais one more" cannot be refactored
+   |step name|
+   |---------|
+   |alias one|
+   |alias two|
 
 Rename step
 -----------

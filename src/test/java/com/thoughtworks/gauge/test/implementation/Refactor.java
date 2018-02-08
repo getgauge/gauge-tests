@@ -1,10 +1,12 @@
 package com.thoughtworks.gauge.test.implementation;
 
+import com.google.common.base.CharMatcher;
 import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.test.common.*;
 import com.thoughtworks.gauge.test.common.Concept;
-import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Specification;
-import com.thoughtworks.gauge.test.common.Util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +26,12 @@ public class Refactor {
             oldStep = oldStep.replaceAll("\\\"", "\\\\\"");
             newStep = newStep.replaceAll("\\\"", "\\\\\"");
         }
-        getCurrentProject().refactorStep(oldStep, newStep);
+        ExecutionSummary result = getCurrentProject().refactorStep(oldStep, newStep);
+        assertThat(result.getSuccess()).isFalse();
+
+        if (!result.getSuccess()) {
+            System.out.println(getCurrentProject().getLastProcessStdout());
+        }
     }
 
     @Step("The step <First step> should no longer be used")
@@ -67,5 +74,27 @@ public class Refactor {
             }
         }
         return false;
+    }
+
+    @Step("Step with alias <from> to <to> cannot be refactored <steps>")
+    public void stepWithAliasCannotBeRefactored(String from, String to,Table steps) throws Exception {
+        ExecutionSummary result = getCurrentProject().refactorStep(from, to);
+        assertThat(result.getSuccess()).isFalse();
+        StringBuilder stepNames = new StringBuilder();
+        for(TableRow row:steps.getTableRows()){
+            stepNames.append("'"+row.getCell("step name")+"', ");
+        }
+
+        assertThat(result.getStdout()).contains("steps with aliases : "+stepNames.substring(0,stepNames.length()-2)+" cannot be refactored.");
+
+//        steps with aliases : 'alias one', 'alias tw' cannot be refactored.
+//
+//        0 specifications changed.
+//
+//        0 concepts changed.
+//
+//        0 files in code changed.
+//
+
     }
 }

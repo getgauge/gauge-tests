@@ -18,13 +18,29 @@ public class RubyProject extends GaugeProject {
         super("ruby", projName);
     }
 
+    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+        StringBuilder step = new StringBuilder();
+        if(stepTexts.size()==1){
+            return step.append("step '").append(stepTexts.get(0)).append("'");
+        }
+        else {
+            StringBuilder commaSeparated = new StringBuilder();
+            for(String stepText:stepTexts){
+                commaSeparated.append("\"").append(stepText).append("\",");
+            }
+            return step.append("step '").append(commaSeparated).append("'");
+        }
+    }
+
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
+        StepValueExtractor stepValueExtractor = new StepValueExtractor();
+        StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
+
         String fileName = Util.getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
-        rubyCode.append("step '").append(stepValue.value).append("'");
+        rubyCode.append(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
         if (stepImpl.isContinueOnFailure()) {
             rubyCode.append(", :continue_on_failure => true");
         }
