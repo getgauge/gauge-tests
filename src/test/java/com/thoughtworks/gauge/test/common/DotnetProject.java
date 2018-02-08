@@ -28,14 +28,30 @@ public class DotnetProject extends GaugeProject {
         return "";
     }
 
+    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+        StringBuilder step = new StringBuilder();
+        if(stepTexts.size()==1){
+            return step.append("[Step(\"").append(stepTexts.get(0)).append("\")]\n");
+        }
+        else {
+            StringBuilder commaSeparated = new StringBuilder();
+            for(String stepText:stepTexts){
+                commaSeparated.append("\"").append(stepText).append("\",");
+            }
+            return step.append("[Step({").append(commaSeparated).append("})]\n");
+        }
+    }
+
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
         List<String> paramTypes = new ArrayList<String>();
-        StepValueExtractor.StepValue stepValue = new StepValueExtractor().getFor(stepImpl.getStepText());
+        StepValueExtractor stepValueExtractor = new StepValueExtractor();
+        StepValueExtractor.StepValue stepValue =  stepValueExtractor.getFor(stepImpl.getFirstStepText());
+        ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
         String className = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append("public class ").append(className).append("\n{\n");
-        classText.append("[Step(\"").append(stepValue.value).append("\")]\n");
+        classText.append(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
         if (stepImpl.isContinueOnFailure()) {
             classText.append("[ContinueOnFailure]\n");
         }
