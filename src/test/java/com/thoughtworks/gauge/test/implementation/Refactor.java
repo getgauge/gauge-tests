@@ -27,7 +27,7 @@ public class Refactor {
             newStep = newStep.replaceAll("\\\"", "\\\\\"");
         }
         ExecutionSummary result = getCurrentProject().refactorStep(oldStep, newStep);
-        assertThat(result.getSuccess()).isFalse();
+        assertThat(result.getSuccess()).isTrue();
 
         if (!result.getSuccess()) {
             System.out.println(getCurrentProject().getLastProcessStdout());
