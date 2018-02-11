@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +42,8 @@ public abstract class GaugeProject {
         this.language = language;
         currentProject.set(this);
 
-        this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
+        Path workSpacePath = new File(".gauge/tmp").toPath();
+        this.projectDir = Files.createTempDirectory(workSpacePath, projName + projectCount++ + "_").toFile();
     }
 
     public static GaugeProject getCurrentProject() {
