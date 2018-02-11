@@ -42,7 +42,8 @@ public abstract class GaugeProject {
         this.language = language;
         currentProject.set(this);
 
-        Path workSpacePath = new File(".gauge/tmp").toPath();
+        Path workSpacePath = Paths.get(System.getenv("GAUGE_PROJECT_ROOT"), ".gauge", "tmp");
+        Files.createDirectory(workSpacePath);
         this.projectDir = Files.createTempDirectory(workSpacePath, projName + projectCount++ + "_").toFile();
     }
 
