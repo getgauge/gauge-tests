@@ -26,7 +26,7 @@ tags: refactoring
 Should not refactor alias steps
 -------------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, python, js
 
 * Create step implementations
 

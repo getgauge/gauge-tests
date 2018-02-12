@@ -25,10 +25,11 @@ public class RubyProject extends GaugeProject {
         }
         else {
             StringBuilder commaSeparated = new StringBuilder();
-            for(String stepText:stepTexts){
-                commaSeparated.append("\"").append(stepText).append("\",");
+            for (int i = 0; i < stepTexts.size(); i++) {
+                commaSeparated.append("\"").append(stepTexts.get(i)).append("\"");
+                if (i != stepTexts.size() - 1) commaSeparated.append(",");
             }
-            return step.append("step '").append(commaSeparated).append("'");
+            return step.append("step ").append(commaSeparated);
         }
     }
 
