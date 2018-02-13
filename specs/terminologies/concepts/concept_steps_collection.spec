@@ -38,3 +38,6 @@ Fetch all concept steps present in project
    |------------|
    |concept1 <a>|
    |concept2    |
+
+____________
+* Stop Gauge daemon

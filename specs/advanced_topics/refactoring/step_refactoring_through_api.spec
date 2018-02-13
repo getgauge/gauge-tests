@@ -77,3 +77,6 @@ Rename an unimplemented step
 * Refactor step "Repeated First step" to "again Repeated First step" via api
 * The step "Repeated First step" should no longer be used
 * The step "again Repeated First step" should be used in project
+
+____________
+* Stop Gauge daemon

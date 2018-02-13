@@ -27,6 +27,11 @@ public class Api {
         getCurrentProject().createGaugeService();
     }
 
+    @Step("Stop Gauge daemon")
+    public void stopGauge() {
+        getCurrentProject().stopGaugeService();
+    }
+
     @Step("Fetch all steps from gauge")
     public void fetchAllSteps() throws IOException {
         allSteps = getCurrentProject().getService().getGaugeConnection().fetchAllSteps()

@@ -46,3 +46,6 @@ Rephrase concept
 * Refactor step "concept with <param0> and <param1>" to "concept with <param0> and <param2>" via api
 * The step "concept with <param0> and <param2>" should be used in project
 * The step "concept with <param0> and <param1>" should no longer be used
+
+____________
+* Stop Gauge daemon

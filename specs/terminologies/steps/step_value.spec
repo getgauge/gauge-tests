@@ -70,3 +70,6 @@ Fetch step Values
    |step with multiple parameters "c" <d>        |step with multiple parameters {} {}|c,d                |
    |step with csv parameter <table:specs/abc.csv>|step with csv parameter {}         |table:specs/abc.csv|
    |step with txt parameter <table:specs/abc.csv>|step with txt parameter {}         |table:specs/def.txt|
+
+____________
+* Stop Gauge daemon

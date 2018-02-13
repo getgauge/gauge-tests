@@ -21,7 +21,7 @@ import static java.util.Arrays.asList;
 
 public abstract class GaugeProject {
 
-    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD","GAUGE_PYTHON_COMMAND");
+    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
@@ -75,6 +75,10 @@ public abstract class GaugeProject {
         Process process = getCurrentProject().executeGaugeDaemon(freePortForApi);
         GaugeConnection gaugeConnection = initializeGaugeConnection(freePortForApi);
         service = new GaugeService(process, gaugeConnection);
+    }
+
+    public void stopGaugeService() {
+        service.getGaugeProcess().destroyForcibly();
     }
 
     private static GaugeConnection initializeGaugeConnection(int apiPort) {
