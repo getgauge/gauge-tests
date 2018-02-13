@@ -43,9 +43,7 @@ public abstract class GaugeProject {
         currentProject.set(this);
 
         Path workSpacePath = Paths.get(System.getenv("GAUGE_PROJECT_ROOT"), ".gauge", "tmp");
-        if(!Files.exists(workSpacePath)) {
-            Files.createDirectory(workSpacePath);
-        }
+        Files.createDirectory(workSpacePath);
         this.projectDir = Files.createTempDirectory(workSpacePath, projName + projectCount++ + "_").toFile();
     }
 
