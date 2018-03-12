@@ -32,9 +32,7 @@ public class HtmlReport {
 
         String expected = "data:image/png;base64," + Base64.getEncoder().encodeToString(stubScreenshot.getBytes());
 
-        final WebClient webClient = new WebClient();
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        final WebClient webClient = getWebClient();
         final HtmlPage page = webClient.getPage(getReportsPath());
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
@@ -55,7 +53,7 @@ public class HtmlReport {
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
 
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = getWebClient();
         final HtmlPage page = webClient.getPage(getReportsPath());
         JavaScriptJobManager manager = page.getEnclosingWindow().getJobManager();
         while (manager.getJobCount() > 0)
@@ -81,5 +79,12 @@ public class HtmlReport {
 
     private String getReportsPath() {
         return "file://" + Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
+    }
+
+    private WebClient getWebClient() {
+        final WebClient webClient = new WebClient();
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        return webClient;
     }
 }
