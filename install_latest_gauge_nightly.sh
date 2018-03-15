@@ -11,8 +11,8 @@ if [[ "$unamestr" == 'Linux' ]]; then
 	wget $GAUGE_DOWNLOAD_URL -O $GAUGE_FILE_NAME
 	unzip $GAUGE_FILE_NAME -d $GAUGE_PREFIX/bin
 elif [[ "$unamestr" == 'Darwin' ]]; then
-	GAUGE_FILE_NAME="gauge-$GAUGE_LATEST_NIGHTLY_VERSION-darwin.$BIT.pkg"
+	GAUGE_FILE_NAME="gauge-$GAUGE_LATEST_NIGHTLY_VERSION-darwin.$BIT.zip"
 	GAUGE_DOWNLOAD_URL="https://bintray.com/gauge/Gauge/download_file?file_path=darwin%2F$GAUGE_FILE_NAME"
 	wget $GAUGE_DOWNLOAD_URL -O $GAUGE_FILE_NAME
-	sudo installer -pkg $GAUGE_FILE_NAME -target /
+	unzip $GAUGE_FILE_NAME -d $GAUGE_PREFIX/bin
 fi
