@@ -22,6 +22,9 @@ import static java.util.Arrays.asList;
 public abstract class GaugeProject {
 
     private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
+    private static final List<String> GAUGE_ENVS = asList("gauge_custom_classpath", "overwrite_reports", "GAUGE_INTERNAL_PORT",
+            "GAUGE_PROJECT_ROOT", "logs_directory", "GAUGE_DEBUG_OPTS", "GAUGE_API_PORT", "gauge_reports_dir", "screenshot_on_failure",
+            "save_execution_result", "enable_multithreading");
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
@@ -292,6 +295,7 @@ public abstract class GaugeProject {
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
 
+        filterParentProcessGaugeEnvs(processBuilder);
         filterConflictingEnv(processBuilder);
         Process lastProcess = processBuilder.start();
 
@@ -319,6 +323,10 @@ public abstract class GaugeProject {
         processBuilder.environment().keySet().stream()
                 .filter(env -> !PRODUCT_ENVS.contains(env.toUpperCase()) && env.toUpperCase().contains(PRODUCT_PREFIX))
                 .forEach(env -> processBuilder.environment().put(env, ""));
+    }
+
+    private void filterParentProcessGaugeEnvs(ProcessBuilder processBuilder) {
+        GAUGE_ENVS.stream().forEach(env -> processBuilder.environment().remove(env));
     }
 
     public ExecutionSummary refactorStep(String oldStep, String newStep) throws Exception {
