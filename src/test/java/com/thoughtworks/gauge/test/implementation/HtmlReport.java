@@ -9,10 +9,12 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
 import org.w3c.dom.Node;
 import se.fishtank.css.selectors.Selectors;
 import se.fishtank.css.selectors.dom.W3CNode;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -33,7 +35,7 @@ public class HtmlReport {
         String expected = "data:image/png;base64," + Base64.getEncoder().encodeToString(stubScreenshot.getBytes());
 
         final WebClient webClient = getWebClient();
-        final HtmlPage page = webClient.getPage(getReportsPath());
+        final HtmlPage page = webClient.getPage("file://" + getReportsPath());
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
 
@@ -47,38 +49,28 @@ public class HtmlReport {
         }
     }
 
+    private String getReportsPath() {
+        return Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
+    }
+
     @Step("verify statistics in html with <statistics>")
     public void verifyStatistics(Table statistics) throws IOException, InterruptedException {
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
-        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
-
-        final WebClient webClient = getWebClient();
-        final HtmlPage page = webClient.getPage(getReportsPath());
-        JavaScriptJobManager manager = page.getEnclosingWindow().getJobManager();
-        while (manager.getJobCount() > 0)
-            Thread.sleep(1000);
-        Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
-
-        String expectedTotalCount = ((HtmlDivision) selectors.querySelectorAll(".total-specs").get(0)).getFirstChild().asText();
+        org.jsoup.nodes.Document doc = Jsoup.parse(new File(getReportsPath()), "UTF-8");
+        String expectedTotalCount = doc.select(".total-specs").get(0).child(0).text();
         String actualTotalCount = statistics.getTableRows().get(0).getCell("totalCount");
         assertEquals("Total count:", expectedTotalCount, actualTotalCount);
 
-        String expectedPassCount = ((HtmlListItem) selectors.querySelectorAll(".pass").get(0)).getFirstChild().asText();
+        String expectedPassCount = doc.select(".pass").get(0).child(0).text();
         String actualPassCount = statistics.getTableRows().get(0).getCell("passCount");
         assertEquals("Pass count:", expectedPassCount, actualPassCount);
 
-        String expectedFailCount = ((HtmlListItem) selectors.querySelectorAll(".fail").get(0)).getFirstChild().asText();
+        String expectedFailCount = doc.select(".fail").get(0).child(0).text();
         String actualFailCount = statistics.getTableRows().get(0).getCell("failCount");
         assertEquals("Fail count:", expectedFailCount, actualFailCount);
 
-        String expectedSkippedCount = ((HtmlListItem) selectors.querySelectorAll(".skip").get(0)).getFirstChild().asText();
+        String expectedSkippedCount = doc.select(".skip").get(0).child(0).text();
         String actualSkippedCount = statistics.getTableRows().get(0).getCell("skippedCount");
         assertEquals("Skipped count:", expectedSkippedCount, actualSkippedCount);
-    }
-
-    private String getReportsPath() {
-        return "file://" + Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
     }
 
     private WebClient getWebClient() {
