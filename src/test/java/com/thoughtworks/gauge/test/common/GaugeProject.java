@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import static java.util.Arrays.asList;
 
@@ -42,7 +41,7 @@ public abstract class GaugeProject {
         this.language = language;
         currentProject.set(this);
 
-        this.projectDir = Files.createDirectories(Paths.get(Util.combinePath("tmp", projName + projectCount++ + "_" + UUID.randomUUID())).toAbsolutePath()).toFile();
+        this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
     }
 
     public static GaugeProject getCurrentProject() {
