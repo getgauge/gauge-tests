@@ -50,6 +50,8 @@ Passing tagged execution
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -76,6 +78,8 @@ Passing tagged execution
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

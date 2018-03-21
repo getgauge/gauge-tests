@@ -46,6 +46,8 @@ Spec execution with unimplemented step in scenarios
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |1      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -86,6 +88,8 @@ Spec execution with unimplemented step in context step
    |---------------|--------|------|------|-------|
    |Specifications |0       |0     |0     |1      |
    |Scenarios      |0       |0     |0     |1      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -147,6 +151,8 @@ Spec execution with unimplemented step in context step, scenario and tear down
    |---------------|--------|------|------|-------|
    |Specifications |0       |0     |0     |1      |
    |Scenarios      |0       |0     |0     |2      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

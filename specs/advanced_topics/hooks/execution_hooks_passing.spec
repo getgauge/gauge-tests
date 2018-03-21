@@ -52,6 +52,8 @@ Suite and Spec Level Hooks
    |Specifications |2       |2     |0     |0      |
    |Scenarios      |3       |3     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -86,6 +88,8 @@ Scenario and step level hooks
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -119,6 +123,8 @@ All level Execution hooks
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

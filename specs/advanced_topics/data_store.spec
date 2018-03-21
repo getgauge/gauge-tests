@@ -31,6 +31,8 @@ Scenario data store refreshes after every scenario run
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -68,6 +70,8 @@ Spec data store persists data between scenario runs
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -117,6 +121,8 @@ Suite data store persists data between spec runs
    |---------------|--------|------|------|-------|
    |Specifications |2       |2     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

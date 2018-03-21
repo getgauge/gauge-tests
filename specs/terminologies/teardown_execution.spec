@@ -46,6 +46,8 @@ Passing teardown execution
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -89,6 +91,8 @@ Unimplemented teardown execution
    |---------------|--------|------|------|-------|
    |Specifications |0       |0     |0     |1      |
    |Scenarios      |0       |0     |0     |2      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -141,6 +145,8 @@ Failed teardown execution
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |2       |0     |2     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

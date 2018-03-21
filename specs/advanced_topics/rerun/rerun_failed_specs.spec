@@ -37,6 +37,8 @@ Rerun failed scenarios
    |Specifications |3       |1     |2     |0      |
    |Scenarios      |3       |1     |2     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -63,6 +65,8 @@ Rerun failed scenarios
    |---------------|--------|------|------|-------|
    |Specifications |2       |0     |2     |0      |
    |Scenarios      |2       |0     |2     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

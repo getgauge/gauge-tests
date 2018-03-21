@@ -35,6 +35,8 @@ Hook failure at suite level
    |Specifications |0       |0     |0     |0      |
    |Scenarios      |0       |0     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -71,6 +73,8 @@ Hook failure at spec level
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |0       |0     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -103,6 +107,8 @@ Hook failure at scenario level
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |1       |0     |1     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -127,6 +133,8 @@ Hook failure at step level
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |1       |0     |1     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

@@ -15,7 +15,6 @@ public class Hooks {
             getCurrentProject().getService().getGaugeProcess().destroy();
         File dir = GaugeProject.getCurrentProject().getProjectDir();
         try {
-            System.out.println("Deleting directory " + dir);
             FileUtils.deleteDirectory(dir);
         } catch (IOException e) {
             System.err.println(String.format("Could not delete project directory %s", dir.getAbsolutePath()));

@@ -73,6 +73,8 @@ Tagged expression with & operator
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -99,6 +101,8 @@ Tagged expression with | operator
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |4       |4     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -121,6 +125,8 @@ Tagged expression with | operator
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |4       |4     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -153,6 +159,8 @@ Tagged expression with ! operator
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -183,6 +191,8 @@ Tagged expression with (!&|) operator
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

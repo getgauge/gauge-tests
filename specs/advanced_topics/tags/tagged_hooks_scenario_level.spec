@@ -92,6 +92,8 @@ AND aggregation of hooks
    |Specifications |3       |3     |0     |0      |
    |Scenarios      |4       |4     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -142,6 +144,8 @@ OR aggregation of hooks
    |---------------|--------|------|------|-------|
    |Specifications |3       |3     |0     |0      |
    |Scenarios      |4       |4     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

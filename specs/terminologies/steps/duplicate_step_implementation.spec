@@ -26,6 +26,8 @@ Duplicate step implementation should atleast give a warning
    |Specifications |0       |0     |0     |1      |
    |Scenarios      |0       |0     |0     |1      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|

@@ -31,6 +31,8 @@ Execute specs parallelly for each datatable
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+   
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -56,6 +58,8 @@ Execute specs parallely in n streams
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -85,6 +89,8 @@ Execute specs sequentially if datatable row values not used
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
@@ -119,6 +125,8 @@ Datatable driven parallel execution should execute before spec hooks per row
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -152,6 +160,8 @@ Datatable driven parallel execution with hook failure
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |0       |0     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

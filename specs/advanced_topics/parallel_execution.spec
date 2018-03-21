@@ -52,6 +52,8 @@ Execute specs parallelly
    |Specifications |6       |6     |0     |0      |
    |Scenarios      |6       |6     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -70,6 +72,8 @@ Execute specs parallelly in n streams
    |---------------|--------|------|------|-------|
    |Specifications |6       |6     |0     |0      |
    |Scenarios      |6       |6     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 

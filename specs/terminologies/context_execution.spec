@@ -46,6 +46,8 @@ basic context execution
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |2       |2     |0     |0      |
 
+* Console should contain "Successfully generated html-report to =>"
+
 * verify statistics in html with 
 
    |totalCount|passCount|failCount|skippedCount|
@@ -103,6 +105,8 @@ Normal context step - with no cof fails then tear down steps are expected to exe
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |2       |0     |2     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
 
 * verify statistics in html with 
 
