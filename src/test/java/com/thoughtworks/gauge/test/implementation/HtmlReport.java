@@ -13,6 +13,8 @@ import se.fishtank.css.selectors.dom.W3CNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,6 +22,7 @@ import java.util.logging.Level;
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HtmlReport {
 
@@ -51,7 +54,9 @@ public class HtmlReport {
     }
 
     @Step("verify statistics in html with <statistics>")
-    public void verifyStatistics(Table statistics) throws IOException, InterruptedException {
+    public void verifyStatistics(Table statistics) throws IOException {
+        assertTrue(Files.exists(Paths.get(getCurrentProject().getProjectDir().getAbsolutePath())));
+        assertTrue(Files.exists(Paths.get(getReportsPath())));
         org.jsoup.nodes.Document doc = Jsoup.parse(new File(getReportsPath()), "UTF-8");
         String expectedTotalCount = doc.select(".total-specs").get(0).child(0).text();
         String actualTotalCount = statistics.getTableRows().get(0).getCell("totalCount");
