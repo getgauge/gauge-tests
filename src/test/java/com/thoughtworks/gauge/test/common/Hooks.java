@@ -10,19 +10,15 @@ import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class Hooks {
     @AfterScenario
-    public void delete() {
+    public void tearDown() {
+        if (getCurrentProject().getService() != null)
+            getCurrentProject().getService().getGaugeProcess().destroy();
         File dir = GaugeProject.getCurrentProject().getProjectDir();
         try {
+            System.out.println("Deleting directory " + dir);
             FileUtils.deleteDirectory(dir);
         } catch (IOException e) {
             System.err.println(String.format("Could not delete project directory %s", dir.getAbsolutePath()));
         }
     }
-
-    @AfterScenario
-    public void tearDown() {
-        if (getCurrentProject().getService() != null)
-            getCurrentProject().getService().getGaugeProcess().destroy();
-    }
-
 }
