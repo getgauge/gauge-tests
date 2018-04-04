@@ -99,6 +99,7 @@ public abstract class GaugeProject {
     }
 
     public boolean initialize() throws Exception {
+        executeGaugeCommand("config", "plugin_kill_timeout", "60000");
         return executeGaugeCommand("init", language);
     }
 
@@ -293,7 +294,6 @@ public abstract class GaugeProject {
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
-        processBuilder.environment().put("plugin_kill_timeout", "60000");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
 
         filterParentProcessGaugeEnvs(processBuilder);
