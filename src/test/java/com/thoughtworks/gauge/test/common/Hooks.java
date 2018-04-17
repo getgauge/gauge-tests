@@ -16,13 +16,13 @@ public class Hooks {
             try {
                 getCurrentProject().getService().getGaugeProcess().destroyForcibly().waitFor();
             } catch (InterruptedException e) {
-                System.err.println(String.format("Unable to stop gauge process for %s", dir.getAbsolutePath()));
+                System.err.println(String.format("Unable to stop gauge process for %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
             }
         }
         try {
             FileUtils.deleteDirectory(dir);
         } catch (IOException e) {
-            System.err.println(String.format("Could not delete project directory %s", dir.getAbsolutePath()));
+            System.err.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
         }
     }
 }
