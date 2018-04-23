@@ -32,6 +32,15 @@ public class Specification {
     }
 
     public void addScenarios(Scenario... newScenarios) {
+        List<Scenario> toBeRemoved = new ArrayList<>();
+        for(Scenario newScenario:newScenarios){
+            scenarios.forEach(scenario -> {
+                if(scenario.getName().equalsIgnoreCase(newScenario.getName())){
+                    toBeRemoved.add(scenario);
+                }});
+        }
+
+        scenarios.removeAll(toBeRemoved);
         Collections.addAll(scenarios, newScenarios);
     }
 

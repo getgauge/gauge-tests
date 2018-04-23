@@ -11,7 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Execution {
 
-    public enum Result{
+    @Step("Rerun failed scenarios and ensure success")
+    public void rerunFailedAndEnsureSuccess() throws Exception {
+        assertOn(getCurrentProject().rerunFailed(), true);
+    }
+
+    public enum Result {
         FAILURE,
         SUCCESS
     }
@@ -116,6 +121,6 @@ public class Execution {
 
     @Step("Repeat last run and ensure <result>")
     public void repeatLastRun(Result argResult) throws Exception {
-        assertOn(getCurrentProject().repeatLastRun(), argResult==Result.SUCCESS);
+        assertOn(getCurrentProject().repeatLastRun(), argResult == Result.SUCCESS);
     }
 }

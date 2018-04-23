@@ -33,6 +33,10 @@ public class Scenario {
         this.items.add(new Step(item));
     }
 
+    public void clearItems(){
+        this.items.clear();
+    }
+
     public void addTags(String newTags) {
         tags.add(newTags);
     }
