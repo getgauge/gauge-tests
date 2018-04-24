@@ -297,7 +297,8 @@ public abstract class GaugeProject {
         processBuilder.environment().put("GAUGE_BUNDLER_CACHE_PATH", localBundlerPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
-        processBuilder.environment().put("GAUGE_SOURCE_BUILD", System.getenv("GAUGE_SOURCE_BUILD"));
+        if(System.getenv("GAUGE_SOURCE_BUILD")!=null)
+            processBuilder.environment().put("GAUGE_SOURCE_BUILD", System.getenv("GAUGE_SOURCE_BUILD"));
 
         filterParentProcessGaugeEnvs(processBuilder);
         filterConflictingEnv(processBuilder);
