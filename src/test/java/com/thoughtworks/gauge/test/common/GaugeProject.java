@@ -21,7 +21,7 @@ import static java.util.Arrays.asList;
 
 public abstract class GaugeProject {
 
-    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
+    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND", "GAUGE_BUNDLER_CACHE_PATH", "GAUGE_SOURCE_BUILD");
     private static final List<String> GAUGE_ENVS = asList("gauge_custom_classpath", "overwrite_reports", "GAUGE_INTERNAL_PORT",
             "GAUGE_PROJECT_ROOT", "logs_directory", "GAUGE_DEBUG_OPTS", "GAUGE_API_PORT", "gauge_reports_dir", "screenshot_on_failure",
             "save_execution_result", "enable_multithreading");
@@ -292,9 +292,12 @@ public abstract class GaugeProject {
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
+        String localBundlerPath = Paths.get(gauge_project_root, "resources", "LocalBundle").toAbsolutePath().toString();
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
+        processBuilder.environment().put("GAUGE_BUNDLER_CACHE_PATH", localBundlerPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
+        processBuilder.environment().put("GAUGE_SOURCE_BUILD", System.getenv("GAUGE_SOURCE_BUILD"));
 
         filterParentProcessGaugeEnvs(processBuilder);
         filterConflictingEnv(processBuilder);

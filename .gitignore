@@ -15,3 +15,5 @@ docs/
 .classpath
 .project
 .settings
+resources/LocalBundle/*
+!resources/LocalBundle/.gitkeep
