@@ -85,7 +85,7 @@ public class Refactor {
             stepNames.append("'"+row.getCell("step name")+"', ");
         }
 
-        assertThat(result.getStdout()).contains("steps with aliases : "+stepNames.substring(0,stepNames.length()-2)+" cannot be refactored.");
+        assertThat(result.getStdout()).contains("steps with aliases : "+stepNames.substring(0,stepNames.length()-2)+" cannot be refactored");
 
 //        steps with aliases : 'alias one', 'alias tw' cannot be refactored.
 //
