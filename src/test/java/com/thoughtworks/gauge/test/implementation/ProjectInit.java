@@ -28,6 +28,7 @@ public class ProjectInit {
     @Step("Initialize a project named <projName> with the example specs")
     public void defaultInitializationProject(String projName) throws Exception {
         currentProject = new ProjectBuilder()
+                .withRemoteTemplate()
                 .withLangauge(Util.getCurrentLanguage())
                 .withProjectName(projName)
                 .build(false);

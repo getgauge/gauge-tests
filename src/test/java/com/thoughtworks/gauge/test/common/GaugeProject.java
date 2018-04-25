@@ -100,12 +100,12 @@ public abstract class GaugeProject {
         return concepts;
     }
 
-    public boolean initialize() throws Exception {
+    public boolean initialize(boolean remoteTemplate) throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
-        if(!copyLocalTemplateIfExists(language)) {
+        if (remoteTemplate) {
             return executeGaugeCommand("init", "-l","debug", language);
         }
-        return true;
+        return copyLocalTemplateIfExists(language) || executeGaugeCommand("init", language);
     }
 
     private boolean copyLocalTemplateIfExists(String language) {

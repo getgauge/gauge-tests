@@ -1,10 +1,14 @@
 package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.AfterScenario;
+import com.thoughtworks.gauge.BeforeSuite;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 

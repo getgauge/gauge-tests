@@ -9,6 +9,11 @@ public class ProjectBuilder {
     private String language;
     private String projName;
     private boolean deleteExampleSpec;
+    private boolean remoteTemplate;
+
+    public ProjectBuilder() {
+        this.remoteTemplate = false;
+    }
 
     public ProjectBuilder withLangauge(String language) {
         this.language = language;
@@ -20,9 +25,14 @@ public class ProjectBuilder {
         return this;
     }
 
+    public ProjectBuilder withRemoteTemplate() {
+        this.remoteTemplate = true;
+        return this;
+    }
+
     public GaugeProject build(boolean expectFailure) throws Exception {
         GaugeProject currentProject = GaugeProject.createProject(language, projName);
-        if (!currentProject.initialize() && !expectFailure)
+        if (!currentProject.initialize(remoteTemplate) && !expectFailure)
             throw new Exception("Unable to initialize gauge project.\nSTDERR:\n\n"
                     + currentProject.getLastProcessStderr() + "\n\nSTDOUT:\n\n"
                     + currentProject.getLastProcessStdout());

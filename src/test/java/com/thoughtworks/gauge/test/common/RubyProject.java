@@ -39,30 +39,32 @@ public class RubyProject extends GaugeProject {
     }
 
     @Override
-    public boolean initialize() throws Exception {
-        String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
-        Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", "ruby");
-        if(!Files.exists(Paths.get(templatePath.toString(), "Gemfile.lock"))) {
-            ProcessBuilder processBuilder = new ProcessBuilder("bundle", "install", "--path=vendor/bundle");
-            processBuilder.directory(templatePath.toFile());
-            Process process = processBuilder.start();
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            String newLine = System.getProperty("line.separator");
-            lastProcessStdout = "";
-            while ((line = br.readLine()) != null) {
-                lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
+    public boolean initialize(boolean remoteTemplate) throws Exception {
+        if(!remoteTemplate){
+            String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+            Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", "ruby");
+            if(!Files.exists(Paths.get(templatePath.toString(), "Gemfile.lock"))) {
+                ProcessBuilder processBuilder = new ProcessBuilder("bundle", "install", "--path=vendor/bundle");
+                processBuilder.directory(templatePath.toFile());
+                Process process = processBuilder.start();
+                BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                String newLine = System.getProperty("line.separator");
+                lastProcessStdout = "";
+                while ((line = br.readLine()) != null) {
+                    lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
+                }
+                lastProcessStderr = "";
+                br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                while ((line = br.readLine()) != null) {
+                    lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
+                }
+                process.waitFor();
+                if( process.exitValue() != 0)
+                    return false;
             }
-            lastProcessStderr = "";
-            br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while ((line = br.readLine()) != null) {
-                lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
-            }
-            process.waitFor();
-            if( process.exitValue() != 0)
-                return false;
         }
-        return super.initialize();
+        return super.initialize(remoteTemplate);
     }
 
     @Override
