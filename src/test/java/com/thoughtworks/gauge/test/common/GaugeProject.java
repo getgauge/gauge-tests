@@ -100,7 +100,7 @@ public abstract class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
-        return executeGaugeCommand("init", language);
+        return executeGaugeCommand("init", "-l","debug", language);
     }
 
     public String getStdOut() throws IOException {
