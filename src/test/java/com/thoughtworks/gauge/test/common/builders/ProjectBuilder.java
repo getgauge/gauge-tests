@@ -1,5 +1,6 @@
 package com.thoughtworks.gauge.test.common.builders;
 
+import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 
@@ -28,6 +29,9 @@ public class ProjectBuilder {
 
         if (this.deleteExampleSpec)
             currentProject.deleteSpec(Util.combinePath("specs", "example"));
+
+        Gauge.writeMessage("STDOUT\n" + currentProject.getLastProcessStdout());
+        Gauge.writeMessage("STDERR\n" + currentProject.getLastProcessStderr());
         return currentProject;
     }
 
