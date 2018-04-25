@@ -1,0 +1,12 @@
+# Gauge - metadata dir
+.gauge
+
+# Gauge - log files dir
+logs
+
+# Gauge - java class output directory
+gauge_bin
+
+# Gauge - ruby dependencies dir
+vendor
+

@@ -5,12 +5,14 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.test.StepImpl;
+import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,9 +37,9 @@ public abstract class GaugeProject {
     private File projectDir;
     private String language;
     private ArrayList<Specification> specifications = new ArrayList<>();
-    private String lastProcessStdout;
+    protected String lastProcessStdout;
     private GaugeService service;
-    private String lastProcessStderr;
+    protected String lastProcessStderr;
     private static int projectCount = 0;
 
     protected GaugeProject(String language, String projName) throws IOException {
@@ -100,7 +102,24 @@ public abstract class GaugeProject {
 
     public boolean initialize() throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
-        return executeGaugeCommand("init", "-l","debug", language);
+        if(!copyLocalTemplateIfExists(language)) {
+            return executeGaugeCommand("init", "-l","debug", language);
+        }
+        return true;
+    }
+
+    private boolean copyLocalTemplateIfExists(String language) {
+        String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+        Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
+        if (!Files.exists(templatePath)) {
+            return false;
+        }
+        try {
+            FileUtils.copyDirectory(templatePath.toFile(), this.projectDir);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 
     public String getStdOut() throws IOException {
@@ -109,10 +128,6 @@ public abstract class GaugeProject {
 
     public File getProjectDir() {
         return projectDir;
-    }
-
-    public Specification createSpecification(String name) throws IOException {
-        return createSpecification("", name);
     }
 
     public Specification createSpecification(String specsDirName, String name) throws IOException {

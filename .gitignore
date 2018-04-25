@@ -15,5 +15,7 @@ docs/
 .classpath
 .project
 .settings
-resources/LocalBundle/*
-!resources/LocalBundle/.gitkeep
+resources/LocalTemplates/**/.bundle
+resources/LocalTemplates/**/logs
+resources/LocalTemplates/**/vendor
+resources/LocalTemplates/**/Gemfile.lock
