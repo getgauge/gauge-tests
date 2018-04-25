@@ -124,7 +124,7 @@ Rerun failed after correcting failure
    |----------|---------|---------|------------|
    |1         |0        |1        |0           |
 
-* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps with implementation
+* Update scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps unimplemented
 
    |step text  |
    |-----------|
