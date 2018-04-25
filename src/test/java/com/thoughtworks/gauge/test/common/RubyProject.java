@@ -43,7 +43,8 @@ public class RubyProject extends GaugeProject {
         if(!remoteTemplate){
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", "ruby");
-            if(!Files.exists(Paths.get(templatePath.toString(), "Gemfile.lock"))) {
+            try {
+                Files.createFile(Paths.get(templatePath.toString(), ".buildlock"));
                 ProcessBuilder processBuilder = new ProcessBuilder("bundle", "install", "--path=vendor/bundle");
                 processBuilder.directory(templatePath.toFile());
                 Process process = processBuilder.start();
@@ -60,9 +61,9 @@ public class RubyProject extends GaugeProject {
                     lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
                 }
                 process.waitFor();
-                if( process.exitValue() != 0)
+                if (process.exitValue() != 0)
                     return false;
-            }
+            } catch(IOException ex) {}
         }
         return super.initialize(remoteTemplate);
     }
