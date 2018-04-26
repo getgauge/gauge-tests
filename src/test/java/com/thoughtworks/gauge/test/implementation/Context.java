@@ -12,7 +12,7 @@ public class Context {
         new SpecificationBuilder()
                 .withSpecName(specName)
                 .withContextSteps(steps)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 
     @Step({"Add the following teardown steps in specification <spec name> <steps table>",
@@ -21,6 +21,6 @@ public class Context {
         new SpecificationBuilder()
                 .withSpecName(specName)
                 .withTeardownSteps(steps)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 }

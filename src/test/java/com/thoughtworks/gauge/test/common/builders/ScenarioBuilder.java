@@ -74,8 +74,8 @@ public class ScenarioBuilder {
         return this;
     }
 
-    public void build() throws Exception {
-        spec.addScenarios(buildScenario());
+    public void build(boolean dedup) throws Exception {
+        spec.addScenarios(dedup, buildScenario());
     }
 
     public ScenarioBuilder addSteps(List<String> columnNames, String cell, String step) {

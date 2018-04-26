@@ -9,7 +9,7 @@ public class TagsExecution {
         new SpecificationBuilder().withScenarioName(scenarioName)
                 .withSpecName(specName)
                 .withTags(tags)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 
     @Step("Add tags <tags> to specification <specification name>")
@@ -17,6 +17,6 @@ public class TagsExecution {
         new SpecificationBuilder()
                 .withSpecName(specName)
                 .withTags(tags)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 }

@@ -70,7 +70,7 @@ public class SpecificationBuilder {
         return this;
     }
 
-    public void buildAndAddToProject() throws Exception {
+    public void buildAndAddToProject(boolean dedupScenario) throws Exception {
         Specification spec = getCurrentProject().findSpecification(specName);
         if (spec == null) {
             spec = getCurrentProject().createSpecification(subDirPath, specName);
@@ -88,7 +88,7 @@ public class SpecificationBuilder {
             contextBuilder.build();
 
         if (scenarioBuilder.canBuild())
-            scenarioBuilder.build();
+            scenarioBuilder.build(dedupScenario);
 
         if (tagsBuilder.canBuild())
             tagsBuilder.build();

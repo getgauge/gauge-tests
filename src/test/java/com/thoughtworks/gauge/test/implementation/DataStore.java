@@ -12,7 +12,7 @@ public class DataStore {
                 .withDataStoreWriteStatement(datastoreValues.getColumnNames(), datastoreValues.getTableRows().get(0))
                 .withDataStorePrintValues(datastoreValues.getColumnNames(), datastoreValues.getTableRows().get(1))
                 .withAppendCode(true)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 
     @Step("Create a scenario <readScenario> in specification <newSpec> with step to read from datastore <table>")
@@ -21,7 +21,7 @@ public class DataStore {
                 .withSpecName(spec)
                 .withDataStorePrintValues(datastoreValues.getColumnNames(), datastoreValues.getTableRows().get(0))
                 .withAppendCode(true)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 
     @Step("Create a scenario <writeScenario> in specification <newSpec> with step to write to datastore <table>")
@@ -30,6 +30,6 @@ public class DataStore {
                 .withSpecName(spec)
                 .withDataStoreWriteStatement(datastoreValues.getColumnNames(), datastoreValues.getTableRows().get(0))
                 .withAppendCode(true)
-                .buildAndAddToProject();
+                .buildAndAddToProject(false);
     }
 }
