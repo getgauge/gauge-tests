@@ -360,7 +360,7 @@ public abstract class GaugeProject {
 
     public abstract Map<String, String> getLanguageSpecificFiles();
 
-    public abstract String getLanguageSpecificGitIgnoreText();
+    public abstract List<String> getLanguageSpecificGitIgnoreText();
 
     public abstract String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode);
 

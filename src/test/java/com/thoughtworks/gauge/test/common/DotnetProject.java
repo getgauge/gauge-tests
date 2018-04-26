@@ -24,8 +24,8 @@ public class DotnetProject extends GaugeProject {
     }
 
     @Override
-    public String getLanguageSpecificGitIgnoreText() {
-        return "";
+    public List<String> getLanguageSpecificGitIgnoreText() {
+        return new ArrayList<>();
     }
 
     private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {

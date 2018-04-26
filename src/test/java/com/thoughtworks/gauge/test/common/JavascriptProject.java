@@ -72,18 +72,13 @@ public class JavascriptProject extends GaugeProject {
     }
 
     @Override
-    public String getLanguageSpecificGitIgnoreText() {
-        return "# Gauge - metadata dir\n" +
-                ".gauge\n" +
-                "\n" +
-                "# Gauge - log files dir\n" +
-                "logs\n" +
-                "\n" +
-                "# Gauge - reports dir\n" +
-                "reports\n" +
-                "\n" +
-                "# Gauge - JavaScript node dependencies\n" +
-                "node_modules\n\n";
+    public List<String> getLanguageSpecificGitIgnoreText() {
+        return new ArrayList<String>() {{
+            add("# Gauge - metadata dir\n.gauge");
+            add("# Gauge - log files dir\nlogs");
+            add("# Gauge - reports dir\nreports");
+            add("# Gauge - JavaScript node dependencies\nnode_modules");
+        }};
     }
 
     @Override

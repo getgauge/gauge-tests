@@ -11,6 +11,7 @@ import org.junit.Assert;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class ProjectInit {
@@ -79,11 +80,13 @@ public class ProjectInit {
 
     @Step("Verify language specific .gitignore is created")
     public void verifyGitIngoreForLanguageIsCreated() throws IOException {
-        String gitignore = currentProject.getLanguageSpecificGitIgnoreText();
+        List<String> gitignoreTexts = currentProject.getLanguageSpecificGitIgnoreText();
         File fileName = new File(getPathRelativeToCurrentProjectDir(".gitignore"));
         Assert.assertTrue(fileName.exists());
         String content = Util.read(fileName.getAbsolutePath());
-        Assert.assertEquals(gitignore, content);
+        for (String gitignoreText : gitignoreTexts) {
+            Assert.assertTrue(content.contains(gitignoreText));
+        }
     }
 
     private String getPathRelativeToCurrentProjectDir(String path) {
