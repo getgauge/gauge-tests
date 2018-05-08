@@ -24,7 +24,7 @@ Screenshot using custom logic
 
 * Execute the current project and ensure failure
 
-* Generated html report should have "some screenshot" for 
+* Generated html report should have "some screenshot" in spec "custom_screenshot" for
 
    |step text  |
    |-----------|

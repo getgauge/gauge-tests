@@ -26,8 +26,8 @@ import static org.junit.Assert.assertTrue;
 
 public class HtmlReport {
 
-    @Step("Generated html report should have <some screenshot> for <table>")
-    public void verifyCustomScreenshot(String stubScreenshot, Table stepTexts) throws IOException {
+    @Step("Generated html report should have <some screenshot> in spec <spec> for <table>")
+    public void verifyCustomScreenshot(String stubScreenshot, String specName, Table stepTexts) throws IOException {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
@@ -35,12 +35,13 @@ public class HtmlReport {
         String expected = "data:image/png;base64," + Base64.getEncoder().encodeToString(stubScreenshot.getBytes());
 
         final WebClient webClient = getWebClient();
-        final HtmlPage page = webClient.getPage("file://" + getReportsPath());
+        String reportsPath = getReportsPath(specName);
+        final HtmlPage page = webClient.getPage("file://" + reportsPath);
+
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
-
         for (Node div : divs) {
-            stepTexts.getColumnValues(0).stream().filter(stepText -> div.getTextContent().contains(stepText)).forEach(stepText -> {
+            stepTexts.getColumnValues("step text").stream().filter(stepText -> div.getTextContent().contains(stepText)).forEach(stepText -> {
                 Selectors errorSelectors = new Selectors(new W3CNode(div.getParentNode()));
                 Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
@@ -50,7 +51,13 @@ public class HtmlReport {
     }
 
     private String getReportsPath() {
-        return Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "index.html");
+        return getReportsPath(null);
+    }
+
+    private String getReportsPath(String specName) {
+        if(specName==null)
+            return Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report","index.html");
+        return Util.combinePath(getCurrentProject().getProjectDir().getAbsolutePath(), "reports", "html-report", "specs",specName+".html");
     }
 
     @Step("verify statistics in html with <statistics>")
