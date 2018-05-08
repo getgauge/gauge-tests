@@ -2,6 +2,7 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.BeforeSuite;
+import com.thoughtworks.gauge.ExecutionContext;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -14,8 +15,22 @@ import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class Hooks {
     @AfterScenario
-    public void tearDown() {
-        File dir = GaugeProject.getCurrentProject().getProjectDir();
+    public void tearDown(ExecutionContext context) throws IOException {
+        if(getCurrentProject()==null)
+        {
+            System.err.println("Current project is unavailable");
+            return;
+        }
+        File dir = getCurrentProject().getProjectDir();
+        if(context.getCurrentScenario()!=null && context.getCurrentScenario().getIsFailing())
+        {
+            String copyFrom = Util.combinePath(dir.getAbsolutePath(), System.getenv("logs_directory"));
+            String copyTo = Util.combinePath("./testLogs",context.getCurrentSpecification().getName(),context.getCurrentScenario().getName());
+
+            File subProjectLog = new File(copyFrom);
+            if(subProjectLog.exists())
+                FileUtils.copyDirectory(subProjectLog, new File(copyTo));
+        }
         if (getCurrentProject().getService() != null) {
             try {
                 getCurrentProject().getService().getGaugeProcess().destroyForcibly().waitFor();
