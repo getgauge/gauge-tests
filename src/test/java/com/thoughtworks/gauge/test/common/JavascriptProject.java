@@ -6,10 +6,7 @@ import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JavascriptProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
@@ -156,7 +153,15 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
-
+        String className = Util.getUniqueName();
+        StringBuilder sb = new StringBuilder();
+        sb.append("var fs = require('fs');\n");
+        sb.append("\n");
+        sb.append("gauge.screenshotFn = function () {\n");
+        sb.append("\n");
+        sb.append("    return \""+Base64.getEncoder().encodeToString(stubScreenshot.getBytes())+"\";\n");
+        sb.append("};");
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".js"), sb.toString());
     }
 
     private String getStepImplementationsDir() {
