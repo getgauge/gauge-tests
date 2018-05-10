@@ -31,6 +31,11 @@ public class Hooks {
             if(subProjectLog.exists())
                 FileUtils.copyDirectory(subProjectLog, new File(copyTo));
         }
+        else {
+            File testLogs = new File("./testLogs");
+            if(!testLogs.exists())
+                testLogs.mkdir();
+        }
         if (getCurrentProject().getService() != null) {
             try {
                 getCurrentProject().getService().getGaugeProcess().destroyForcibly().waitFor();
