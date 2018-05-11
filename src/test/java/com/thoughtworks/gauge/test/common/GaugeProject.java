@@ -102,11 +102,49 @@ public abstract class GaugeProject {
 
     public boolean initialize(boolean remoteTemplate) throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
+
+        if(Boolean.parseBoolean(System.getenv("cache_remote_init"))){
+            return cacheAndFetchFromLocalTemplate();
+        }
+
         if (remoteTemplate) {
-            return executeGaugeCommand("init", "-l","debug", language);
+            return executeGaugeCommand("init", "-l", "debug", language);
         }
         return copyLocalTemplateIfExists(language) || executeGaugeCommand("init", language);
     }
+
+    private boolean isLocalTemplateAvaialable(String language){
+        String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+        Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
+        return (Files.exists(templatePath));
+    }
+
+    private boolean cacheAndFetchFromLocalTemplate() throws InterruptedException {
+        synchronized(this){//synchronized block
+            String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+            Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
+
+            try {
+                if(isLocalTemplateAvaialable(language)) {
+                    System.out.println("copy from");
+                    FileUtils.copyDirectory(templatePath.toFile(), this.projectDir);
+                    return true;
+                }
+                else {
+
+                    if(executeGaugeCommand("init", "-l","debug", language)) {
+                        System.out.println("copy to");
+                        FileUtils.copyDirectory(this.projectDir, templatePath.toFile());
+                        return true;
+                    }
+                    return false;
+                }
+            } catch (IOException e) {
+                return false;
+            }
+        }
+    }
+
 
     private boolean copyLocalTemplateIfExists(String language) {
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
