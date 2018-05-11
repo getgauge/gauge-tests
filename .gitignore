@@ -20,3 +20,4 @@ resources/LocalTemplates/**/logs
 resources/LocalTemplates/**/vendor
 resources/LocalTemplates/**/Gemfile.lock
 .buildlock
+testLogs    

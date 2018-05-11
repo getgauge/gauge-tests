@@ -167,7 +167,7 @@ public class CSharpProject extends GaugeProject {
         sb.append("\n");
         sb.append("public class " + className + " : ICustomScreenshotGrabber {\n");
         sb.append("\n");
-        sb.append("    byte[] ICustomScreenshotGrabber.TakeScreenShot() {\n");
+        sb.append("    public byte[] TakeScreenShot() {\n");
         sb.append("        return System.Text.Encoding.UTF8.GetBytes(\"" + stubScreenshot + "\");\n");
         sb.append("    }\n");
         sb.append("}");
