@@ -22,6 +22,7 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 public abstract class GaugeProject {
+    private static final Boolean INITIALIZE_LOCK = true;
 
     private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
     private static final List<String> GAUGE_ENVS = asList("gauge_custom_classpath", "overwrite_reports", "GAUGE_INTERNAL_PORT",
@@ -120,20 +121,18 @@ public abstract class GaugeProject {
     }
 
     private boolean cacheAndFetchFromLocalTemplate() throws InterruptedException {
-        synchronized(this){//synchronized block
+        synchronized(INITIALIZE_LOCK){//synchronized block
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
 
             try {
                 if(isLocalTemplateAvaialable(language)) {
-                    System.out.println("copy from");
                     FileUtils.copyDirectory(templatePath.toFile(), this.projectDir);
                     return true;
                 }
                 else {
 
                     if(executeGaugeCommand("init", "-l","debug", language)) {
-                        System.out.println("copy to");
                         FileUtils.copyDirectory(this.projectDir, templatePath.toFile());
                         return true;
                     }
