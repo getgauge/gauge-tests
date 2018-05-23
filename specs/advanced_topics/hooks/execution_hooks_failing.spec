@@ -1,5 +1,4 @@
-Execution Hooks Failure
-=======================
+# Execution Hooks Failure
 
 tags: java, csharp, ruby, python, js
 
@@ -13,8 +12,7 @@ When a before execution hook fails the after hook will still execute skipping al
    |First step |"inside step 1"|
    |Second step|"inside step 2"|
 
-Hook failure at suite level
----------------------------
+## Hook failure at suite level
 
 * Create "suite" level "before" hook with exception
 * Create "scenario" level "before" hook with implementation "inside before scenario"
@@ -43,8 +41,7 @@ Hook failure at suite level
    |----------|---------|---------|------------|
    |0         |0        |0        |0           |
 
-Hook failure at spec level
---------------------------
+## Hook failure at spec level
 
 * Create "suite" level "before" hook with implementation "inside before suite"
 * Create "spec" level "before" hook with exception
@@ -81,8 +78,7 @@ Hook failure at spec level
    |----------|---------|---------|------------|
    |1         |0        |1        |0           |
 
-Hook failure at scenario level
-------------------------------
+## Hook failure at scenario level
 
 * Create "scenario" level "before" hook with exception
 * Create "scenario" level "after" hook with implementation "inside after scenario"
@@ -115,8 +111,14 @@ Hook failure at scenario level
    |----------|---------|---------|------------|
    |1         |0        |1        |0           |
 
-Hook failure at step level
---------------------------
+* Generated html report should have screenshot in spec "01 Hooks Spec" for element "SCENARIO"
+
+   |Element Name|Type     |Error In|
+   |------------|---------|--------|
+   |New scenario|scenario |before  |
+   |New scenario|scenario |after   |
+
+## Hook failure at step level
 
 * Create "step" level "before" hook with exception
 * Create "step" level "after" hook with implementation "inside after step"
