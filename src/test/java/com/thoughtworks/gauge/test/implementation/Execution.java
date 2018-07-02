@@ -16,6 +16,31 @@ public class Execution {
         assertOn(getCurrentProject().rerunFailed(), true);
     }
 
+    @Step("Rerun failed scenarios with log level debug")
+    public void rerunWithFailedAndEnsureFailure() throws Exception {
+        assertOn(getCurrentProject().rerunFailedWithLogLevel(), false);
+    }
+
+    @Step("Rerun failed scenarios with specific directory")
+    public void rerunFailedWithSpecificDirectory() throws Exception {
+        assertThat(getCurrentProject().rerunFailedWithSpecificDir());
+    }
+
+    @Step("Execute current project with failed and repeat flags")
+    public void executeCurrentProjectWithFailedAndRepeat() throws Exception {
+        assertThat(getCurrentProject().executeRepeatWithFailed());
+    }
+
+    @Step("Repeat last run with log level debug and ensure success")
+    public void repeatLastRunWithLogLevelAndEnsureSuccess() throws Exception {
+        assertOn(getCurrentProject().repeatLastRunWithLogLevel(), true);
+    }
+
+    @Step("Repeat last run with specific directory")
+    public void repeatLastRunWithSpecificDirectory() throws Exception {
+        assertThat(getCurrentProject().repeatLastRunWithSpecificDir());
+    }
+
     public enum Result {
         FAILURE,
         SUCCESS

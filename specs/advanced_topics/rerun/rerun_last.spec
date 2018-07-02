@@ -205,3 +205,80 @@ Repeat last run with rerun failed specs after correcting failure
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
    |Scenarios      |1       |1     |0     |0      |
+
+Repeat last run with log level debuging
+---------------------------------------
+
+* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps with implementation
+
+   |step text  |implementation      |
+   |-----------|--------------------|
+   |First step |"inside first step" |
+   |Second step|"inside second step"|
+
+* Create a scenario "Sample scenario1" in specification "Basic_spec_execution1" with the following steps with implementation
+
+   |step text |implementation     |
+   |----------|-------------------|
+   |Third step|"inside third step"|
+
+* Execute the current project and ensure success
+
+
+* Statistics generated should have
+
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |2       |2     |0     |0      |
+   |Scenarios      |2       |2     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
+
+* Repeat last run with log level debug and ensure success
+
+* Statistics generated should have
+
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |2       |2     |0     |0      |
+   |Scenarios      |2       |2     |0     |0      |
+
+* Console should contain following lines in order
+
+   |console output                          |
+   |----------------------------------------|
+   |Plugin html-report is already installed.|
+   |inside first step                       |
+   |inside second step                      |
+   |inside third step                       |
+
+Repeat last run with spec directory
+-----------------------------------
+
+* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps with implementation
+
+   |step text  |implementation      |
+   |-----------|--------------------|
+   |First step |"inside first step" |
+   |Second step|"inside second step"|
+* Execute the current project and ensure success
+
+* Repeat last run with specific directory
+
+* Console should contain "Invalid Command. Usage: gauge run --repeat"
+
+Rerun specs with failed flags
+-----------------------------
+
+* Create a scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps with implementation
+
+   |step text  |implementation      |
+   |-----------|--------------------|
+   |First step |"inside first step" |
+   |Second step|"inside second step"|
+
+* Execute the current project and ensure success
+
+* Execute current project with failed and repeat flags
+
+* Console should contain "Invalid Command. Usage: gauge run --repeat"

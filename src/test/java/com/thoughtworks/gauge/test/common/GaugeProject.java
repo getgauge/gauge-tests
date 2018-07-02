@@ -428,4 +428,24 @@ public abstract class GaugeProject {
     public abstract String getDataStorePrintValueStatement(TableRow row, List<String> columnNames);
 
     public abstract void configureCustomScreengrabber(String stubScreenshot) throws IOException;
+
+    public ExecutionSummary rerunFailedWithLogLevel() throws Exception {
+        return execute(new String[]{"run", "--log-level=debug", "--failed"});
+    }
+
+    public ExecutionSummary rerunFailedWithSpecificDir() throws Exception {
+        return execute(new String[]{"run", "specs", "--failed"});
+    }
+
+    public ExecutionSummary executeRepeatWithFailed() throws Exception {
+        return execute(new String[]{"run", "--repeat", "--failed"});
+    }
+
+    public ExecutionSummary repeatLastRunWithLogLevel() throws Exception {
+        return execute(new String[]{"run", "--log-level=debug", "--repeat"});
+    }
+
+    public ExecutionSummary repeatLastRunWithSpecificDir() throws Exception {
+        return execute(new String[]{"run", "specs", "--repeat"});
+    }
 }
