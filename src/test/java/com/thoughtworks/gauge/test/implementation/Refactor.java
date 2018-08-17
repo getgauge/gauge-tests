@@ -1,6 +1,7 @@
 package com.thoughtworks.gauge.test.implementation;
 
 import com.google.common.base.CharMatcher;
+import com.thoughtworks.gauge.Gauge;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
