@@ -27,11 +27,14 @@ public class Refactor {
             newStep = newStep.replaceAll("\\\"", "\\\\\"");
         }
         ExecutionSummary result = getCurrentProject().refactorStep(oldStep, newStep);
-        assertThat(result.getSuccess()).isTrue();
-
         if (!result.getSuccess()) {
-            System.out.println(getCurrentProject().getLastProcessStdout());
+            String stdout = getCurrentProject().getLastProcessStdout();
+            System.out.println(stdout);
+            Gauge.writeMessage("STDOUT\n" + stdout);
+            Gauge.writeMessage("STDERR\n" + getCurrentProject().getLastProcessStderr());
         }
+
+        assertThat(result.getSuccess()).isTrue();
     }
 
     @Step("The step <First step> should no longer be used")

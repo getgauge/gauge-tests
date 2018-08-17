@@ -121,9 +121,4 @@ public class ProjectInit {
                 .withTextFile(name)
                 .build();
     }
-
-    @BeforeStep
-    public void beforeScenario(){
-        Gauge.writeMessage("before");
-    }
 }
