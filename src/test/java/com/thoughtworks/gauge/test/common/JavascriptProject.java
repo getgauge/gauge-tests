@@ -157,7 +157,7 @@ public class JavascriptProject extends GaugeProject {
         StringBuilder sb = new StringBuilder();
         sb.append("var fs = require('fs');\n");
         sb.append("\n");
-        sb.append("gauge.screenshotFn = function () {\n");
+        sb.append("gauge.screenshotFn = async function () {\n");
         sb.append("\n");
         sb.append("    return \""+Base64.getEncoder().encodeToString(stubScreenshot.getBytes())+"\";\n");
         sb.append("};");
