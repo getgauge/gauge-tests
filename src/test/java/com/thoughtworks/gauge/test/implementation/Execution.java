@@ -91,6 +91,11 @@ public class Execution {
         assertOn(getCurrentProject().execute(false), false);
     }
 
+    @Step("Execute the current project in fail-safe mode and ensure success")
+    public void executeCurrentProjectAndInFailSafeModeAndEnsureSuccess() throws Exception {
+        assertOn(getCurrentProject().executeFailSafe(false), true);
+    }
+
     @Step("Rerun failed scenarios and ensure failure")
     public void rerunCurrentProjectAndEnsureFailure() throws Exception {
         assertOn(getCurrentProject().rerunFailed(), false);

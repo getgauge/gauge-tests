@@ -263,6 +263,13 @@ public abstract class GaugeProject {
         return executeGaugeCommand("format", specFolder);
     }
 
+    public ExecutionSummary executeFailSafe(boolean sorted) throws Exception {
+        String[] args = sorted ? new String[]{"run","--fail-safe", "--simple-console", "--verbose", "--sort", "specs/"} :
+                new String[]{"run","--fail-safe", "--simple-console", "--verbose", "specs/"};
+        System.out.println(String.join(" ", args));
+        return execute(args);
+    }
+
     public ExecutionSummary execute(boolean sorted) throws Exception {
         String[] args = sorted ? new String[]{"run", "--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"run", "--simple-console", "--verbose", "specs/"};
         return execute(args);
