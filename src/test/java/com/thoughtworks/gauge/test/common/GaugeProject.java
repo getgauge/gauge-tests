@@ -104,14 +104,15 @@ public abstract class GaugeProject {
     public boolean initialize(boolean remoteTemplate) throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
 
+        if (remoteTemplate) {
+            return executeGaugeCommand("init", "-l", "debug", language);
+        }
+
         if(Boolean.parseBoolean(System.getenv("cache_remote_init"))){
             return cacheAndFetchFromLocalTemplate();
         }
 
-        if (remoteTemplate) {
-            return executeGaugeCommand("init", "-l", "debug", language);
-        }
-        return copyLocalTemplateIfExists(language) || executeGaugeCommand("init", language);
+        return copyLocalTemplateIfExists(language) || executeGaugeCommand("init", "-l", "debug", language);
     }
 
     private boolean isLocalTemplateAvaialable(String language){
