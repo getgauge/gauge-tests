@@ -103,6 +103,9 @@ public abstract class GaugeProject {
 
     public boolean initialize(boolean remoteTemplate) throws Exception {
         executeGaugeCommand("config", "plugin_kill_timeout", "60000");
+        if(remoteTemplate && language.equals("js")){
+            return executeGaugeCommand("init", "-l", "debug", "js_simple");
+        }
 
         if (remoteTemplate) {
             return executeGaugeCommand("init", "-l", "debug", language);
