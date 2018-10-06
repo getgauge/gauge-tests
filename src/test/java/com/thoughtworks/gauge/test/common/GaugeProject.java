@@ -135,8 +135,8 @@ public abstract class GaugeProject {
                     return true;
                 }
                 else {
-
-                    if(executeGaugeCommand("init", "-l","debug", language)) {
+                    String projectName = language.equals("js") ? "js_simple" : language;
+                    if(executeGaugeCommand("init", "-l","debug", projectName)) {
                         FileUtils.copyDirectory(this.projectDir, templatePath.toFile());
                         return true;
                     }
