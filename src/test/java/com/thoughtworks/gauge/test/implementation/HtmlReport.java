@@ -97,7 +97,7 @@ public class HtmlReport {
         assertTrue(Files.exists(Paths.get(getCurrentProject().getProjectDir().getAbsolutePath())));
         assertTrue(Files.exists(Paths.get(getReportsPath())));
         org.jsoup.nodes.Document doc = Jsoup.parse(new File(getReportsPath()), "UTF-8");
-        String expectedTotalCount = doc.select(".total-specs").get(0).child(0).text();
+        String expectedTotalCount = doc.select(".total-specs").get(0).child(1).text();
         String actualTotalCount = statistics.getTableRows().get(0).getCell("totalCount");
         assertEquals("Total count:", expectedTotalCount, actualTotalCount);
         String expectedPassCount = doc.select(".pass").get(0).child(0).text();
