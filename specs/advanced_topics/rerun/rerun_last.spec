@@ -38,12 +38,6 @@ Repeat last run with a failure
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |3         |2        |1        |0           |
-
 * Repeat last run and ensure "FAILURE"
 * Console should contain following lines in order 
 
@@ -67,12 +61,6 @@ Repeat last run with a failure
    |Scenarios      |3       |2     |1     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |3         |2        |1        |0           |
 
 Repeat last successful run
 ---------------------------
@@ -106,12 +94,6 @@ Repeat last successful run
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |3         |3        |0        |0           |
-
 * Repeat last run and ensure "SUCCESS"
 * Console should contain following lines in order
 
@@ -130,12 +112,6 @@ Repeat last successful run
    |Scenarios      |3       |3     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |3         |3        |0        |0           |
 
 Repeat last run with rerun failed specs after correcting failure
 ----------------------------------------------------------------

@@ -39,12 +39,6 @@ Rerun failed scenarios
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |3         |1        |2        |0           |
-
 * Rerun failed scenarios and ensure failure
 * Console should contain following lines in order 
 
@@ -67,12 +61,6 @@ Rerun failed scenarios
    |Scenarios      |2       |0     |2     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |2         |0        |2        |0           |
 
 Rerun failed after correcting failure
 -------------------------------------
@@ -98,12 +86,6 @@ Rerun failed after correcting failure
    |Specifications |2       |1     |1     |0      |
    |Scenarios      |2       |1     |1     |0      |
 
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |2         |1        |1        |0           |
-
 * Rerun failed scenarios and ensure failure
 * Console should contain following lines in order
 
@@ -117,12 +99,6 @@ Rerun failed after correcting failure
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |1       |0     |1     |0      |
-
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |
 
 * Update scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps unimplemented
 
@@ -167,12 +143,6 @@ Rerun failed specs after correcting failure
    |Specifications |2       |1     |1     |0      |
    |Scenarios      |2       |1     |1     |0      |
 
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |2         |1        |1        |0           |
-
 * Rerun failed scenarios and ensure failure
 * Console should contain following lines in order
 
@@ -186,12 +156,6 @@ Rerun failed specs after correcting failure
    |---------------|--------|------|------|-------|
    |Specifications |1       |0     |1     |0      |
    |Scenarios      |1       |0     |1     |0      |
-
-* verify statistics in html with
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |
 
 * Update scenario "Sample scenario" in specification "Basic_spec_execution" with the following steps unimplemented
 

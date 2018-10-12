@@ -59,12 +59,6 @@ Continue on failure in setup and teardown
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |
-
 Execute teardown if some other step fails in setup
 --------------------------------------------------
 
@@ -123,9 +117,3 @@ Execute teardown if some other step fails in setup
    |Scenarios      |1       |0     |1     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |

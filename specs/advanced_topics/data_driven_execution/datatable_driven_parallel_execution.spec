@@ -34,7 +34,7 @@ Execute specs parallelly for each datatable
    
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
+* verify statistics in html with
 
    |totalCount|passCount|failCount|skippedCount|
    |----------|---------|---------|------------|
@@ -92,12 +92,6 @@ Execute specs sequentially if datatable row values not used
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |1        |0        |0           |
-
 Datatable driven parallel execution should execute before spec hooks per row
 ----------------------------------------------------------------------------
 * Create "spec" level "before" hook with implementation "inside before spec"
@@ -126,12 +120,6 @@ Datatable driven parallel execution should execute before spec hooks per row
    |Scenarios      |1       |1     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |1        |0        |0           |
 
 Datatable driven parallel execution with hook failure
 -----------------------------------------------------

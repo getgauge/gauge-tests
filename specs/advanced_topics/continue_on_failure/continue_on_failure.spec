@@ -90,12 +90,6 @@ tags: csharp, ruby, python, js
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |
-
 Continue execution only for mentioned error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------------------
 

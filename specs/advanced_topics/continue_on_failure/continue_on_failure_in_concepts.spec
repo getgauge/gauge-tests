@@ -52,12 +52,6 @@ Continue on failure in a concept step
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |
-
 Continue on failure in a nested concept step
 --------------------------------------------
 
@@ -135,9 +129,3 @@ Continue on failure in a nested concept step
    |Scenarios      |1       |0     |1     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |

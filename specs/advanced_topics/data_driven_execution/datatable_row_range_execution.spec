@@ -44,12 +44,6 @@ Datatable execution with row number
 
 * Console should contain "Successfully generated html-report to =>"
 
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |1        |0        |0           |
-
 Datatable execution with row range
 ----------------------------------
 
@@ -81,9 +75,3 @@ Datatable execution with row range
    |Scenarios      |1       |1     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |1        |0        |0           |
