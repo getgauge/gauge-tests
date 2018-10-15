@@ -107,9 +107,3 @@ Normal context step - with no cof fails then tear down steps are expected to exe
    |Scenarios      |2       |0     |2     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
-
-* verify statistics in html with 
-
-   |totalCount|passCount|failCount|skippedCount|
-   |----------|---------|---------|------------|
-   |1         |0        |1        |0           |

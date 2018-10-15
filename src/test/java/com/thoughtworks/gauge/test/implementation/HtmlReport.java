@@ -7,6 +7,7 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Node;
 import se.fishtank.css.selectors.Selectors;
 import se.fishtank.css.selectors.dom.W3CNode;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +26,27 @@ import static org.junit.Assert.assertTrue;
 
 public class HtmlReport {
 
-    public enum ElementTypes{
+    @Step("Step <stepText> should appear in <specName> <times> times in the report")
+    public void stepShouldAppearNTimesInReport(String stepText,String specName, Integer times) throws IOException {
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
+        final WebClient webClient = getWebClient();
+        String reportsPath = getReportsPath(specName);
+        final HtmlPage page = webClient.getPage("file://" + reportsPath);
+        Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
+        List<Node> divs = selectors.querySelectorAll(".step-txt");
+        int actualNumberOfTimes = 0;
+        for (Node div : divs) {
+            if(div.getTextContent().contains(stepText))
+            {
+                actualNumberOfTimes++;
+            }
+        }
+        assertThat(actualNumberOfTimes).isEqualTo(times);
+    }
+
+    public enum ElementTypes {
         SUITE,
         SPEC,
         SCENARIO,
@@ -32,7 +54,7 @@ public class HtmlReport {
     }
 
     @Step("Generated html report should have screenshot in spec <specName> for element <type> <hooks>")
-    public void verifyScreenshot(String specName,ElementTypes elementType, Table scenarios) throws IOException {
+    public void verifyScreenshot(String specName, ElementTypes elementType, Table scenarios) throws IOException {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
@@ -42,7 +64,7 @@ public class HtmlReport {
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         String elementSelector = null;
         String elementTypeName = null;
-        switch (elementType){
+        switch (elementType) {
             case SCENARIO:
                 elementSelector = ".scenario-head";
                 elementTypeName = "scenario";
@@ -50,9 +72,9 @@ public class HtmlReport {
             default:
         }
         List<Node> divs = selectors.querySelectorAll(elementSelector);
-        assertThat(divs.size()>0);
+        assertThat(divs.size() > 0);
         for (Node div : divs) {
-            scenarios.getColumnValues(elementTypeName).stream().filter( scenario -> div.getTextContent().contains(scenario)).forEach( scenario -> {
+            scenarios.getColumnValues(elementTypeName).stream().filter(scenario -> div.getTextContent().contains(scenario)).forEach(scenario -> {
                 Selectors errorSelectors = new Selectors(new W3CNode(div.getParentNode()));
                 Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
@@ -73,7 +95,7 @@ public class HtmlReport {
         Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
         for (Node div : divs) {
-            stepTexts.getColumnValues("step text").stream().filter( stepText -> div.getTextContent().contains(stepText)).forEach( stepText -> {
+            stepTexts.getColumnValues("step text").stream().filter(stepText -> div.getTextContent().contains(stepText)).forEach(stepText -> {
                 Selectors errorSelectors = new Selectors(new W3CNode(div.getParentNode()));
                 Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
