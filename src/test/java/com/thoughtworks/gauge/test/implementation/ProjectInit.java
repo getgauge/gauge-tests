@@ -97,7 +97,7 @@ public class ProjectInit {
     public void verifyEmptyDir(String dirName) {
         File[] files = currentProject.getProjectDir().listFiles();
         Assert.assertNotNull(files);
-        Assert.assertEquals(files.length, 0);
+        Assert.assertEquals("Expected " + currentProject.getProjectDir().getPath() + " to be empty.", 0, files.length);
     }
 
     @Step("Create a csv file <name>")
