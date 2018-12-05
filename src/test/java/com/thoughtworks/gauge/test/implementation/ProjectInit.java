@@ -16,32 +16,32 @@ import java.util.Map;
 
 public class ProjectInit {
 
-    private GaugeProject currentProject = null;
+    private ThreadLocal<GaugeProject> currentProject = new ThreadLocal<GaugeProject>();
 
     @Step("In an empty directory, use default initialization of a project named <projName> in language <language>")
     public void initializeProjectWithLanguage(String projName, String language) throws Exception {
-        currentProject = new ProjectBuilder()
+        currentProject.set(new ProjectBuilder()
                 .withLangauge(language)
                 .withProjectName(projName)
-                .build(language.equals("unknown"));
+                .build(language.equals("unknown")));
     }
 
     @Step("Initialize a project named <projName> with the example specs")
     public void defaultInitializationProject(String projName) throws Exception {
-        currentProject = new ProjectBuilder()
+        currentProject.set(new ProjectBuilder()
                 .withRemoteTemplate()
                 .withLangauge(Util.getCurrentLanguage())
                 .withProjectName(projName)
-                .build(false);
+                .build(false));
     }
 
     @Step("Initialize a project named <projName> without example spec")
     public void projectInitWithoutHelloWorldSpec(String projName) throws Exception {
-        currentProject = new ProjectBuilder()
+        currentProject.set(new ProjectBuilder()
                 .withLangauge(Util.getCurrentLanguage())
                 .withProjectName(projName)
                 .withoutExampleSpec()
-                .build(false);
+                .build(false));
     }
 
     @Step("The following file structure should be created <table>")
@@ -63,7 +63,7 @@ public class ProjectInit {
     @Step("Verify language specific files are created")
     public void verifyFilesForLanguageIsCreated() {
         SoftAssertions softly = new SoftAssertions();
-        Map<String, String> files = currentProject.getLanguageSpecificFiles();
+        Map<String, String> files = currentProject.get().getLanguageSpecificFiles();
         files.forEach((k, v) -> {
             File fileName = new File(getPathRelativeToCurrentProjectDir(k));
             String fileType = v.toLowerCase();
@@ -80,7 +80,7 @@ public class ProjectInit {
 
     @Step("Verify language specific .gitignore is created")
     public void verifyGitIngoreForLanguageIsCreated() throws IOException {
-        List<String> gitignoreTexts = currentProject.getLanguageSpecificGitIgnoreText();
+        List<String> gitignoreTexts = currentProject.get().getLanguageSpecificGitIgnoreText();
         File fileName = new File(getPathRelativeToCurrentProjectDir(".gitignore"));
         Assert.assertTrue(fileName.exists());
         String content = Util.read(fileName.getAbsolutePath());
@@ -90,14 +90,14 @@ public class ProjectInit {
     }
 
     private String getPathRelativeToCurrentProjectDir(String path) {
-        return Util.combinePath(currentProject.getProjectDir().getAbsolutePath(), path);
+        return Util.combinePath(currentProject.get().getProjectDir().getAbsolutePath(), path);
     }
 
     @Step("Directory <dirName> should be empty")
     public void verifyEmptyDir(String dirName) {
-        File[] files = currentProject.getProjectDir().listFiles();
+        File[] files = currentProject.get().getProjectDir().listFiles();
         Assert.assertNotNull(files);
-        Assert.assertEquals("Expected " + currentProject.getProjectDir().getPath() + " to be empty.", 0, files.length);
+        Assert.assertEquals("Expected " + currentProject.get().getProjectDir().getPath() + " to be empty.", 0, files.length);
     }
 
     @Step("Create a csv file <name>")
