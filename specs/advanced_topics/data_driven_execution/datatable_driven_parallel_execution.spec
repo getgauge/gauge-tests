@@ -30,7 +30,7 @@ Execute specs parallelly for each datatable
    |Statistics name|executed|passed|failed|skipped|
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
-   |Scenarios      |1       |1     |0     |0      |
+   |Scenarios      |3       |3     |0     |0      |
    
 * Console should contain "Successfully generated html-report to =>"
 
@@ -57,7 +57,7 @@ Execute specs parallely in n streams
    |Statistics name|executed|passed|failed|skipped|
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
-   |Scenarios      |1       |1     |0     |0      |
+   |Scenarios      |3       |3     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
 
@@ -117,7 +117,7 @@ Datatable driven parallel execution should execute before spec hooks per row
    |Statistics name|executed|passed|failed|skipped|
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
-   |Scenarios      |1       |1     |0     |0      |
+   |Scenarios      |3       |3     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
 

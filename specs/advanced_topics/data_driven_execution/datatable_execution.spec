@@ -36,7 +36,7 @@ Simple Datatable Execution
    |Statistics name|executed|passed|failed|skipped|
    |---------------|--------|------|------|-------|
    |Specifications |1       |1     |0     |0      |
-   |Scenarios      |1       |1     |0     |0      |
+   |Scenarios      |3       |3     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
 
