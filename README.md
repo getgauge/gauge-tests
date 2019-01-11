@@ -5,13 +5,9 @@ GAUGE testing GAUGE!
 Tests for Gauge Command-Line Utility using Gauge
 
 ### Steps to get started
-- [Install Gauge](http://getgauge.io/download.html)
-  - Homebrew on Mac OS X :
-      ```
-      brew install gauge
-      ```
-  - [Download Installer](http://getgauge.io/download.html)
-- [Install language plugin](http://getgauge.io/documentation/user/current/plugins/installation.html) by running<br>
+- [Install Gauge](https://docs.gauge.org/latest/installation.html#install-gauge-for-your-os)
+
+- [Install language plugin](https://docs.gauge.org/latest/installation.html#language-plugins) by running<br>
   ```
   gauge install {language}
   ```
