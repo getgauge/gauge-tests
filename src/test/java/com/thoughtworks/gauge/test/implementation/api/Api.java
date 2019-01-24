@@ -81,7 +81,7 @@ public class Api {
     @Step("Refactor step <old step> to <new step> via api")
     public void refactor(String oldStep, String newStep) throws Exception {
         refactorResponse = getCurrentProject().getService().getGaugeConnection().sendPerformRefactoringRequest(oldStep, newStep);
-        assertThat(refactorResponse.getSuccess()).isTrue().withFailMessage("Refactoring resulted in error");
+        assertThat(refactorResponse.getSuccess()).withFailMessage("Refactoring resulted in error").isTrue();
     }
 
     @Step("verify refactoring didn't change files")

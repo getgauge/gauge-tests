@@ -13,8 +13,8 @@ public class Format {
     @Step("Format specs and ensure failure")
     public void formatSpecs() throws Exception {
         assertThat(GaugeProject.getCurrentProject().formatSpecFolder("specs"))
-                .isFalse()
-                .withFailMessage("Formatting passed, expected a parse failure.");
+                .withFailMessage("Formatting passed, expected a parse failure.")
+                .isFalse();
     }
 
     @Step("Spec <spec formatting> should not be formatted")

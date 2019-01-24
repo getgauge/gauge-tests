@@ -45,13 +45,13 @@ public class Refactor {
 
         for (Specification specification : specFiles)
             assertThat(isStepPresent(oldStep, specification.getSpecFile()))
-                    .isFalse()
-                    .withFailMessage("Found Step :'" + oldStep + "' in Spec: " + specification.getSpecFile().getAbsolutePath());
+                    .withFailMessage("Found Step :'" + oldStep + "' in Spec: " + specification.getSpecFile().getAbsolutePath())
+                    .isFalse();
 
         for (Concept concept : currentProject1.getConcepts())
             assertThat(isStepPresent(oldStep, concept.getConceptFile()))
-                    .isFalse()
-                    .withFailMessage("Found Step :'" + oldStep + "' in Concept: " + concept.getConceptFile().getAbsolutePath());
+                    .withFailMessage("Found Step :'" + oldStep + "' in Concept: " + concept.getConceptFile().getAbsolutePath())
+                    .isFalse();
     }
 
     @Step("The step <First step> should be used in project")

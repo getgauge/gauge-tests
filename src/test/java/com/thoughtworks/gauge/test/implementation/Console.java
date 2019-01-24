@@ -27,9 +27,7 @@ public class Console {
         int matchCount = Util.countOccurrences(output, text);
         String errorMessage = "Expected '" + output + "' to have '" + text + "' " + numberOfTimes + " times. Found " + matchCount + " times.";
 
-        assertThat(matchCount)
-                .isEqualTo(numberOfTimes)
-                .withFailMessage(errorMessage);
+        assertThat(matchCount).withFailMessage(errorMessage).isEqualTo(numberOfTimes);
     }
 
     @Step({"Console should contain <message>", "The error message <message> should be displayed on console"})

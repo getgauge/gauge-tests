@@ -53,7 +53,7 @@ public class Execution {
 
     @Step("Execute the spec folder <specs/subfolder> and ensure success")
     public void executeTheSpecFolderAndEnsureSuccess(String subFolder) throws Exception {
-        assertThat(getCurrentProject().executeSpecFolder(subFolder)).isTrue().withFailMessage(getFormattedProcessOutput());
+        assertThat(getCurrentProject().executeSpecFolder(subFolder)).withFailMessage(getFormattedProcessOutput()).isTrue();
     }
 
     @Step("Execute the current project and ensure success")
@@ -141,7 +141,7 @@ public class Execution {
     }
 
     private ExecutionSummaryAssert assertOn(ExecutionSummary summary, boolean result) {
-        return ExecutionSummaryAssert.assertThat(summary).hasSuccess(result).withFailMessage(getFormattedProcessOutput());
+        return ExecutionSummaryAssert.assertThat(summary).withFailMessage(getFormattedProcessOutput()).hasSuccess(result);
     }
 
     @Step("Configure project to take custom screenshot and return <some screenshot> as byte array")

@@ -19,8 +19,8 @@ public class Validate {
 
     private ExecutionSummaryAssert assertOn(ExecutionSummary summary, boolean result) {
         return ExecutionSummaryAssert.assertThat(summary)
-                .hasSuccess(result)
-                .withFailMessage(getFormattedProcessOutput());
+                .withFailMessage(getFormattedProcessOutput())
+                .hasSuccess(result);
     }
 
     private String getFormattedProcessOutput() {
