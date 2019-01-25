@@ -358,7 +358,7 @@ public abstract class GaugeProject {
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
-        processBuilder.environment().put("PYTHONUNBUFFERED", "true");
+        processBuilder.environment().put("PYTHONUNBUFFERED", "1");
 
         filterParentProcessGaugeEnvs(processBuilder);
         filterConflictingEnv(processBuilder);
