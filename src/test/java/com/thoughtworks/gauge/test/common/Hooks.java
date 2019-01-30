@@ -25,7 +25,7 @@ public class Hooks {
         if(context.getCurrentScenario()!=null && context.getCurrentScenario().getIsFailing())
         {
             String copyFrom = Util.combinePath(dir.getAbsolutePath(), System.getenv("logs_directory"));
-            String copyTo = Util.combinePath("./testLogs",context.getCurrentSpecification().getName(),context.getCurrentScenario().getName());
+            String copyTo = Util.combinePath("./testLogs",context.getCurrentSpecification().getName().replaceAll(" ", "_"),context.getCurrentScenario().getName().replaceAll(" ", "_"));
 
             File subProjectLog = new File(copyFrom);
             if(subProjectLog.exists())
