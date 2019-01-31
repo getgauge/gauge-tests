@@ -127,9 +127,9 @@ public class PythonProject extends GaugeProject {
     public void createHook(String hookLevel, String hookType, String printString, String aggregation, List<String> tags) throws IOException {
         StringBuilder fileText = new StringBuilder();
         if (!isSuiteHook(hookLevel))
-            fileText.append(String.format(IMPORT + "@%s_%s%s\ndef %s():\n    print(\"%s\")\n", hookType, hookLevel, getOptions(aggregation, tags), Util.getUniqueName(), printString));
+            fileText.append(String.format(IMPORT + "@%s_%s%s\ndef %s():\n    print(\"%s \")\n", hookType, hookLevel, getOptions(aggregation, tags), Util.getUniqueName(), printString));
         else
-            fileText.append(String.format(IMPORT + "@%s_%s\ndef %s():\n    print(\"%s\")\n", hookType, hookLevel, Util.getUniqueName(), printString));
+            fileText.append(String.format(IMPORT + "@%s_%s\ndef %s():\n    print(\"%s \")\n", hookType, hookLevel, Util.getUniqueName(), printString));
         fileText.append("\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".py"), fileText.toString());
     }
