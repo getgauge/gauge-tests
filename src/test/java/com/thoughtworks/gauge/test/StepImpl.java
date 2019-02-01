@@ -9,13 +9,15 @@ public class StepImpl {
     private String implementation;
     private boolean continueOnFailure;
     private boolean isValidStatement;
+    private final String implementationDir;
     private List<String> errorTypes;
 
-    public StepImpl(String stepText, String implementation, boolean continueOnFailure, boolean isValidStatement, String errorTypes) {
+    public StepImpl(String stepText, String implementation, boolean continueOnFailure, boolean isValidStatement, String errorTypes, String implementationDir) {
         this.stepText = stepText;
         this.implementation = implementation;
         this.continueOnFailure = continueOnFailure;
         this.isValidStatement = isValidStatement;
+        this.implementationDir = implementationDir;
         this.errorTypes = new ArrayList<String>();
         this.errorTypes.add(errorTypes);
     }
@@ -45,5 +47,9 @@ public class StepImpl {
 
     public List<String> getErrorTypes() {
         return errorTypes;
+    }
+
+    public String getImplementationDir() {
+        return implementationDir;
     }
 }

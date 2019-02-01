@@ -3,12 +3,13 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.StepImpl;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JavaProject extends GaugeProject {
     public static final String DEFAULT_AGGREGATION = "AND";
@@ -56,7 +57,7 @@ public class JavaProject extends GaugeProject {
         implementation = getStepImplementation(stepValue, implementation, paramTypes, stepImpl.isValidStatement());
         classText.append(") {\n").append(implementation).append("\n}\n");
         classText.append("}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(stepImpl.getImplementationDir()), className + ".java"), classText.toString());
     }
 
     @Override
@@ -86,7 +87,7 @@ public class JavaProject extends GaugeProject {
         sb.append("        return \"" + stubScreenshot + "\".getBytes();\n");
         sb.append("    }\n");
         sb.append("}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), sb.toString());
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(""), className + ".java"), sb.toString());
     }
 
     @Override
@@ -142,7 +143,7 @@ public class JavaProject extends GaugeProject {
         classText.append("public class ").append(className).append("{\n");
         classText.append(method);
         classText.append("\n}");
-        Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".java"), classText.toString());
+        Util.writeToFile(Util.combinePath(getStepImplementationsDir(""), className + ".java"), classText.toString());
     }
 
     private String createHookMethod(String hookLevel, String hookType, String implementation, String aggregation, List<String> tags) {
@@ -167,7 +168,14 @@ public class JavaProject extends GaugeProject {
         return String.format("tags = {%s}, tagAggregation = Operator.%s ", Util.joinList(Util.quotifyValues(tags)), aggregation);
     }
 
-    private String getStepImplementationsDir() {
+    private String getStepImplementationsDir(String implementationDir) {
+        if (implementationDir != "") {
+            String[] paths = new String[]{getProjectDir().getAbsolutePath()};
+
+            String implPath = Util.combinePath(ArrayUtils.addAll(paths, StringUtils.split(implementationDir, "/")));
+            if (!new File(implPath).exists()) new File(implPath).mkdirs();
+            return implPath;
+        }
         return Util.combinePath(getProjectDir().getAbsolutePath(), "src", "test", "java");
     }
 

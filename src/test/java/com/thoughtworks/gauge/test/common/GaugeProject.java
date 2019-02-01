@@ -6,6 +6,7 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,10 +15,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 
@@ -102,20 +100,21 @@ public abstract class GaugeProject {
     }
 
     public boolean initialize(boolean remoteTemplate) throws Exception {
-        executeGaugeCommand("config", "plugin_kill_timeout", "60000");
+        executeGaugeCommand(new String[]{
+                "config", "plugin_kill_timeout", "60000"}, null);
         if(remoteTemplate && language.equals("js")){
-            return executeGaugeCommand("init", "-l", "debug", "js_simple");
+            return executeGaugeCommand(new String[]{"init", "-l", "debug", "js_simple"}, null);
         }
 
         if (remoteTemplate) {
-            return executeGaugeCommand("init", "-l", "debug", language);
+            return executeGaugeCommand(new String[]{"init", "-l", "debug", language}, null);
         }
 
         if(Boolean.parseBoolean(System.getenv("cache_remote_init"))){
             return cacheAndFetchFromLocalTemplate();
         }
 
-        return copyLocalTemplateIfExists(language) || executeGaugeCommand("init", "-l", "debug", language);
+        return copyLocalTemplateIfExists(language) || executeGaugeCommand(new String[]{"init", "-l", "debug", language}, null);
     }
 
     private boolean isLocalTemplateAvaialable(String language){
@@ -136,7 +135,7 @@ public abstract class GaugeProject {
                 }
                 else {
                     String projectName = language.equals("js") ? "js_simple" : language;
-                    if(executeGaugeCommand("init", "-l","debug", projectName)) {
+                    if(executeGaugeCommand(new String[]{"init", "-l","debug", projectName}, null)) {
                         FileUtils.copyDirectory(this.projectDir, templatePath.toFile());
                         return true;
                     }
@@ -172,7 +171,7 @@ public abstract class GaugeProject {
     }
 
     public Specification createSpecification(String specsDirName, String name) throws IOException {
-        String specsDir = (specsDirName == null || specsDirName.isEmpty()) ? this.specsDirName : specsDirName;
+        String specsDir = StringUtils.isEmpty(specsDirName) ? this.specsDirName : specsDirName;
         File specFile = getSpecFile(name, specsDir);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
@@ -243,7 +242,7 @@ public abstract class GaugeProject {
         for (TableRow row : steps.getTableRows()) {
             concept.addItem(row.getCell(columnNames.get(0)), row.getCell("Type"));
             if (columnNames.size() == 2) {
-                implementStep(new StepImpl(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false, ""));
+                implementStep(new StepImpl(row.getCell(columnNames.get(0)), row.getCell(columnNames.get(1)), false, false, "", ""));
             }
         }
         concept.saveAs(conceptFile);
@@ -252,31 +251,36 @@ public abstract class GaugeProject {
     }
 
     public boolean executeSpecFolder(String specFolder) throws Exception {
-        return executeGaugeCommand("run", "--simple-console", "--verbose", specFolder);
+        return executeGaugeCommand(new String[]{"run", "--simple-console", "--verbose", specFolder}, null);
     }
 
     public boolean executeSpecFromFolder(String spec, String specFolder) throws Exception {
         File oldProjectDir = this.projectDir;
         this.projectDir = new File(oldProjectDir, specFolder);
-        boolean exitCode = executeGaugeCommand("run", "--simple-console", "--verbose", spec);
+        boolean exitCode = executeGaugeCommand(new String[]{"run", "--simple-console", "--verbose", spec}, null);
         this.projectDir = oldProjectDir;
         return exitCode;
     }
 
     public boolean formatSpecFolder(String specFolder) throws Exception {
-        return executeGaugeCommand("format", specFolder);
+        return executeGaugeCommand(new String[]{"format", specFolder}, null);
     }
 
     public ExecutionSummary executeFailSafe(boolean sorted) throws Exception {
         String[] args = sorted ? new String[]{"run","--fail-safe", "--simple-console", "--verbose", "--sort", "specs/"} :
                 new String[]{"run","--fail-safe", "--simple-console", "--verbose", "specs/"};
         System.out.println(String.join(" ", args));
-        return execute(args);
+        return execute(args, null);
     }
 
     public ExecutionSummary execute(boolean sorted) throws Exception {
         String[] args = sorted ? new String[]{"run", "--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"run", "--simple-console", "--verbose", "specs/"};
-        return execute(args);
+        return execute(args, null);
+    }
+
+    public ExecutionSummary execute(HashMap<String, String> envVars) throws Exception {
+        String[] args = new String[]{"run", "--simple-console", "--verbose", "specs/"};
+        return execute(args, envVars);
     }
 
     public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
@@ -284,52 +288,52 @@ public abstract class GaugeProject {
         for (String specName : specNames) {
             args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
         }
-        return execute(args.toArray(new String[args.size()]));
+        return execute(args.toArray(new String[args.size()]), null);
     }
 
-    private ExecutionSummary execute(String[] args) throws Exception {
-        boolean success = executeGaugeCommand(args);
+    private ExecutionSummary execute(String[] args, HashMap<String, String> envVars) throws Exception {
+        boolean success = executeGaugeCommand(args, envVars);
         return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
     }
 
     public ExecutionSummary executeInParallel() throws Exception {
-        return execute(new String[]{"run", "--parallel", "--verbose", "specs/"});
+        return execute(new String[]{"run", "--parallel", "--verbose", "specs/"}, null);
     }
 
     public ExecutionSummary executeInParallel(int nStreams) throws Exception {
-        return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--verbose", "specs/"});
+        return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--verbose", "specs/"}, null);
     }
 
     public ExecutionSummary validate() throws Exception {
-        return execute(new String[]{"validate", "specs/"});
+        return execute(new String[]{"validate", "specs/"}, null);
     }
 
     public ExecutionSummary executeSpec(String specName) throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
     public ExecutionSummary repeatLastRun() throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "--repeat"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--repeat"}, null);
     }
 
     public ExecutionSummary rerunFailed() throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "--failed"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--failed"}, null);
     }
 
     public ExecutionSummary executeSpecWithScenarioLineNumber(String specName, int lineNumber) throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "specs" + File.separator + Util.getSpecName(specName) + ".spec:" + lineNumber}, null);
     }
 
     public ExecutionSummary executeSpecWithRowRange(String specName, String rowRange) throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--table-rows", rowRange, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
     public ExecutionSummary executeTagsInSpec(String tags, String specName) throws Exception {
-        return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"});
+        return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
     ExecutionSummary executeRefactor(String oldStep, String newStep) throws Exception {
-        return execute(new String[]{"refactor", oldStep, newStep, "specs"});
+        return execute(new String[]{"refactor", oldStep, newStep, "specs"}, null);
     }
 
     private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
@@ -347,7 +351,7 @@ public abstract class GaugeProject {
         return process;
     }
 
-    private boolean executeGaugeCommand(String... args) throws IOException, InterruptedException {
+    private boolean executeGaugeCommand(String[] args, HashMap<String, String> envVars) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
         Collections.addAll(command, args);
@@ -355,14 +359,20 @@ public abstract class GaugeProject {
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
+
+        filterParentProcessGaugeEnvs(processBuilder);
+        filterConflictingEnv(processBuilder);
+
         processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
         processBuilder.environment().put("PYTHONUNBUFFERED", "1");
         processBuilder.environment().put("enable_multithreading", "true");
 
-        filterParentProcessGaugeEnvs(processBuilder);
-        filterConflictingEnv(processBuilder);
+        if (envVars != null) {
+            processBuilder.environment().putAll(envVars);
+        }
+
         Process lastProcess = processBuilder.start();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(lastProcess.getInputStream()));
@@ -401,7 +411,9 @@ public abstract class GaugeProject {
 
     public static void implement(Table impl, TableRow row, boolean appendCode) throws Exception {
         if (impl.getColumnNames().contains("implementation")) {
-            StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"), Boolean.parseBoolean(row.getCell("continue on failure")), appendCode, row.getCell("error type"));
+            StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"),
+                    Boolean.parseBoolean(row.getCell("continue on failure")), appendCode,
+                    row.getCell("error type"), row.getCell("implementation dir"));
             getCurrentProject().implementStep(stepImpl);
         }
     }
@@ -443,22 +455,22 @@ public abstract class GaugeProject {
     public abstract void configureCustomScreengrabber(String stubScreenshot) throws IOException;
 
     public ExecutionSummary rerunFailedWithLogLevel() throws Exception {
-        return execute(new String[]{"run", "--log-level=debug", "--failed"});
+        return execute(new String[]{"run", "--log-level=debug", "--failed"}, null);
     }
 
     public ExecutionSummary rerunFailedWithSpecificDir() throws Exception {
-        return execute(new String[]{"run", "specs", "--failed"});
+        return execute(new String[]{"run", "specs", "--failed"}, null);
     }
 
     public ExecutionSummary executeRepeatWithFailed() throws Exception {
-        return execute(new String[]{"run", "--repeat", "--failed"});
+        return execute(new String[]{"run", "--repeat", "--failed"}, null);
     }
 
     public ExecutionSummary repeatLastRunWithLogLevel() throws Exception {
-        return execute(new String[]{"run", "--log-level=debug", "--repeat"});
+        return execute(new String[]{"run", "--log-level=debug", "--repeat"}, null);
     }
 
     public ExecutionSummary repeatLastRunWithSpecificDir() throws Exception {
-        return execute(new String[]{"run", "specs", "--repeat"});
+        return execute(new String[]{"run", "specs", "--repeat"}, null);
     }
 }
