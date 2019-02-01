@@ -6,6 +6,8 @@ import com.thoughtworks.gauge.test.common.ExecutionSummary;
 import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
 import java.io.IOException;
+import java.util.HashMap;
+
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -89,6 +91,13 @@ public class Execution {
     @Step("Execute the current project and ensure failure")
     public void executeCurrentProjectAndEnsureFailure() throws Exception {
         assertOn(getCurrentProject().execute(false), false);
+    }
+
+    @Step("Ensure success while executing current project with environment variables <table>")
+    public void implementation1(Table envVariables) throws Exception {
+        HashMap<String, String> envVars = new HashMap<>();
+        envVariables.getTableRows().stream().forEach(row -> envVars.put(row.getCell("Environment Variable"), row.getCell("Value")));
+        assertOn(getCurrentProject().execute(envVars), true);
     }
 
     @Step("Execute the current project in fail-safe mode and ensure success")
