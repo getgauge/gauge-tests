@@ -11,6 +11,7 @@ public class StepImpl {
     private boolean isValidStatement;
     private final String implementationDir;
     private List<String> errorTypes;
+    private String packageName;
 
     public StepImpl(String stepText, String implementation, boolean continueOnFailure, boolean isValidStatement, String errorTypes, String implementationDir) {
         this.stepText = stepText;
@@ -51,5 +52,13 @@ public class StepImpl {
 
     public String getImplementationDir() {
         return implementationDir;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

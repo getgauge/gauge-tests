@@ -414,6 +414,8 @@ public abstract class GaugeProject {
             StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"),
                     Boolean.parseBoolean(row.getCell("continue on failure")), appendCode,
                     row.getCell("error type"), row.getCell("implementation dir"));
+            if(impl.getColumnNames().contains("package_name"))
+                stepImpl.setPackageName(row.getCell("package_name"));
             getCurrentProject().implementStep(stepImpl);
         }
     }

@@ -45,7 +45,7 @@ public class JavaProject extends GaugeProject {
         ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
 
         String className = Util.getUniqueName();
-        StringBuilder classText = createClassTeplate(className, stepValues);
+        StringBuilder classText = createClassTeplate(className, stepValues, stepImpl.getPackageName());
         if (stepImpl.isContinueOnFailure()) {
             classText.insert(0, "import com.thoughtworks.gauge.ContinueOnFailure;\n");
             classText.append("\n@ContinueOnFailure");
@@ -204,8 +204,10 @@ public class JavaProject extends GaugeProject {
         }
     }
 
-    private StringBuilder createClassTeplate(String className, ArrayList<String> stepTexts) {
+    private StringBuilder createClassTeplate(String className, ArrayList<String> stepTexts, String packageName) {
         StringBuilder classText = new StringBuilder();
+        if( packageName != null)
+            classText.append(String.format("package %s;\n", packageName));
         classText.append("import com.thoughtworks.gauge.Step;\n");
         classText.append("public class ").append(className).append("{\n");
         classText.append(createStepTeplate(stepTexts));
