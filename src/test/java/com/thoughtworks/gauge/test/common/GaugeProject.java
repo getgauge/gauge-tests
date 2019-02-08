@@ -343,9 +343,8 @@ public abstract class GaugeProject {
         command.add(String.valueOf(apiPort));
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(this.projectDir);
-        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
-
         filterConflictingEnv(processBuilder);
+        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
         Process process = processBuilder.start();
         Thread.sleep(3000);
         return process;
