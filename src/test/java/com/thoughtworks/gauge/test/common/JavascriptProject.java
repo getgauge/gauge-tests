@@ -92,10 +92,10 @@ public class JavascriptProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else if (implementation.equalsIgnoreCase("throw")) {
+        } else if (implementation.toLowerCase().startsWith("throw")) {
             builder.append("  throw new Error(\"exception raised\");\n\n");
         } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)){
-            builder.append("gauge.screenshot();");
+            builder.append("gauge.screenshot();\n\n");
         } else {
             if (appendCode) {
                 builder.append(implementation);

@@ -106,7 +106,7 @@ public class JavaProject extends GaugeProject {
             return "throw new RuntimeException();";
         } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
             return "com.thoughtworks.gauge.Gauge.captureScreenshot();";
-        } else if (implementation.equalsIgnoreCase("throw")) {
+        } else if (implementation.toLowerCase().startsWith("throw")) {
             return "throw new " + implementation.trim().substring(implementation.indexOf(' ')) + "();";
         } else {
             if (appendCode) {
