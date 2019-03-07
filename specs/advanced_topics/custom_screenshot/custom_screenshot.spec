@@ -1,8 +1,8 @@
 # Custom Screenshot
 
-tags: java, csharp, ruby, python, js
-
 ## Screenshot using custom logic
+
+tags: java, csharp, ruby, python, js
 
 * Initialize a project named "custom_screenshot" without example spec
 
@@ -29,6 +29,8 @@ tags: java, csharp, ruby, python, js
    |Second step|
 
 ## Capture screenshot using custom screenshot grabber during test execution
+
+tags: java, ruby, python, js
 
 * Initialize a project named "custom_screenshot" without example spec
 
