@@ -81,7 +81,7 @@ public class JavascriptProject extends GaugeProject {
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
-        if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
+        if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("  console.log(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 if (paramTypes.get(i).toLowerCase().equals("string")) {
@@ -92,8 +92,10 @@ public class JavascriptProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else if (implementation.toLowerCase().startsWith("throw")) {
+        } else if (implementation.equalsIgnoreCase("throw")) {
             builder.append("  throw new Error(\"exception raised\");\n\n");
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)){
+            builder.append("gauge.screenshot();");
         } else {
             if (appendCode) {
                 builder.append(implementation);

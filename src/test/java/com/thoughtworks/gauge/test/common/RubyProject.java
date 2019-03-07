@@ -118,7 +118,7 @@ public class RubyProject extends GaugeProject {
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
-        if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
+        if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("puts ");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 builder.append("\"param").append(i).append("=\"+").append("param").append(i).append(".to_s");
@@ -127,8 +127,10 @@ public class RubyProject extends GaugeProject {
                 }
             }
             builder.append("\n");
-        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
+        } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             builder.append("raise \" exception raised \" \n \n");
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
+            builder.append("Gauge.capture\n \n");
         } else {
             if (appendCode) {
                 builder.append(implementation);

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PythonProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
-    public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory, continue_on_failure\n";
+    public static final String IMPORT = "from getgauge.python import step, after_step, before_step, after_scenario, before_scenario, after_spec, before_spec, after_suite, before_suite, Messages, DataStoreFactory, continue_on_failure, Screenshots\n";
 
     public PythonProject(String projName) throws IOException {
         super("python", projName);
@@ -82,7 +82,7 @@ public class PythonProject extends GaugeProject {
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
-        if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
+        if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("    print(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 if (paramTypes.get(i).toLowerCase().equals("string")) {
@@ -93,8 +93,10 @@ public class PythonProject extends GaugeProject {
                 }
             }
             builder.append(")\n");
-        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
+        } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             builder.append("    raise Exception('I do not know Python!')\n");
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
+            builder.append("    Screenshots.capture_screenshot()");
         } else {
             if (appendCode) {
                 builder.append(implementation);

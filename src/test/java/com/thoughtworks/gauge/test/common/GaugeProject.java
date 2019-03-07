@@ -29,6 +29,7 @@ public abstract class GaugeProject {
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
+    static final String CAPTURE_SCREENSHOT = "capture screenshot";
     private static ThreadLocal<GaugeProject> currentProject = ThreadLocal.withInitial(() -> null);
     private static String executableName = "gauge";
     private static String specsDirName = "specs";

@@ -93,7 +93,7 @@ public class JavaProject extends GaugeProject {
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
-        if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
+        if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("System.out.println(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 builder.append("\"param").append(i).append("=\"+").append("param").append(i);
@@ -102,9 +102,11 @@ public class JavaProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
+        } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
-        } else if (implementation.toLowerCase().startsWith("throw")) {
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
+            return "com.thoughtworks.gauge.Gauge.captureScreenshot();";
+        } else if (implementation.equalsIgnoreCase("throw")) {
             return "throw new " + implementation.trim().substring(implementation.indexOf(' ')) + "();";
         } else {
             if (appendCode) {

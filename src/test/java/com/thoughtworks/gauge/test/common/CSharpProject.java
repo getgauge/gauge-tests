@@ -72,7 +72,7 @@ public class CSharpProject extends GaugeProject {
     @Override
     public String getStepImplementation(StepValueExtractor.StepValue stepValue, String implementation, List<String> paramTypes, boolean appendCode) {
         StringBuilder builder = new StringBuilder();
-        if (implementation.toLowerCase().equals(PRINT_PARAMS)) {
+        if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("Console.WriteLine(");
             for (int i = 0; i < stepValue.paramCount; i++) {
                 builder.append("\"param").append(i).append("=\"+").append("param").append(i);
@@ -81,8 +81,10 @@ public class CSharpProject extends GaugeProject {
                 }
             }
             builder.append(");\n");
-        } else if (implementation.toLowerCase().equals(THROW_EXCEPTION)) {
+        } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             return "throw new SystemException();";
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
+            return "GaugeScreenshots.Capture();";
         } else {
             if (appendCode) {
                 builder.append(implementation);
