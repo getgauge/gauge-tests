@@ -87,7 +87,7 @@ public class DotnetProject extends GaugeProject {
         } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             return "throw new SystemException();";
         } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
-            return "GaugeScreenshots.Capture();";
+            return "Gauge.CSharp.Lib.GaugeScreenshots.Capture();";
         } else {
             if (appendCode) {
                 builder.append(implementation);
