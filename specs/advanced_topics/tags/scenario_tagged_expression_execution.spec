@@ -1,7 +1,7 @@
 Scenario Tagged Expression Execution
 ====================================
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "scen_tagged_expression_exec" without example spec
 * Create a scenario "first scenario" in specification "tags_expression_execution" with the following steps with implementation 

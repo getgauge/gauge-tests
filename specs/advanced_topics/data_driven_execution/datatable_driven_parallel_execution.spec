@@ -1,7 +1,7 @@
 Datatable Driven Parallel Execution
 ===================================
 
-tags: java, csharp, ruby, python, js, parallel_data_table
+tags: java, csharp, dotnet, ruby, python, js, parallel_data_table
 
 * Initialize a project named "parallel_data_driven_spec" without example spec
 

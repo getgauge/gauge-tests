@@ -1,7 +1,7 @@
 Continue on failure in concepts
 ===============================
 
-tags: continueOnFailure, java, csharp, ruby, python, js
+tags: continueOnFailure, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "continueOnFailure" without example spec
 

@@ -1,7 +1,7 @@
 Step Refactoring through API
 ============================
 
-tags: refactoring, api, java, csharp, ruby, python, js
+tags: refactoring, api, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "refactor_thru_api" without example spec
 

@@ -1,7 +1,7 @@
 Execute specs in a folder
 =========================
 
-tags: spec, java, csharp, ruby, python, js
+tags: spec, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "scenarios_execution" without example spec
 

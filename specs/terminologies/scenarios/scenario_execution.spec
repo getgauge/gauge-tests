@@ -1,7 +1,7 @@
 Scenario execution
 ==================
 
-tags: scenario, java, csharp, ruby, python, js
+tags: scenario, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "scenarios_execution" without example spec
 

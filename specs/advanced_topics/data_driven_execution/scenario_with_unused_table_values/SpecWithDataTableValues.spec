@@ -1,7 +1,7 @@
 Scenario execution count depends on Data Table value usage
 ==========================================================
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "Data_Driven_execution" without example spec
 

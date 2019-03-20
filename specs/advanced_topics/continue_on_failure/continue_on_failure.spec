@@ -14,7 +14,7 @@ tags: continueOnFailure, java
 Continue execution on any error/exception in "Continue on Failure" step
 -----------------------------------------------------------------------
 
-tags: csharp, ruby, python, js
+tags: csharp, dotnet, ruby, python, js
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 
@@ -52,7 +52,7 @@ tags: csharp, ruby, python, js
 Stop execution on failure of some other step
 --------------------------------------------
 
-tags: csharp, ruby, python, js
+tags: csharp, dotnet, ruby, python, js
 
 * Create a scenario "continueOnFailureScenario" in specification "continueOnFailureSpec" with the following steps with implementation 
 

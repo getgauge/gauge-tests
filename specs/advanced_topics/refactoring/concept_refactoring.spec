@@ -1,7 +1,7 @@
 Concept Refactoring
 ===================
 
-tags: refactoring, java, csharp, ruby, python, js
+tags: refactoring, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "concept_refactoring" without example spec
 * Create concept "concept with <param0> and <param1>" with following steps 

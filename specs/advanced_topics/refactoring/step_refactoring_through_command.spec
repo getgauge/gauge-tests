@@ -50,7 +50,7 @@ tags: java, python, js
 Rename step
 -----------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "First step" to "New step"
 * The step "First step" should no longer be used
@@ -60,7 +60,7 @@ tags: java, csharp, ruby, python, js
 Rephrase simple step
 --------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <a>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -70,7 +70,7 @@ tags: java, csharp, ruby, python, js
 Rephrase step having new parameters
 -----------------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "Step with <a> <b>" to "Step having <b> <c> and <a>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -80,7 +80,7 @@ tags: java, csharp, ruby, python, js
 Rephrase step removing parameters
 ---------------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "Step with <a> <b>" to "Step having <b> and <c>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -90,7 +90,7 @@ tags: java, csharp, ruby, python, js
 Rephrase step with all new parameters
 -------------------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "Step with <a> <b>" to "Step having <d> and <c>"
 * The step "Step with \"two\" \"params\"" should no longer be used
@@ -100,7 +100,7 @@ tags: java, csharp, ruby, python, js
 Refactor a non-Existing step
 ----------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "hello" to "world"
 * The error message <file:resources/refactor_console.txt> should be displayed on console
@@ -108,7 +108,7 @@ tags: java, csharp, ruby, python, js
 Rename an unimplemented step
 ----------------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Refactor step "Repeated First step" to "again Repeated First step"
 * The step "Repeated First step" should no longer be used
@@ -127,7 +127,7 @@ tags: java, js
 Rename in teardown
 ------------------
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Add the following teardown steps in specification "Basic spec execution2"
 

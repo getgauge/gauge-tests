@@ -1,7 +1,7 @@
 Refactoring with special characters
 ===================================
 
-tags: refactoring, java, csharp, ruby, python, js
+tags: refactoring, java, csharp, dotnet, ruby, python, js
 
 Rephrase step with special and keyword parameters
 -------------------------------------------------

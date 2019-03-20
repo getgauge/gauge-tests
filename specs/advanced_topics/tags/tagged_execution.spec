@@ -1,7 +1,7 @@
 Tagged Execution
 ================
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "tagged_exec" without example spec
 

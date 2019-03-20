@@ -1,7 +1,7 @@
 Spec Formatting
 ===============
 
-tags: java, csharp, ruby, python, js
+tags: java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "formatting" without example spec
 

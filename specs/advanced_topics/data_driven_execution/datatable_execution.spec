@@ -1,7 +1,7 @@
 Datatable Execution
 ===================
 
-tags: Data-table, execution, java, csharp, ruby, python, js
+tags: Data-table, execution, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "datatable_exec" without example spec
 

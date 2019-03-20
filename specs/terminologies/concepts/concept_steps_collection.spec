@@ -1,7 +1,7 @@
 Concept Steps Collection
 ========================
 
-tags: api, java, csharp, ruby, python, js
+tags: api, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "concept_steps_collection" with the example specs
 

@@ -1,7 +1,7 @@
 Rerun Failed Specs
 ==================
 
-tags: execution, rerun, java, csharp, ruby, python, js
+tags: execution, rerun, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "spec_exec" without example spec
 

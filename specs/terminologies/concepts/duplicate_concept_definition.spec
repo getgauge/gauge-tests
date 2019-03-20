@@ -1,7 +1,7 @@
 Duplicate concept definition
 ============================
 
-tags: java, csharp, ruby, python
+tags: java, csharp, dotnet, ruby, python
 
 Duplicate concept definition
 ----------------------------

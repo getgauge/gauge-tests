@@ -1,7 +1,7 @@
 Tagged hooks spec level
 =======================
 
-tags: tagged_hooks, execution_hooks, java, csharp, ruby, python, js
+tags: tagged_hooks, execution_hooks, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "tagged_hook_spec" without example spec
 * Create a scenario "First scenario" in specification "First Spec" with the following steps with implementation 

@@ -1,7 +1,7 @@
 Step Value
 ==========
 
-tags: api, java, csharp, ruby, python, js
+tags: api, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "step_value" without example spec
 
