@@ -301,6 +301,12 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--parallel", "--verbose", "specs/"}, null);
     }
 
+    public ExecutionSummary executeInSerialAndThenParallel(String tagName, int nStreams) throws Exception {
+        HashMap<String, String> envVars = new HashMap<>();
+        envVars.put("allow_filtered_parallel_execution", "true");
+        return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--only", tagName}, envVars);
+    }
+
     public ExecutionSummary executeInParallel(int nStreams) throws Exception {
         return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--verbose", "specs/"}, null);
     }

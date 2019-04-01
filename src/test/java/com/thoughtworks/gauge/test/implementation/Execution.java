@@ -68,6 +68,11 @@ public class Execution {
         assertOn(getCurrentProject().executeInParallel(), true);
     }
 
+    @Step("Execute specs with tags <tagName> in <n> parallel streams and other specs serially")
+    public void executeCurrentProjectInSerialAndParallelAndEnsureSuccess(String tagName, int n) throws Exception {
+        assertOn(getCurrentProject().executeInSerialAndThenParallel(tagName, n), true);
+    }
+
     @Step("Execute the current project in parallel in <n> streams and ensure failure")
     public void executeCurrentProjectInParallelStreamsAndEnsureFailure(int n) throws Exception {
         assertOn(getCurrentProject().executeInParallel(n), false);
