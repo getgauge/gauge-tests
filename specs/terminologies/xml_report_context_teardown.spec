@@ -1,8 +1,10 @@
 # XML Report for Context and Teardown
 
-tags: xml-report
+tags: xml-report, java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "context_teardown_exec" without example spec
+
+* Add xml report plugin in manifest.json
 
 ## Context steps should appear for all scenarios
 

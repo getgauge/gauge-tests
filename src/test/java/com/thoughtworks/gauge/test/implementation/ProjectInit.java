@@ -6,6 +6,8 @@ import com.thoughtworks.gauge.test.common.Util;
 import com.thoughtworks.gauge.test.common.builders.DataFileBuilder;
 import com.thoughtworks.gauge.test.common.builders.ProjectBuilder;
 import org.assertj.core.api.SoftAssertions;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 
 import java.io.File;
@@ -120,5 +122,14 @@ public class ProjectInit {
         new DataFileBuilder()
                 .withTextFile(name)
                 .build();
+    }
+
+    @Step("Add xml report plugin in manifest.json")
+    public void AddXmlPlugin() throws IOException, JSONException {
+        String manifest = Util.combinePath(currentProject.get().getProjectDir().getAbsolutePath(), "manifest.json");
+        String json = Util.read(manifest);
+        JSONObject jsonObject = new JSONObject(json);
+        jsonObject.append("Plugins", "xml-report");
+        Util.writeToFile(manifest, jsonObject.toString());
     }
 }
