@@ -38,13 +38,18 @@ tags: java, csharp, dotnet, ruby, python, js
    |-------------------|----------------------------|
    |fifth Scenario step|"inside fifth scenario step"|
 
+* Add tags "tagOne" to specification "specification six"
+* Create a scenario "six scenario" in specification "specification six" with the following steps with implementation
 
+   |step text          |implementation              |
+   |-------------------|----------------------------|
+   |sixth Scenario step|"inside six scenario step"|
 
 ## Execute specs before parallel execution
 
 * Execute specs with tags "parallelizable" in "2" parallel streams and other specs serially
 
-* Console should contain "Executing 1 specs in serial."
+* Console should contain "Executing 2 specs in serial."
 
 * Console should contain "Executing in 2 parallel streams."
 
@@ -52,8 +57,8 @@ tags: java, csharp, dotnet, ruby, python, js
 
    |Statistics name|executed|passed|failed|skipped|
    |---------------|--------|------|------|-------|
-   |Specifications |5       |5     |0     |0      |
-   |Scenarios      |5       |5     |0     |0      |
+   |Specifications |6       |6     |0     |0      |
+   |Scenarios      |6       |6     |0     |0      |
 
 * Console should contain "Successfully generated html-report to =>"
 
@@ -61,4 +66,25 @@ tags: java, csharp, dotnet, ruby, python, js
 
    |totalCount|passCount|failCount|skippedCount|
    |----------|---------|---------|------------|
-   |5         |5        |0        |0           |
+   |6         |6        |0        |0           |
+
+* Execute specs with tags "tagOne | non parallelizable" in "1" parallel streams and other specs serially
+
+* Console should contain "Executing 4 specs in serial."
+
+* Console should contain "Executing in 1 parallel streams."
+
+* Statistics generated should have
+
+   |Statistics name|executed|passed|failed|skipped|
+   |---------------|--------|------|------|-------|
+   |Specifications |6       |6     |0     |0      |
+   |Scenarios      |6       |6     |0     |0      |
+
+* Console should contain "Successfully generated html-report to =>"
+
+* verify statistics in html with
+
+   |totalCount|passCount|failCount|skippedCount|
+   |----------|---------|---------|------------|
+   |6         |6        |0        |0           |
