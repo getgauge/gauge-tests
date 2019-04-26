@@ -2,11 +2,15 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.ExecutionSummary;
 import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,6 +45,22 @@ public class Execution {
     @Step("Repeat last run with specific directory")
     public void repeatLastRunWithSpecificDirectory() throws Exception {
         assertThat(getCurrentProject().repeatLastRunWithSpecificDir());
+    }
+
+    @Step("Execute spec <specName> with following flags ensure failure <flagsTable>")
+    public void executeSpecsWithFlags(String specName, Table flagsTable) throws Exception {
+        Specification spec = getCurrentProject().findSpecification(specName);
+
+        List<TableRow> tableRows = flagsTable.getTableRows();
+        Map<String, String> flags = new HashMap<String, String>();
+        for (int i = 0; i < tableRows.size(); i++) {
+            TableRow tableRow = tableRows.get(i);
+            String flagName = tableRow.getCell("flag");
+            String values = tableRow.getCell("values");
+            flags.put(flagName, values);
+        }
+        assertThat(spec).isNotNull();
+        assertOn(getCurrentProject().executeSpecWithFlags(specName, flags), false);
     }
 
     public enum Result {

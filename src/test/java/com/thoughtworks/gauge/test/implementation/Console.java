@@ -4,6 +4,7 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.datastore.DataStoreFactory;
 import com.thoughtworks.gauge.test.common.Util;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -56,7 +57,16 @@ public class Console {
         assertThat(names).asList().hasSize(duplicateConceptNumbers);
 
         for (String s : names) {
-            assertThat(output).contains(s+":1");
+            assertThat(output).contains(s + ":1");
+        }
+    }
+
+    @Step("Console should contain following output for <count> times <table>")
+    public void conatinsInformationOnConsoleForTimes(int count, Table consoleoutPut) throws IOException {
+        String output = getCurrentProject().getStdOut();
+        for (String s : consoleoutPut.getColumnValues(0)) {
+            int actualCount = StringUtils.countMatches(output, s);
+            assertThat(actualCount).isEqualTo(count);
         }
     }
 }

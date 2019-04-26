@@ -29,6 +29,7 @@ public abstract class GaugeProject {
     private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
+    static final String FAILING_IMPLEMENTATION = "failing implementation";
     static final String CAPTURE_SCREENSHOT = "capture screenshot";
     private static ThreadLocal<GaugeProject> currentProject = ThreadLocal.withInitial(() -> null);
     private static String executableName = "gauge";
@@ -480,5 +481,30 @@ public abstract class GaugeProject {
 
     public ExecutionSummary repeatLastRunWithSpecificDir() throws Exception {
         return execute(new String[]{"run", "specs", "--repeat"}, null);
+    }
+
+    public ExecutionSummary executeSpecWithFlags(String specName, Map<String, String> flags) throws Exception {
+
+        ArrayList<String> cmdArgs = new ArrayList<String>();
+        cmdArgs.add("run");
+        cmdArgs.add("--simple-console");
+        cmdArgs.add("--verbose");
+        for (Map.Entry<String, String> entry : flags.entrySet()) {
+            String key = entry.getKey();
+            cmdArgs.add(ensureFlagFormat(key));
+            cmdArgs.add(entry.getValue());
+        }
+        cmdArgs.add(String.format("specs%s%s%s", File.separator, Util.getSpecName(specName), ".spec"));
+        String[] args = cmdArgs.toArray(new String[cmdArgs.size()]);
+        return execute(args, null);
+
+
+    }
+
+    private String ensureFlagFormat(String flag) {
+        if (flag.startsWith("--") || flag.startsWith("-"))
+            return flag;
+        String prefix = flag.length() > 1 ? "--" : "-";
+        return String.format("%s%s", prefix, flag);
     }
 }

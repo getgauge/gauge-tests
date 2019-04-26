@@ -104,6 +104,8 @@ public class JavaProject extends GaugeProject {
             builder.append(");\n");
         } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
+        } else if (implementation.equalsIgnoreCase(FAILING_IMPLEMENTATION)) {
+                return "assertThat(false).isTrue();";
         } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
             return "com.thoughtworks.gauge.Gauge.captureScreenshot();";
         } else if (implementation.toLowerCase().startsWith("throw")) {
@@ -211,6 +213,7 @@ public class JavaProject extends GaugeProject {
         if( packageName != null)
             classText.append(String.format("package %s;\n", packageName));
         classText.append("import com.thoughtworks.gauge.Step;\n");
+        classText.append("import static org.assertj.core.api.Assertions.*;\n\n");
         classText.append("public class ").append(className).append("{\n");
         classText.append(createStepTeplate(stepTexts));
         return classText;
