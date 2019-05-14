@@ -2,6 +2,8 @@ GAUGE testing GAUGE!
 ====================
 [![Gauge Badge](http://getgauge.io/Gauge_Badge.svg)](http://getgauge.io)
 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+
 Tests for Gauge Command-Line Utility using Gauge
 
 ### Steps to get started
