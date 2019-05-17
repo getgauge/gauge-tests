@@ -24,3 +24,7 @@ testLogs
 resources/LocalTemplates/java
 resources/LocalTemplates/python
 resources/LocalTemplates/js
+bin/
+.gradle
+.classpath
+.project
