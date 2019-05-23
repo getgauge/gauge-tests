@@ -25,6 +25,7 @@ resources/LocalTemplates/java
 resources/LocalTemplates/python
 resources/LocalTemplates/js
 bin/
+src/**/*.class
 .gradle
 .classpath
 .project

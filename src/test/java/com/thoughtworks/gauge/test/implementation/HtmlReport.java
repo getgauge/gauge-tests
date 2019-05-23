@@ -34,7 +34,7 @@ public class HtmlReport {
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
-        Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
+        Selectors<Node,W3CNode> selectors = new Selectors<Node,W3CNode>(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
         int actualNumberOfTimes = 0;
         for (Node div : divs) {
@@ -61,7 +61,7 @@ public class HtmlReport {
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
-        Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
+        Selectors<Node, W3CNode> selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
         String elementSelector = null;
         String elementTypeName = null;
         switch (elementType) {
@@ -75,7 +75,7 @@ public class HtmlReport {
         assertThat(divs.size() > 0);
         for (Node div : divs) {
             scenarios.getColumnValues(elementTypeName).stream().filter(scenario -> div.getTextContent().contains(scenario)).forEach(scenario -> {
-                Selectors errorSelectors = new Selectors(new W3CNode(div.getParentNode()));
+                Selectors<Node, W3CNode> errorSelectors = new Selectors<>(new W3CNode(div.getParentNode()));
                 Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
                 assertThat(actual).isNotNull();
@@ -92,11 +92,11 @@ public class HtmlReport {
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
-        Selectors selectors = new Selectors(new W3CNode(page.getDocumentElement()));
+        Selectors<Node, W3CNode>  selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
         for (Node div : divs) {
             stepTexts.getColumnValues("step text").stream().filter(stepText -> div.getTextContent().contains(stepText)).forEach(stepText -> {
-                Selectors errorSelectors = new Selectors(new W3CNode(div.getParentNode()));
+                Selectors<Node, W3CNode>  errorSelectors = new Selectors<>(new W3CNode(div.getParentNode()));
                 Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
                 assertThat(actual).isEqualTo(expected);

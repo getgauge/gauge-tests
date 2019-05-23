@@ -12,6 +12,7 @@ import java.util.List;
 public class Concept {
 
     @Step("Create concept <concept name> with following steps <steps table>")
+    @SuppressWarnings("unchecked")
     public void createConcept(String conceptName, Table steps) throws Exception {
         com.thoughtworks.gauge.test.common.Concept concept = new ConceptBuilder()
                 .withName(conceptName)

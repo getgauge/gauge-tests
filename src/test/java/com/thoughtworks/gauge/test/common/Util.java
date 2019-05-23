@@ -36,7 +36,7 @@ public class Util {
     }
 
     public static String read(String absolutePath) throws IOException {
-        return FileUtils.readFileToString(new File(absolutePath));
+        return FileUtils.readFileToString(new File(absolutePath), "UTF-8");
     }
 
     public static void appendToFile(String absolutePath, String data) throws IOException {

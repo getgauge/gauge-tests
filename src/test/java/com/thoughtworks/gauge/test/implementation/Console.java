@@ -47,6 +47,7 @@ public class Console {
     }
 
     @Step("Console should contain <duplicateConceptNumbers> duplicate concept definition list <conceptName>")
+    @SuppressWarnings("unchecked")
     public void consoleShouldContainDuplicateConceptDefinitionList(int duplicateConceptNumbers, String conceptName) throws IOException {
         String output = getCurrentProject().getStdOut();
 
