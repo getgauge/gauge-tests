@@ -1,6 +1,6 @@
 # XML Report for Context and Teardown
 
-tags: xml-report, java, csharp, dotnet, ruby, python, js
+tags: xml-report
 
 * Initialize a project named "context_teardown_exec" without example spec
 

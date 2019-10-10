@@ -1,6 +1,6 @@
 HTML Report for Context and Teardown
 ====================================
-tags: html-report, java, csharp, dotnet, ruby, python, js
+tags: html-report
 
 * Initialize a project named "context_teardown_exec" without example spec
 
