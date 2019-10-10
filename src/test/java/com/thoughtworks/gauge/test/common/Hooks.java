@@ -46,7 +46,7 @@ public class Hooks {
         try {
             FileUtils.deleteDirectory(dir);
         } catch (IOException e) {
-            System.err.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
+            System.out.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
         }
     }
 }
