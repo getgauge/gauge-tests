@@ -114,7 +114,7 @@ public class JavascriptProject extends GaugeProject {
     @Override
     public void createHookWithException(String hookLevel, String hookType) throws IOException {
         StringBuilder jsFileText = new StringBuilder();
-        jsFileText.append(String.format("gauge.hooks.%s%s(", hookType.toLowerCase(), toTitleCase(hookLevel)));
+        jsFileText.append(String.format("%s%s(", hookType.toLowerCase(), toTitleCase(hookLevel)));
         jsFileText.append("function () {\nthrow new Error(\"exception was raised\");\n}");
         jsFileText.append(");\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".js"), jsFileText.toString());
