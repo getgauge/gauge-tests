@@ -46,7 +46,9 @@ public class RubyProject extends GaugeProject {
             try {
                 synchronized (BUNDLE_INSTALL_LOCK) {
                     Files.createFile(Paths.get(templatePath.toString(), ".buildlock"));
-                    ProcessBuilder processBuilder = new ProcessBuilder("bundle", "install", "--path=vendor/bundle");
+                    String osName = System.getProperty("os.name").toLowerCase();
+                    String bundleCommand = osName.contains("win") ? "bundle.bat" : "bundle";
+                    ProcessBuilder processBuilder = new ProcessBuilder(bundleCommand, "install", "--path=vendor/bundle");
                     processBuilder.directory(templatePath.toFile());
                     Process process = processBuilder.start();
                     BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
