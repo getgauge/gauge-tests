@@ -50,6 +50,7 @@ public class RubyProject extends GaugeProject {
                     String bundleCommand = osName.contains("win") ? "bundle.bat" : "bundle";
                     ProcessBuilder processBuilder = new ProcessBuilder(bundleCommand, "install", "--path=vendor/bundle");
                     processBuilder.directory(templatePath.toFile());
+                    processBuilder.environment().remove("CLASSPATH");
                     Process process = processBuilder.start();
                     BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
                     String line;
