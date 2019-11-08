@@ -7,6 +7,7 @@ import com.thoughtworks.gauge.connection.GaugeConnection;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import com.thoughtworks.gauge.datastore.DataStoreFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -365,6 +366,8 @@ public abstract class GaugeProject {
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+        String folderName = (String) DataStoreFactory.getScenarioDataStore().get("log_proj_name");
+        String logFolder = Util.combinePath(new File("./testLogs").getAbsolutePath(), folderName);
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
 
         filterParentProcessGaugeEnvs(processBuilder);
@@ -374,6 +377,7 @@ public abstract class GaugeProject {
         processBuilder.environment().put("screenshot_on_failure", "true");
         processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
         processBuilder.environment().put("PYTHONUNBUFFERED", "1");
+        processBuilder.environment().put("logs_directory", logFolder);
         if(Util.getCurrentLanguage().equals("java")) processBuilder.environment().put("enable_multithreading", "true");
 
         if (envVars != null) {

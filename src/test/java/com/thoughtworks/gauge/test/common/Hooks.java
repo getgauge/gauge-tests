@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 import com.thoughtworks.gauge.AfterScenario;
+import com.thoughtworks.gauge.BeforeScenario;
 import com.thoughtworks.gauge.ExecutionContext;
+import com.thoughtworks.gauge.datastore.DataStoreFactory;
 
 import org.apache.commons.io.FileUtils;
 
@@ -19,20 +21,6 @@ public class Hooks {
             return;
         }
         File dir = getCurrentProject().getProjectDir();
-        if(context.getCurrentScenario()!=null && context.getCurrentScenario().getIsFailing())
-        {
-            String copyFrom = Util.combinePath(dir.getAbsolutePath(), System.getenv("logs_directory"));
-            String copyTo = Util.combinePath("./testLogs",context.getCurrentSpecification().getName().replaceAll(" ", "_"),context.getCurrentScenario().getName().replaceAll(" ", "_"));
-
-            File subProjectLog = new File(copyFrom);
-            if(subProjectLog.exists())
-                FileUtils.copyDirectory(subProjectLog, new File(copyTo));
-        }
-        else {
-            File testLogs = new File("./testLogs");
-            if(!testLogs.exists())
-                testLogs.mkdir();
-        }
         if (getCurrentProject().getService() != null) {
             try {
                 getCurrentProject().getService().getGaugeProcess().destroyForcibly().waitFor();
@@ -45,5 +33,12 @@ public class Hooks {
         } catch (IOException e) {
             System.out.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
         }
+    }
+
+    @BeforeScenario
+    public void setProjectName(ExecutionContext context) {
+        String folderName = Util.combinePath(context.getCurrentSpecification().getName().replaceAll(" ", "_"),
+            context.getCurrentScenario().getName().replaceAll(" ", "_"));
+        DataStoreFactory.getScenarioDataStore().put("log_proj_name", folderName);
     }
 }
