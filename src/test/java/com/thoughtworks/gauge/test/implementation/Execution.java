@@ -178,9 +178,9 @@ public class Execution {
         return ExecutionSummaryAssert.assertThat(summary).withFailMessage(getFormattedProcessOutput()).hasSuccess(result);
     }
 
-    @Step("Configure project to take custom screenshot and return <some screenshot> as byte array")
-    public void configureScreengrabber(String stubScreenshot) throws IOException {
-        getCurrentProject().configureCustomScreengrabber(stubScreenshot);
+    @Step("Configure project to take custom screenshot and return <some_screenshot.png> as screenshot file")
+    public void configureScreengrabber(String screenshotFile) throws IOException {
+        getCurrentProject().configureCustomScreengrabber(screenshotFile);
     }
 
     @Step("Repeat last run and ensure <result>")

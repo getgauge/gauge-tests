@@ -6,7 +6,7 @@ tags: java, csharp, dotnet, ruby, python, js
 
 * Initialize a project named "custom_screenshot" without example spec
 
-* Configure project to take custom screenshot and return "some screenshot" as byte array
+* Configure project to take custom screenshot and return "some_screenshot.png" as screenshot file
 
 * Create a specification "custom_screenshot" with the following contexts 
 
@@ -22,7 +22,7 @@ tags: java, csharp, dotnet, ruby, python, js
 
 * Execute the current project and ensure failure
 
-* Generated html report should have "some screenshot" in spec "custom_screenshot" for
+* Generated html report should have "some_screenshot.png" file in spec "custom_screenshot" for
 
    |step text  |
    |-----------|
@@ -34,7 +34,7 @@ tags: java, ruby, python, js
 
 * Initialize a project named "custom_screenshot" without example spec
 
-* Configure project to take custom screenshot and return "some screenshot" as byte array
+* Configure project to take custom screenshot and return "some_screenshot.png" as screenshot file
 
 * Create a specification "custom_screenshot" with the following contexts 
 
@@ -50,7 +50,7 @@ tags: java, ruby, python, js
 
 * Execute the current project and ensure success
 
-* Generated html report should have "some screenshot" in spec "custom_screenshot" for 
+* Generated html report should have "some_screenshot.png" file in spec "custom_screenshot" for
 
    |step text  |
    |-----------|

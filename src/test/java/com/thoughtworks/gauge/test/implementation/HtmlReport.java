@@ -83,12 +83,12 @@ public class HtmlReport {
         }
     }
 
-    @Step("Generated html report should have <some screenshot> in spec <spec> for <table>")
+    @Step("Generated html report should have <some_screenshot.png> file in spec <spec> for <table>")
     public void verifyCustomScreenshot(String stubScreenshot, String specName, Table stepTexts) throws IOException {
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
-        String expected = "data:image/png;base64," + Base64.getEncoder().encodeToString(stubScreenshot.getBytes());
+        String expected = "../images/" + stubScreenshot;
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
