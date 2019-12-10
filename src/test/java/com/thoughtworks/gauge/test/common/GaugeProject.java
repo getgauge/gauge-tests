@@ -47,8 +47,10 @@ public abstract class GaugeProject {
     protected GaugeProject(String language, String projName) throws IOException {
         this.language = language;
         currentProject.set(this);
-
-        this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
+        Path dir = Paths.get(".gauge");
+        
+        this.projectDir = Files.createTempDirectory(dir, projName + projectCount++ + "_").toFile();
+        System.out.println(this.projectDir.getAbsolutePath());
     }
 
     public static GaugeProject getCurrentProject() {
