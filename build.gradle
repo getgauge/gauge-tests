@@ -32,7 +32,7 @@ languages.each {lang ->
     task "${lang}FT" (type: GaugeTask) {
         doFirst {
             gauge {
-                specsDir = 'specs'
+                specsDir = 'specs/advanced_topics/continue_on_failure'
                 inParallel = true
                 env = "ci-${lang}"
                 tags = "${lang}"

@@ -28,11 +28,12 @@ public class Hooks {
                 System.out.println(String.format("Unable to stop gauge process for %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
             }
         }
-        try {
-            FileUtils.deleteDirectory(dir);
-        } catch (IOException e) {
-            System.out.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
-        }
+        System.out.println(dir.getAbsolutePath());
+        // try {
+        //     FileUtils.deleteDirectory(dir);
+        // } catch (IOException e) {
+        //     System.out.println(String.format("Could not delete project directory %s; reason : %s", dir.getAbsolutePath(), e.getMessage()));
+        // }
     }
 
     @BeforeScenario
