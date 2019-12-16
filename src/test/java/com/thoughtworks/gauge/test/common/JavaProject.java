@@ -79,12 +79,12 @@ public class JavaProject extends GaugeProject {
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
-        sb.append("import com.thoughtworks.gauge.screenshot.ICustomScreenshotGrabber;\n");
+        sb.append("import com.thoughtworks.gauge.screenshot.ICustomScreenshotWriter;\n");
         sb.append("\n");
-        sb.append("public class " + className + " implements ICustomScreenshotGrabber {\n");
+        sb.append("public class " + className + " implements ICustomScreenshotWriter {\n");
         sb.append("\n");
-        sb.append("    public byte[] takeScreenshot() {\n");
-        sb.append("        return \"" + stubScreenshot + "\".getBytes();\n");
+        sb.append("    public String takeScreenshot() {\n");
+        sb.append("        return \"" + stubScreenshot + "\";\n");
         sb.append("    }\n");
         sb.append("}");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(""), className + ".java"), sb.toString());
