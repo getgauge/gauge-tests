@@ -160,13 +160,10 @@ public class PythonProject extends GaugeProject {
     @Override
     public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
         StringBuilder sb = new StringBuilder();
-        sb.append("from getgauge.python import file_based_screen_grabber\nimport os");
+        sb.append("from getgauge.python import custom_screenshot_writer\nimport os");
         sb.append("\n");
-        sb.append("@file_based_screen_grabber\n");
+        sb.append("@custom_screenshot_writer\n");
         sb.append("def takeScreenshot():\n");
-        sb.append("    file = open(os.path.join(os.getenv(\"screenshots_dir\"), \"").append(stubScreenshot).append("\"), \"w\")\n");
-        sb.append("    file.write(\"screenshot data\")\n");
-        sb.append("    file.close()\n");
         sb.append("    return \"").append(stubScreenshot).append("\"\n");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".py"), sb.toString());
     }
