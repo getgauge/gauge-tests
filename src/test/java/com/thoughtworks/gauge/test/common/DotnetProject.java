@@ -166,14 +166,14 @@ public class DotnetProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+    public void configureCustomScreengrabber(String screenshotFile) throws IOException {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        sb.append("public class " + className + " : ICustomScreenshotGrabber {\n");
+        sb.append("public class " + className + " : ICustomScreenshotWriter {\n");
         sb.append("\n");
-        sb.append("    public byte[] TakeScreenShot() {\n");
-        sb.append("        return System.Text.Encoding.UTF8.GetBytes(\"" + stubScreenshot + "\");\n");
+        sb.append("    public string TakeScreenShot() {\n");
+        sb.append("        return \"" + screenshotFile + "\";\n");
         sb.append("    }\n");
         sb.append("}");
         Util.appendToFile(Util.combinePath(getStepImplementationsDir(), "StepImplementation.cs"), sb.toString());
