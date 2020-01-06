@@ -3,11 +3,10 @@ package com.thoughtworks.gauge.test.common;
 
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import com.thoughtworks.gauge.connection.GaugeConnection;
+import com.thoughtworks.gauge.datastore.DataStoreFactory;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import com.thoughtworks.gauge.datastore.DataStoreFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,7 +39,6 @@ public abstract class GaugeProject {
     private String language;
     private ArrayList<Specification> specifications = new ArrayList<>();
     protected String lastProcessStdout;
-    private GaugeService service;
     protected String lastProcessStderr;
     private static int projectCount = 0;
 
@@ -75,23 +73,6 @@ public abstract class GaugeProject {
             default:
                 return new UnknownProject(language, projName);
         }
-    }
-
-    public void createGaugeService() throws IOException, InterruptedException {
-        int freePortForApi = SocketUtils.findFreePortForApi();
-        Process process = getCurrentProject().executeGaugeDaemon(freePortForApi);
-        GaugeConnection gaugeConnection = initializeGaugeConnection(freePortForApi);
-        service = new GaugeService(process, gaugeConnection);
-    }
-
-    public void stopGaugeService() {
-        service.getGaugeProcess().destroyForcibly();
-    }
-
-    private static GaugeConnection initializeGaugeConnection(int apiPort) {
-        if (apiPort != -1)
-            return new GaugeConnection(apiPort);
-        return null;
     }
 
     public void addConcepts(Concept... newConcepts) {
@@ -165,7 +146,7 @@ public abstract class GaugeProject {
         }
     }
 
-    public String getStdOut() throws IOException {
+    public String getStdOut() {
         return lastProcessStdout;
     }
 
@@ -455,10 +436,6 @@ public abstract class GaugeProject {
 
     public ArrayList<Specification> getAllSpecifications() {
         return specifications;
-    }
-
-    public GaugeService getService() {
-        return service;
     }
 
     public abstract String getDataStoreWriteStatement(TableRow row, List<String> columnNames);

@@ -16,7 +16,7 @@ tags: java
    |step text |implementation                  |implementation dir               | package_name         |
    |----------|--------------------------------|---------------------------------|----------------------|
    |Print step 2|"impl inside second package"| src/test/java/impls/second_package| impls.second_package |
-   
+
 
 ## Setting single value for package_to_scane env
 

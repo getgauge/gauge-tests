@@ -1,13 +1,11 @@
 plugins {
     id 'java'
-    id 'org.gauge' version '1.7.3'
+    id 'org.gauge' version '1.8.0'
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url = 'https://dl.bintray.com/gauge/maven-gauge-java'
-    }
+    mavenLocal()
 }
 
 dependencies {
