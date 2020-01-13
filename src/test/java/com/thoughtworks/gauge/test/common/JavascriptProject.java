@@ -154,14 +154,14 @@ public class JavascriptProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+    public void configureCustomScreengrabber(String stubScreenshotFile) throws IOException {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
         sb.append("var fs = require('fs');\n");
         sb.append("\n");
-        sb.append("gauge.screenshotFn = async function () {\n");
+        sb.append("gauge.customScreenshotWriter = async function () {\n");
         sb.append("\n");
-        sb.append("    return \""+Base64.getEncoder().encodeToString(stubScreenshot.getBytes())+"\";\n");
+        sb.append("    return \""+stubScreenshotFile+"\";\n");
         sb.append("};");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".js"), sb.toString());
     }
