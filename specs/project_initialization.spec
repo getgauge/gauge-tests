@@ -2,7 +2,7 @@ Project initialization
 ======================
 
 A gauge project follows a simple structure. A Gauge project can be initialized by running
-    gauge --init <language>
+    gauge init <language>
 where the <language> can be any of the supported languages. Currently gauge supports the following languages.
 
 Initializing a new project
