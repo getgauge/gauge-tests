@@ -51,12 +51,6 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public ExecutionSummary refactorStep(String oldStep, String newStep) throws IOException, InterruptedException {
-
-        return null;
-    }
-
-    @Override
     public String getDataStoreWriteStatement(TableRow row, List<String> columnNames) {
         throw new RuntimeException("Not implemented");
     }
