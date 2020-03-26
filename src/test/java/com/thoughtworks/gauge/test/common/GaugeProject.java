@@ -322,10 +322,6 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
-    ExecutionSummary executeRefactor(String oldStep, String newStep) throws Exception {
-        return execute(new String[]{"refactor", oldStep, newStep, "specs"}, null);
-    }
-
     private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
@@ -395,10 +391,6 @@ public abstract class GaugeProject {
 
     private void filterParentProcessGaugeEnvs(ProcessBuilder processBuilder) {
         GAUGE_ENVS.stream().forEach(env -> processBuilder.environment().remove(env));
-    }
-
-    public ExecutionSummary refactorStep(String oldStep, String newStep) throws Exception {
-        return getCurrentProject().executeRefactor(oldStep, newStep);
     }
 
     public static void implement(Table impl, TableRow row, boolean appendCode) throws Exception {
