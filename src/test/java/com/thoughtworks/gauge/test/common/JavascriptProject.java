@@ -127,7 +127,7 @@ public class JavascriptProject extends GaugeProject {
 
     public void createHook(String hookLevel, String hookType, String printString, String aggregation, List<String> tags) throws IOException {
         StringBuilder jsFileText = new StringBuilder();
-        jsFileText.append(String.format("gauge.hooks.%s%s(function () {", hookType.toLowerCase(), toTitleCase(hookLevel)));
+        jsFileText.append(String.format("%s%s(function () {", hookType.toLowerCase(), toTitleCase(hookLevel)));
         jsFileText.append(String.format("  console.log(\"%s\");\n", printString));
         jsFileText.append(String.format("}, %s);\n", getOptions(aggregation, tags)));
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), Util.getUniqueName() + ".js"), jsFileText.toString());
