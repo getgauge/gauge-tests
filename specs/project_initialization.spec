@@ -54,10 +54,10 @@ tags: java, csharp, dotnet, ruby, python, js
 * In an empty directory, use default initialization of a project named "init_proj_unknown" in language "unknown"
 * Console should contain following lines in order 
 
-   |console output                                                       |
-   |---------------------------------------------------------------------|
-   |Compatible language plugin unknown is not installed.                 |
-   |Failed to install plugin 'unknown'.                                  |
-   |Reason: Invalid plugin. Could not download unknown-install.json file.|
+   |console output                                                                       |
+   |-------------------------------------------------------------------------------------|
+   |Compatible language plugin unknown is not installed.                                 |
+   |Failed to install plugin 'unknown'.                                                  |
+   |Reason: Invalid plugin name or there's a network issue while fetching plugin details.|
 
 * Directory "init_proj_unknown" should be empty
