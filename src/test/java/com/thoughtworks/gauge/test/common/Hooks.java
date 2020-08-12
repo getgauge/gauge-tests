@@ -1,15 +1,15 @@
 package com.thoughtworks.gauge.test.common;
 
-import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
+import com.thoughtworks.gauge.AfterScenario;
+import com.thoughtworks.gauge.BeforeScenario;
+import com.thoughtworks.gauge.ExecutionContext;
+import com.thoughtworks.gauge.datastore.ScenarioDataStore;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.thoughtworks.gauge.AfterScenario;
-import com.thoughtworks.gauge.BeforeScenario;
-import com.thoughtworks.gauge.ExecutionContext;
-import com.thoughtworks.gauge.datastore.DataStoreFactory;
-import org.apache.commons.io.FileUtils;
+import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 
 public class Hooks {
     @AfterScenario
@@ -30,6 +30,6 @@ public class Hooks {
     public void setProjectName(ExecutionContext context) {
         String folderName = Util.combinePath(context.getCurrentSpecification().getName().replaceAll(" ", "_"),
                 context.getCurrentScenario().getName().replaceAll(" ", "_"));
-        DataStoreFactory.getScenarioDataStore().put("log_proj_name", folderName);
+        ScenarioDataStore.put("log_proj_name", folderName);
     }
 }

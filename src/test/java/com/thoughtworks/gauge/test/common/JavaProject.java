@@ -3,13 +3,15 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.StepImpl;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class JavaProject extends GaugeProject {
     public static final String DEFAULT_AGGREGATION = "AND";
@@ -41,7 +43,7 @@ public class JavaProject extends GaugeProject {
         List<String> paramTypes = new ArrayList<>();
 
         StepValueExtractor stepValueExtractor = new StepValueExtractor();
-        StepValueExtractor.StepValue stepValue =  stepValueExtractor.getFor(stepImpl.getFirstStepText());
+        StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
 
         String className = Util.getUniqueName();
@@ -65,14 +67,14 @@ public class JavaProject extends GaugeProject {
         String dataStoreType = row.getCell("datastore type");
         String key = row.getCell("key");
         String value = row.getCell("value");
-        return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\"" + key + "\",\"" + value + "\");";
+        return "com.thoughtworks.gauge.datastore." + dataStoreType + "DataStore.put(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
-        return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\"" + key + "\"));";
+        return "System.out.println(com.thoughtworks.gauge.datastore." + dataStoreType + "DataStore.get(\"" + key + "\"));";
     }
 
     @Override
@@ -105,7 +107,7 @@ public class JavaProject extends GaugeProject {
         } else if (implementation.equalsIgnoreCase(THROW_EXCEPTION)) {
             return "throw new RuntimeException();";
         } else if (implementation.equalsIgnoreCase(FAILING_IMPLEMENTATION)) {
-                return "assertThat(false).isTrue();";
+            return "assertThat(false).isTrue();";
         } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
             return "com.thoughtworks.gauge.Gauge.captureScreenshot();";
         } else if (implementation.toLowerCase().startsWith("throw")) {
@@ -196,12 +198,11 @@ public class JavaProject extends GaugeProject {
 
     private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
         StringBuilder step = new StringBuilder();
-        if(stepTexts.size()==1){
+        if (stepTexts.size() == 1) {
             return step.append("@Step(\"").append(stepTexts.get(0)).append("\")\n");
-        }
-        else {
+        } else {
             StringBuilder commaSeparated = new StringBuilder();
-            for(String stepText:stepTexts){
+            for (String stepText : stepTexts) {
                 commaSeparated.append("\"").append(stepText).append("\",");
             }
             return step.append("@Step({").append(commaSeparated).append("})\n");
@@ -210,7 +211,7 @@ public class JavaProject extends GaugeProject {
 
     private StringBuilder createClassTeplate(String className, ArrayList<String> stepTexts, String packageName) {
         StringBuilder classText = new StringBuilder();
-        if( packageName != null)
+        if (packageName != null)
             classText.append(String.format("package %s;\n", packageName));
         classText.append("import com.thoughtworks.gauge.Step;\n");
         classText.append("import static org.assertj.core.api.Assertions.*;\n\n");

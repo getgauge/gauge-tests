@@ -2,7 +2,7 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.datastore.DataStoreFactory;
+import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.test.common.builders.ConceptBuilder;
 
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ public class Concept {
                 .withSteps(steps)
                 .build();
 
-        List<String> value = (List<String>) DataStoreFactory.getScenarioDataStore().get(conceptName);
+        List<String> value = (List<String>) ScenarioDataStore.get(conceptName);
 
         List<String> conceptNameList = value !=null ? value : new ArrayList<>();
         conceptNameList.add(concept.getConceptFile().getAbsolutePath());
 
-        DataStoreFactory.getScenarioDataStore().put(conceptName,conceptNameList);
+        ScenarioDataStore.put(conceptName,conceptNameList);
 
     }
 }
