@@ -57,5 +57,6 @@ tags: java, csharp, dotnet, ruby, python, js
    |console output                                                           |
    |-------------------------------------------------------------------------|
    |Failed to initialize project. Cannot find a Gauge template 'unknown'     |
+   |console output                                                                       |
 
 * Directory "init_proj_unknown" should be empty
