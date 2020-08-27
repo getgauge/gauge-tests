@@ -54,8 +54,8 @@ tags: java, csharp, dotnet, ruby, python, js
 * In an empty directory, use default initialization of a project named "init_proj_unknown" in language "unknown"
 * Console should contain following lines in order
 
-   |console output                                                                     |
-   |-----------------------------------------------------------------------------------|
+   |console output                                                           |
+   |-------------------------------------------------------------------------|
    |Failed to initialize project. Cannot find a Gauge template 'unknown'     |
 
 * Directory "init_proj_unknown" should be empty
