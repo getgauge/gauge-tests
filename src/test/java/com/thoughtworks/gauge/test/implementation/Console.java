@@ -2,7 +2,7 @@ package com.thoughtworks.gauge.test.implementation;
 
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.datastore.DataStoreFactory;
+import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.lang.StringUtils;
 
@@ -54,7 +54,7 @@ public class Console {
         assertThat(output).contains("[ParseError]");
         assertThat(output).contains("Duplicate concept definition found => '"+conceptName+"'");
 
-        List<String> names = (List<String>) DataStoreFactory.getScenarioDataStore().get(conceptName);
+        List<String> names = (List<String>) ScenarioDataStore.get(conceptName);
         assertThat(names).asList().hasSize(duplicateConceptNumbers);
 
         for (String s : names) {

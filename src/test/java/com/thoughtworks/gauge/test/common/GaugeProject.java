@@ -1,9 +1,8 @@
 package com.thoughtworks.gauge.test.common;
 
-
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
-import com.thoughtworks.gauge.datastore.DataStoreFactory;
+import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -343,7 +342,7 @@ public abstract class GaugeProject {
         ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
         processBuilder.directory(projectDir);
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
-        String folderName = (String) DataStoreFactory.getScenarioDataStore().get("log_proj_name");
+        String folderName = (String) ScenarioDataStore.get("log_proj_name");
         String logFolder = Util.combinePath(new File("./testLogs").getAbsolutePath(), folderName);
         String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
 

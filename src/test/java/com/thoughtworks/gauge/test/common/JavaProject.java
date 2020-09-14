@@ -65,14 +65,14 @@ public class JavaProject extends GaugeProject {
         String dataStoreType = row.getCell("datastore type");
         String key = row.getCell("key");
         String value = row.getCell("value");
-        return "com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().put(\"" + key + "\",\"" + value + "\");";
+        return "com.thoughtworks.gauge.datastore." + dataStoreType + "DataStore.put(\"" + key + "\",\"" + value + "\");";
     }
 
     @Override
     public String getDataStorePrintValueStatement(TableRow row, List<String> columnNames) {
         String dataStoreType = row.getCell(columnNames.get(3));
         String key = row.getCell(columnNames.get(1));
-        return "System.out.println(com.thoughtworks.gauge.datastore.DataStoreFactory.get" + dataStoreType + "DataStore().get(\"" + key + "\"));";
+        return "System.out.println(com.thoughtworks.gauge.datastore." + dataStoreType + "DataStore.get(\"" + key + "\"));";
     }
 
     @Override
