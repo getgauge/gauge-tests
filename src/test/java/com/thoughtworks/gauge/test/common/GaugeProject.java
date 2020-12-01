@@ -293,6 +293,12 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--verbose", "specs/"}, null);
     }
 
+    public ExecutionSummary generateSpectacleDocumentation() throws Exception {
+        String[] args = new String[]{"docs", "spectacle", "specs/"};
+        boolean success = executeGaugeCommand(args, null);
+        return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
+    }
+
     public ExecutionSummary validate() throws Exception {
         return execute(new String[]{"validate", "specs/"}, null);
     }

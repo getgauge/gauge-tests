@@ -26,6 +26,8 @@ import com.thoughtworks.gauge.gradle.*
 
 def languages = ['java', 'js', 'csharp', 'dotnet', 'ruby', 'python']
 
+def plugins = ['spectacle']
+
 languages.each {lang ->
     task "${lang}FT" (type: GaugeTask) {
         doFirst {
@@ -35,6 +37,27 @@ languages.each {lang ->
                 env = "ci-${lang}"
                 tags = "${lang}"
             }
+        }
+    }
+
+    plugins.each {plugin ->
+        task "${plugin}${lang.capitalize()}FT" (type: GaugeTask) {
+            doFirst {
+                gauge {
+                    specsDir = 'specs'
+                    inParallel = true
+                    env = "ci-${lang}"
+                    tags = "${lang} & ${plugin}"
+                }
+            }
+        }
+    }
+}
+
+plugins.each {plugin ->
+    task "${plugin}FT" {
+        dependsOn {
+            languages.collect {"${plugin}${it.capitalize()}FT"}
         }
     }
 }

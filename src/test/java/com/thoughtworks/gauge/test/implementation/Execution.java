@@ -187,4 +187,9 @@ public class Execution {
     public void repeatLastRun(Result argResult) throws Exception {
         assertOn(getCurrentProject().repeatLastRun(), argResult == Result.SUCCESS);
     }
+
+    @Step("Generate Spectacle Documentation for the current project")
+    public void generateSpectacleDocumentationForCurrentProject() throws Exception {
+        assertOn(getCurrentProject().generateSpectacleDocumentation(), true);
+    }
 }
