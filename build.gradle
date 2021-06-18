@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     testImplementation 'com.thoughtworks.gauge:gauge-java:+'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'net.sourceforge.htmlunit:htmlunit:2.50.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
     testImplementation 'org.jsoup:jsoup:1.13.1'
