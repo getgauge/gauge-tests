@@ -13,7 +13,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'net.sourceforge.htmlunit:htmlunit:2.53.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
-    testImplementation 'org.jsoup:jsoup:1.14.2'
+    testImplementation 'org.jsoup:jsoup:1.14.3'
     testImplementation 'org.assertj:assertj-core:3.21.0'
     testImplementation 'org.json:json:20200518'
 }
