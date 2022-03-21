@@ -15,7 +15,7 @@ dependencies {
     testImplementation 'se.fishtank:css-selectors:2.0'
     testImplementation 'org.jsoup:jsoup:1.14.3'
     testImplementation 'org.assertj:assertj-core:3.22.0'
-    testImplementation 'org.json:json:20211205'
+    testImplementation 'org.json:json:20220320'
 }
 
 group = 'com.thoughtworks.gauge.test'
