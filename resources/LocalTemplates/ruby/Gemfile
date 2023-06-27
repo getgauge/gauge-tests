@@ -2,7 +2,7 @@
 
     gem 'test-unit', :group => [:development, :test]
     if ENV['LOCAL_RUBY_PLUGIN_PATH'].nil?
-        gem 'gauge-ruby', '~>0.5.3', :github => 'getgauge/gauge-ruby', :branch => ENV['RUBY_PLUGIN_BRANCH'] || 'master', :group => [:development, :test]
+        gem 'gauge-ruby', '>= 0.5.3', :github => 'getgauge/gauge-ruby', :branch => ENV['RUBY_PLUGIN_BRANCH'] || 'master', :group => [:development, :test]
     else
-        gem 'gauge-ruby', '~>0.5.3', :path => ENV['LOCAL_RUBY_PLUGIN_PATH'], :group => [:development, :test]
+        gem 'gauge-ruby', '>= 0.5.3', :path => ENV['LOCAL_RUBY_PLUGIN_PATH'], :group => [:development, :test]
     end
