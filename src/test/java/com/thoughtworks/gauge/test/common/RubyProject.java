@@ -61,7 +61,7 @@ public class RubyProject extends GaugeProject {
                         CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
                         CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
 
-                        if (!process.waitFor(60, TimeUnit.SECONDS)) {
+                        if (!process.waitFor(5, TimeUnit.MINUTES)) {
                             process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
                             if (process.isAlive()) process.destroyForcibly();
                         }
