@@ -28,7 +28,7 @@ public class RubyProject extends GaugeProject {
         super("ruby", projName);
     }
 
-    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+    private StringBuilder createStepTemplate(ArrayList<String> stepTexts) {
         StringBuilder step = new StringBuilder();
         if (stepTexts.size() == 1) {
             return step.append("step '").append(stepTexts.get(0)).append("'");
@@ -60,11 +60,12 @@ public class RubyProject extends GaugeProject {
                     CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
 
                     if (!process.waitFor(60, TimeUnit.SECONDS)) {
-                        process.destroyForcibly();
+                        process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
+                        if (process.isAlive()) process.destroyForcibly();
                     }
 
-                    lastProcessStdout += stdout.get();
-                    lastProcessStderr += stderr.get();
+                    lastProcessStdout = stdout.get();
+                    lastProcessStderr = stderr.get();
 
                     if (process.exitValue() != 0) {
                         return false;
@@ -73,7 +74,7 @@ public class RubyProject extends GaugeProject {
                     Thread.currentThread().interrupt();
                     return false;
                 } catch (Exception ex) {
-                    lastProcessStderr += lastProcessStderr.concat(System.lineSeparator()).concat(ExceptionUtils.getStackTrace(ex));
+                    lastProcessStderr = ExceptionUtils.getStackTrace(ex);
                     return false;
                 } finally {
                     pool.shutdownNow();
@@ -99,7 +100,7 @@ public class RubyProject extends GaugeProject {
 
         String fileName = Util.getUniqueName();
         StringBuilder rubyCode = new StringBuilder();
-        rubyCode.append(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
+        rubyCode.append(createStepTemplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
         if (stepImpl.isContinueOnFailure()) {
             rubyCode.append(", :continue_on_failure => true");
         }

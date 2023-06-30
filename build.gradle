@@ -20,7 +20,7 @@ dependencies {
 
 group = 'com.thoughtworks.gauge.test'
 version = '0.4.0-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.11'
 
 import com.thoughtworks.gauge.gradle.*
 
