@@ -47,36 +47,40 @@ public class RubyProject extends GaugeProject {
         if (!remoteTemplate) {
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", "ruby");
+            Path lock = templatePath.resolve(".buildlock");
             synchronized (BUNDLE_INSTALL_LOCK) {
-                ExecutorService pool = Executors.newCachedThreadPool();
-                try {
-                    ProcessBuilder processBuilder = new ProcessBuilder(Util.isWindows() ? "bundle.bat" : "bundle", "install");
-                    processBuilder.directory(templatePath.toFile());
-                    processBuilder.environment().remove("CLASSPATH");
-                    Process process = processBuilder.start();
+                if (!lock.toFile().exists()) {
+                    Files.createFile(lock);
+                    ExecutorService pool = Executors.newCachedThreadPool();
+                    try {
+                        ProcessBuilder processBuilder = new ProcessBuilder(Util.isWindows() ? "bundle.bat" : "bundle", "install");
+                        processBuilder.directory(templatePath.toFile());
+                        processBuilder.environment().remove("CLASSPATH");
+                        Process process = processBuilder.start();
 
-                    CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
-                    CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
+                        CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
+                        CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
 
-                    if (!process.waitFor(60, TimeUnit.SECONDS)) {
-                        process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
-                        if (process.isAlive()) process.destroyForcibly();
-                    }
+                        if (!process.waitFor(60, TimeUnit.SECONDS)) {
+                            process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
+                            if (process.isAlive()) process.destroyForcibly();
+                        }
 
-                    lastProcessStdout = stdout.get();
-                    lastProcessStderr = stderr.get();
+                        lastProcessStdout = stdout.get();
+                        lastProcessStderr = stderr.get();
 
-                    if (process.exitValue() != 0) {
+                        if (process.exitValue() != 0) {
+                            return false;
+                        }
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
                         return false;
+                    } catch (Exception ex) {
+                        lastProcessStderr = ExceptionUtils.getStackTrace(ex);
+                        return false;
+                    } finally {
+                        pool.shutdownNow();
                     }
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    return false;
-                } catch (Exception ex) {
-                    lastProcessStderr = ExceptionUtils.getStackTrace(ex);
-                    return false;
-                } finally {
-                    pool.shutdownNow();
                 }
             }
         }
