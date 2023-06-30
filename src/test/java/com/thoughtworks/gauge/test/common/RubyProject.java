@@ -74,9 +74,11 @@ public class RubyProject extends GaugeProject {
                         }
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
+                        lock.toFile().delete();
                         return false;
                     } catch (Exception ex) {
                         lastProcessStderr = ExceptionUtils.getStackTrace(ex);
+                        lock.toFile().delete();
                         return false;
                     } finally {
                         pool.shutdownNow();
