@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RubyProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
-    private static final Boolean BUNDLE_INSTALL_LOCK = false;
+    private static final Object BUNDLE_INSTALL_LOCK = new Object();
 
     public RubyProject(String projName) throws IOException {
         super("ruby", projName);
