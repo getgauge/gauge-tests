@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class RubyProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
     private static final Object BUNDLE_INSTALL_LOCK = new Object();
+    private static final int BUNDLE_INSTALL_WAIT_MINS = 5;
 
     public RubyProject(String projName) throws IOException {
         super("ruby", projName);
@@ -51,6 +52,8 @@ public class RubyProject extends GaugeProject {
             synchronized (BUNDLE_INSTALL_LOCK) {
                 if (!lock.toFile().exists()) {
                     Files.createFile(lock);
+                    lastProcessStdout = "";
+                    lastProcessStderr = "";
                     ExecutorService pool = Executors.newCachedThreadPool();
                     try {
                         ProcessBuilder processBuilder = new ProcessBuilder(Util.isWindows() ? "bundle.bat" : "bundle", "install");
@@ -61,13 +64,14 @@ public class RubyProject extends GaugeProject {
                         CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
                         CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
 
-                        if (!process.waitFor(5, TimeUnit.MINUTES)) {
+                        if (!process.waitFor(BUNDLE_INSTALL_WAIT_MINS, TimeUnit.MINUTES)) {
+                            lastProcessStderr += "bundle install didn't complete after [" + BUNDLE_INSTALL_WAIT_MINS + "] minutes. Killing...\n";
                             process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
                             if (process.isAlive()) process.destroyForcibly();
                         }
 
-                        lastProcessStdout = stdout.get();
-                        lastProcessStderr = stderr.get();
+                        lastProcessStdout += stdout.get();
+                        lastProcessStderr += stderr.get();
 
                         if (process.exitValue() != 0) {
                             return false;
@@ -77,7 +81,7 @@ public class RubyProject extends GaugeProject {
                         lock.toFile().delete();
                         return false;
                     } catch (Exception ex) {
-                        lastProcessStderr = ExceptionUtils.getStackTrace(ex);
+                        lastProcessStderr += ExceptionUtils.getStackTrace(ex);
                         lock.toFile().delete();
                         return false;
                     } finally {
