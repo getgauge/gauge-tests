@@ -3,11 +3,11 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.StepImpl;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class RubyProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
@@ -43,35 +47,48 @@ public class RubyProject extends GaugeProject {
         if (!remoteTemplate) {
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", "ruby");
-            try {
-                synchronized (BUNDLE_INSTALL_LOCK) {
+            synchronized (BUNDLE_INSTALL_LOCK) {
+                ExecutorService pool = Executors.newCachedThreadPool();
+                try {
                     Files.createFile(Paths.get(templatePath.toString(), ".buildlock"));
-                    String osName = System.getProperty("os.name").toLowerCase();
-                    String bundleCommand = osName.contains("win") ? "bundle.bat" : "bundle";
-                    ProcessBuilder processBuilder = new ProcessBuilder(bundleCommand, "install", "--path=vendor/bundle");
+                    ProcessBuilder processBuilder = new ProcessBuilder(Util.isWindows() ? "bundle.bat" : "bundle", "install");
                     processBuilder.directory(templatePath.toFile());
                     processBuilder.environment().remove("CLASSPATH");
                     Process process = processBuilder.start();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                    String line;
-                    String newLine = System.getProperty("line.separator");
-                    lastProcessStdout = "";
-                    while ((line = br.readLine()) != null) {
-                        lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
+
+                    CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
+                    CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
+
+                    if (!process.waitFor(60, TimeUnit.SECONDS)) {
+                        process.destroyForcibly();
                     }
-                    lastProcessStderr = "";
-                    br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-                    while ((line = br.readLine()) != null) {
-                        lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
-                    }
-                    process.waitFor();
-                    if (process.exitValue() != 0)
+
+                    lastProcessStdout += stdout.get();
+                    lastProcessStderr += stderr.get();
+
+                    if (process.exitValue() != 0) {
                         return false;
+                    }
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    return false;
+                } catch (Exception ex) {
+                    lastProcessStderr += lastProcessStderr.concat(System.lineSeparator()).concat(ExceptionUtils.getStackTrace(ex));
+                    return false;
+                } finally {
+                    pool.shutdownNow();
                 }
-            } catch (IOException ex) {
             }
         }
         return super.initialize(remoteTemplate);
+    }
+
+    private static String readSafely(InputStream stream) {
+        try (InputStream is = stream) {
+            return IOUtils.toString(is, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
     }
 
     @Override
