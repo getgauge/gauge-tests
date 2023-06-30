@@ -30,6 +30,7 @@ public abstract class GaugeProject {
     static final String THROW_EXCEPTION = "throw exception";
     static final String FAILING_IMPLEMENTATION = "failing implementation";
     static final String CAPTURE_SCREENSHOT = "capture screenshot";
+    public static final String CLEANUP_DIR_AFTER_SCENARIO_RUN = "cleanup_dir_after_scenario_run";
     private static ThreadLocal<GaugeProject> currentProject = ThreadLocal.withInitial(() -> null);
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
@@ -321,20 +322,6 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
-    private Process executeGaugeDaemon(Integer apiPort) throws IOException, InterruptedException {
-        ArrayList<String> command = new ArrayList<>();
-        command.add(executableName);
-        command.add("daemon");
-        command.add(String.valueOf(apiPort));
-        ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
-        processBuilder.directory(this.projectDir);
-        filterConflictingEnv(processBuilder);
-        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
-        Process process = processBuilder.start();
-        Thread.sleep(3000);
-        return process;
-    }
-
     private boolean executeGaugeCommand(String[] args, HashMap<String, String> envVars) throws IOException, InterruptedException {
         ArrayList<String> command = new ArrayList<>();
         command.add(executableName);
@@ -425,10 +412,6 @@ public abstract class GaugeProject {
         return lastProcessStderr;
     }
 
-    public ArrayList<Specification> getAllSpecifications() {
-        return specifications;
-    }
-
     public abstract String getDataStoreWriteStatement(TableRow row, List<String> columnNames);
 
     public abstract String getDataStorePrintValueStatement(TableRow row, List<String> columnNames);
@@ -478,5 +461,15 @@ public abstract class GaugeProject {
             return flag;
         String prefix = flag.length() > 1 ? "--" : "-";
         return String.format("%s%s", prefix, flag);
+    }
+
+    public void deleteFromFileSystem() {
+        String cleanup_dir_after_scenario_run = System.getenv(CLEANUP_DIR_AFTER_SCENARIO_RUN);
+        if(StringUtils.isNotEmpty(cleanup_dir_after_scenario_run) && !Boolean.parseBoolean(cleanup_dir_after_scenario_run)) return;
+        try {
+            FileUtils.deleteDirectory(this.projectDir);
+        } catch (IOException e) {
+            System.out.println(String.format("Could not delete project directory %s; reason : %s", this.projectDir.getAbsolutePath(), e.getMessage()));
+        }
     }
 }
