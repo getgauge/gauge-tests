@@ -5,7 +5,7 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.File;
