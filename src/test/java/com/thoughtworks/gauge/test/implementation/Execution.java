@@ -6,8 +6,8 @@ import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.ExecutionSummary;
 import com.thoughtworks.gauge.test.common.ExecutionSummaryAssert;
 import com.thoughtworks.gauge.test.common.Specification;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

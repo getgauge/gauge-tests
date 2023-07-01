@@ -1,6 +1,8 @@
 package com.thoughtworks.gauge.test.implementation;
 
-import com.thoughtworks.gauge.*;
+import com.thoughtworks.gauge.Step;
+import com.thoughtworks.gauge.Table;
+import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.common.GaugeProject;
 import com.thoughtworks.gauge.test.common.Util;
 import com.thoughtworks.gauge.test.common.builders.DataFileBuilder;
@@ -8,13 +10,14 @@ import com.thoughtworks.gauge.test.common.builders.ProjectBuilder;
 import org.assertj.core.api.SoftAssertions;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProjectInit {
 
@@ -84,10 +87,10 @@ public class ProjectInit {
     public void verifyGitIngoreForLanguageIsCreated() throws IOException {
         List<String> gitignoreTexts = currentProject.get().getLanguageSpecificGitIgnoreText();
         File fileName = new File(getPathRelativeToCurrentProjectDir(".gitignore"));
-        Assert.assertTrue(fileName.exists());
+        assertThat(fileName).exists();
         String content = Util.read(fileName.getAbsolutePath());
         for (String gitignoreText : gitignoreTexts) {
-            Assert.assertTrue(content.contains(gitignoreText));
+            assertThat(content).contains(gitignoreText);
         }
     }
 
@@ -98,8 +101,10 @@ public class ProjectInit {
     @Step("Directory <dirName> should be empty")
     public void verifyEmptyDir(String dirName) {
         File[] files = currentProject.get().getProjectDir().listFiles();
-        Assert.assertNotNull(files);
-        Assert.assertEquals("Expected " + currentProject.get().getProjectDir().getPath() + " to be empty.", 0, files.length);
+        assertThat(files)
+                .isNotNull()
+                .withFailMessage(() -> "Expected " + currentProject.get().getProjectDir().getPath() + " to be empty.")
+                .isEmpty();
     }
 
     @Step("Create a csv file <name>")

@@ -7,22 +7,18 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
-import org.jsoup.select.Elements;
 import org.w3c.dom.Node;
 import se.fishtank.css.selectors.Selectors;
 import se.fishtank.css.selectors.dom.W3CNode;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
+
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class HtmlReport {
 
@@ -116,21 +112,21 @@ public class HtmlReport {
 
     @Step("verify statistics in html with <statistics>")
     public void verifyStatistics(Table statistics) throws IOException {
-        assertTrue(Files.exists(Paths.get(getCurrentProject().getProjectDir().getAbsolutePath())));
-        assertTrue(Files.exists(Paths.get(getReportsPath())));
+        assertThat(Paths.get(getCurrentProject().getProjectDir().getAbsolutePath())).exists();
+        assertThat(Paths.get(getReportsPath())).exists();
         org.jsoup.nodes.Document doc = Jsoup.parse(new File(getReportsPath()), "UTF-8");
         String expectedTotalCount = doc.select(".total-specs").get(0).child(1).text();
         String actualTotalCount = statistics.getTableRows().get(0).getCell("totalCount");
-        assertEquals("Total count:", expectedTotalCount, actualTotalCount);
+        assertThat(actualTotalCount).isEqualTo(expectedTotalCount);
         String expectedPassCount = doc.select(".pass").get(0).child(0).text();
         String actualPassCount = statistics.getTableRows().get(0).getCell("passCount");
-        assertEquals("Pass count:", expectedPassCount, actualPassCount);
+        assertThat(actualPassCount).isEqualTo(expectedPassCount);
         String expectedFailCount = doc.select(".fail").get(0).child(0).text();
         String actualFailCount = statistics.getTableRows().get(0).getCell("failCount");
-        assertEquals("Fail count:", expectedFailCount, actualFailCount);
+        assertThat(actualFailCount).isEqualTo(expectedFailCount);
         String expectedSkippedCount = doc.select(".skip").get(0).child(0).text();
         String actualSkippedCount = statistics.getTableRows().get(0).getCell("skippedCount");
-        assertEquals("Skipped count:", expectedSkippedCount, actualSkippedCount);
+        assertThat(actualSkippedCount).isEqualTo(expectedSkippedCount);
     }
 
     private WebClient getWebClient() {

@@ -10,7 +10,6 @@ repositories {
 
 dependencies {
     testImplementation 'com.thoughtworks.gauge:gauge-java:+'
-    testImplementation 'junit:junit:4.13.2'
     testImplementation 'net.sourceforge.htmlunit:htmlunit:2.70.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
     testImplementation 'org.jsoup:jsoup:1.16.1'
@@ -22,7 +21,8 @@ group = 'com.thoughtworks.gauge.test'
 version = '0.4.0-SNAPSHOT'
 sourceCompatibility = '1.11'
 
-import com.thoughtworks.gauge.gradle.*
+
+import com.thoughtworks.gauge.gradle.GaugeTask
 
 def languages = ['java', 'js', 'csharp', 'dotnet', 'ruby', 'python']
 

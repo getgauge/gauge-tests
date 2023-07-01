@@ -6,7 +6,10 @@ import com.thoughtworks.gauge.test.StepImpl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class JavascriptProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
