@@ -3,11 +3,10 @@ package com.thoughtworks.gauge.test.common;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import com.thoughtworks.gauge.test.StepImpl;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,8 +60,8 @@ public class RubyProject extends GaugeProject {
                         processBuilder.environment().remove("CLASSPATH");
                         Process process = processBuilder.start();
 
-                        CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> readSafely(process.getInputStream()), pool);
-                        CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> readSafely(process.getErrorStream()), pool);
+                        CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getInputStream()), pool);
+                        CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getErrorStream()), pool);
 
                         if (!process.waitFor(BUNDLE_INSTALL_WAIT_MINS, TimeUnit.MINUTES)) {
                             lastProcessStderr += "bundle install didn't complete after [" + BUNDLE_INSTALL_WAIT_MINS + "] minutes. Killing...\n";
@@ -91,14 +90,6 @@ public class RubyProject extends GaugeProject {
             }
         }
         return super.initialize(remoteTemplate);
-    }
-
-    private static String readSafely(InputStream stream) {
-        try (InputStream is = stream) {
-            return IOUtils.toString(is, StandardCharsets.UTF_8);
-        } catch (IOException ex) {
-            throw new UncheckedIOException(ex);
-        }
     }
 
     @Override

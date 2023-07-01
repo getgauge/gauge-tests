@@ -6,15 +6,15 @@ import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.test.StepImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.*;
 
 import static java.util.Arrays.asList;
 
@@ -31,6 +31,7 @@ public abstract class GaugeProject {
     static final String FAILING_IMPLEMENTATION = "failing implementation";
     static final String CAPTURE_SCREENSHOT = "capture screenshot";
     public static final String CLEANUP_DIR_AFTER_SCENARIO_RUN = "cleanup_dir_after_scenario_run";
+    private static final long GAUGE_WAIT_MINS = 20;
     private static ThreadLocal<GaugeProject> currentProject = ThreadLocal.withInitial(() -> null);
     private static String executableName = "gauge";
     private static String specsDirName = "specs";
@@ -107,7 +108,7 @@ public abstract class GaugeProject {
         return (Files.exists(templatePath));
     }
 
-    private boolean cacheAndFetchFromLocalTemplate() throws InterruptedException {
+    private boolean cacheAndFetchFromLocalTemplate() {
         synchronized(INITIALIZE_LOCK){//synchronized block
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
@@ -125,7 +126,7 @@ public abstract class GaugeProject {
                     }
                     return false;
                 }
-            } catch (IOException e) {
+            } catch (IOException | ExecutionException e) {
                 return false;
             }
         }
@@ -322,47 +323,59 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
-    private boolean executeGaugeCommand(String[] args, HashMap<String, String> envVars) throws IOException, InterruptedException {
-        ArrayList<String> command = new ArrayList<>();
-        command.add(executableName);
-        Collections.addAll(command, args);
-        ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
-        processBuilder.directory(projectDir);
-        String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
-        String folderName = (String) ScenarioDataStore.get("log_proj_name");
-        String logFolder = Util.combinePath(new File("./testLogs").getAbsolutePath(), folderName);
-        String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
-
-        filterParentProcessGaugeEnvs(processBuilder);
-        filterConflictingEnv(processBuilder);
-
-        processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
-        processBuilder.environment().put("screenshot_on_failure", "true");
-        processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
-        processBuilder.environment().put("PYTHONUNBUFFERED", "1");
-        processBuilder.environment().put("logs_directory", logFolder);
-        if(Util.getCurrentLanguage().equals("java")) processBuilder.environment().put("enable_multithreading", "true");
-
-        if (envVars != null) {
-            processBuilder.environment().putAll(envVars);
-        }
-
-        Process lastProcess = processBuilder.start();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(lastProcess.getInputStream()));
-        String line;
-        String newLine = System.getProperty("line.separator");
+    private boolean executeGaugeCommand(String[] args, HashMap<String, String> envVars) throws IOException, ExecutionException {
         lastProcessStdout = "";
-        while ((line = br.readLine()) != null) {
-            lastProcessStdout = lastProcessStdout.concat(line).concat(newLine);
-        }
         lastProcessStderr = "";
-        br = new BufferedReader(new InputStreamReader(lastProcess.getErrorStream()));
-        while ((line = br.readLine()) != null) {
-            lastProcessStderr = lastProcessStderr.concat(line).concat(newLine);
+        ExecutorService pool = Executors.newCachedThreadPool();
+        try {
+            List<String> command = new ArrayList<>();
+            command.add(executableName);
+            Collections.addAll(command, args);
+            ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
+            processBuilder.directory(projectDir);
+            String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
+            String folderName = (String) ScenarioDataStore.get("log_proj_name");
+            String logFolder = Util.combinePath(new File("./testLogs").getAbsolutePath(), folderName);
+            String localNugetPath = Paths.get(gauge_project_root, "resources", "LocalNuget").toAbsolutePath().toString();
+
+            filterParentProcessGaugeEnvs(processBuilder);
+            filterConflictingEnv(processBuilder);
+
+            processBuilder.environment().put("NUGET_ENDPOINT", localNugetPath);
+            processBuilder.environment().put("screenshot_on_failure", "true");
+            processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
+            processBuilder.environment().put("PYTHONUNBUFFERED", "1");
+            processBuilder.environment().put("logs_directory", logFolder);
+            if(Util.getCurrentLanguage().equals("java")) processBuilder.environment().put("enable_multithreading", "true");
+
+            if (envVars != null) {
+                processBuilder.environment().putAll(envVars);
+            }
+
+            Process process = processBuilder.start();
+
+            CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getInputStream()), pool);
+            CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getErrorStream()), pool);
+
+            if (!process.waitFor(GAUGE_WAIT_MINS, TimeUnit.MINUTES)) {
+                lastProcessStderr += "bundle install didn't complete after [" + GAUGE_WAIT_MINS + "] minutes. Killing...\n";
+                process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
+                if (process.isAlive()) process.destroyForcibly();
+            }
+
+            lastProcessStdout += stdout.get();
+            lastProcessStderr += stderr.get();
+
+            return process.exitValue() == 0;
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            return false;
+        } catch (IOException | ExecutionException ex) {
+            lastProcessStderr += ExceptionUtils.getStackTrace(ex);
+            throw ex;
+        } finally {
+            pool.shutdownNow();
         }
-        lastProcess.waitFor();
-        return lastProcess.exitValue() == 0;
     }
 
     public void deleteSpec(String specName) {
