@@ -1,11 +1,11 @@
 package com.thoughtworks.gauge.test.implementation;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.test.common.Util;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
 import org.w3c.dom.Node;
 import se.fishtank.css.selectors.Selectors;
@@ -24,7 +24,7 @@ public class HtmlReport {
 
     @Step("Step <stepText> should appear in <specName> <times> times in the report")
     public void stepShouldAppearNTimesInReport(String stepText,String specName, Integer times) throws IOException {
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.htmlunit").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
         final WebClient webClient = getWebClient();
@@ -51,7 +51,7 @@ public class HtmlReport {
 
     @Step("Generated html report should have screenshot in spec <specName> for element <type> <hooks>")
     public void verifyScreenshot(String specName, ElementTypes elementType, Table scenarios) throws IOException {
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.htmlunit").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
         final WebClient webClient = getWebClient();
@@ -81,7 +81,7 @@ public class HtmlReport {
 
     @Step("Generated html report should have <some_screenshot.png> file in spec <spec> for <table>")
     public void verifyCustomScreenshot(String stubScreenshot, String specName, Table stepTexts) throws IOException {
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.htmlunit").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
         String expected = "../images/" + stubScreenshot;
