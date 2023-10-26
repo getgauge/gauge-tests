@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.gauge' version '1.8.2'
+    id 'org.gauge' version '2.0.0'
 }
 
 repositories {
@@ -9,6 +9,9 @@ repositories {
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.+")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
     testImplementation 'com.thoughtworks.gauge:gauge-java:+'
     testImplementation 'org.htmlunit:htmlunit:3.3.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
@@ -19,22 +22,37 @@ dependencies {
 
 group = 'com.thoughtworks.gauge.test'
 version = '0.4.0-SNAPSHOT'
-sourceCompatibility = '1.11'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+}
 
-import com.thoughtworks.gauge.gradle.GaugeTask
+import org.gauge.gradle.GaugeTask
 
 def languages = ['java', 'js', 'csharp', 'dotnet', 'ruby', 'python']
 
 languages.each {lang ->
-    task "${lang}FT" (type: GaugeTask) {
+    tasks.register("${lang}FT", GaugeTask) {
         doFirst {
             gauge {
                 specsDir = 'specs'
                 inParallel = true
                 env = "ci-${lang}"
                 tags = "${lang}"
+                additionalFlags = "--simple-console"
             }
         }
     }
+}
+
+tasks.withType(Test).configureEach {
+    // https://docs.gradle.org/8.2/userguide/upgrading_version_8.html#test_framework_implementation_dependencies
+    // Using JUnitPlatform for running tests
+    useJUnitPlatform()
+}
+
+tasks.withType(GaugeTask).configureEach {
+    // https://docs.gradle.org/8.2/userguide/upgrading_version_8.html#test_task_default_classpath
+    testClassesDirs = sourceSets.test.output
+    classpath = sourceSets.test.runtimeClasspath
 }
