@@ -13,7 +13,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation 'com.thoughtworks.gauge:gauge-java:+'
-    testImplementation 'org.htmlunit:htmlunit:3.10.0'
+    testImplementation 'org.htmlunit:htmlunit:3.11.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
     testImplementation 'org.jsoup:jsoup:1.17.2'
     testImplementation 'org.assertj:assertj-core:3.25.3'
