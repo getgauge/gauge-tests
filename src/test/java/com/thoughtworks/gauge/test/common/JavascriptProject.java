@@ -26,7 +26,7 @@ public class JavascriptProject extends GaugeProject {
         return f + input.substring(1);
     }
 
-    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+    private StringBuilder createStepTemplate(List<String> stepTexts) {
         StringBuilder step = new StringBuilder();
         if (stepTexts.size() == 1) {
             return step.append("step(\"").append(stepTexts.get(0)).append("\",");
@@ -42,11 +42,11 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
-        List<String> paramTypes = new ArrayList<String>();
+        List<String> paramTypes = new ArrayList<>();
         StepValueExtractor stepValueExtractor = new StepValueExtractor();
         StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         String fileName = Util.getUniqueName();
-        StringBuilder jsCode = new StringBuilder(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
+        StringBuilder jsCode = new StringBuilder(createStepTemplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
         if (stepImpl.isContinueOnFailure()) {
             jsCode.append(" { continueOnFailure: true },");
         }
@@ -64,7 +64,7 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("tests", "dir");
         map.put(Util.combinePath("tests", "step_implementation.js"), "file");
         map.put(Util.combinePath("env", "default", "js.properties"), "file");
@@ -73,7 +73,7 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public List<String> getLanguageSpecificGitIgnoreText() {
-        return new ArrayList<String>() {{
+        return new ArrayList<>() {{
             add("# Gauge - metadata dir\n.gauge");
             add("# Gauge - log files dir\nlogs");
             add("# Gauge - reports dir\nreports");
@@ -87,7 +87,7 @@ public class JavascriptProject extends GaugeProject {
         if (implementation.equalsIgnoreCase(PRINT_PARAMS)) {
             builder.append("  console.log(");
             for (int i = 0; i < stepValue.paramCount; i++) {
-                if (paramTypes.get(i).toLowerCase().equals("string")) {
+                if (paramTypes.get(i).equalsIgnoreCase("string")) {
                     builder.append(String.format("\"param%d=\"+param%d", i, i));
                     if (i != stepValue.paramCount - 1) {
                         builder.append("+\",\"+");
@@ -97,7 +97,7 @@ public class JavascriptProject extends GaugeProject {
             builder.append(");\n");
         } else if (implementation.toLowerCase().startsWith("throw")) {
             builder.append("  throw new Error(\"exception raised\");\n\n");
-        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)){
+        } else if (implementation.equalsIgnoreCase(CAPTURE_SCREENSHOT)) {
             builder.append("gauge.screenshot();\n\n");
         } else {
             if (appendCode) {
@@ -111,7 +111,7 @@ public class JavascriptProject extends GaugeProject {
 
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printString) throws IOException {
-        createHook(hookLevel, hookType, printString, DEFAULT_AGGREGATION, new ArrayList<String>());
+        createHook(hookLevel, hookType, printString, DEFAULT_AGGREGATION, new ArrayList<>());
     }
 
     @Override
@@ -145,7 +145,7 @@ public class JavascriptProject extends GaugeProject {
     }
 
     private String getOptions(String aggregation, List<String> tags) {
-        String tagsText = Util.joinList(Util.quotifyValues(tags));
+        String tagsText = Util.joinList(Util.quoteValues(tags));
         return String.format("{tags: [%s], operator: \"%s\"}", tagsText, aggregation);
     }
 
@@ -157,14 +157,14 @@ public class JavascriptProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshotFile) throws IOException {
+    public void configureCustomScreenGrabber(String stubScreenshotFile) throws IOException {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
         sb.append("var fs = require('fs');\n");
         sb.append("\n");
         sb.append("gauge.customScreenshotWriter = async function () {\n");
         sb.append("\n");
-        sb.append("    return \""+stubScreenshotFile+"\";\n");
+        sb.append("    return \"" + stubScreenshotFile + "\";\n");
         sb.append("};");
         Util.writeToFile(Util.combinePath(getStepImplementationsDir(), className + ".js"), sb.toString());
     }

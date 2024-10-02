@@ -18,7 +18,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("StepImplementation.cs", "file");
         return map;
     }
@@ -28,30 +28,28 @@ public class CSharpProject extends GaugeProject {
         return new ArrayList<>();
     }
 
-    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+    private StringBuilder createStepTemplate(List<String> stepTexts) {
         StringBuilder step = new StringBuilder();
-        if(stepTexts.size()==1){
+        if (stepTexts.size() == 1) {
             return step.append("[Step(\"").append(stepTexts.get(0)).append("\")]\n");
-        }
-        else {
+        } else {
             StringBuilder commaSeparated = new StringBuilder();
-            for(String stepText:stepTexts){
+            for (String stepText : stepTexts) {
                 commaSeparated.append("\"").append(stepText).append("\",");
             }
-            StringBuilder res = step.append("[Step(").append(commaSeparated.substring(0,commaSeparated.length()-1)).append(")]\n");
-            return res;
+            return step.append("[Step(").append(commaSeparated, 0, commaSeparated.length() - 1).append(")]\n");
         }
     }
 
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
-        List<String> paramTypes = new ArrayList<String>();
+        List<String> paramTypes = new ArrayList<>();
         StepValueExtractor stepValueExtractor = new StepValueExtractor();
         StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         String className = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append("public class ").append(className).append("\n{\n");
-        classText.append(createStepTeplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
+        classText.append(createStepTemplate(stepValueExtractor.getValueFor(stepImpl.getAllStepTexts())));
 
         if (stepImpl.isContinueOnFailure()) {
             classText.append("[ContinueOnFailure]\n");
@@ -120,7 +118,7 @@ public class CSharpProject extends GaugeProject {
 
 
     private String createHookMethod(String hookLevel, String hookType, String implementation) {
-        return createHookMethod(hookLevel, hookType, implementation, new ArrayList<String>(), DEFAULT_AGGREGATION);
+        return createHookMethod(hookLevel, hookType, implementation, new ArrayList<>(), DEFAULT_AGGREGATION);
     }
 
     private String createHookMethod(String hookLevel, String hookType, String implementation, List<String> tags, String aggregation) {
@@ -166,7 +164,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+    public void configureCustomScreenGrabber(String stubScreenshot) throws IOException {
         String className = Util.getUniqueName();
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
@@ -181,7 +179,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     private String hookString(String hookLevel, String hookType, List<String> tags) {
-        String tagsText = isSuiteLevel(hookLevel) ? "" : Util.joinList(Util.quotifyValues(tags));
+        String tagsText = isSuiteLevel(hookLevel) ? "" : Util.joinList(Util.quoteValues(tags));
         return String.format("[%s(%s)]", hookName(hookLevel, hookType), tagsText);
     }
 

@@ -20,14 +20,13 @@ public class PythonProject extends GaugeProject {
         super("python", projName);
     }
 
-    private StringBuilder createStepTeplate(ArrayList<String> stepTexts) {
+    private StringBuilder createStepTemplate(List<String> stepTexts) {
         StringBuilder step = new StringBuilder();
-        if(stepTexts.size()==1){
+        if (stepTexts.size() == 1) {
             return step.append("@step(\"").append(stepTexts.get(0)).append("\")\n");
-        }
-        else {
+        } else {
             StringBuilder commaSeparated = new StringBuilder();
-            for(String stepText:stepTexts){
+            for (String stepText : stepTexts) {
                 commaSeparated.append("\"").append(stepText).append("\",");
             }
             return step.append("@step([").append(commaSeparated).append("])\n");
@@ -36,16 +35,16 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public void implementStep(StepImpl stepImpl) throws Exception {
-        List<String> paramTypes = new ArrayList<String>();
+        List<String> paramTypes = new ArrayList<>();
         StepValueExtractor stepValueExtractor = new StepValueExtractor();
-        ArrayList<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
+        List<String> stepValues = stepValueExtractor.getValueFor(stepImpl.getAllStepTexts());
         StepValueExtractor.StepValue stepValue = stepValueExtractor.getFor(stepImpl.getFirstStepText());
         String fileName = Util.getUniqueName();
         StringBuilder classText = new StringBuilder();
         classText.append(IMPORT);
         if (stepImpl.isContinueOnFailure())
             classText.append("@continue_on_failure([Exception])\n");
-        classText.append(createStepTeplate(stepValues));
+        classText.append(createStepTemplate(stepValues));
         classText.append("def ").append(Util.getUniqueName()).append("(");
         for (int i = 0; i < stepValue.paramCount; i++) {
             if (i + 1 == stepValue.paramCount) {
@@ -63,7 +62,7 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("step_impl", "dir");
         map.put(Util.combinePath("step_impl", "step_impl.py"), "file");
         return map;
@@ -71,7 +70,7 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public List<String> getLanguageSpecificGitIgnoreText() {
-        return new ArrayList<String>() {{
+        return new ArrayList<>() {{
             add("# Gauge - metadata dir\n.gauge");
             add("# Gauge - log files dir\nlogs");
             add("# Gauge - reports dir\nreports");
@@ -110,7 +109,7 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public void createHookWithPrint(String hookLevel, String hookType, String printString) throws IOException {
-        createHook(hookLevel, hookType, printString, DEFAULT_AGGREGATION, new ArrayList<String>());
+        createHook(hookLevel, hookType, printString, DEFAULT_AGGREGATION, new ArrayList<>());
     }
 
     @Override
@@ -145,7 +144,7 @@ public class PythonProject extends GaugeProject {
     }
 
     private String getOptions(String aggregation, List<String> tags) {
-        return tags.size() < 1
+        return tags.isEmpty()
                 ? ""
                 : "('<" + StringUtils.join(tags, "> " + aggregation.toLowerCase() + " <") + ">')";
     }
@@ -158,7 +157,7 @@ public class PythonProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+    public void configureCustomScreenGrabber(String stubScreenshot) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("from getgauge.python import custom_screenshot_writer\nimport os");
         sb.append("\n");

@@ -60,7 +60,7 @@ public class UnknownProject extends GaugeProject {
     }
 
     @Override
-    public void configureCustomScreengrabber(String stubScreenshot) throws IOException {
+    public void configureCustomScreenGrabber(String stubScreenshot) throws IOException {
 
     }
 }

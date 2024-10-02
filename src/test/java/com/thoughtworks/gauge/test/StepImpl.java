@@ -19,18 +19,18 @@ public class StepImpl {
         this.continueOnFailure = continueOnFailure;
         this.isValidStatement = isValidStatement;
         this.implementationDir = implementationDir;
-        this.errorTypes = new ArrayList<String>();
+        this.errorTypes = new ArrayList<>();
         this.errorTypes.add(errorTypes);
     }
 
-    public String[] getAllStepTexts(){
-        if(!stepText.startsWith("["))
+    public String[] getAllStepTexts() {
+        if (!stepText.startsWith("["))
             return new String[]{stepText};
 
         return stepText.substring(1, stepText.length() - 1).split(",");
     }
 
-    public String getFirstStepText(){
+    public String getFirstStepText() {
         return getAllStepTexts()[0];
     }
 

@@ -12,9 +12,9 @@ import java.util.List;
 public class Specification {
 
     private String name;
-    private List<Scenario> scenarios = new ArrayList<Scenario>();
-    private List<String> contextSteps = new ArrayList<String>();
-    private List<String> teardownSteps = new ArrayList<String>();
+    private List<Scenario> scenarios = new ArrayList<>();
+    private List<String> contextSteps = new ArrayList<>();
+    private List<String> teardownSteps = new ArrayList<>();
     private File specFile = null;
     private Table datatable = null;
     private String tags = "";
@@ -97,7 +97,7 @@ public class Specification {
         List<String> columnNames = datatable.getColumnNames();
         appendRow(builder, columnNames);
         for (TableRow tableRow : datatable.getTableRows()) {
-            ArrayList<String> row = new ArrayList<String>();
+            ArrayList<String> row = new ArrayList<>();
             for (String column : columnNames) {
                 row.add(tableRow.getCell(column));
             }

@@ -17,10 +17,10 @@ public class DataFileBuilder {
     public void build() throws IOException {
         File file = null;
         if (csvFile != null)
-            file = getCurrentProject().createCsv(csvFile, subDirPath);
+            file = getCurrentProject().createCsv(csvFile);
 
         if (txtFile != null)
-            file = getCurrentProject().createTxt(txtFile, subDirPath);
+            file = getCurrentProject().createTxt(txtFile);
 
         Util.writeToFile(file.getAbsolutePath(), (content == null || content.isEmpty()) ? this.toString() : String.join("\n", content));
     }

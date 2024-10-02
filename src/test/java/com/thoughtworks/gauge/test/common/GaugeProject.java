@@ -18,43 +18,45 @@ import java.util.concurrent.*;
 
 import static java.util.Arrays.asList;
 
+@SuppressWarnings("UnusedReturnValue")
 public abstract class GaugeProject {
-    private static final Object INITIALIZE_LOCK = new Object();
-
-    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
-    private static final List<String> GAUGE_ENVS = asList("gauge_custom_classpath", "overwrite_reports", "GAUGE_INTERNAL_PORT",
-            "GAUGE_PROJECT_ROOT", "logs_directory", "GAUGE_DEBUG_OPTS", "GAUGE_API_PORT", "gauge_reports_dir", "screenshot_on_failure",
-            "save_execution_result", "enable_multithreading", "screenshots_dir");
-    private static final String PRODUCT_PREFIX = "GAUGE_";
     static final String PRINT_PARAMS = "print params";
     static final String THROW_EXCEPTION = "throw exception";
     static final String FAILING_IMPLEMENTATION = "failing implementation";
     static final String CAPTURE_SCREENSHOT = "capture screenshot";
-    public static final String CLEANUP_DIR_AFTER_SCENARIO_RUN = "cleanup_dir_after_scenario_run";
+
+    private static final Object INITIALIZE_LOCK = new Object();
+
+    private static final List<String> PRODUCT_ENVS = asList("GAUGE_ROOT", "GAUGE_HOME", "GAUGE_SOURCE_BUILD", "GAUGE_PYTHON_COMMAND");
+    private static final List<String> GAUGE_ENVS = asList("gauge_custom_classpath", "overwrite_reports", "GAUGE_INTERNAL_PORT", "GAUGE_PROJECT_ROOT", "logs_directory", "GAUGE_DEBUG_OPTS", "GAUGE_API_PORT", "gauge_reports_dir", "screenshot_on_failure", "save_execution_result", "enable_multithreading", "screenshots_dir");
+    private static final String PRODUCT_PREFIX = "GAUGE_";
+    private static final String CLEANUP_DIR_AFTER_SCENARIO_RUN = "cleanup_dir_after_scenario_run";
     private static final long GAUGE_WAIT_MINS = 20;
-    private static ThreadLocal<GaugeProject> currentProject = ThreadLocal.withInitial(() -> null);
-    private static String executableName = "gauge";
-    private static String specsDirName = "specs";
-    private ArrayList<Concept> concepts = new ArrayList<>();
-    private File projectDir;
-    private String language;
-    private ArrayList<Specification> specifications = new ArrayList<>();
+    private static final ThreadLocal<GaugeProject> CURRENT_PROJECT = ThreadLocal.withInitial(() -> null);
+    private static final String EXECUTABLE_NAME = "gauge";
+    private static final String SPECS_DIR_NAME = "specs";
+
+    private static int projectCount = 0;
+
     protected String lastProcessStdout;
     protected String lastProcessStderr;
-    private static int projectCount = 0;
+
+    private final ArrayList<Concept> concepts = new ArrayList<>();
+    private final String language;
+    private final ArrayList<Specification> specifications = new ArrayList<>();
+    private File projectDir;
 
     protected GaugeProject(String language, String projName) throws IOException {
         this.language = language;
-        currentProject.set(this);
+        CURRENT_PROJECT.set(this);
 
         this.projectDir = Files.createTempDirectory(projName + projectCount++ + "_").toFile();
     }
 
     public static GaugeProject getCurrentProject() {
-        if (currentProject == null) {
+        return Objects.requireNonNullElseGet(CURRENT_PROJECT.get(), () -> {
             throw new RuntimeException("Gauge project is not initialized yet");
-        }
-        return currentProject.get();
+        });
     }
 
     public static GaugeProject createProject(String language, String projName) throws IOException {
@@ -84,10 +86,10 @@ public abstract class GaugeProject {
         return concepts;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean initialize(boolean remoteTemplate) throws Exception {
-        executeGaugeCommand(new String[]{
-                "config", "plugin_kill_timeout", "60000"}, null);
-        if(remoteTemplate && language.equals("js")){
+        executeGaugeCommand(new String[]{"config", "plugin_kill_timeout", "60000"}, null);
+        if (remoteTemplate && language.equals("js")) {
             return executeGaugeCommand(new String[]{"init", "-l", "debug", "js_simple"}, null);
         }
 
@@ -95,32 +97,31 @@ public abstract class GaugeProject {
             return executeGaugeCommand(new String[]{"init", "-l", "debug", language}, null);
         }
 
-        if(Boolean.parseBoolean(System.getenv("cache_remote_init"))){
+        if (Boolean.parseBoolean(System.getenv("cache_remote_init"))) {
             return cacheAndFetchFromLocalTemplate();
         }
 
         return copyLocalTemplateIfExists(language) || executeGaugeCommand(new String[]{"init", "-l", "debug", language}, null);
     }
 
-    private boolean isLocalTemplateAvaialable(String language){
+    private boolean isLocalTemplateAvailable(String language) {
         String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
         Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
         return (Files.exists(templatePath));
     }
 
     private boolean cacheAndFetchFromLocalTemplate() {
-        synchronized(INITIALIZE_LOCK){//synchronized block
+        synchronized (INITIALIZE_LOCK) {
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             Path templatePath = Paths.get(gauge_project_root, "resources", "LocalTemplates", language);
 
             try {
-                if(isLocalTemplateAvaialable(language)) {
+                if (isLocalTemplateAvailable(language)) {
                     FileUtils.copyDirectory(templatePath.toFile(), this.projectDir);
                     return true;
-                }
-                else {
+                } else {
                     String projectName = language.equals("js") ? "js_simple" : language;
-                    if(executeGaugeCommand(new String[]{"init", "-l","debug", projectName}, null)) {
+                    if (executeGaugeCommand(new String[]{"init", "-l", "debug", projectName}, null)) {
                         FileUtils.copyDirectory(this.projectDir, templatePath.toFile());
                         return true;
                     }
@@ -156,7 +157,7 @@ public abstract class GaugeProject {
     }
 
     public Specification createSpecification(String specsDirName, String name) throws IOException {
-        String specsDir = StringUtils.isEmpty(specsDirName) ? this.specsDirName : specsDirName;
+        String specsDir = StringUtils.isEmpty(specsDirName) ? SPECS_DIR_NAME : specsDirName;
         File specFile = getSpecFile(name, specsDir);
         if (specFile.exists()) {
             throw new RuntimeException("Failed to create specification with name: " + name + "." + specFile.getAbsolutePath() + ": File already exists");
@@ -174,6 +175,7 @@ public abstract class GaugeProject {
 
     private File getFile(String name, String dirPath, String extension) {
         if (!new File(projectDir, dirPath).exists()) {
+            //noinspection ResultOfMethodCallIgnored
             new File(projectDir, dirPath).mkdirs();
         }
         return new File(projectDir, Util.combinePath(dirPath, name) + extension);
@@ -183,12 +185,12 @@ public abstract class GaugeProject {
         return getSpecFile(name, "");
     }
 
-    public File createCsv(String name, String dirPath) {
-        return getFile(name, specsDirName, ".csv");
+    public File createCsv(String name) {
+        return getFile(name, SPECS_DIR_NAME, ".csv");
     }
 
-    public File createTxt(String name, String dirPath) {
-        return getFile(name, specsDirName, ".txt");
+    public File createTxt(String name) {
+        return getFile(name, SPECS_DIR_NAME, ".txt");
     }
 
     public Specification findSpecification(String specName) {
@@ -212,10 +214,11 @@ public abstract class GaugeProject {
 
 
     public Concept createConcept(String name, Table steps) throws Exception {
-        String specDirPath = new File(projectDir, specsDirName).getAbsolutePath();
+        String specDirPath = new File(projectDir, SPECS_DIR_NAME).getAbsolutePath();
         String conceptsDirName = "concepts";
         File conceptsDir = new File(specDirPath, conceptsDirName);
         if (!conceptsDir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             conceptsDir.mkdir();
         }
         File conceptFile = new File(conceptsDir, "concept_" + System.nanoTime() + ".cpt");
@@ -252,8 +255,7 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary executeFailSafe(boolean sorted) throws Exception {
-        String[] args = sorted ? new String[]{"run","--fail-safe", "--simple-console", "--verbose", "--sort", "specs/"} :
-                new String[]{"run","--fail-safe", "--simple-console", "--verbose", "specs/"};
+        String[] args = sorted ? new String[]{"run", "--fail-safe", "--simple-console", "--verbose", "--sort", "specs/"} : new String[]{"run", "--fail-safe", "--simple-console", "--verbose", "specs/"};
         System.out.println(String.join(" ", args));
         return execute(args, null);
     }
@@ -271,9 +273,9 @@ public abstract class GaugeProject {
     public ExecutionSummary executeSpecsInOrder(List<String> specNames) throws Exception {
         ArrayList<String> args = new ArrayList<>(asList("run", "--simple-console", "--verbose"));
         for (String specName : specNames) {
-            args.add(Util.combinePath(this.specsDirName, specName) + ".spec");
+            args.add(Util.combinePath(SPECS_DIR_NAME, specName) + ".spec");
         }
-        return execute(args.toArray(new String[args.size()]), null);
+        return execute(args.toArray(new String[0]), null);
     }
 
     private ExecutionSummary execute(String[] args, HashMap<String, String> envVars) throws Exception {
@@ -329,9 +331,9 @@ public abstract class GaugeProject {
         ExecutorService pool = Executors.newCachedThreadPool();
         try {
             List<String> command = new ArrayList<>();
-            command.add(executableName);
+            command.add(EXECUTABLE_NAME);
             Collections.addAll(command, args);
-            ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[command.size()]));
+            ProcessBuilder processBuilder = new ProcessBuilder(command.toArray(new String[0]));
             processBuilder.directory(projectDir);
             String gauge_project_root = System.getenv("GAUGE_PROJECT_ROOT");
             String folderName = (String) ScenarioDataStore.get("log_proj_name");
@@ -346,8 +348,9 @@ public abstract class GaugeProject {
             processBuilder.environment().put("GAUGE_TELEMETRY_ENABLED", "false");
             processBuilder.environment().put("PYTHONUNBUFFERED", "1");
             processBuilder.environment().put("logs_directory", logFolder);
-            if(Util.getCurrentLanguage().equals("java")) processBuilder.environment().put("enable_multithreading", "true");
-
+            if (Util.getCurrentLanguage().equals("java")) {
+                processBuilder.environment().put("enable_multithreading", "true");
+            }
             if (envVars != null) {
                 processBuilder.environment().putAll(envVars);
             }
@@ -359,7 +362,9 @@ public abstract class GaugeProject {
 
             if (!process.waitFor(GAUGE_WAIT_MINS, TimeUnit.MINUTES)) {
                 lastProcessStderr += "bundle install didn't complete after [" + GAUGE_WAIT_MINS + "] minutes. Killing...\n";
-                process.descendants().forEach(handle -> { if (handle.isAlive()) handle.destroyForcibly(); });
+                process.descendants().forEach(handle -> {
+                    if (handle.isAlive()) handle.destroyForcibly();
+                });
                 if (process.isAlive()) process.destroyForcibly();
             }
 
@@ -379,26 +384,22 @@ public abstract class GaugeProject {
     }
 
     public void deleteSpec(String specName) {
+        //noinspection ResultOfMethodCallIgnored
         getSpecFile(specName).delete();
     }
 
     private void filterConflictingEnv(ProcessBuilder processBuilder) {
-        processBuilder.environment().keySet().stream()
-                .filter(env -> !PRODUCT_ENVS.contains(env.toUpperCase()) && env.toUpperCase().contains(PRODUCT_PREFIX))
-                .forEach(env -> processBuilder.environment().put(env, ""));
+        processBuilder.environment().keySet().stream().filter(env -> !PRODUCT_ENVS.contains(env.toUpperCase()) && env.toUpperCase().contains(PRODUCT_PREFIX)).forEach(env -> processBuilder.environment().put(env, ""));
     }
 
     private void filterParentProcessGaugeEnvs(ProcessBuilder processBuilder) {
-        GAUGE_ENVS.stream().forEach(env -> processBuilder.environment().remove(env));
+        GAUGE_ENVS.forEach(env -> processBuilder.environment().remove(env));
     }
 
     public static void implement(Table impl, TableRow row, boolean appendCode) throws Exception {
         if (impl.getColumnNames().contains("implementation")) {
-            StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"),
-                    Boolean.parseBoolean(row.getCell("continue on failure")), appendCode,
-                    row.getCell("error type"), row.getCell("implementation dir"));
-            if(impl.getColumnNames().contains("package_name"))
-                stepImpl.setPackageName(row.getCell("package_name"));
+            StepImpl stepImpl = new StepImpl(row.getCell("step text"), row.getCell("implementation"), Boolean.parseBoolean(row.getCell("continue on failure")), appendCode, row.getCell("error type"), row.getCell("implementation dir"));
+            if (impl.getColumnNames().contains("package_name")) stepImpl.setPackageName(row.getCell("package_name"));
             getCurrentProject().implementStep(stepImpl);
         }
     }
@@ -429,7 +430,7 @@ public abstract class GaugeProject {
 
     public abstract String getDataStorePrintValueStatement(TableRow row, List<String> columnNames);
 
-    public abstract void configureCustomScreengrabber(String screenshotFile) throws IOException;
+    public abstract void configureCustomScreenGrabber(String screenshotFile) throws IOException;
 
     public ExecutionSummary rerunFailedWithLogLevel() throws Exception {
         return execute(new String[]{"run", "--log-level=debug", "--failed"}, null);
@@ -453,7 +454,7 @@ public abstract class GaugeProject {
 
     public ExecutionSummary executeSpecWithFlags(String specName, Map<String, String> flags) throws Exception {
 
-        ArrayList<String> cmdArgs = new ArrayList<String>();
+        ArrayList<String> cmdArgs = new ArrayList<>();
         cmdArgs.add("run");
         cmdArgs.add("--simple-console");
         cmdArgs.add("--verbose");
@@ -463,26 +464,24 @@ public abstract class GaugeProject {
             cmdArgs.add(entry.getValue());
         }
         cmdArgs.add(String.format("specs%s%s%s", File.separator, Util.getSpecName(specName), ".spec"));
-        String[] args = cmdArgs.toArray(new String[cmdArgs.size()]);
+        String[] args = cmdArgs.toArray(new String[0]);
         return execute(args, null);
-
-
     }
 
     private String ensureFlagFormat(String flag) {
-        if (flag.startsWith("--") || flag.startsWith("-"))
-            return flag;
+        if (flag.startsWith("--") || flag.startsWith("-")) return flag;
         String prefix = flag.length() > 1 ? "--" : "-";
         return String.format("%s%s", prefix, flag);
     }
 
     public void deleteFromFileSystem() {
         String cleanup_dir_after_scenario_run = System.getenv(CLEANUP_DIR_AFTER_SCENARIO_RUN);
-        if(StringUtils.isNotEmpty(cleanup_dir_after_scenario_run) && !Boolean.parseBoolean(cleanup_dir_after_scenario_run)) return;
+        if (StringUtils.isNotEmpty(cleanup_dir_after_scenario_run) && !Boolean.parseBoolean(cleanup_dir_after_scenario_run))
+            return;
         try {
             FileUtils.deleteDirectory(this.projectDir);
         } catch (IOException e) {
-            System.out.println(String.format("Could not delete project directory %s; reason : %s", this.projectDir.getAbsolutePath(), e.getMessage()));
+            System.out.printf("Could not delete project directory %s; reason : %s%n", this.projectDir.getAbsolutePath(), e.getMessage());
         }
     }
 }

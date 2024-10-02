@@ -1,7 +1,5 @@
 package com.thoughtworks.gauge.test.common;
 
-import com.thoughtworks.gauge.Table;
-import com.thoughtworks.gauge.TableRow;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -63,16 +61,8 @@ public class Util {
         return String.format("Name%d%s", System.nanoTime(), dateFormat.format(new Date()));
     }
 
-    public static List<String> toList(Table table, String columnName) {
-        ArrayList<String> values = new ArrayList<String>();
-        for (TableRow row : table.getTableRows()) {
-            values.add(row.getCell(columnName));
-        }
-        return values;
-    }
-
-    public static ArrayList<String> quotifyValues(List<String> values) {
-        ArrayList<String> quotedValues = new ArrayList<String>();
+    public static List<String> quoteValues(List<String> values) {
+        List<String> quotedValues = new ArrayList<>();
         for (String val : values) {
             quotedValues.add(String.format("\"%s\"", val));
         }

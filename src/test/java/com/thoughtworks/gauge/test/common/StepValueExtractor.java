@@ -1,11 +1,12 @@
 package com.thoughtworks.gauge.test.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StepValueExtractor {
-    public ArrayList<String> getValueFor(String[] values){
-        ArrayList<String> stepValues = new ArrayList<>();
-        for(String value:values){
+    public List<String> getValueFor(String[] values) {
+        List<String> stepValues = new ArrayList<>();
+        for (String value : values) {
             stepValues.add(getFor(value).value);
         }
         return stepValues;
@@ -14,10 +15,10 @@ public class StepValueExtractor {
     public StepValue getFor(String value) {
         StringBuilder extractedValue = new StringBuilder();
         char[] chars = value.toCharArray();
-        Boolean inEscape = false;
+        boolean inEscape = false;
         boolean inQuotes = false;
         boolean inBracket = false;
-        Integer count = 0;
+        int count = 0;
         for (char aChar : chars) {
             count++;
             if (inEscape) {
@@ -28,13 +29,13 @@ public class StepValueExtractor {
                 if (!inQuotes) {
                     inQuotes = true;
                 } else {
-                    extractedValue.append("<param").append(count.toString()).append(">");
+                    extractedValue.append("<param").append(count).append(">");
                     inQuotes = false;
                 }
             } else if (aChar == '<' && !inBracket) {
                 inBracket = true;
             } else if (aChar == '>' && inBracket) {
-                extractedValue.append("<param").append(count.toString()).append(">");
+                extractedValue.append("<param").append(count).append(">");
                 inBracket = false;
             } else if (aChar == '\\') {
                 inEscape = true;
@@ -48,7 +49,7 @@ public class StepValueExtractor {
         return v;
     }
 
-    public class StepValue {
+    public static class StepValue {
         public int paramCount;
         public String value;
     }

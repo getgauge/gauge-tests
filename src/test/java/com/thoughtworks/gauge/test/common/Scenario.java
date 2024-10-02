@@ -7,7 +7,7 @@ public class Scenario {
 
     private String name;
     List<Item> items = new ArrayList<>();
-    List<String> tags = new ArrayList<String>();
+    List<String> tags = new ArrayList<>();
 
     public Scenario(String name) {
         this.name = name;

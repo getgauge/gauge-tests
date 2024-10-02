@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static com.thoughtworks.gauge.test.common.GaugeProject.getCurrentProject;
@@ -23,19 +24,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HtmlReport {
 
     @Step("Step <stepText> should appear in <specName> <times> times in the report")
-    public void stepShouldAppearNTimesInReport(String stepText,String specName, Integer times) throws IOException {
+    public void stepShouldAppearNTimesInReport(String stepText, String specName, Integer times) throws IOException {
         java.util.logging.Logger.getLogger("org.htmlunit").setLevel(Level.OFF);
         LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
         java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
-        Selectors<Node,W3CNode> selectors = new Selectors<Node,W3CNode>(new W3CNode(page.getDocumentElement()));
+        Selectors<Node, W3CNode> selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
         int actualNumberOfTimes = 0;
         for (Node div : divs) {
-            if(div.getTextContent().contains(stepText))
-            {
+            if (div.getTextContent().contains(stepText)) {
                 actualNumberOfTimes++;
             }
         }
@@ -60,19 +60,16 @@ public class HtmlReport {
         Selectors<Node, W3CNode> selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
         String elementSelector = null;
         String elementTypeName = null;
-        switch (elementType) {
-            case SCENARIO:
-                elementSelector = ".scenario-head";
-                elementTypeName = "scenario";
-                break;
-            default:
+        if (Objects.requireNonNull(elementType) == ElementTypes.SCENARIO) {
+            elementSelector = ".scenario-head";
+            elementTypeName = "scenario";
         }
         List<Node> divs = selectors.querySelectorAll(elementSelector);
-        assertThat(divs.size() > 0);
+        assertThat(divs).isNotEmpty();
         for (Node div : divs) {
             scenarios.getColumnValues(elementTypeName).stream().filter(scenario -> div.getTextContent().contains(scenario)).forEach(scenario -> {
                 Selectors<Node, W3CNode> errorSelectors = new Selectors<>(new W3CNode(div.getParentNode()));
-                Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
+                Node screenshotThumbnail = errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
                 assertThat(actual).isNotNull();
             });
@@ -88,12 +85,12 @@ public class HtmlReport {
         final WebClient webClient = getWebClient();
         String reportsPath = getReportsPath(specName);
         final HtmlPage page = webClient.getPage("file://" + reportsPath);
-        Selectors<Node, W3CNode>  selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
+        Selectors<Node, W3CNode> selectors = new Selectors<>(new W3CNode(page.getDocumentElement()));
         List<Node> divs = selectors.querySelectorAll(".step-txt");
         for (Node div : divs) {
             stepTexts.getColumnValues("step text").stream().filter(stepText -> div.getTextContent().contains(stepText)).forEach(stepText -> {
-                Selectors<Node, W3CNode>  errorSelectors = new Selectors<>(new W3CNode(div.getParentNode()));
-                Node screenshotThumbnail = (Node) errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
+                Selectors<Node, W3CNode> errorSelectors = new Selectors<>(new W3CNode(div.getParentNode()));
+                Node screenshotThumbnail = errorSelectors.querySelectorAll("img.screenshot-thumbnail").get(0);
                 String actual = screenshotThumbnail.getAttributes().getNamedItem("src").getTextContent();
                 assertThat(actual).isEqualTo(expected);
             });

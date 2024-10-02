@@ -29,12 +29,12 @@ public class Execution {
 
     @Step("Rerun failed scenarios with specific directory")
     public void rerunFailedWithSpecificDirectory() throws Exception {
-        assertThat(getCurrentProject().rerunFailedWithSpecificDir());
+       getCurrentProject().rerunFailedWithSpecificDir();
     }
 
     @Step("Execute current project with failed and repeat flags")
     public void executeCurrentProjectWithFailedAndRepeat() throws Exception {
-        assertThat(getCurrentProject().executeRepeatWithFailed());
+        getCurrentProject().executeRepeatWithFailed();
     }
 
     @Step("Repeat last run with log level debug and ensure success")
@@ -44,7 +44,7 @@ public class Execution {
 
     @Step("Repeat last run with specific directory")
     public void repeatLastRunWithSpecificDirectory() throws Exception {
-        assertThat(getCurrentProject().repeatLastRunWithSpecificDir());
+        getCurrentProject().repeatLastRunWithSpecificDir();
     }
 
     @Step("Execute spec <specName> with following flags ensure failure <flagsTable>")
@@ -52,9 +52,8 @@ public class Execution {
         Specification spec = getCurrentProject().findSpecification(specName);
 
         List<TableRow> tableRows = flagsTable.getTableRows();
-        Map<String, String> flags = new HashMap<String, String>();
-        for (int i = 0; i < tableRows.size(); i++) {
-            TableRow tableRow = tableRows.get(i);
+        Map<String, String> flags = new HashMap<>();
+        for (TableRow tableRow : tableRows) {
             String flagName = tableRow.getCell("flag");
             String values = tableRow.getCell("values");
             flags.put(flagName, values);
@@ -121,7 +120,7 @@ public class Execution {
     @Step("Ensure success while executing current project with environment variables <table>")
     public void implementation1(Table envVariables) throws Exception {
         HashMap<String, String> envVars = new HashMap<>();
-        envVariables.getTableRows().stream().forEach(row -> envVars.put(row.getCell("Environment Variable"), row.getCell("Value")));
+        envVariables.getTableRows().forEach(row -> envVars.put(row.getCell("Environment Variable"), row.getCell("Value")));
         assertOn(getCurrentProject().execute(envVars), true);
     }
 
@@ -179,8 +178,8 @@ public class Execution {
     }
 
     @Step("Configure project to take custom screenshot and return <some_screenshot.png> as screenshot file")
-    public void configureScreengrabber(String screenshotFile) throws IOException {
-        getCurrentProject().configureCustomScreengrabber(screenshotFile);
+    public void configureScreenGrabber(String screenshotFile) throws IOException {
+        getCurrentProject().configureCustomScreenGrabber(screenshotFile);
     }
 
     @Step("Repeat last run and ensure <result>")

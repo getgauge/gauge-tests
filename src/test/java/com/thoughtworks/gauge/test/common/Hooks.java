@@ -15,8 +15,8 @@ public class Hooks {
             System.out.println("Current project is unavailable");
             return;
         }
-        if (context.getCurrentScenario().getIsFailing()){
-            System.out.println(String.format("Scenario %s failed against %s",context.getCurrentScenario().getName(), currentProject.getProjectDir().getAbsolutePath()));
+        if (context.getCurrentScenario().getIsFailing()) {
+            System.out.printf("Scenario %s failed against %s%n", context.getCurrentScenario().getName(), currentProject.getProjectDir().getAbsolutePath());
             return;
         }
         currentProject.deleteFromFileSystem();

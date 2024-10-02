@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProjectInit {
 
-    private ThreadLocal<GaugeProject> currentProject = new ThreadLocal<GaugeProject>();
+    private final ThreadLocal<GaugeProject> currentProject = new ThreadLocal<>();
 
     @Step("In an empty directory, use default initialization of a project named <projName> in language <language>")
     public void initializeProjectWithLanguage(String projName, String language) throws Exception {
