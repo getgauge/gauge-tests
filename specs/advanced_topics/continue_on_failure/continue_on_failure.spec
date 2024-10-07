@@ -11,7 +11,7 @@ tags: continueOnFailure, java
    |----------|-------------------|
    |First step|"inside first step"|
 
-Continue execution on any error/exception in "Continue on Failure" step
+Continue execution on any error/exception in Continue on Failure step
 -----------------------------------------------------------------------
 
 tags: csharp, dotnet, ruby, python, js
@@ -90,7 +90,7 @@ tags: csharp, dotnet, ruby, python, js
 
 * Console should contain "Successfully generated html-report to =>"
 
-Continue execution only for mentioned error/exception in "Continue on Failure" step
+Continue execution only for mentioned error/exception in Continue on Failure step
 -----------------------------------------------------------------------------------
 
 tags: js
