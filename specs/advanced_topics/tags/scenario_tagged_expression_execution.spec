@@ -33,7 +33,7 @@ tags: java, csharp, dotnet, ruby, python, js
 
 * Add tags "tag3, tag2" to scenario "fourth scenario" in specification "tags_expression_execution"
 
-Tagged expression with & operator
+Tagged expression with (and) operator
 ---------------------------------
 
 * Execute the tags "tag1 & tag2" in spec "tags_expression_execution" and ensure success
@@ -81,7 +81,7 @@ Tagged expression with & operator
    |----------|---------|---------|------------|
    |1         |1        |0        |0           |
 
-Tagged expression with | operator
+Tagged expression with (pipe) operator
 ---------------------------------
 
 * Execute the tags "tag3 | tag1" in spec "tags_expression_execution" and ensure success
@@ -134,7 +134,7 @@ Tagged expression with | operator
    |----------|---------|---------|------------|
    |1         |1        |0        |0           |
 
-Tagged expression with ! operator
+Tagged expression with (not) operator
 ---------------------------------
 
 * Execute the tags "!tag1" in spec "tags_expression_execution" and ensure success
@@ -167,7 +167,7 @@ Tagged expression with ! operator
    |----------|---------|---------|------------|
    |1         |1        |0        |0           |
 
-Tagged expression with (!&|) operator
+Tagged expression with (not, and, pipe) operators
 -------------------------------------
 
 * Execute the tags "!tag3 & (tag2|tag1)" in spec "tags_expression_execution" and ensure success
