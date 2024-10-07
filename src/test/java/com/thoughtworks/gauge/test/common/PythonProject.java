@@ -62,7 +62,7 @@ public class PythonProject extends GaugeProject {
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("step_impl", "dir");
         map.put(Util.combinePath("step_impl", "step_impl.py"), "file");
         return map;

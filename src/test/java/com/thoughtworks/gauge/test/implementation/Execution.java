@@ -119,7 +119,7 @@ public class Execution {
 
     @Step("Ensure success while executing current project with environment variables <table>")
     public void implementation1(Table envVariables) throws Exception {
-        HashMap<String, String> envVars = new HashMap<>();
+        Map<String, String> envVars = new HashMap<>();
         envVariables.getTableRows().forEach(row -> envVars.put(row.getCell("Environment Variable"), row.getCell("Value")));
         assertOn(getCurrentProject().execute(envVars), true);
     }

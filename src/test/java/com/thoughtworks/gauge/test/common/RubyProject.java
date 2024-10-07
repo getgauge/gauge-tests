@@ -121,7 +121,7 @@ public class RubyProject extends GaugeProject {
 
     @Override
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("step_implementations", "dir");
         map.put(Util.combinePath("step_implementations", "step_implementation.rb"), "file");
         map.put(Util.combinePath("env", "default", "ruby.properties"), "file");

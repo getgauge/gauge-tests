@@ -21,7 +21,7 @@ public class JavaProject extends GaugeProject {
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("src", "dir");
         map.put("libs", "dir");
         map.put(Util.combinePath("src", "test", "java", "StepImplementation.java"), "file");

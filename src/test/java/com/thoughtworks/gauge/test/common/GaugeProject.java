@@ -265,7 +265,7 @@ public abstract class GaugeProject {
         return execute(args, null);
     }
 
-    public ExecutionSummary execute(HashMap<String, String> envVars) throws Exception {
+    public ExecutionSummary execute(Map<String, String> envVars) throws Exception {
         String[] args = new String[]{"run", "--simple-console", "--verbose", "specs/"};
         return execute(args, envVars);
     }
@@ -278,7 +278,7 @@ public abstract class GaugeProject {
         return execute(args.toArray(new String[0]), null);
     }
 
-    private ExecutionSummary execute(String[] args, HashMap<String, String> envVars) throws Exception {
+    private ExecutionSummary execute(String[] args, Map<String, String> envVars) throws Exception {
         boolean success = executeGaugeCommand(args, envVars);
         return new ExecutionSummary(String.join(" ", args), success, lastProcessStdout, lastProcessStderr);
     }
@@ -288,7 +288,7 @@ public abstract class GaugeProject {
     }
 
     public ExecutionSummary executeInSerialAndThenParallel(String tagName, int nStreams) throws Exception {
-        HashMap<String, String> envVars = new HashMap<>();
+        Map<String, String> envVars = new HashMap<>();
         envVars.put("allow_filtered_parallel_execution", "true");
         return execute(new String[]{"run", "--parallel", "-n=" + nStreams, "--only", tagName}, envVars);
     }
@@ -325,7 +325,7 @@ public abstract class GaugeProject {
         return execute(new String[]{"run", "--simple-console", "--verbose", "--tags", tags, "specs" + File.separator + Util.getSpecName(specName) + ".spec"}, null);
     }
 
-    private boolean executeGaugeCommand(String[] args, HashMap<String, String> envVars) throws IOException, ExecutionException {
+    private boolean executeGaugeCommand(String[] args, Map<String, String> envVars) throws IOException, ExecutionException {
         lastProcessStdout = "";
         lastProcessStderr = "";
         ExecutorService pool = Executors.newCachedThreadPool();

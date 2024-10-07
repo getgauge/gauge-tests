@@ -18,7 +18,7 @@ public class CSharpProject extends GaugeProject {
     }
 
     public Map<String, String> getLanguageSpecificFiles() {
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("StepImplementation.cs", "file");
         return map;
     }
