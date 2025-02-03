@@ -44,6 +44,20 @@ languages.each {lang ->
             }
         }
     }
+
+    tasks.register("clean${lang}FT") {
+        doFirst {
+            delete "reports-${lang}"
+            if (lang == 'ruby') {
+                delete 'resources/LocalTemplates/ruby/vendor'
+                delete 'resources/LocalTemplates/ruby/.buildlock'
+                delete 'resources/LocalTemplates/ruby/Gemfile.lock'
+            } else {
+                delete "resources/LocalTemplates/${lang}"
+            }
+        }
+    }
+    clean.dependsOn "clean${lang}FT"
 }
 
 tasks.withType(Test).configureEach {
@@ -57,3 +71,12 @@ tasks.withType(GaugeTask).configureEach {
     testClassesDirs = sourceSets.test.output
     classpath = sourceSets.test.runtimeClasspath
 }
+
+tasks.register('cleanGauge') {
+    doFirst {
+        delete '.gauge'
+        delete 'logs'
+        delete 'testLogs'
+    }
+}
+clean.dependsOn cleanGauge
