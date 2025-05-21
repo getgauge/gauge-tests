@@ -3,7 +3,7 @@ Duplicate step implementation
 
 tags: step, java, csharp, dotnet, ruby, python, js
 
-Duplicate step implementation should atleast give a warning
+Duplicate step implementation should at least give a warning
 -----------------------------------------------------------
 
 * Initialize a project named "duplicate_step_implementation" without example spec
