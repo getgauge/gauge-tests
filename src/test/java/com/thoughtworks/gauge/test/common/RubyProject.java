@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class RubyProject extends GaugeProject {
     private static final String DEFAULT_AGGREGATION = "AND";
     private static final Object BUNDLE_INSTALL_LOCK = new Object();
-    private static final int BUNDLE_INSTALL_WAIT_MINS = 5;
+    private static final int BUNDLE_INSTALL_WAIT_MINS_DEFAULT = 5;
+    private static final int BUNDLE_INSTALL_WAIT_MINS_SOURCE = 20;
 
     public RubyProject(String projName) throws IOException {
         super("ruby", projName);
@@ -63,8 +64,8 @@ public class RubyProject extends GaugeProject {
                         CompletableFuture<String> stdout = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getInputStream()), pool);
                         CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getErrorStream()), pool);
 
-                        if (!process.waitFor(BUNDLE_INSTALL_WAIT_MINS, TimeUnit.MINUTES)) {
-                            lastProcessStderr += "bundle install didn't complete after [" + BUNDLE_INSTALL_WAIT_MINS + "] minutes. Killing...\n";
+                        if (!process.waitFor(calculateBundleInstallWaitMins(), TimeUnit.MINUTES)) {
+                            lastProcessStderr += "bundle install didn't complete after [" + calculateBundleInstallWaitMins() + "] minutes. Killing...\n";
                             process.descendants().forEach(handle -> {
                                 if (handle.isAlive()) handle.destroyForcibly();
                             });
@@ -92,6 +93,12 @@ public class RubyProject extends GaugeProject {
             }
         }
         return super.initialize(remoteTemplate);
+    }
+
+    private static int calculateBundleInstallWaitMins() {
+        return System.getenv().getOrDefault("RUBY_PLUGIN_GRPC_SOURCE_BRANCH", "").isBlank()
+                ? BUNDLE_INSTALL_WAIT_MINS_DEFAULT
+                : BUNDLE_INSTALL_WAIT_MINS_SOURCE;
     }
 
     @Override
