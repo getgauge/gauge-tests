@@ -6,3 +6,7 @@
     else
         gem 'gauge-ruby', '>= 0.5.3', :path => ENV['LOCAL_RUBY_PLUGIN_PATH'], :group => [:development, :test]
     end
+
+    if ENV['RUBY_PLUGIN_GRPC_SOURCE_BRANCH']
+        gem 'grpc', :github => 'grpc/grpc', :branch => ENV['RUBY_PLUGIN_GRPC_SOURCE_BRANCH'], :submodules => true, :group => [:development, :test]
+    end
