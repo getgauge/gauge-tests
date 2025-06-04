@@ -37,7 +37,7 @@ languages.each {lang ->
         doFirst {
             gauge {
                 specsDir = 'specs'
-                inParallel = true
+                inParallel = false
                 env = "ci-${lang}"
                 tags = "${lang}"
                 additionalFlags = "--simple-console"
