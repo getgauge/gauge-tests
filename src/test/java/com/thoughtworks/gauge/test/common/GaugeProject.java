@@ -361,7 +361,7 @@ public abstract class GaugeProject {
             CompletableFuture<String> stderr = CompletableFuture.supplyAsync(() -> Util.readSafely(process.getErrorStream()), pool);
 
             if (!process.waitFor(GAUGE_WAIT_MINS, TimeUnit.MINUTES)) {
-                lastProcessStderr += "bundle install didn't complete after [" + GAUGE_WAIT_MINS + "] minutes. Killing...\n";
+                lastProcessStderr += "gauge didn't complete after [" + GAUGE_WAIT_MINS + "] minutes. Killing...\n";
                 process.descendants().forEach(handle -> {
                     if (handle.isAlive()) handle.destroyForcibly();
                 });
