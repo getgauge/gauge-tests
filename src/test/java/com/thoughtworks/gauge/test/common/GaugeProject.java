@@ -479,6 +479,7 @@ public abstract class GaugeProject {
         if (StringUtils.isNotEmpty(cleanup_dir_after_scenario_run) && !Boolean.parseBoolean(cleanup_dir_after_scenario_run))
             return;
         try {
+            System.out.println("Cleaning up after scenario run...");
             FileUtils.deleteDirectory(this.projectDir);
         } catch (IOException e) {
             System.out.printf("Could not delete project directory %s; reason : %s%n", this.projectDir.getAbsolutePath(), e.getMessage());
