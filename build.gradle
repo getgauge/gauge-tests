@@ -9,14 +9,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.+")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.+")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation 'com.thoughtworks.gauge:gauge-java:+'
     testImplementation 'org.htmlunit:htmlunit:4.16.0'
     testImplementation 'se.fishtank:css-selectors:2.0'
     testImplementation 'org.jsoup:jsoup:1.21.2'
-    testImplementation 'org.assertj:assertj-core:3.27.4'
+    testImplementation 'org.assertj:assertj-core:3.27.6'
     testImplementation 'org.json:json:20250517'
 }
 
