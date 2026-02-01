@@ -8,11 +8,3 @@ updates:
       java-deps:
         patterns:
           - "*"
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: monthly
-    groups:
-      github-actions:
-        patterns:
-          - "*"
