@@ -32,11 +32,11 @@ Tests for Gauge Command-Line Utility using Gauge
   ```
   ```
   ./gradlew clean javaFT      # For Windows - gradlew.bat clean javaFT
-  ./gradlew clean javaFT      # For Windows - gradlew.bat clean javaFT
-  ./gradlew clean pythonFT    # For Windows - gradlew.bat clean pythonFT
   ./gradlew clean rubyFT      # For Windows - gradlew.bat clean rubyFT
   ./gradlew clean csharpFT    # For Windows - gradlew.bat clean csharpFT
   ./gradlew clean dotnetFT    # For Windows - gradlew.bat clean dotnetFT
+  ./gradlew clean pythonFT    # For Windows - gradlew.bat clean pythonFT
+  ./gradlew clean jsFT        # For Windows - gradlew.bat clean jsFT
   ```
 
 This will also compile all the supporting code implementations and run your specs in parallel.
