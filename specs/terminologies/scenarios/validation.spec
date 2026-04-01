@@ -18,10 +18,12 @@ Validation Failure
 * Check for validation errors in the project and ensure failure
 * Console should contain following lines in order 
 
-   |Console output                                |
-   |----------------------------------------------|
-   |Step implementation not found => 'First Step' |
-   |Step implementation not found => 'Second Step'|
+   |Console output                |
+   |------------------------------|
+   |Step implementation not found |
+   |=> 'First Step'               |
+   |Step implementation not found |
+   |=> 'Second Step'              |
 
 Validation Success
 ------------------
