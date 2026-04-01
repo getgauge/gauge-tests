@@ -25,12 +25,14 @@ Spec execution with unimplemented step in scenarios
 * Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
-   |console output                                              |
-   |------------------------------------------------------------|
-   |Step implementation not found => 'First unimplemented step' |
-   |Step implementation not found => 'Second unimplemented step'|
-   |inside first step                                           |
-   |inside second step                                          |
+   |console output                       |
+   |-------------------------------------|
+   |Step implementation not found        |
+   |=> 'First unimplemented step'        |
+   |Step implementation not found        |
+   |=> 'Second unimplemented step'       |
+   |inside first step                    |
+   |inside second step                   |
 
 * Statistics generated should have 
 
@@ -66,9 +68,10 @@ Spec execution with unimplemented step in context step
 * Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
-   |console output                                  |
-   |------------------------------------------------|
-   |Step implementation not found => 'First context'|
+   |console output                |
+   |------------------------------|
+   |Step implementation not found |
+   |=> 'First context'            |
 
 * Statistics generated should have 
 
@@ -110,10 +113,12 @@ Spec execution with unimplemented step in context step and scenario
 * Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
-   |console output                                              |
-   |------------------------------------------------------------|
-   |Step implementation not found => 'First context'            |
-   |Step implementation not found => 'Second unimplemented step'|
+   |console output                       |
+   |-------------------------------------|
+   |Step implementation not found        |
+   |=> 'First context'                   |
+   |Step implementation not found        |
+   |=> 'Second unimplemented step'       |
 
 * Statistics generated should have 
 
@@ -176,12 +181,16 @@ Skip spec if all scenarios are skipped
 * Execute the spec "Basic spec execution" and ensure success
 * Console should contain following lines in order 
 
-   |console output                                              |
-   |------------------------------------------------------------|
-   |Step implementation not found => 'First unimplemented step' |
-   |Step implementation not found => 'Second unimplemented step'|
-   |Step implementation not found => 'Third unimplemented step' |
-   |Step implementation not found => 'Fourth unimplemented step'|
+   |console output                       |
+   |-------------------------------------|
+   |Step implementation not found        |
+   |=> 'First unimplemented step'        |
+   |Step implementation not found        |
+   |=> 'Second unimplemented step'       |
+   |Step implementation not found        |
+   |=> 'Third unimplemented step'        |
+   |Step implementation not found        |
+   |=> 'Fourth unimplemented step'       |
 
 * Statistics generated should have 
 

@@ -73,10 +73,12 @@ Unimplemented teardown execution
 * Execute the spec "basic teardown execution" and ensure success
 * Console should contain following lines in order 
 
-   |console output                                    |
-   |--------------------------------------------------|
-   |Step implementation not found => 'First teardown' |
-   |Step implementation not found => 'Second teardown'|
+   |console output                |
+   |------------------------------|
+   |Step implementation not found |
+   |=> 'First teardown'           |
+   |Step implementation not found |
+   |=> 'Second teardown'          |
 
 
 * Statistics generated should have 

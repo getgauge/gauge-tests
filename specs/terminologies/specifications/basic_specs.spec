@@ -98,10 +98,12 @@ Spec should be skipped if it has all scenarios with unimplemented steps
 
 * Console should contain following lines in order 
 
-   |console output                               |
-   |---------------------------------------------|
-   |Step implementation not found => 'some step1'|
-   |Step implementation not found => 'some step2'|
+   |console output                |
+   |------------------------------|
+   |Step implementation not found |
+   |=> 'some step1'               |
+   |Step implementation not found |
+   |=> 'some step2'               |
 
 * Statistics generated should have 
 
